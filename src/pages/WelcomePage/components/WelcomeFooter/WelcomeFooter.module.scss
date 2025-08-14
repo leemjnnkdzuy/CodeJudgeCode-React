@@ -1,0 +1,135 @@
+.welcomeFooter * {
+	box-sizing: border-box;
+}
+
+.welcomeFooter {
+	background: var(--text-primary, #333);
+	color: white;
+	padding: 3rem 0;
+}
+
+.welcomeFooter .container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 1rem;
+}
+
+.footerContent {
+	display: grid;
+	grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+	gap: 2rem;
+	margin-bottom: 2rem;
+}
+
+.footerBrand {
+	margin-bottom: 1rem;
+}
+
+.footerBrand h5 {
+	color: white;
+	margin-bottom: 1rem;
+	font-size: 1.25rem;
+	font-weight: 600;
+}
+
+.logoText {
+	font-family: "Dosis", sans-serif;
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: var(--primary-blue);
+}
+
+.footerDescription {
+	color: rgba(255, 255, 255, 0.8);
+	font-size: 0.875rem;
+	line-height: 1.6;
+	margin-bottom: 1rem;
+}
+
+.footerSocial {
+	display: flex;
+	gap: 1rem;
+}
+
+.footerSocial a {
+	color: rgba(255, 255, 255, 0.8);
+	transition: color 0.3s ease, transform 0.3s ease;
+	text-decoration: none;
+}
+
+.footerSocial i {
+	font-size: 1.5rem;
+	transition: color 0.3s ease, transform 0.3s ease;
+	cursor: pointer;
+}
+
+.footerSocial a:hover i {
+	color: white;
+	transform: translateY(-2px);
+}
+
+.footerSection h6 {
+	color: white;
+	margin-bottom: 1rem;
+	font-size: 1rem;
+	font-weight: 600;
+}
+
+.footerLinks {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.footerLinks li {
+	margin-bottom: 0.5rem;
+}
+
+.footerLinks div {
+	cursor: pointer;
+	font-weight: 200;
+	font-size: 0.75rem;
+	transition: transform 0.3s ease;
+}
+
+.footerLinks div:hover {
+	transform: translateX(5px);
+}
+
+.footerSocialIcon {
+	color: rgba(255, 255, 255, 0.8);
+	text-decoration: none;
+	font-size: 0.875rem;
+	transition: color 0.3s ease;
+}
+
+.footerSocialIcon:hover {
+	color: white;
+}
+
+.footerDivider {
+	border: none;
+	border-top: 1px solid rgba(255, 255, 255, 0.2);
+	margin: 2rem 0;
+}
+
+.footerBottom {
+	text-align: center;
+}
+
+.footerCopyright {
+	color: rgba(255, 255, 255, 0.6);
+	font-size: 0.875rem;
+	margin: 0;
+}
+
+@media (max-width: 768px) {
+	.footerContent {
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+
+	.welcomeFooter {
+		padding: 2rem 0;
+	}
+}

@@ -1,0 +1,108 @@
+.searchBar {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.searchContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.searchInput {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    padding-right: 2.5rem;
+    border: 2px solid #e9ecef;
+    border-radius: 32px;
+    outline: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    height: 36px;
+    box-sizing: border-box;
+}
+
+.searchInput:focus {
+    border-color: var(--primary-blue);
+    background: white;
+    box-shadow: 0 8px 25px rgba(32, 190, 255, 0.15);
+}
+
+.searchInput::placeholder {
+    color: #adb5bd;
+    font-weight: 400;
+}
+
+.searchBtn {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-blue);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.searchBtn:hover {
+    background: rgba(32, 190, 255, 0.1);
+    transform: translateY(-50%) scale(1.05);
+    color: var(--primary-blue-hover, #1a9edb);
+}
+
+// Size variations
+.searchBar-sm {
+    .searchInput {
+        height: 32px;
+        font-size: 0.8rem;
+        padding: 0.4rem 0.8rem;
+        padding-right: 2.2rem;
+    }
+
+    .searchBtn {
+        width: 24px;
+        height: 24px;
+        right: 3px;
+    }
+}
+
+.searchBar-md {
+    .searchInput {
+        height: 36px;
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+        padding-right: 2.5rem;
+    }
+
+    .searchBtn {
+        width: 28px;
+        height: 28px;
+        right: 4px;
+    }
+}
+
+.searchBar-lg {
+    .searchInput {
+        height: 44px;
+        font-size: 0.9rem;
+        padding: 0.75rem 1.25rem;
+        padding-right: 3rem;
+    }
+
+    .searchBtn {
+        width: 32px;
+        height: 32px;
+        right: 6px;
+    }
+}

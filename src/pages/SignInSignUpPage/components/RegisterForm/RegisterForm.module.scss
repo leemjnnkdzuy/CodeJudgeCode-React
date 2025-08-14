@@ -1,0 +1,34 @@
+.register-form {
+	background-color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding: 0 40px;
+	height: 100%;
+
+	h1 {
+		font-weight: bold;
+		margin: 0;
+	}
+
+	span {
+		font-size: 12px;
+	}
+
+	input {
+		background-color: #eee;
+		border: none;
+		margin: 8px 0;
+		padding: 10px 15px;
+		font-size: 13px;
+		border-radius: 8px;
+		width: 100%;
+		outline: none;
+		transition: all 0.3s ease;
+
+		&:focus {
+			background-color: #ddd;
+		}
+	}
+}

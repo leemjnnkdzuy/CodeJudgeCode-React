@@ -1,0 +1,370 @@
+import { 
+    BiGridAlt, BiText, BiHash, BiTrendingUp, BiCalculator, BiSortAlt2,
+    BiTargetLock, BiGitBranch, BiSearchAlt, BiData, BiGrid, BiExpandHorizontal, BiPointer, BiPlus, BiLayer, BiPlayCircle,
+    BiShareAlt, BiListOl, BiWindow, BiCube, BiListUl, BiUndo, BiLink,
+    BiListCheck, BiMath, BiSortDown, BiTrendingDown, BiShuffle, BiMask,
+    BiRightArrowAlt, BiRefresh, BiSplitHorizontal, BiShapeTriangle, BiBookmark,
+    BiNavigation, BiSearch, BiSort, BiJoystick, BiChat, BiTransfer, BiBrain,
+    BiLinkAlt, BiMerge, BiRepeat, BiTimer, BiBarChart, BiSelectMultiple,
+    BiScan, BiTerminal, BiDroplet, BiXCircle
+} from 'react-icons/bi';
+
+const TYPE_PROBLEM = {
+    "Array": {
+        "name": "Mảng",
+        "description": "Bài toán liên quan đến xử lý mảng.",
+        "icon": BiGridAlt
+    },
+    "String": {
+        "name": "Chuỗi",
+        "description": "Bài toán liên quan đến xử lý chuỗi.",
+        "icon": BiText
+    },
+    "Hash_Table": {
+        "name": "Bảng Băm",
+        "description": "Bài toán liên quan đến cấu trúc dữ liệu bảng băm.",
+        "icon": BiHash
+    },
+    "Dynamic_Programming": {
+        "name": "Quy Hoạch Động",
+        "description": "Bài toán sử dụng kỹ thuật quy hoạch động.",
+        "icon": BiTrendingUp
+    },
+    "Math": {
+        "name": "Toán Học",
+        "description": "Bài toán liên quan đến toán học.",
+        "icon": BiCalculator
+    },
+    "Sorting": {
+        "name": "Sắp Xếp",
+        "description": "Bài toán liên quan đến thuật toán sắp xếp.",
+        "icon": BiSortAlt2
+    },
+    "Greedy": {
+        "name": "Tham Lam",
+        "description": "Bài toán sử dụng thuật toán tham lam.",
+        "icon": BiTargetLock
+    },
+    "Depth_First_Search": {
+        "name": "Tìm Kiếm Theo Chiều Sâu",
+        "description": "Bài toán sử dụng thuật toán DFS.",
+        "icon": BiGitBranch
+    },
+    "Binary_Search": {
+        "name": "Tìm Kiếm Nhị Phân",
+        "description": "Bài toán sử dụng thuật toán tìm kiếm nhị phân.",
+        "icon": BiSearchAlt
+    },
+    "Database": {
+        "name": "Cơ Sở Dữ Liệu",
+        "description": "Bài toán liên quan đến cơ sở dữ liệu.",
+        "icon": BiData
+    },
+    "Matrix": {
+        "name": "Ma Trận",
+        "description": "Bài toán liên quan đến xử lý ma trận.",
+        "icon": BiGrid
+    },
+    "Tree": {
+        "name": "Cây",
+        "description": "Bài toán liên quan đến cấu trúc dữ liệu cây.",
+        "icon": BiGitBranch
+    },
+    "Breadth_First_Search": {
+        "name": "Tìm Kiếm Theo Chiều Rộng",
+        "description": "Bài toán sử dụng thuật toán BFS.",
+        "icon": BiExpandHorizontal
+    },
+    "Bit_Manipulation": {
+        "name": "Thao Tác Bit",
+        "description": "Bài toán liên quan đến thao tác trên bit.",
+        "icon": BiMask
+    },
+    "Two_Pointers": {
+        "name": "Hai Con Trỏ",
+        "description": "Bài toán sử dụng kỹ thuật hai con trỏ.",
+        "icon": BiPointer
+    },
+    "Prefix_Sum": {
+        "name": "Tổng Tiền Tố",
+        "description": "Bài toán sử dụng kỹ thuật tổng tiền tố.",
+        "icon": BiPlus
+    },
+    "Heap_Priority_Queue": {
+        "name": "Heap (Hàng Đợi Ưu Tiên)",
+        "description": "Bài toán sử dụng cấu trúc dữ liệu heap.",
+        "icon": BiLayer
+    },
+    "Simulation": {
+        "name": "Mô Phỏng",
+        "description": "Bài toán mô phỏng quá trình.",
+        "icon": BiPlayCircle
+    },
+    "Binary_Tree": {
+        "name": "Cây Nhị Phân",
+        "description": "Bài toán liên quan đến cây nhị phân.",
+        "icon": BiGitBranch
+    },
+    "Graph": {
+        "name": "Đồ Thị",
+        "description": "Bài toán liên quan đến lý thuyết đồ thị.",
+        "icon": BiShareAlt
+    },
+    "Stack": {
+        "name": "Ngăn Xếp",
+        "description": "Bài toán sử dụng cấu trúc dữ liệu ngăn xếp.",
+        "icon": BiLayer
+    },
+    "Counting": {
+        "name": "Đếm",
+        "description": "Bài toán liên quan đến đếm số lượng.",
+        "icon": BiListOl
+    },
+    "Sliding_Window": {
+        "name": "Cửa Sổ Trượt",
+        "description": "Bài toán sử dụng kỹ thuật cửa sổ trượt.",
+        "icon": BiWindow
+    },
+    "Design": {
+        "name": "Thiết Kế",
+        "description": "Bài toán thiết kế cấu trúc dữ liệu.",
+        "icon": BiCube
+    },
+    "Enumeration": {
+        "name": "Liệt Kê",
+        "description": "Bài toán liệt kê các khả năng.",
+        "icon": BiListUl
+    },
+    "Backtracking": {
+        "name": "Quay Lui",
+        "description": "Bài toán sử dụng thuật toán quay lui.",
+        "icon": BiUndo
+    },
+    "Union_Find": {
+        "name": "Union Find",
+        "description": "Bài toán sử dụng cấu trúc dữ liệu Union Find.",
+        "icon": BiLink
+    },
+    "Linked_List": {
+        "name": "Danh Sách Liên Kết",
+        "description": "Bài toán liên quan đến danh sách liên kết.",
+        "icon": BiListCheck
+    },
+    "Number_Theory": {
+        "name": "Lý Thuyết Số",
+        "description": "Bài toán liên quan đến lý thuyết số.",
+        "icon": BiMath
+    },
+    "Ordered_Set": {
+        "name": "Tập Có Thứ Tự",
+        "description": "Bài toán sử dụng tập có thứ tự.",
+        "icon": BiSortDown
+    },
+    "Monotonic_Stack": {
+        "name": "Ngăn Xếp Đơn Điệu",
+        "description": "Bài toán sử dụng ngăn xếp đơn điệu.",
+        "icon": BiTrendingDown
+    },
+    "Segment_Tree": {
+        "name": "Cây Phân Đoạn",
+        "description": "Bài toán sử dụng cây phân đoạn.",
+        "icon": BiGitBranch
+    },
+    "Trie": {
+        "name": "Trie",
+        "description": "Bài toán sử dụng cấu trúc dữ liệu Trie.",
+        "icon": BiGitBranch
+    },
+    "Combinatorics": {
+        "name": "Tổ Hợp",
+        "description": "Bài toán liên quan đến tổ hợp.",
+        "icon": BiShuffle
+    },
+    "Bitmask": {
+        "name": "Mặt Nạ Bit",
+        "description": "Bài toán sử dụng kỹ thuật bitmask.",
+        "icon": BiMask
+    },
+    "Queue": {
+        "name": "Hàng Đợi",
+        "description": "Bài toán sử dụng cấu trúc dữ liệu hàng đợi.",
+        "icon": BiRightArrowAlt
+    },
+    "Recursion": {
+        "name": "Đệ Quy",
+        "description": "Bài toán sử dụng kỹ thuật đệ quy.",
+        "icon": BiRefresh
+    },
+    "Divide_and_Conquer": {
+        "name": "Chia Để Trị",
+        "description": "Bài toán sử dụng thuật toán chia để trị.",
+        "icon": BiSplitHorizontal
+    },
+    "Geometry": {
+        "name": "Hình Học",
+        "description": "Bài toán liên quan đến hình học.",
+        "icon": BiShapeTriangle
+    },
+    "Binary_Indexed_Tree": {
+        "name": "Cây Chỉ Số Nhị Phân",
+        "description": "Bài toán sử dụng cây chỉ số nhị phân.",
+        "icon": BiGitBranch
+    },
+    "Memoization": {
+        "name": "Ghi Nhớ",
+        "description": "Bài toán sử dụng kỹ thuật ghi nhớ.",
+        "icon": BiBookmark
+    },
+    "Hash_Function": {
+        "name": "Hàm Băm",
+        "description": "Bài toán sử dụng hàm băm.",
+        "icon": BiHash
+    },
+    "Binary_Search_Tree": {
+        "name": "Cây Tìm Kiếm Nhị Phân",
+        "description": "Bài toán liên quan đến cây tìm kiếm nhị phân.",
+        "icon": BiGitBranch
+    },
+    "Shortest_Path": {
+        "name": "Đường Đi Ngắn Nhất",
+        "description": "Bài toán tìm đường đi ngắn nhất.",
+        "icon": BiNavigation
+    },
+    "String_Matching": {
+        "name": "Khớp Chuỗi",
+        "description": "Bài toán khớp mẫu chuỗi.",
+        "icon": BiSearch
+    },
+    "Topological_Sort": {
+        "name": "Sắp Xếp Tô-pô",
+        "description": "Bài toán sắp xếp tô-pô.",
+        "icon": BiSort
+    },
+    "Rolling_Hash": {
+        "name": "Băm Cuộn",
+        "description": "Bài toán sử dụng kỹ thuật băm cuộn.",
+        "icon": BiRefresh
+    },
+    "Game_Theory": {
+        "name": "Lý Thuyết Trò Chơi",
+        "description": "Bài toán liên quan đến lý thuyết trò chơi.",
+        "icon": BiJoystick
+    },
+    "Interactive": {
+        "name": "Tương Tác",
+        "description": "Bài toán tương tác với hệ thống.",
+        "icon": BiChat
+    },
+    "Data_Stream": {
+        "name": "Luồng Dữ Liệu",
+        "description": "Bài toán xử lý luồng dữ liệu.",
+        "icon": BiTransfer
+    },
+    "Monotonic_Queue": {
+        "name": "Hàng Đợi Đơn Điệu",
+        "description": "Bài toán sử dụng hàng đợi đơn điệu.",
+        "icon": BiTrendingDown
+    },
+    "Brainteaser": {
+        "name": "Câu Đố",
+        "description": "Bài toán câu đố logic.",
+        "icon": BiBrain
+    },
+    "Doubly_Linked_List": {
+        "name": "Danh Sách Liên Kết Đôi",
+        "description": "Bài toán liên quan đến danh sách liên kết đôi.",
+        "icon": BiLinkAlt
+    },
+    "Randomized": {
+        "name": "Ngẫu Nhiên",
+        "description": "Bài toán sử dụng thuật toán ngẫu nhiên.",
+        "icon": BiShuffle
+    },
+    "Merge_Sort": {
+        "name": "Sắp Xếp Trộn",
+        "description": "Bài toán sử dụng thuật toán sắp xếp trộn.",
+        "icon": BiMerge
+    },
+    "Counting_Sort": {
+        "name": "Sắp Xếp Đếm",
+        "description": "Bài toán sử dụng thuật toán sắp xếp đếm.",
+        "icon": BiListOl
+    },
+    "Iterator": {
+        "name": "Bộ Lặp",
+        "description": "Bài toán sử dụng bộ lặp.",
+        "icon": BiRepeat
+    },
+    "Concurrency": {
+        "name": "Đồng Thời",
+        "description": "Bài toán xử lý đồng thời.",
+        "icon": BiTimer
+    },
+    "Probability_and_Statistics": {
+        "name": "Xác Suất và Thống Kê",
+        "description": "Bài toán liên quan đến xác suất và thống kê.",
+        "icon": BiBarChart
+    },
+    "Quickselect": {
+        "name": "Chọn Nhanh",
+        "description": "Bài toán sử dụng thuật toán chọn nhanh.",
+        "icon": BiSelectMultiple
+    },
+    "Suffix_Array": {
+        "name": "Mảng Hậu Tố",
+        "description": "Bài toán sử dụng mảng hậu tố.",
+        "icon": BiGridAlt
+    },
+    "Line_Sweep": {
+        "name": "Quét Đường",
+        "description": "Bài toán sử dụng thuật toán quét đường.",
+        "icon": BiScan
+    },
+    "Minimum_Spanning_Tree": {
+        "name": "Cây Khung Nhỏ Nhất",
+        "description": "Bài toán tìm cây khung có trọng số nhỏ nhất.",
+        "icon": BiGitBranch
+    },
+    "Bucket_Sort": {
+        "name": "Sắp Xếp Thùng",
+        "description": "Bài toán sử dụng thuật toán sắp xếp thùng.",
+        "icon": BiGrid
+    },
+    "Shell": {
+        "name": "Shell",
+        "description": "Bài toán liên quan đến shell script.",
+        "icon": BiTerminal
+    },
+    "Reservoir_Sampling": {
+        "name": "Lấy Mẫu Hồ Chứa",
+        "description": "Bài toán sử dụng thuật toán lấy mẫu hồ chứa.",
+        "icon": BiDroplet
+    },
+    "Strongly_Connected_Component": {
+        "name": "Thành Phần Liên Thông Mạnh",
+        "description": "Bài toán tìm thành phần liên thông mạnh.",
+        "icon": BiShareAlt
+    },
+    "Eulerian_Circuit": {
+        "name": "Chu Trình Euler",
+        "description": "Bài toán tìm chu trình Euler.",
+        "icon": BiRefresh
+    },
+    "Radix_Sort": {
+        "name": "Sắp Xếp Cơ Số",
+        "description": "Bài toán sử dụng thuật toán sắp xếp cơ số.",
+        "icon": BiSort
+    },
+    "Rejection_Sampling": {
+        "name": "Lấy Mẫu Loại Bỏ",
+        "description": "Bài toán sử dụng thuật toán lấy mẫu loại bỏ.",
+        "icon": BiXCircle
+    },
+    "Biconnected_Component": {
+        "name": "Thành Phần Liên Thông Kép",
+        "description": "Bài toán tìm thành phần liên thông kép.",
+        "icon": BiLinkAlt
+    }
+};
+
+export default TYPE_PROBLEM;
