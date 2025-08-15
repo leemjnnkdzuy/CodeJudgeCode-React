@@ -1,4 +1,5 @@
-export { default as CookiesForm } from "./CookiesForm";
-export { default as PrivacyForm } from "./PrivacyForm";
-export { default as Sidebar } from "./Sidebar";
-export { default as TermsForm } from "./TermsForm";
+export {default as ContactForm} from "./contactForm";
+export {default as CookiesForm} from "./CookiesForm";
+export {default as PrivacyForm} from "./PrivacyForm";
+export {default as Sidebar} from "./Sidebar";
+export {default as TermsForm} from "./TermsForm";

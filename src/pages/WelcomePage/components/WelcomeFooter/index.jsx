@@ -186,7 +186,7 @@ const WelcomeFooter = () => {
 				<div className={cx("footerBottom")}>
 					<p className={cx("footerCopyright")}>
 						© 2025 CodeJudge. Tất cả quyền được bảo lưu. Được xây
-						dựng với ❤️ cho các lập trình viên.
+						dựng với cho các lập trình viên.
 					</p>
 				</div>
 			</div>

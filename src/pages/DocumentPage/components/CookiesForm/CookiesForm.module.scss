@@ -35,23 +35,9 @@
 	color: var(--text-secondary);
 	line-height: 1.6;
 	margin-bottom: 2rem;
-	max-width: 900px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: justify;
-}
-
-.cookies-buttons {
-	display: flex;
-	gap: 1rem;
-	justify-content: center;
-	flex-wrap: wrap;
-}
-
-.cookies-buttons .btn {
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
 }
 
 .cookies-content {
@@ -260,7 +246,6 @@
 	margin: 0;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
 	.cookies-section {
 		padding: 2rem 0;

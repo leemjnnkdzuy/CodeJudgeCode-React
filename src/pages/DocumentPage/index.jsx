@@ -1,4 +1,6 @@
+import {useLocation} from "react-router-dom";
 import {
+	ContactForm,
 	CookiesForm,
 	PrivacyForm,
 	Sidebar,
@@ -10,13 +12,21 @@ import classNames from "classnames/bind";
 const cx = classNames.bind(style);
 
 const DocumentPage = () => {
+	const location = useLocation();
+
+	const shouldShowPrivacy =
+		location.pathname === "/docs" || location.pathname === "/docs/privacy";
+
 	return (
 		<div className={cx("document-page")}>
-			<Sidebar />
-			<div className={cx("content")}>
-				<CookiesForm />
-				<PrivacyForm />
-				<TermsForm />
+			<div className={cx("container")}>
+				<Sidebar className={cx("sidebar")} />
+				<div className={cx("content")}>
+					{shouldShowPrivacy && <PrivacyForm />}
+					<ContactForm />
+					<CookiesForm />
+					<TermsForm />
+				</div>
 			</div>
 		</div>
 	);

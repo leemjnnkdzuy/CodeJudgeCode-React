@@ -35,27 +35,27 @@ const publicRoutes = [
 	},
 	{
 		path: "/docs",
-		// component: DocumentPage,
+		component: DocumentPage,
 		layout: NotThingLayout,
 	},
 	{
 		path: "/docs/privacy",
-		// component: DocumentPage,
+		component: DocumentPage,
 		layout: NotThingLayout,
 	},
 	{
 		path: "/docs/terms",
-		// component: DocumentPage,
+		component: DocumentPage,
 		layout: NotThingLayout,
 	},
 	{
 		path: "/docs/cookies",
-		// component: DocumentPage,
+		component: DocumentPage,
 		layout: NotThingLayout,
 	},
 	{
 		path: "/docs/contact",
-		// component: DocumentPage,
+		component: DocumentPage,
 		layout: NotThingLayout,
 	},
 ];
