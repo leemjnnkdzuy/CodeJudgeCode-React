@@ -102,7 +102,6 @@
 
 .about-section {
     padding-bottom: 5rem;
-    background: #f8f9fa;
 }
 
 .about-header {
@@ -332,6 +331,7 @@
     align-items: center;
     gap: 1.5rem;
     text-align: left;
+    cursor: pointer;
 }
 
 .language-card:hover {
@@ -368,7 +368,7 @@
     font-size: 1.25rem;
     font-weight: 700;
     color: var(--text-primary, #333);
-    margin-bottom: 0.5rem;
+    margin: 0;
 }
 
 .language-description {
@@ -417,9 +417,10 @@
 }
 
 .cta-section {
-    padding: 4rem 0;
+    padding: 8rem 0;
     background: white;
     text-align: center;
+    margin-bottom: 8rem;
 }
 
 .cta-content {
