@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames/bind";
 
-import {Button} from "../../../../components/UI/";
+import {Button, Loading} from "../../../../components/UI/";
 
 import styles from "./ResetPasswordForm.module.scss";
 
@@ -51,7 +51,7 @@ function ResetPasswordForm({
 					Quay lại
 				</Button>
 				<Button type='submit' disabled={isLoading}>
-					{isLoading ? "Đang đặt lại..." : "Đặt lại"}
+					{isLoading ? <Loading size='10px' /> : "Đặt lại"}
 				</Button>
 			</div>
 		</form>

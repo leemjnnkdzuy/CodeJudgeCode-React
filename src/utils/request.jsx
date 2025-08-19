@@ -61,6 +61,12 @@ const request = {
 			});
 			return response.data;
 		} catch (error) {
+			if (error.response && error.response.status === 401) {
+				return {
+					success: false,
+					message: "Sai tài khoản hoặc mật khẩu!",
+				};
+			}
 			handleAxiosError(error);
 		}
 	},
@@ -94,22 +100,22 @@ const request = {
 			handleAxiosError(error);
 		}
 	},
-	resetPassword: async (resetPasswordData) => {
+	verifyResetPin: async ({email, code}) => {
 		try {
 			const response = await axiosInstance.post(
-				"/api/user/reset-password",
-				resetPasswordData
+				"/api/user/verify-reset-pin",
+				{email, code}
 			);
 			return response.data;
 		} catch (error) {
 			handleAxiosError(error);
 		}
 	},
-	verify: async (verificationData) => {
+	resetPassword: async (resetPasswordData) => {
 		try {
 			const response = await axiosInstance.post(
-				"/api/user/verify",
-				verificationData
+				"/api/user/reset-password",
+				resetPasswordData
 			);
 			return response.data;
 		} catch (error) {

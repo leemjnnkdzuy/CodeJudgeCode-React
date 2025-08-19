@@ -1,5 +1,5 @@
 // layouts
-import NotThingLayout from "../layouts/NotThingLayout";
+import {NotThingLayout} from "../layouts/";
 
 // Pages
 import WelcomePage from "../pages/WelcomePage";
@@ -30,6 +30,11 @@ const publicRoutes = [
 	},
 	{
 		path: "/forgot-password",
+		component: SignInSignUpPage,
+		layout: NotThingLayout,
+	},
+	{
+		path: '/reset-password',
 		component: SignInSignUpPage,
 		layout: NotThingLayout,
 	},

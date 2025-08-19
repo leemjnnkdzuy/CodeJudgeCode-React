@@ -53,13 +53,13 @@ function SignInSignUpPage() {
 		password: "",
 		confirmPassword: "",
 	});
-	const [verificationData, setVerificationData] = useState({code: ""});
+	const [pinData, setPinData] = useState({code: ""});
+	const [resetToken, setResetToken] = useState("");
 
 	const [currentPhase, setCurrentPhase] = useState(() => {
 		const path = location.pathname;
 		if (path === "/register") return "register";
 		if (path === "/forgot-password") return "forgotPassword";
-		if (path === "/reset-password") return "resetPassword";
 		if (path === "/verification") return "verification";
 		return "login";
 	});
@@ -69,7 +69,6 @@ function SignInSignUpPage() {
 			const path = location.pathname;
 			if (path === "/register") return "register";
 			if (path === "/forgot-password") return "forgotPassword";
-			if (path === "/reset-password") return "resetPassword";
 			if (path === "/verification") return "verification";
 			return "login";
 		};
@@ -86,12 +85,10 @@ function SignInSignUpPage() {
 			login: "/login",
 			register: "/register",
 			forgotPassword: "/forgot-password",
-			resetPassword: "/reset-password",
 			verification: "/verification",
 		};
 
 		navigate(routes[phase]);
-
 		setIsActive(phase === "register");
 	};
 
@@ -135,8 +132,9 @@ function SignInSignUpPage() {
 		setIsLoading(true);
 		try {
 			await request.forgotPassword(forgotPasswordData);
-			showSuccess("Email khôi phục đã được gửi!");
-			handlePhaseChange("resetPassword");
+			showSuccess("Mã PIN đã được gửi về email!");
+			setPinData({code: ""});
+			handlePhaseChange("verification");
 		} catch (error) {
 			showError(error.message || "Gửi email thất bại!");
 		} finally {
@@ -150,10 +148,19 @@ function SignInSignUpPage() {
 			showError("Mật khẩu không khớp!");
 			return;
 		}
+		if (!resetToken) {
+			showError("Bạn cần xác thực mã PIN trước!");
+			return;
+		}
 		setIsLoading(true);
 		try {
-			await request.resetPassword(resetPasswordData);
+			await request.resetPassword({
+				password: resetPasswordData.password,
+				confirmPassword: resetPasswordData.confirmPassword,
+				resetToken,
+			});
 			showSuccess("Đặt lại mật khẩu thành công!");
+			setResetToken("");
 			handlePhaseChange("login");
 		} catch (error) {
 			showError(error.message || "Đặt lại mật khẩu thất bại!");
@@ -166,11 +173,24 @@ function SignInSignUpPage() {
 		e.preventDefault();
 		setIsLoading(true);
 		try {
-			await request.verify(verificationData);
-			showSuccess("Xác minh thành công!");
-			handlePhaseChange("login");
+			const res = await request.verifyResetPin({
+				email: forgotPasswordData.email,
+				code: pinData.code,
+			});
+			if (res.resetToken) {
+				setResetToken(res.resetToken);
+				showSuccess("Xác thực thành công! Hãy đặt lại mật khẩu mới.");
+				setResetPasswordData({password: "", confirmPassword: ""});
+				setTimeout(() => handlePhaseChange("resetPassword"), 500);
+			} else {
+				showError(
+					res.message || "Mã xác thực không hợp lệ hoặc đã hết hạn!"
+				);
+			}
 		} catch (error) {
-			showError(error.message || "Xác minh thất bại!");
+			showError(
+				error.message || "Mã xác thực không hợp lệ hoặc đã hết hạn!"
+			);
 		} finally {
 			setIsLoading(false);
 		}
@@ -213,7 +233,6 @@ function SignInSignUpPage() {
 							isLoading={isLoading}
 						/>
 					)}
-
 					{currentPhase === "forgotPassword" && (
 						<ForgotPasswordForm
 							forgotPasswordData={forgotPasswordData}
@@ -223,22 +242,22 @@ function SignInSignUpPage() {
 							isLoading={isLoading}
 						/>
 					)}
-
+					{currentPhase === "verification" && (
+						<VerificationForm
+							verificationData={pinData}
+							onDataChange={setPinData}
+							onSubmit={handleVerification}
+							onBackToLogin={() =>
+								handlePhaseChange("forgotPassword")
+							}
+							isLoading={isLoading}
+						/>
+					)}
 					{currentPhase === "resetPassword" && (
 						<ResetPasswordForm
 							resetPasswordData={resetPasswordData}
 							onDataChange={setResetPasswordData}
 							onSubmit={handleResetPassword}
-							onBackToLogin={() => handlePhaseChange("login")}
-							isLoading={isLoading}
-						/>
-					)}
-
-					{currentPhase === "verification" && (
-						<VerificationForm
-							verificationData={verificationData}
-							onDataChange={setVerificationData}
-							onSubmit={handleVerification}
 							onBackToLogin={() => handlePhaseChange("login")}
 							isLoading={isLoading}
 						/>
