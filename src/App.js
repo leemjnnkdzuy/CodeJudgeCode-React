@@ -13,7 +13,7 @@ import {
 import {publicRoutes} from "./routes";
 import AppLoader from "./components/AppLoader";
 import GlobalNotificationPopup from "./components/GlobalNotificationPopup";
-import {healthCheck} from "./utils/request";
+import request from "./utils/request";
 
 const routerOptions = {
 	future: {
@@ -33,7 +33,7 @@ function NotificationRenderer() {
 					message={notification.message}
 					type={notification.type}
 					onClose={() => removeNotification(notification.id)}
-					duration={0} // Disable auto-close since we handle it in the hook
+					duration={0}
 				/>
 			))}
 		</>
@@ -47,7 +47,7 @@ function AppContent() {
 	useEffect(() => {
 		const initializeApp = async () => {
 			try {
-				await healthCheck();
+				await request.healthCheck();
 				await new Promise((resolve) => setTimeout(resolve, 1000));
 			} catch (error) {
 				console.log("Health check failed, continuing anyway:", error);
@@ -94,13 +94,13 @@ function App() {
 		<I18nextProvider i18n={i18n}>
 			<Router future={routerOptions.future}>
 				<ThemeProvider>
-					<GlobalNotificationProvider>
-						<AuthProvider>
-							<LanguagesProvider>
+					<LanguagesProvider>
+						<GlobalNotificationProvider>
+							<AuthProvider>
 								<AppContent />
-							</LanguagesProvider>
-						</AuthProvider>
-					</GlobalNotificationProvider>
+							</AuthProvider>
+						</GlobalNotificationProvider>
+					</LanguagesProvider>
 				</ThemeProvider>
 			</Router>
 		</I18nextProvider>

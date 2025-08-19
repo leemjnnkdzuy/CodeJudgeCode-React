@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames/bind";
 
-import Button from "../../../../components/UI/Button";
+import {Button, Loading} from "../../../../components/UI/";
 import SocialIcons from "../SocialIcons";
 
 import styles from "./LoginForm.module.scss";
@@ -53,7 +53,7 @@ function LoginForm({
 				Quên mật khẩu?
 			</button>
 			<Button type='submit' disabled={isLoading}>
-				{isLoading ? "Đang đăng nhập..." : "Đăng nhập"}
+				{isLoading ? <Loading size="10px"/> : "Đăng nhập"}
 			</Button>
 		</form>
 	);

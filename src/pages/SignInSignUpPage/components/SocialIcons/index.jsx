@@ -1,4 +1,3 @@
-import React from "react";
 import classNames from "classnames/bind";
 import {FaGoogle, FaFacebookF, FaGithub, FaLinkedinIn} from "react-icons/fa";
 

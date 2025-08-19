@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames/bind";
 
-import Button from "../../../../components/UI/Button";
+import {Button, Loading} from "../../../../components/UI/";
 
 import styles from "./VerificationForm.module.scss";
 
@@ -31,15 +31,11 @@ function VerificationForm({
 				required
 			/>
 			<div className={cx("verification-buttons")}>
-				<Button
-					type='button'
-					variant='secondary'
-					onClick={onBackToLogin}
-				>
+				<Button type='button' variant='variant' onClick={onBackToLogin}>
 					Quay lại
 				</Button>
 				<Button type='submit' disabled={isLoading}>
-					{isLoading ? "Đang xác minh..." : "Xác minh"}
+					{isLoading ? <Loading size='10px' /> : "Xác minh"}
 				</Button>
 			</div>
 		</form>

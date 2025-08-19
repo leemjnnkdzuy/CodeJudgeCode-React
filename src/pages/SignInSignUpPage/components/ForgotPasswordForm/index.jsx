@@ -1,7 +1,6 @@
 import React from "react";
 import classNames from "classnames/bind";
-import Loading from "../../../../components/UI/Loading";
-import Button from "../../../../components/UI/Button";
+import {Loading, Button} from "../../../../components/UI/";
 
 import styles from "./ForgotPasswordForm.module.scss";
 
@@ -31,15 +30,11 @@ function ForgotPasswordForm({
 				required
 			/>
 			<div className={cx("forgot-password-buttons")}>
-				<Button
-					type='button'
-					variant='outline'
-					onClick={onBackToLogin}
-				>
+				<Button type='button' variant='outline' onClick={onBackToLogin}>
 					Quay lại
 				</Button>
 				<Button type='submit' disabled={isLoading}>
-					{isLoading ? <Loading size="20px" /> : "Gửi Email"}
+					{isLoading ? <Loading size='10px' /> : "Gửi Email"}
 				</Button>
 			</div>
 		</form>

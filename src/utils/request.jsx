@@ -1,166 +1,132 @@
+import axios from "axios";
+
 const API_BASE_URL =
 	process.env.REACT_APP_API_BASE_URL || "http://localhost:3001";
 
-// Create axios-like interface
+const axiosInstance = axios.create({
+	baseURL: API_BASE_URL,
+	headers: {
+		"Content-Type": "application/json",
+	},
+	withCredentials: true,
+});
+
 const request = {
-	async get(url, config = {}) {
+	get: async (url, config = {}) => {
 		try {
-			const response = await fetch(`${API_BASE_URL}/${url}`, {
-				method: "GET",
-				headers: {
-					"Content-Type": "application/json",
-					...config.headers,
-				},
-			});
-
-			const data = await response.json();
-
-			if (!response.ok) {
-				const error = new Error(`HTTP ${response.status}`);
-				error.response = {
-					data,
-					status: response.status,
-				};
-				throw error;
-			}
-
-			return {data};
+			const response = await axiosInstance.get(url, config);
+			return response.data;
 		} catch (error) {
-			console.error("GET request failed:", error);
-			throw error;
+			handleAxiosError(error);
 		}
 	},
-
-	async post(url, body = {}, config = {}) {
+	post: async (url, body = {}, config = {}) => {
 		try {
-			const response = await fetch(`${API_BASE_URL}/${url}`, {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-					...config.headers,
-				},
-				body: JSON.stringify(body),
-			});
-
-			const data = await response.json();
-
-			if (!response.ok) {
-				const error = new Error(`HTTP ${response.status}`);
-				error.response = {
-					data,
-					status: response.status,
-				};
-				throw error;
-			}
-
-			return {data};
+			const response = await axiosInstance.post(url, body, config);
+			return response.data;
 		} catch (error) {
-			console.error("POST request failed:", error);
-			throw error;
+			handleAxiosError(error);
 		}
 	},
-
-	async put(url, body = {}, config = {}) {
+	put: async (url, body = {}, config = {}) => {
 		try {
-			const response = await fetch(`${API_BASE_URL}/${url}`, {
-				method: "PUT",
-				headers: {
-					"Content-Type": "application/json",
-					...config.headers,
-				},
-				body: JSON.stringify(body),
-			});
-
-			const data = await response.json();
-
-			if (!response.ok) {
-				const error = new Error(`HTTP ${response.status}`);
-				error.response = {
-					data,
-					status: response.status,
-				};
-				throw error;
-			}
-
-			return {data};
+			const response = await axiosInstance.put(url, body, config);
+			return response.data;
 		} catch (error) {
-			console.error("PUT request failed:", error);
-			throw error;
+			handleAxiosError(error);
 		}
 	},
-
-	async delete(url, config = {}) {
+	delete: async (url, config = {}) => {
 		try {
-			const response = await fetch(`${API_BASE_URL}/${url}`, {
-				method: "DELETE",
-				headers: {
-					"Content-Type": "application/json",
-					...config.headers,
-				},
-			});
-
-			const data = await response.json();
-
-			if (!response.ok) {
-				const error = new Error(`HTTP ${response.status}`);
-				error.response = {
-					data,
-					status: response.status,
-				};
-				throw error;
-			}
-
-			return {data};
+			const response = await axiosInstance.delete(url, config);
+			return response.data;
 		} catch (error) {
-			console.error("DELETE request failed:", error);
-			throw error;
+			handleAxiosError(error);
+		}
+	},
+	healthCheck: async () => {
+		try {
+			const response = await axiosInstance.get("/");
+			return response.status === 200;
+		} catch (error) {
+			console.error("Health check failed:", error);
+			return false;
+		}
+	},
+	login: async (username, password) => {
+		try {
+			const response = await axiosInstance.post("/api/user/login", {
+				username,
+				password,
+			});
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+	logout: async () => {
+		try {
+			const response = await axiosInstance.post("/api/user/logout");
+			return response.status === 200;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+	register: async (registerData) => {
+		try {
+			const response = await axiosInstance.post(
+				"/api/user/register",
+				registerData
+			);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+	forgotPassword: async (forgotPasswordData) => {
+		try {
+			const response = await axiosInstance.post(
+				"/api/user/forgot-password",
+				forgotPasswordData
+			);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+	resetPassword: async (resetPasswordData) => {
+		try {
+			const response = await axiosInstance.post(
+				"/api/user/reset-password",
+				resetPasswordData
+			);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+	verify: async (verificationData) => {
+		try {
+			const response = await axiosInstance.post(
+				"/api/user/verify",
+				verificationData
+			);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
 		}
 	},
 };
 
-export const healthCheck = async () => {
-	try {
-		const response = await fetch(`${API_BASE_URL}/api/health`);
-		return response.ok;
-	} catch (error) {
-		console.error("Health check failed:", error);
-		throw error;
+function handleAxiosError(error) {
+	if (error.response) {
+		const errMsg = error.response.data?.message || "Unknown error";
+		throw new Error(errMsg);
+	} else if (error.request) {
+		throw new Error("No response from server");
+	} else {
+		throw new Error(error.message);
 	}
-};
+}
 
-export const login = async (emailOrUsername, password) => {
-	try {
-		const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({emailOrUsername, password}),
-		});
-
-		const data = await response.json();
-		return data;
-	} catch (error) {
-		console.error("Login failed:", error);
-		throw error;
-	}
-};
-
-export const logout = async () => {
-	try {
-		const response = await fetch(`${API_BASE_URL}/api/auth/logout`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-		});
-
-		return response.ok;
-	} catch (error) {
-		console.error("Logout failed:", error);
-		throw error;
-	}
-};
-
-// Default export
 export default request;

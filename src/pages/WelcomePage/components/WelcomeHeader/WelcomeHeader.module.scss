@@ -190,20 +190,18 @@
 	background: var(--primary-blue);
 	color: white;
 	border-color: var(--primary-blue);
-	transform: translateY(-2px);
 	box-shadow: 0 8px 25px rgba(32, 190, 255, 0.3);
 }
 
 .logoutBtn {
-	color: #dc3545;
-	border-color: #dc3545;
+	background: #dc3545 !important;
+	border-color: #dc3545 !important;
 }
 
 .logoutBtn:hover {
 	background: #dc3545;
 	color: white;
-	transform: translateY(-2px);
-	box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3);
+	box-shadow: 0 8px 25px rgba(220, 53, 69, 0.3) !important;
 }
 
 .mobileMenuToggle {

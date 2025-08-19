@@ -1,8 +1,7 @@
-import React from "react";
 import {useNavigate} from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./NotFoundPage.module.scss";
-import Button from "../../components/UI/Button";
+import {Button} from "../../components/UI/";
 
 const cx = classNames.bind(styles);
 

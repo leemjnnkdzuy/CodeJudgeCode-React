@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames/bind";
 
-import Button from "../../../../components/UI/Button";
+import {Button} from "../../../../components/UI/";
 
 import styles from "./TogglePanel.module.scss";
 

@@ -3,10 +3,11 @@ import {useLocation, useNavigate} from "react-router-dom";
 import classNames from "classnames/bind";
 import {FaArrowLeft} from "react-icons/fa";
 
-import Button from "../../components/UI/Button";
+import {Button} from "../../components/UI/";
 import {useGlobalNotificationPopup} from "../../hooks/useGlobalNotificationPopup";
 import {useSocialLogin} from "../../hooks/useSocialLogin";
 import request from "../../utils/request";
+import {useAuth} from "../../hooks/useAuth";
 import {
 	LoginForm,
 	RegisterForm,
@@ -25,11 +26,23 @@ function SignInSignUpPage() {
 	const navigate = useNavigate();
 	const {handleSocialLogin} = useSocialLogin();
 	const {showError, showSuccess} = useGlobalNotificationPopup();
+	const {login, isAuthenticated} = useAuth();
 	const [isActive, setIsActive] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 
-	const [loginData, setLoginData] = useState({username: "", password: ""});
+	useEffect(() => {
+		if (isAuthenticated) {
+			navigate("/home");
+		}
+	}, [isAuthenticated, navigate]);
+
+	const [loginData, setLoginData] = useState({
+		username: "",
+		password: "",
+	});
 	const [registerData, setRegisterData] = useState({
+		first_name: "",
+		last_name: "",
 		username: "",
 		email: "",
 		password: "",
@@ -85,10 +98,13 @@ function SignInSignUpPage() {
 	const handleLogin = async (e) => {
 		e.preventDefault();
 		setIsLoading(true);
-
 		try {
-			await request.post("/auth/login", loginData);
-			showSuccess("Đăng nhập thành công!");
+			const result = await login(loginData.username, loginData.password);
+			if (result && result.success) {
+				showSuccess("Đăng nhập thành công!");
+			} else {
+				showError(result?.message || "Đăng nhập thất bại!");
+			}
 		} catch (error) {
 			showError(error.message || "Đăng nhập thất bại!");
 		} finally {
@@ -102,10 +118,9 @@ function SignInSignUpPage() {
 			showError("Mật khẩu không khớp!");
 			return;
 		}
-
 		setIsLoading(true);
 		try {
-			await request.post("/auth/register", registerData);
+			await request.register(registerData);
 			showSuccess("Đăng ký thành công!");
 			handlePhaseChange("verification");
 		} catch (error) {
@@ -118,9 +133,8 @@ function SignInSignUpPage() {
 	const handleForgotPassword = async (e) => {
 		e.preventDefault();
 		setIsLoading(true);
-
 		try {
-			await request.post("/auth/forgot-password", forgotPasswordData);
+			await request.forgotPassword(forgotPasswordData);
 			showSuccess("Email khôi phục đã được gửi!");
 			handlePhaseChange("resetPassword");
 		} catch (error) {
@@ -136,10 +150,9 @@ function SignInSignUpPage() {
 			showError("Mật khẩu không khớp!");
 			return;
 		}
-
 		setIsLoading(true);
 		try {
-			await request.post("/auth/reset-password", resetPasswordData);
+			await request.resetPassword(resetPasswordData);
 			showSuccess("Đặt lại mật khẩu thành công!");
 			handlePhaseChange("login");
 		} catch (error) {
@@ -152,9 +165,8 @@ function SignInSignUpPage() {
 	const handleVerification = async (e) => {
 		e.preventDefault();
 		setIsLoading(true);
-
 		try {
-			await request.post("/auth/verify", verificationData);
+			await request.verify(verificationData);
 			showSuccess("Xác minh thành công!");
 			handlePhaseChange("login");
 		} catch (error) {

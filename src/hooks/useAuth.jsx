@@ -6,7 +6,7 @@ import React, {
 	useCallback,
 } from "react";
 import {useNavigate, useLocation} from "react-router-dom";
-import {login as loginApi, logout as logoutApi} from "../utils/request";
+import request from "../utils/request";
 
 const AuthContext = createContext(null);
 
@@ -17,14 +17,16 @@ export const AuthProvider = ({children}) => {
 	const [loading, setLoading] = useState(true);
 	const navigate = useNavigate();
 	const location = useLocation();
+
 	const handleLogout = useCallback(async () => {
 		try {
-			await logoutApi();
+			await request.logout();
 		} catch (error) {
 			console.error("Logout API error:", error);
 		}
 
-		localStorage.removeItem("authToken");
+		localStorage.removeItem("userToken");
+		localStorage.removeItem("userInfo");
 		document.cookie =
 			"YIF+pxrGp0isUkYUsAWxn3rQH6pBrNY_=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 		setIsAuthenticated(false);
@@ -35,21 +37,32 @@ export const AuthProvider = ({children}) => {
 
 	useEffect(() => {
 		const checkAuth = () => {
-			const storedToken = localStorage.getItem("authToken");
+			const storedToken = localStorage.getItem("userToken");
+			const storedUser = localStorage.getItem("userInfo");
 
 			if (storedToken) {
 				try {
-					const tokenData = JSON.parse(atob(storedToken.split(".")[1]));
+					const tokenData = JSON.parse(
+						atob(storedToken.split(".")[1])
+					);
 					if (tokenData.exp * 1000 > Date.now()) {
 						setIsAuthenticated(true);
 						setToken(storedToken);
-						setUser({
-							id: tokenData.id,
-							fullName: tokenData.fullName || tokenData.name,
-							role: tokenData.role,
-							email: tokenData.email,
-						});
-						if (!document.cookie.includes("YIF+pxrGp0isUkYUsAWxn3rQH6pBrNY_")) {
+						if (storedUser) {
+							setUser(JSON.parse(storedUser));
+						} else {
+							setUser({
+								id: tokenData.id,
+								fullName: tokenData.fullName || tokenData.name,
+								role: tokenData.role,
+								email: tokenData.email,
+							});
+						}
+						if (
+							!document.cookie.includes(
+								"YIF+pxrGp0isUkYUsAWxn3rQH6pBrNY_"
+							)
+						) {
 							const expiryDate = new Date(tokenData.exp * 1000);
 							document.cookie = `YIF+pxrGp0isUkYUsAWxn3rQH6pBrNY_=true; expires=${expiryDate.toUTCString()}; path=/`;
 						}
@@ -69,51 +82,48 @@ export const AuthProvider = ({children}) => {
 	useEffect(() => {
 		if (!loading) {
 			if (isAuthenticated) {
-				if (location.pathname === "/login") {
-					navigate("/");
+				if (
+					location.pathname === "/login" ||
+					location.pathname === "/register" ||
+					location.pathname === "/forgot-password" ||
+					location.pathname === "/verification"
+				) {
+					navigate("/home");
 				}
 			} else {
-				if (location.pathname === "/") {
+				if (location.pathname === "/home") {
 					navigate("/");
 				}
 			}
 		}
 	}, [isAuthenticated, loading, location.pathname, navigate]);
-	const login = async (emailOrUsername, password) => {
+	const login = async (username, password) => {
 		try {
-			const response = await loginApi(emailOrUsername, password);
-			
-			if (response.success && response.data?.data?.accessToken) {
-				const token = response.data.data.accessToken;
-				const userData = response.data.data.user;
+			const response = await request.login(username, password);
+			if (response && response.token && response.user) {
+				const token = response.token;
+				const userData = response.user;
 
-				console.log("Token:", token);
-				console.log("User data:", userData);
+				localStorage.setItem("userToken", token);
+				localStorage.setItem("userInfo", JSON.stringify(userData));
 
-				const tokenData = JSON.parse(atob(token.split(".")[1]));
-				const expiryDate = new Date(tokenData.exp * 1000);
-
-				localStorage.setItem("authToken", token);
-				document.cookie = `YIF+pxrGp0isUkYUsAWxn3rQH6pBrNY_=true; expires=${expiryDate.toUTCString()}; path=/`;
+				try {
+					const tokenData = JSON.parse(atob(token.split(".")[1]));
+					const expiryDate = new Date(tokenData.exp * 1000);
+					document.cookie = `YIF+pxrGp0isUkYUsAWxn3rQH6pBrNY_=true; expires=${expiryDate.toUTCString()}; path=/`;
+				} catch {}
 
 				setToken(token);
 				setIsAuthenticated(true);
-				setUser({
-					id: userData._id,
-					fullName: userData.fullName,
-					email: userData.email,
-					username: userData.username,
-					role: userData.role,
-					avatar: userData.avatar,
-					phoneNumber: userData.phoneNumber,
-					isVerified: userData.isVerified,
-				});
+				setUser(userData);
 
 				return {success: true};
 			}
 			return {
 				success: false,
-				message: response.message || "Tên đăng nhập hoặc mật khẩu không đúng",
+				message:
+					response.message ||
+					"Tên đăng nhập hoặc mật khẩu không đúng",
 			};
 		} catch (error) {
 			return {
@@ -132,7 +142,9 @@ export const AuthProvider = ({children}) => {
 		logout: handleLogout,
 	};
 
-	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+	return (
+		<AuthContext.Provider value={value}>{children}</AuthContext.Provider>
+	);
 };
 
 export const useAuth = () => {

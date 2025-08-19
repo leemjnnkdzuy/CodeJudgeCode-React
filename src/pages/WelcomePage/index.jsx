@@ -1,8 +1,8 @@
 import assets from "../../assets";
 import classNames from "classnames/bind";
 import styles from "./WelcomePage.module.scss";
-import { WelcomeFooter, WelcomeHeader } from "./components/";
-import Button from "../../components/UI/Button";
+import {WelcomeFooter, WelcomeHeader} from "./components/";
+import {Button} from "../../components/UI/";
 
 const cx = classNames.bind(styles);
 

@@ -2,13 +2,20 @@ import React from "react";
 import {Link} from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./WelcomeHeader.module.scss";
-import Button from "../../../../components/UI/Button";
-import SearchBar from "../../../../components/UI/SearchBar";
+import {Button, SearchBar} from "../../../../components/UI/";
+import {useAuth} from "../../../../hooks/useAuth";
+import {useNavigate} from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
 const WelcomeHeader = () => {
-	const isLoggedIn = false;
+	const {isAuthenticated, logout} = useAuth();
+	const navigate = useNavigate();
+
+	const handleLogout = async () => {
+		await logout();
+		navigate("/");
+	};
 
 	return (
 		<header className={cx("welcomeHeader")}>
@@ -44,20 +51,22 @@ const WelcomeHeader = () => {
 					</div>
 
 					<div className={cx("navbarAuth")}>
-						{isLoggedIn ? (
+						{isAuthenticated ? (
 							<>
 								<Button
 									to='/profile'
 									className={cx("profileBtn")}
-									size='sm'
+									size='md'
 								>
 									Hồ Sơ
 								</Button>
 								<Button
-									to='/logout'
+									as='button'
+									type='button'
 									className={cx("logoutBtn")}
-									size='sm'
+									size='md'
 									variant='secondary'
+									onClick={handleLogout}
 								>
 									Đăng Xuất
 								</Button>

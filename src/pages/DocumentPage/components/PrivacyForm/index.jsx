@@ -8,7 +8,6 @@ const cx = classNames.bind(style);
 const PrivacyForm = () => {
 	const location = useLocation();
 
-	// Chỉ hiển thị khi ở route /docs hoặc /docs/privacy
 	if (
 		location.pathname !== "/docs" &&
 		location.pathname !== "/docs/privacy"

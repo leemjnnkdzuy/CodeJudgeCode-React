@@ -16,6 +16,13 @@
 		font-size: 12px;
 	}
 
+	.name-row {
+		display: flex;
+		gap: 10px;
+		width: 100%;
+		margin: 8px 0;
+	}
+
 	input {
 		background-color: #eee;
 		border: none;
@@ -26,9 +33,14 @@
 		width: 100%;
 		outline: none;
 		transition: all 0.3s ease;
+		box-sizing: border-box;
 
 		&:focus {
 			background-color: #ddd;
 		}
+	}
+
+	.name-row input {
+		margin: 0;
 	}
 }

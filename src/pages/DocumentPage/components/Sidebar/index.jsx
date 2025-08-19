@@ -8,7 +8,7 @@ import {
 } from "react-icons/md";
 import {FaArrowLeft} from "react-icons/fa";
 import style from "./Sidebar.module.scss";
-import Button from "../../../../components/UI/Button";
+import {Button} from "../../../../components/UI/";
 
 const cx = classNames.bind(style);
 

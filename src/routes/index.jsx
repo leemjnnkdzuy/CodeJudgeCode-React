@@ -34,6 +34,11 @@ const publicRoutes = [
 		layout: NotThingLayout,
 	},
 	{
+		path: "/verification",
+		component: SignInSignUpPage,
+		layout: NotThingLayout,
+	},
+	{
 		path: "/docs",
 		component: DocumentPage,
 		layout: NotThingLayout,
