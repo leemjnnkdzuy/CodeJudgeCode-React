@@ -1,0 +1,21 @@
+.tooltip-content {
+  font-size: 13px;
+  padding: 10px 16px;
+  color: #222;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.tippy-box[data-theme~="light"] {
+  background: #fff !important;
+  color: #222;
+  border-radius: 24px !important;
+  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.08);
+}
+
+.tippy-box[data-theme~="dark"] {
+  background: #222 !important;
+  color: #fff;
+  border-radius: 24px !important;
+  box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.2);
+}

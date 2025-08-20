@@ -81,6 +81,29 @@ function SignInSignUpPage() {
 	const handlePhaseChange = (phase) => {
 		setCurrentPhase(phase);
 
+		if (phase === "register") {
+			setRegisterData({
+				first_name: "",
+				last_name: "",
+				username: "",
+				email: "",
+				password: "",
+				confirmPassword: "",
+			});
+		}
+
+		if (phase === "login") {
+			setLoginData({
+				username: "",
+				password: "",
+			});
+		}
+
+		if (phase === "forgotPassword") {
+			setForgotPasswordData({email: ""});
+			setPinData({code: ""});
+		}
+
 		const routes = {
 			login: "/login",
 			register: "/register",
@@ -109,10 +132,33 @@ function SignInSignUpPage() {
 		}
 	};
 
+	const validateRegister = (data) => {
+		if (!data.last_name || data.last_name.trim().length < 2) {
+			return "Họ phải có ít nhất 2 ký tự.";
+		}
+		if (!data.first_name || data.first_name.trim().length < 2) {
+			return "Tên phải có ít nhất 2 ký tự.";
+		}
+		if (!data.username || data.username.length < 6) {
+			return "Tên người dùng phải có ít nhất 6 ký tự.";
+		}
+		if (!data.email || !/^\S+@\S+\.\S+$/.test(data.email)) {
+			return "Email không hợp lệ.";
+		}
+		if (!data.password || data.password.length < 6) {
+			return "Mật khẩu phải có ít nhất 6 ký tự.";
+		}
+		if (data.password !== data.confirmPassword) {
+			return "Mật khẩu không khớp!";
+		}
+		return null;
+	};
+
 	const handleRegister = async (e) => {
 		e.preventDefault();
-		if (registerData.password !== registerData.confirmPassword) {
-			showError("Mật khẩu không khớp!");
+		const errorMsg = validateRegister(registerData);
+		if (errorMsg) {
+			showError(errorMsg);
 			return;
 		}
 		setIsLoading(true);

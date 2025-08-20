@@ -1,3 +1,20 @@
+.strength-dot {
+	display: none;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: var(--dot-color, #e74c3c);
+	margin-left: 10px;
+	cursor: pointer;
+	box-shadow: 0 0 0 0px #aaa;
+	transition: box-shadow 0.2s;
+}
+.strength-dot.show {
+	display: inline-block;
+}
+.strength-dot.active {
+	box-shadow: 0 0 6px 2px #aaa;
+}
 .register-form {
 	background-color: #fff;
 	display: flex;
@@ -22,11 +39,13 @@
 		width: 100%;
 		margin: 8px 0;
 	}
-
+	.username-input,
+	.confirm-password-input {
+		margin-bottom: 8px;
+	}
 	input {
 		background-color: #eee;
 		border: none;
-		margin: 8px 0;
 		padding: 10px 15px;
 		font-size: 13px;
 		border-radius: 8px;
@@ -42,5 +61,41 @@
 
 	.name-row input {
 		margin: 0;
+	}
+
+	.password-row {
+		position: relative;
+		display: flex;
+		align-items: center;
+		width: 100%;
+		margin: 8px 0;
+		input[type="password"] {
+			width: 100%;
+			transition: all 0.3s cubic-bezier(0.4, 2, 0.6, 1);
+		}
+		&.focused input[type="password"],
+		&.has-value input[type="password"] {
+			width: 92%;
+		}
+		&.focused .strength-dot,
+		&.has-value .strength-dot {
+			display: block !important;
+		}
+		span[data-tip] {
+			position: absolute;
+			right: 8px;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 16px;
+			height: 16px;
+			border-radius: 50%;
+			box-shadow: 0 0 0 1.5px #ccc;
+			z-index: 2;
+		}
+	}
+
+	.password-input {
+		transition: all 0.3s cubic-bezier(0.4, 2, 0.6, 1);
+		z-index: 100;
 	}
 }
