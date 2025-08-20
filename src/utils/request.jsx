@@ -12,38 +12,6 @@ const axiosInstance = axios.create({
 });
 
 const request = {
-	get: async (url, config = {}) => {
-		try {
-			const response = await axiosInstance.get(url, config);
-			return response.data;
-		} catch (error) {
-			handleAxiosError(error);
-		}
-	},
-	post: async (url, body = {}, config = {}) => {
-		try {
-			const response = await axiosInstance.post(url, body, config);
-			return response.data;
-		} catch (error) {
-			handleAxiosError(error);
-		}
-	},
-	put: async (url, body = {}, config = {}) => {
-		try {
-			const response = await axiosInstance.put(url, body, config);
-			return response.data;
-		} catch (error) {
-			handleAxiosError(error);
-		}
-	},
-	delete: async (url, config = {}) => {
-		try {
-			const response = await axiosInstance.delete(url, config);
-			return response.data;
-		} catch (error) {
-			handleAxiosError(error);
-		}
-	},
 	healthCheck: async () => {
 		try {
 			const response = await axiosInstance.get("/");
@@ -84,6 +52,16 @@ const request = {
 				"/api/user/register",
 				registerData
 			);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+	verify: async (code) => {
+		try {
+			const response = await axiosInstance.post("/api/user/verify", {
+				code,
+			});
 			return response.data;
 		} catch (error) {
 			handleAxiosError(error);

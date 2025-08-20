@@ -132,6 +132,29 @@ function SignInSignUpPage() {
 		}
 	};
 
+	const rules = [
+		{
+			label: "Ít nhất 6 ký tự",
+			test: (password) => password.length >= 6,
+		},
+		{
+			label: "Có chữ hoa",
+			test: (password) => /[A-Z]/.test(password),
+		},
+		{
+			label: "Có chữ thường",
+			test: (password) => /[a-z]/.test(password),
+		},
+		{
+			label: "Có số",
+			test: (password) => /[0-9]/.test(password),
+		},
+		{
+			label: "Có ký tự đặc biệt",
+			test: (password) => /[^A-Za-z0-9]/.test(password),
+		},
+	];
+
 	const validateRegister = (data) => {
 		if (!data.last_name || data.last_name.trim().length < 2) {
 			return "Họ phải có ít nhất 2 ký tự.";
@@ -142,11 +165,16 @@ function SignInSignUpPage() {
 		if (!data.username || data.username.length < 6) {
 			return "Tên người dùng phải có ít nhất 6 ký tự.";
 		}
+		if (!/^[a-z0-9_.-]+$/.test(data.username)) {
+			return "Tên người dùng chỉ được chứa các ký tự a-z, 0-9, dấu gạch dưới (_), gạch ngang (-) và dấu chấm (.)";
+		}
 		if (!data.email || !/^\S+@\S+\.\S+$/.test(data.email)) {
 			return "Email không hợp lệ.";
 		}
-		if (!data.password || data.password.length < 6) {
-			return "Mật khẩu phải có ít nhất 6 ký tự.";
+		for (const rule of rules) {
+			if (!rule.test(data.password)) {
+				return `Mật khẩu: ${rule.label}`;
+			}
 		}
 		if (data.password !== data.confirmPassword) {
 			return "Mật khẩu không khớp!";
@@ -219,19 +247,35 @@ function SignInSignUpPage() {
 		e.preventDefault();
 		setIsLoading(true);
 		try {
-			const res = await request.verifyResetPin({
-				email: forgotPasswordData.email,
-				code: pinData.code,
-			});
-			if (res.resetToken) {
-				setResetToken(res.resetToken);
-				showSuccess("Xác thực thành công! Hãy đặt lại mật khẩu mới.");
-				setResetPasswordData({password: "", confirmPassword: ""});
-				setTimeout(() => handlePhaseChange("resetPassword"), 500);
+			if (forgotPasswordData.email) {
+				const res = await request.verifyResetPin({
+					email: forgotPasswordData.email,
+					code: pinData.code,
+				});
+				if (res.resetToken) {
+					setResetToken(res.resetToken);
+					showSuccess(
+						"Xác thực thành công! Hãy đặt lại mật khẩu mới."
+					);
+					setResetPasswordData({password: "", confirmPassword: ""});
+					setTimeout(() => handlePhaseChange("resetPassword"), 500);
+				} else {
+					showError(
+						res.message ||
+							"Mã xác thực không hợp lệ hoặc đã hết hạn!"
+					);
+				}
 			} else {
-				showError(
-					res.message || "Mã xác thực không hợp lệ hoặc đã hết hạn!"
-				);
+				const res = await request.verify(pinData.code);
+				if (res && res.message === "Xác minh thành công!") {
+					showSuccess("Xác minh thành công! Hãy đăng nhập.");
+					setTimeout(() => handlePhaseChange("login"), 1000);
+				} else {
+					showError(
+						res?.message ||
+							"Mã xác thực không hợp lệ hoặc đã hết hạn!"
+					);
+				}
 			}
 		} catch (error) {
 			showError(
