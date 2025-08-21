@@ -1,5 +1,6 @@
-import React from "react";
 import classNames from "classnames/bind";
+import {useState} from "react";
+import "boxicons/css/boxicons.min.css";
 
 import {Button, Loading} from "../../../../components/UI/";
 import SocialIcons from "../SocialIcons";
@@ -16,6 +17,9 @@ function LoginForm({
 	onSocialLogin,
 	isLoading,
 }) {
+	const [showPassword, setShowPassword] = useState(false);
+	const toggleShowPassword = () => setShowPassword((prev) => !prev);
+
 	return (
 		<form onSubmit={onSubmit} className={cx("login-form")}>
 			<h1>Đăng nhập</h1>
@@ -33,18 +37,37 @@ function LoginForm({
 				}
 				required
 			/>
-			<input
-				type='password'
-				placeholder='Mật khẩu'
-				value={loginData.password}
-				onChange={(e) =>
-					onDataChange({
-						...loginData,
-						password: e.target.value,
-					})
-				}
-				required
-			/>
+			<div className={cx("password-input-wrapper")}>
+				<input
+					type={showPassword ? "text" : "password"}
+					placeholder='Mật khẩu'
+					value={loginData.password}
+					onChange={(e) =>
+						onDataChange({
+							...loginData,
+							password: e.target.value,
+						})
+					}
+					required
+					className={cx("password-input")}
+				/>
+				{loginData.password && (
+					<span
+						onClick={toggleShowPassword}
+						className={cx("toggle-password-icon")}
+						tabIndex={0}
+						aria-label={
+							showPassword ? "Ẩn mật khẩu" : "Hiện mật khẩu"
+						}
+					>
+						<i
+							className={
+								showPassword ? "bx bx-hide" : "bx bx-show"
+							}
+						></i>
+					</span>
+				)}
+			</div>
 			<button
 				type='button'
 				className={cx("forget-password")}
@@ -53,7 +76,7 @@ function LoginForm({
 				Quên mật khẩu?
 			</button>
 			<Button type='submit' disabled={isLoading}>
-				{isLoading ? <Loading size="10px"/> : "Đăng nhập"}
+				{isLoading ? <Loading size='10px' /> : "Đăng nhập"}
 			</Button>
 		</form>
 	);

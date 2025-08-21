@@ -26,10 +26,40 @@
 		width: 100%;
 		outline: none;
 		transition: all 0.3s ease;
-
+		box-sizing: border-box;
 		&:focus {
 			background-color: #ddd;
 		}
+	}
+
+	.password-input-wrapper {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		position: relative;
+		margin: 8px 0;
+	}
+
+	.password-input {
+		padding-right: 38px;
+		margin: 0;
+	}
+
+	.toggle-password-icon {
+		position: absolute;
+		right: 12px;
+		top: 50%;
+		transform: translateY(-50%);
+		cursor: pointer;
+		color: #888;
+		font-size: 20px;
+		z-index: 2;
+		display: flex;
+		align-items: center;
+		height: 100%;
+		background: transparent;
+		border: none;
+		padding: 0;
 	}
 
 	.forget-password {

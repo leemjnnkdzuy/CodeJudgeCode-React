@@ -3,11 +3,13 @@ import classNames from "classnames/bind";
 import styles from "./WelcomePage.module.scss";
 import {WelcomeFooter, WelcomeHeader} from "./components/";
 import {Button} from "../../components/UI/";
+import {FaArrowRight} from "react-icons/fa";
+import {useAuth} from "../../hooks/useAuth";
 
 const cx = classNames.bind(styles);
 
 const WelcomePage = () => {
-	const isLoggedIn = false;
+	const {isAuthenticated} = useAuth();
 
 	const toggleAllFeatures = (button) => {
 		const allFeatures = document.querySelectorAll(
@@ -51,7 +53,7 @@ const WelcomePage = () => {
 								lồ các bài tập, giải pháp mẫu và hệ thống chấm
 								tự động cho tất cả các dự án học tập của bạn.
 							</p>
-							{!isLoggedIn ? (
+							{!isAuthenticated ? (
 								<div className={cx("hero-buttons")}>
 									<Button to='/login' variant='primary-hero'>
 										Đăng Nhập
@@ -62,11 +64,18 @@ const WelcomePage = () => {
 								</div>
 							) : (
 								<div className={cx("hero-buttons")}>
-									<Button to='/home' variant='primary-hero'>
-										Vào Trang Chủ
-									</Button>
-									<Button to='/profile' variant='outline'>
-										Hồ Sơ Của Tôi
+									<Button
+										to='/home'
+										variant='primary-hero'
+										size='lg'
+										className={cx("home-btn-animated")}
+									>
+										<span className={cx("home-btn-text")}>
+											Vào Trang Chủ
+										</span>
+										<span className={cx("home-btn-icon")}>
+											<FaArrowRight size={16} />
+										</span>
 									</Button>
 								</div>
 							)}
@@ -418,7 +427,7 @@ const WelcomePage = () => {
 								flexWrap: "wrap",
 							}}
 						>
-							{!isLoggedIn ? (
+							{!isAuthenticated ? (
 								<Button
 									to='/register'
 									variant='primary'
