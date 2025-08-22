@@ -1,10 +1,10 @@
-import React from "react";
-import {Link} from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./WelcomeHeader.module.scss";
 import {Button, SearchBar} from "../../../../components/UI/";
+import DropDown from "../../../../components/UI/DropDown";
 import {useAuth} from "../../../../hooks/useAuth";
 import {useNavigate} from "react-router-dom";
+import {base64ToImage} from "../../../../helper/avatarBase64Helper";
 
 const cx = classNames.bind(styles);
 
@@ -12,31 +12,70 @@ const WelcomeHeader = () => {
 	const {isAuthenticated, logout} = useAuth();
 	const navigate = useNavigate();
 
-	const handleLogout = async () => {
-		await logout();
-		navigate("/");
-	};
+	let avatarSrc = "";
+	try {
+		const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+		avatarSrc = base64ToImage(userInfo?.avatar);
+	} catch (e) {
+		avatarSrc = "";
+	}
+
+	const dropdownItems = [
+		{
+			label: "Hồ sơ",
+			onClick: () => navigate("/profile"),
+			icon: <i className='bx bx-user'></i>,
+		},
+		{
+			label: "Cài đặt",
+			onClick: () => navigate("/settings"),
+			icon: <i className='bx bx-cog'></i>,
+		},
+		{
+			label: "Đăng xuất",
+			onClick: async () => {
+				await logout();
+				navigate("/");
+			},
+			icon: <i className='bx bx-log-out'></i>,
+			danger: true,
+		},
+	];
 
 	return (
 		<header className={cx("welcomeHeader")}>
 			<nav className={cx("welcomeNavbar")}>
 				<div className={cx("container")}>
-					<div className={cx("navbarLogo")}>
-						<Link to='/' className={cx("logoLink")}>
-							<span className={cx("logoText")}>CodeJudge</span>
-						</Link>
+					<div
+						className={cx("navbarLogo")}
+						style={{cursor: "pointer"}}
+						onClick={() => navigate("/")}
+					>
+						<span className={cx("logoText")}>CodeJudge</span>
 					</div>
 
 					<div className={cx("navbarNav")}>
-						<Link to='/competitions' className={cx("navItem")}>
+						<div
+							className={cx("navItem")}
+							style={{cursor: "pointer"}}
+							onClick={() => navigate("/competitions")}
+						>
 							Cuộc Thi
-						</Link>
-						<Link to='/problems' className={cx("navItem")}>
+						</div>
+						<div
+							className={cx("navItem")}
+							style={{cursor: "pointer"}}
+							onClick={() => navigate("/problems")}
+						>
 							Bài Toán
-						</Link>
-						<Link to='/leaderboard' className={cx("navItem")}>
+						</div>
+						<div
+							className={cx("navItem")}
+							style={{cursor: "pointer"}}
+							onClick={() => navigate("/leaderboard")}
+						>
 							Xếp Hạng
-						</Link>
+						</div>
 					</div>
 
 					<div className={cx("navbarSearch")}>
@@ -52,25 +91,15 @@ const WelcomeHeader = () => {
 
 					<div className={cx("navbarAuth")}>
 						{isAuthenticated ? (
-							<>
-								<Button
-									to='/profile'
-									className={cx("profileBtn")}
-									size='md'
-								>
-									Hồ Sơ
-								</Button>
-								<Button
-									as='button'
-									type='button'
-									className={cx("logoutBtn")}
-									size='md'
-									variant='secondary'
-									onClick={handleLogout}
-								>
-									Đăng Xuất
-								</Button>
-							</>
+							<DropDown items={dropdownItems} align='right'>
+								<div className={cx("avatarBtn")}>
+									<img
+										src={avatarSrc}
+										alt='avatar'
+										className={cx("avatarImg")}
+									/>
+								</div>
+							</DropDown>
 						) : (
 							<>
 								<Button to='/login' size='md'>

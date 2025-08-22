@@ -21,6 +21,29 @@ const request = {
 			return false;
 		}
 	},
+
+	reloadUserProfile: async (token) => {
+		try {
+			const response = await axiosInstance.get(
+				"/api/user/reloadUserProfile",
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			return response.data;
+		} catch (error) {
+			if (error.response) {
+				return {
+					error: true,
+					status: error.response.status,
+					data: error.response.data,
+				};
+			}
+			return {error: true, status: 0, data: null};
+		}
+	},
 	login: async (username, password) => {
 		try {
 			const response = await axiosInstance.post("/api/user/login", {

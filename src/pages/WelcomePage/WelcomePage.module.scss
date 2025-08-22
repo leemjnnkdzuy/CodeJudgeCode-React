@@ -37,10 +37,11 @@
 }
 .home-btn-animated:hover .home-btn-icon {
 	opacity: 1;
-	width: 1.2em;
+	width: 1em;
 	margin-left: 0;
 	transform: translateX(0);
 	pointer-events: auto;
+	padding-right: 0;
 }
 .hero-section {
 	color: black;
@@ -489,7 +490,6 @@
 .container {
 	max-width: 1200px;
 	margin: 0 auto;
-	padding: 0 1rem;
 }
 
 @media (max-width: 768px) {

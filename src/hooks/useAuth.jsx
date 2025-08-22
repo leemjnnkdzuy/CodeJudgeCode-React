@@ -72,11 +72,19 @@ export const AuthProvider = ({children}) => {
 				} catch (error) {
 					handleLogout();
 				}
+			} else {
+				setIsAuthenticated(false);
+				setUser(null);
+				setToken(null);
 			}
 			setLoading(false);
 		};
 
+		window.addEventListener("storage", checkAuth);
 		checkAuth();
+		return () => {
+			window.removeEventListener("storage", checkAuth);
+		};
 	}, [handleLogout]);
 
 	useEffect(() => {

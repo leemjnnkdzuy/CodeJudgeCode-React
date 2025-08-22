@@ -46,17 +46,24 @@ function AppContent() {
 
 	useEffect(() => {
 		const initializeApp = async () => {
-			try {
-				await request.healthCheck();
-				await new Promise((resolve) => setTimeout(resolve, 1000));
-			} catch (error) {
-				console.log("Health check failed, continuing anyway:", error);
-				await new Promise((resolve) => setTimeout(resolve, 1000));
-			} finally {
-				setAppLoading(false);
+			const storedToken = localStorage.getItem("userToken");
+			if (storedToken) {
+				const result = await request.reloadUserProfile(storedToken);
+				if (result && !result.error && result.user) {
+					localStorage.setItem(
+						"userInfo",
+						JSON.stringify(result.user)
+					);
+				} else {
+					localStorage.removeItem("userToken");
+					localStorage.removeItem("userInfo");
+				}
+				await new Promise((resolve) => setTimeout(resolve, 500));
+			} else {
+				await new Promise((resolve) => setTimeout(resolve, 500));
 			}
+			setAppLoading(false);
 		};
-
 		initializeApp();
 	}, []);
 
