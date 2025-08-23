@@ -1,5 +1,10 @@
-import React, {useState, useEffect} from "react";
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import {useState, useEffect} from "react";
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Navigate,
+} from "react-router-dom";
 import {I18nextProvider} from "react-i18next";
 import i18n from "./i18n";
 import GlobalStyles from "./globalStyle";
@@ -10,7 +15,7 @@ import {
 	GlobalNotificationProvider,
 	useGlobalNotificationPopup,
 } from "./hooks/useGlobalNotificationPopup";
-import {publicRoutes} from "./routes";
+import {publicRoutes, privateRoutes} from "./routes";
 import AppLoader from "./components/AppLoader";
 import GlobalNotificationPopup from "./components/GlobalNotificationPopup";
 import request from "./utils/request";
@@ -40,8 +45,16 @@ function NotificationRenderer() {
 	);
 }
 
+function AuthRedirect({showError}) {
+	useEffect(() => {
+		showError && showError("Bạn cần đăng nhập để truy cập trang này!");
+	}, [showError]);
+	return <Navigate to='/login' replace />;
+}
+
 function AppContent() {
-	const {loading: authLoading} = useAuth();
+	const {loading: authLoading, isAuthenticated} = useAuth();
+	const {showError} = useGlobalNotificationPopup();
 	const [appLoading, setAppLoading] = useState(true);
 
 	useEffect(() => {
@@ -77,7 +90,6 @@ function AppContent() {
 				{publicRoutes.map((route, index) => {
 					const Page = route.component;
 					const Layout = route.layout;
-
 					return (
 						<Route
 							key={index}
@@ -86,6 +98,25 @@ function AppContent() {
 								<Layout>
 									<Page />
 								</Layout>
+							}
+						/>
+					);
+				})}
+				{privateRoutes.map((route, index) => {
+					const Page = route.component;
+					const Layout = route.layout;
+					return (
+						<Route
+							key={"private-" + index}
+							path={route.path}
+							element={
+								isAuthenticated ? (
+									<Layout>
+										<Page />
+									</Layout>
+								) : (
+									<AuthRedirect showError={showError} />
+								)
 							}
 						/>
 					);

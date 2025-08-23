@@ -1,7 +1,6 @@
 import classNames from "classnames/bind";
 import styles from "./WelcomeHeader.module.scss";
-import {Button, SearchBar} from "../../../../components/UI/";
-import DropDown from "../../../../components/UI/DropDown";
+import {Button, SearchBar, DropDown} from "../../../../components/UI/";
 import {useAuth} from "../../../../hooks/useAuth";
 import {useNavigate} from "react-router-dom";
 import {base64ToImage} from "../../../../helper/avatarBase64Helper";

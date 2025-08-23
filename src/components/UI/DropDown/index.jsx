@@ -1,16 +1,61 @@
 import React, {useState, useRef, useEffect} from "react";
+import {createPopper} from "@popperjs/core";
 import classNames from "classnames/bind";
 import styles from "./DropDown.module.scss";
 
 const cx = classNames.bind(styles);
 
-const DropDown = ({items, onSelect, children, align = "right"}) => {
+const DropDown = ({items, onSelect, children}) => {
 	const [open, setOpen] = useState(false);
-	const ref = useRef();
+	const triggerRef = useRef();
+	const menuRef = useRef();
+	const popperInstance = useRef();
 
 	useEffect(() => {
+		if (open && triggerRef.current && menuRef.current) {
+			popperInstance.current = createPopper(
+				triggerRef.current,
+				menuRef.current,
+				{
+					placement: "bottom-end", // mặc định như MUI Menu
+					modifiers: [
+						{
+							name: "flip",
+							options: {
+								fallbackPlacements: [
+									"top-end",
+									"bottom-start",
+									"top-start",
+								],
+							},
+						},
+						{
+							name: "preventOverflow",
+							options: {
+								padding: 8,
+							},
+						},
+					],
+				}
+			);
+		}
+		return () => {
+			if (popperInstance.current) {
+				popperInstance.current.destroy();
+				popperInstance.current = null;
+			}
+		};
+	}, [open]);
+
+	// đóng khi click ra ngoài
+	useEffect(() => {
 		const handleClickOutside = (event) => {
-			if (ref.current && !ref.current.contains(event.target)) {
+			if (
+				triggerRef.current &&
+				!triggerRef.current.contains(event.target) &&
+				menuRef.current &&
+				!menuRef.current.contains(event.target)
+			) {
 				setOpen(false);
 			}
 		};
@@ -20,20 +65,17 @@ const DropDown = ({items, onSelect, children, align = "right"}) => {
 	}, [open]);
 
 	return (
-		<div className={cx("dropdownWrapper")} ref={ref}>
+		<div className={cx("dropdownWrapper")}>
 			<div
+				ref={triggerRef}
 				onClick={() => setOpen((v) => !v)}
 				className={cx("dropdownTrigger")}
 			>
 				{children}
 			</div>
+
 			{open && (
-				<div
-					className={cx(
-						"dropdownMenu",
-						align === "left" ? "left" : "right"
-					)}
-				>
+				<div ref={menuRef} className={cx("dropdownMenu")}>
 					{items.map((item, idx) => (
 						<div
 							key={idx}

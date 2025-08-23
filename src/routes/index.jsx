@@ -1,11 +1,14 @@
 // layouts
-import {NotThingLayout} from "../layouts/";
+import {NotThingLayout, SidebarLayout} from "../layouts/";
 
 // Pages
-import WelcomePage from "../pages/WelcomePage";
-import NotFoundPage from "../pages/NotFoundPage";
-import SignInSignUpPage from "../pages/SignInSignUpPage";
-import DocumentPage from "../pages/DocumentPage";
+import {
+	WelcomePage,
+	NotFoundPage,
+	SignInSignUpPage,
+	DocumentPage,
+	HomePage,
+} from "../pages";
 
 const publicRoutes = [
 	{
@@ -34,7 +37,7 @@ const publicRoutes = [
 		layout: NotThingLayout,
 	},
 	{
-		path: '/reset-password',
+		path: "/reset-password",
 		component: SignInSignUpPage,
 		layout: NotThingLayout,
 	},
@@ -70,4 +73,8 @@ const publicRoutes = [
 	},
 ];
 
-export {publicRoutes};
+const privateRoutes = [
+	{path: "/home", component: HomePage, layout: SidebarLayout},
+];
+
+export {publicRoutes, privateRoutes};
