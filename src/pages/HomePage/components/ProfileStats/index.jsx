@@ -32,7 +32,7 @@ export default function ProfileStats({
 				<div className={cx("right-stats")}>
 					<div className={cx("stat")}>
 						<p>Chuỗi Đăng Nhập</p>
-						<strong>{user?.login_streak ?? 0}</strong>
+						<div className={cx("stat-score")}>{user?.login_streak ?? 0}</div>
 						<br />
 						<small>
 							ngày{" "}

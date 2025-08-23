@@ -33,7 +33,6 @@ function BadgesSection({userBadges = []}) {
 								<Tooltip
 									content={
 										<div className={cx("badge-tooltip")}>
-											{/* reuse existing tooltip styles */}
 											<strong>{badge.title}</strong>
 											<br />
 											{badge.description}
@@ -42,7 +41,7 @@ function BadgesSection({userBadges = []}) {
 													<br />
 													<em
 														style={{
-															color: "#ffd700",
+															color: "#f5d000ff",
 														}}
 													>
 														Chưa đạt được
