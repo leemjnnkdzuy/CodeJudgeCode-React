@@ -39,11 +39,7 @@ function BadgesSection({userBadges = []}) {
 											{!isEarned && (
 												<>
 													<br />
-													<em
-														style={{
-															color: "#f5d000ff",
-														}}
-													>
+													<em className={cx("badge-tooltip-unearned")}>
 														Chưa đạt được
 													</em>
 												</>

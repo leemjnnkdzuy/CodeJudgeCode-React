@@ -123,6 +123,20 @@ const request = {
 			handleAxiosError(error);
 		}
 	},
+	homeData: async (token) => {
+		try {
+			const response = await axiosInstance.get("/api/user/homeData", {
+				headers: token
+					? {
+							Authorization: `Bearer ${token}`,
+					  }
+					: {},
+			});
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
 };
 
 function handleAxiosError(error) {

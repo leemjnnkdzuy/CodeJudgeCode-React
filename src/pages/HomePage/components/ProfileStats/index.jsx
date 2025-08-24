@@ -1,14 +1,59 @@
 import React from "react";
 import classNames from "classnames/bind";
 import styles from "./ProfileStats.module.scss";
+import RANK from "../../../../config/rankingConfig";
 
 const cx = classNames.bind(styles);
 
-export default function ProfileStats({
-	user,
-	userBadges = [],
-	getLevelProgress,
-}) {
+export default function ProfileStats({user, userBadges = []}) {
+	// Tính tiến trình level dựa trên rating
+	const getLevelProgress = (rating) => {
+		if (typeof rating !== "number" || rating === -1)
+			return {percent: 0, label: "Chưa có xếp hạng"};
+
+		const ranks = Object.values(RANK)
+			.filter((r) => typeof r.order === "number")
+			.sort((a, b) => a.order - b.order);
+
+		// rank hiện tại
+		let current = ranks.find(
+			(r) => rating >= r.min_rating && rating <= r.max_rating
+		);
+
+		if (!current) {
+			// thấp hơn rank đầu
+			if (rating < ranks[0].min_rating) {
+				return {percent: 0, label: `đến ${ranks[0].name}`};
+			}
+			// cao hơn rank cuối
+			const last = ranks[ranks.length - 1];
+			if (rating >= last.min_rating) {
+				return {percent: 100, label: last.name};
+			}
+			return {percent: 0, label: "Chưa có xếp hạng"};
+		}
+
+		// nếu rank cao nhất
+		const maxOrder = Math.max(...ranks.map((r) => r.order));
+		if (current.order === maxOrder)
+			return {percent: 100, label: current.name};
+
+		// tiến trình tới rank tiếp theo
+		const next = ranks.find((r) => r.order === current.order + 1);
+		if (!next) return {percent: 100, label: current.name};
+
+		const rangeStart = Math.max(current.min_rating, 0);
+		const rangeEnd = Math.max(next.min_rating, rangeStart + 1);
+		const denom = rangeEnd - rangeStart;
+		const rawPercent =
+			denom > 0 ? ((rating - rangeStart) / denom) * 100 : 100;
+		const percent = Math.min(100, Math.max(0, Math.round(rawPercent)));
+
+		return {percent, label: `${rating} - đến ${next.name}`};
+	};
+
+	const {percent, label} = getLevelProgress(user?.rating);
+
 	return (
 		<>
 			<div className={cx("top-section")}>
@@ -29,10 +74,13 @@ export default function ProfileStats({
 						đó mới.
 					</p>
 				</div>
+
 				<div className={cx("right-stats")}>
 					<div className={cx("stat")}>
 						<p>Chuỗi Đăng Nhập</p>
-						<div className={cx("stat-score")}>{user?.login_streak ?? 0}</div>
+						<div className={cx("stat-score")}>
+							{user?.login_streak ?? 0}
+						</div>
 						<br />
 						<small>
 							ngày{" "}
@@ -45,22 +93,18 @@ export default function ProfileStats({
 							)}
 						</small>
 					</div>
+
 					<div className={cx("stat")}>
 						<p>Tiến Trình Cấp Độ</p>
-						{typeof user?.rating === "number" &&
-						user.rating !== -1 ? (
-							<div className={cx("circle")}>
-								{getLevelProgress(user.rating)}%
-							</div>
-						) : (
-							<div className={cx("circle")}>0%</div>
-						)}
-						<small>
-							{typeof user?.rating === "number" &&
-							user.rating !== -1
-								? "đến Chuyên Gia"
-								: "Chưa có xếp hạng"}
-						</small>
+						<div
+							className={cx("circle")}
+							style={{"--progress": percent}}
+						>
+							<span className={cx("circle-text")}>
+								{percent}%
+							</span>
+						</div>
+						<small>{label}</small>
 					</div>
 				</div>
 			</div>

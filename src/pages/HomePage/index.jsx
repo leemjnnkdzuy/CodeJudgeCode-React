@@ -3,26 +3,60 @@ import classNames from "classnames/bind";
 import styles from "./HomePage.module.scss";
 import {BadgesSection, ProfileStats} from "./components/";
 import {useAuth} from "../../hooks/useAuth";
+import {useEffect, useState} from "react";
+import request from "../../utils/request";
+import {Loading} from "../../components/UI";
 
 const cx = classNames.bind(styles);
 
 function HomePage() {
-	const {user} = useAuth();
+	const {user, token} = useAuth();
+	const [homeData, setHomeData] = useState(null);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(null);
 
-	const userBadges = user?.badges || [];
+	const userBadges = homeData?.badges ?? user?.badges ?? [];
 
-	const getLevelProgress = (rating) => {
-		return 12;
-	};
+	useEffect(() => {
+		let mounted = true;
+		const fetchHomeData = async () => {
+			if (!token) return;
+			setLoading(true);
+			setError(null);
+			try {
+				const data = await request.homeData(token);
+				if (mounted) setHomeData(data);
+			} catch (err) {
+				if (mounted) setError(err?.message || "Failed to load");
+			} finally {
+				if (mounted) setLoading(false);
+			}
+		};
+
+		fetchHomeData();
+
+		return () => {
+			mounted = false;
+		};
+	}, [token]);
 
 	return (
 		<div className={cx("profile-container")}>
-			<ProfileStats
-				user={user}
-				userBadges={userBadges}
-				getLevelProgress={getLevelProgress}
-			/>
-			<BadgesSection userBadges={userBadges} />
+			{loading ? (
+				<Loading size='20px' />
+			) : error ? (
+				<div className={cx("error-text")}>
+					Có lỗi khi tải dữ liệu: {error}
+				</div>
+			) : (
+				<>
+					<ProfileStats
+						user={{...user, ...homeData}}
+						userBadges={userBadges}
+					/>
+					<BadgesSection userBadges={userBadges} />
+				</>
+			)}
 		</div>
 	);
 }
