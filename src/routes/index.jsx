@@ -1,5 +1,8 @@
 // layouts
-import {NotThingLayout, SidebarLayout} from "../layouts/";
+import {
+	NotThingLayout,
+	SidebarLayout,
+} from "../layouts/";
 
 // Pages
 import {
@@ -8,6 +11,7 @@ import {
 	SignInSignUpPage,
 	DocumentPage,
 	HomePage,
+	ProblemsPage,
 } from "../pages";
 
 const publicRoutes = [
@@ -74,7 +78,16 @@ const publicRoutes = [
 ];
 
 const privateRoutes = [
-	{path: "/home", component: HomePage, layout: SidebarLayout},
+	{
+		path: "/home",
+		component: HomePage,
+		layout: SidebarLayout,
+	},
+	{
+		path: "/problems",
+		component: ProblemsPage,
+		layout: SidebarLayout,
+	},
 ];
 
 export {publicRoutes, privateRoutes};

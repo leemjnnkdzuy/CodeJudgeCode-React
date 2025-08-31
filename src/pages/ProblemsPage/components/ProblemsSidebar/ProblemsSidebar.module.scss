@@ -1,0 +1,144 @@
+.problem-types-container {
+	position: relative;
+}
+
+.problem-types-list {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	max-height: 400px;
+	overflow-y: auto;
+}
+
+.problem-type-item {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.5rem 1rem;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+.problem-type-item:hover {
+	background: #f8fafc;
+}
+
+.problem-type-item.active {
+	background: #dbeafe;
+	color: #1d4ed8;
+}
+
+.problem-type-item.hidden {
+	display: none;
+}
+
+.problem-type-item i {
+	font-size: 1.1rem;
+	width: 20px;
+	text-align: center;
+}
+
+.problem-type-item span {
+	font-size: 0.95rem;
+	font-weight: 500;
+}
+
+.toggle-types-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	width: 100%;
+	margin-top: 1rem;
+	padding: 0.5rem 1.5rem;
+	background: transparent;
+	border: 2px solid var(--primary-blue, #3b82f6);
+	border-radius: 32px;
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 0.85rem;
+	color: var(--primary-blue, #3b82f6);
+	transition: all 0.3s ease;
+	height: 36px;
+	box-sizing: border-box;
+}
+
+.toggle-types-btn:hover {
+	background: var(--primary-blue, #3b82f6);
+	color: white;
+	box-shadow: 0 8px 25px rgba(32, 190, 255, 0.3);
+	transform: translateY(-2px);
+}
+
+.toggle-types-btn i {
+	font-size: 1.1rem;
+	transition: transform 0.2s ease;
+}
+.problems-sidebar {
+	width: 320px;
+	background: #fff;
+	border-radius: 12px;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+	padding: 24px 18px 18px 18px;
+	display: flex;
+	flex-direction: column;
+	gap: 28px;
+}
+.difficulty-section,
+.status-section {
+	margin-bottom: 10px;
+}
+.difficulty-section h3,
+.status-section h3 {
+	font-size: 1.08rem;
+	font-weight: 600;
+	margin-bottom: 10px;
+	color: #333;
+}
+.difficulty-filters,
+.status-filters {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+.difficulty-filter,
+.status-filter {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 0.98rem;
+	cursor: pointer;
+	user-select: none;
+}
+.difficulty-label.easy {
+	color: #4caf50;
+}
+.difficulty-label.medium {
+	color: #ff9800;
+}
+.difficulty-label.hard {
+	color: #f44336;
+}
+.filter-actions {
+	margin-top: 10px;
+	display: flex;
+	justify-content: flex-end;
+}
+.apply-filters-btn {
+	background: #1976d2;
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	padding: 7px 18px;
+	font-size: 1rem;
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	cursor: pointer;
+	transition: background 0.15s;
+}
+.apply-filters-btn:hover {
+	background: #1256a3;
+}

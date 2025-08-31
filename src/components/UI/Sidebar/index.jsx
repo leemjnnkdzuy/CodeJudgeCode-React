@@ -97,7 +97,6 @@ const Sidebar = ({
 
 	return (
 		<div className={cx("global-sidebar", {collapsed})} id='globalSidebar'>
-			{/* Header */}
 			<div className={cx("sidebar-header")}>
 				<button className={cx("sidebar-toggle")} onClick={handleToggle}>
 					<i className='bx bx-menu'></i>
@@ -109,7 +108,6 @@ const Sidebar = ({
 				</div>
 			</div>
 
-			{/* Nav Items */}
 			<nav className={cx("sidebar-nav")}>
 				<ul className={cx("nav-list")}>
 					{navItems.map((item, idx) => (

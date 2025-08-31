@@ -1,2 +1,2 @@
-export { default as NotThingLayout } from "./NotThingLayout";
-export { default as SidebarLayout } from "./SidebarLayout";
+export {default as NotThingLayout} from "./NotThingLayout";
+export {default as SidebarLayout} from "./SidebarLayout";
