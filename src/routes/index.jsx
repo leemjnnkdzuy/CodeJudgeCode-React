@@ -12,6 +12,7 @@ import {
 	DocumentPage,
 	HomePage,
 	ProblemsPage,
+	ProblemsSubmitPage,
 } from "../pages";
 
 const publicRoutes = [
@@ -87,6 +88,12 @@ const privateRoutes = [
 		path: "/problems",
 		component: ProblemsPage,
 		layout: SidebarLayout,
+	},
+
+	{
+		path: "/problems/*",
+		component: ProblemsSubmitPage,
+		layout: NotThingLayout,
 	},
 ];
 

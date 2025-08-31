@@ -1,4 +1,4 @@
-import React, {
+import {
 	createContext,
 	useContext,
 	useState,
@@ -24,9 +24,10 @@ export const AuthProvider = ({children}) => {
 		} catch (error) {
 			console.error("Logout API error:", error);
 		}
-
 		localStorage.removeItem("userToken");
 		localStorage.removeItem("userInfo");
+		localStorage.removeItem("theme");
+		localStorage.removeItem("language");
 		document.cookie =
 			"YIF+pxrGp0isUkYUsAWxn3rQH6pBrNY_=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 		setIsAuthenticated(false);
@@ -111,20 +112,19 @@ export const AuthProvider = ({children}) => {
 			if (response && response.token && response.user) {
 				const token = response.token;
 				const userData = response.user;
-
+				const {theme, language, ...userInfo} = userData;
 				localStorage.setItem("userToken", token);
-				localStorage.setItem("userInfo", JSON.stringify(userData));
-
+				localStorage.setItem("userInfo", JSON.stringify(userInfo));
+				if (theme) localStorage.setItem("theme", theme);
+				if (language) localStorage.setItem("language", language);
 				try {
 					const tokenData = JSON.parse(atob(token.split(".")[1]));
 					const expiryDate = new Date(tokenData.exp * 1000);
 					document.cookie = `YIF+pxrGp0isUkYUsAWxn3rQH6pBrNY_=true; expires=${expiryDate.toUTCString()}; path=/`;
 				} catch {}
-
 				setToken(token);
 				setIsAuthenticated(true);
-				setUser(userData);
-
+				setUser(userInfo);
 				return {success: true};
 			}
 			return {

@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from "react";
 import classNames from "classnames/bind";
 import styles from "./ProblemsPage.module.scss";
-import ProblemsHeader from "./components/ProblemsHeader";
-import ProblemsItem from "./components/ProblemsItem";
-import ProblemsSidebar from "./components/ProblemsSidebar";
+import {ProblemsSidebar, ProblemsItem, ProblemsHeader} from "./components";
 import TYPE_PROBLEM from "../../config/styleProblemConfig";
 
 const cx = classNames.bind(styles);

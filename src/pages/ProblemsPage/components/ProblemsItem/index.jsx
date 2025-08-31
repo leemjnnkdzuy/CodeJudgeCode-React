@@ -1,4 +1,5 @@
 import React from "react";
+import {useNavigate} from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./ProblemsItem.module.scss";
 
@@ -10,12 +11,25 @@ function ProblemsItem({
 	difficultyLabels,
 	formatSolvedCount,
 }) {
+	const navigate = useNavigate();
 	const getType = (type) => problemTypes.find((t) => t.key === type);
 	return (
 		<div
 			className={cx("problem-item")}
 			data-id={problem.id}
 			data-slug={problem.slug}
+			onClick={() => {
+				if (problem.slug) {
+					navigate(`/problems/${problem.slug}`);
+				}
+			}}
+			role='button'
+			tabIndex={0}
+			onKeyPress={(e) => {
+				if ((e.key === "Enter" || e.key === " ") && problem.slug) {
+					navigate(`/problems/${problem.slug}`);
+				}
+			}}
 		>
 			<div className={cx("problem-info")}>
 				<h3 className={cx("problem-title")}>{problem.title}</h3>
