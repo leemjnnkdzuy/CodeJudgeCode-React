@@ -2,5 +2,6 @@ export {default as WelcomePage} from "./WelcomePage";
 export {default as NotFoundPage} from "./NotFoundPage";
 export {default as SignInSignUpPage} from "./SignInSignUpPage";
 export {default as DocumentPage} from "./DocumentPage";
-export { default as HomePage } from "./HomePage";
-export { default as ProblemsPage } from "./ProblemsPage";
+export {default as HomePage} from "./HomePage";
+export {default as ProblemsPage} from "./ProblemsPage";
+export {default as ProblemsSubmitPage} from "./ProblemsSubmitPage";
