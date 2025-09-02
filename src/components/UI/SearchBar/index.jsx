@@ -8,6 +8,7 @@ const cx = classNames.bind(styles);
 const SearchBar = ({
 	placeholder = "Tìm kiếm bài toán...",
 	onSearch,
+	onSubmit,
 	searchPath = "/search",
 	className = "",
 	size = "md",
@@ -19,7 +20,9 @@ const SearchBar = ({
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (searchValue.trim()) {
-			if (onSearch) {
+			if (onSubmit) {
+				onSubmit(searchValue.trim());
+			} else if (onSearch) {
 				onSearch(searchValue.trim());
 			} else {
 				navigate(
@@ -30,7 +33,11 @@ const SearchBar = ({
 	};
 
 	const handleInputChange = (e) => {
-		setSearchValue(e.target.value);
+		const value = e.target.value;
+		setSearchValue(value);
+		if (onSearch) {
+			onSearch(value);
+		}
 	};
 
 	const handleKeyDown = (e) => {

@@ -1,35 +1,12 @@
 import React, {useState, useEffect} from "react";
 import classNames from "classnames/bind";
 import styles from "./ProblemsPage.module.scss";
+import {Button, Loading} from "../../components/UI";
 import {ProblemsSidebar, ProblemsItem, ProblemsHeader} from "./components";
 import TYPE_PROBLEM from "../../config/styleProblemConfig";
+import request from "../../utils/request";
 
 const cx = classNames.bind(styles);
-
-const MOCK_PROBLEMS = [
-	{
-		id: 1,
-		slug: "two-sum",
-		title: "Hai số tổng",
-		description:
-			"Tìm hai số trong mảng có tổng bằng một giá trị cho trước.",
-		problem_types: ["array", "hash_table"],
-		difficulty: "easy",
-		solved_count: 1234,
-		user_status: "solved",
-	},
-	{
-		id: 2,
-		slug: "longest-substring",
-		title: "Chuỗi con dài nhất không lặp",
-		description: "Tìm độ dài chuỗi con không lặp ký tự.",
-		problem_types: ["string", "sliding_window"],
-		difficulty: "medium",
-		solved_count: 567,
-		user_status: "attempted",
-	},
-];
-
 const PROBLEM_TYPES = Object.entries(TYPE_PROBLEM).map(([key, value]) => ({
 	key: key.toLowerCase(),
 	name: value.name,
@@ -49,6 +26,7 @@ function formatSolvedCount(count) {
 }
 
 function ProblemsPage() {
+	const [allProblems, setAllProblems] = useState([]);
 	const [problems, setProblems] = useState([]);
 	const [search, setSearch] = useState("");
 	const [selectedTypes, setSelectedTypes] = useState([]);
@@ -58,11 +36,46 @@ function ProblemsPage() {
 		hard: true,
 	});
 	const [status, setStatus] = useState("all");
-	const [page, setPage] = useState(1);
+	const [isLoading, setIsLoading] = useState(false);
+	const [isContinue, setIsContinue] = useState(false);
+	const [loadedCount, setLoadedCount] = useState(5);
 
 	useEffect(() => {
-		let filtered = MOCK_PROBLEMS.filter((p) => {
-			if (search && !p.title.toLowerCase().includes(search.toLowerCase()))
+		const fetchProblems = async () => {
+			setIsLoading(true);
+			try {
+				const token = window.localStorage.getItem("userToken");
+				const res = await request.getProblemsList({
+					begin: 1,
+					end: loadedCount,
+					token: token || undefined,
+				});
+				const processedProblems = res.problems.map((p) => {
+					if (!p.description) p.description = "";
+					if (!Array.isArray(p.problem_types)) p.problem_types = [];
+					p.problem_types = p.problem_types.map((t) =>
+						t.toLowerCase()
+					);
+					return p;
+				});
+				setAllProblems(processedProblems);
+				setIsContinue(res.isContinue);
+			} catch (e) {
+				setAllProblems([]);
+			} finally {
+				setIsLoading(false);
+			}
+		};
+		fetchProblems();
+	}, [loadedCount]);
+
+	useEffect(() => {
+		let filtered = allProblems.filter((p) => {
+			if (
+				search &&
+				search.trim() &&
+				!p.title.toLowerCase().includes(search.toLowerCase())
+			)
 				return false;
 			if (
 				selectedTypes.length &&
@@ -70,36 +83,34 @@ function ProblemsPage() {
 			)
 				return false;
 			if (!difficulty[p.difficulty]) return false;
-			if (status === "solved" && p.user_status !== "solved") return false;
-			if (status === "unsolved" && p.user_status === "solved")
+			if (status === "solved" && p.user_status !== "accepted")
+				return false;
+			if (status === "unsolved" && p.user_status === "accepted")
 				return false;
 			return true;
 		});
 		setProblems(filtered);
-	}, [search, selectedTypes, difficulty, status, page]);
+	}, [allProblems, search, selectedTypes, difficulty, status]);
 
 	const handleTypeClick = (key) => {
 		setSelectedTypes((prev) =>
 			prev.includes(key) ? prev.filter((t) => t !== key) : [...prev, key]
 		);
-		setPage(1);
 	};
 	const handleDifficultyChange = (key) => {
 		setDifficulty((prev) => ({...prev, [key]: !prev[key]}));
-		setPage(1);
 	};
 	const handleStatusChange = (val) => {
 		setStatus(val);
-		setPage(1);
+	};
+
+	const loadMore = () => {
+		setLoadedCount((prev) => prev + 5);
 	};
 
 	return (
 		<div className={cx("problems-page")}>
-			<ProblemsHeader
-				search={search}
-				setSearch={setSearch}
-				setPage={setPage}
-			/>
+			<ProblemsHeader search={search} setSearch={setSearch} />
 
 			<div className={cx("problems-container")}>
 				<div className={cx("problems-main")}>
@@ -117,11 +128,34 @@ function ProblemsPage() {
 						) : (
 							<div className={cx("no-problems")}>
 								<i className='bx bx-search'></i>
-								<h3>Không tìm thấy bài toán nào</h3>
-								<p>Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm</p>
+								<h3>
+									{search && search.trim()
+										? "Không tìm thấy bài toán nào"
+										: "Chưa có bài toán nào"}
+								</h3>
+								<p>
+									{search && search.trim()
+										? "Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm"
+										: "Bài toán sẽ xuất hiện ở đây khi có dữ liệu"}
+								</p>
 							</div>
 						)}
 					</div>
+					{isContinue && (
+						<div className={cx("load-more-container")}>
+							<Button
+								className={cx("load-more-btn")}
+								onClick={loadMore}
+								disabled={isLoading}
+							>
+								{isLoading ? (
+									<Loading size='10px' />
+								) : (
+									"Xem thêm bài tập"
+								)}
+							</Button>
+						</div>
+					)}
 				</div>
 
 				<ProblemsSidebar
@@ -129,7 +163,6 @@ function ProblemsPage() {
 					handleDifficultyChange={handleDifficultyChange}
 					status={status}
 					handleStatusChange={handleStatusChange}
-					setPage={setPage}
 					DIFFICULTY_LABELS={DIFFICULTY_LABELS}
 					selectedTypes={selectedTypes}
 					handleTypeClick={handleTypeClick}

@@ -60,14 +60,25 @@
 		}
 	}
 
-	@media (max-width: 768px) {
-		.problems-container {
-			padding: 0 0.5rem;
-			gap: 1rem;
+	.load-more-container {
+		display: flex;
+		justify-content: center;
+		margin-top: 2rem;
+		padding: 1rem 0;
+	}
+
+	.load-more-btn {
+		gap: 0.5rem;
+
+		&:active {
+			transform: translateY(0);
 		}
 
-		.problems-main {
-			padding: 1rem 0;
+		&:disabled {
+			background: #9ca3af;
+			border-color: #9ca3af;
+			cursor: not-allowed;
+			transform: none;
 		}
 	}
 }

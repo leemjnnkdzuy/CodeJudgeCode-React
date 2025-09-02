@@ -137,6 +137,32 @@ const request = {
 			handleAxiosError(error);
 		}
 	},
+	getProblemsList: async ({begin = 1, end = 5, language, token} = {}) => {
+		try {
+			let lang = language;
+			if (!lang) {
+				if (typeof window !== "undefined" && window.localStorage) {
+					lang = window.localStorage.getItem("language");
+				} else {
+					lang = "vi";
+				}
+			}
+			const config = {};
+			if (token) {
+				config.headers = {
+					Authorization: `Bearer ${token}`,
+				};
+			}
+			const response = await axiosInstance.post(
+				"/api/problems/get-problems-list",
+				{begin, end, language: lang},
+				config
+			);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
 };
 
 function handleAxiosError(error) {

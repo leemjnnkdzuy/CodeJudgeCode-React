@@ -11,7 +11,6 @@ function ProblemsSidebar({
 	handleDifficultyChange,
 	status,
 	handleStatusChange,
-	setPage,
 	DIFFICULTY_LABELS,
 	selectedTypes = [],
 	handleTypeClick = () => {},
