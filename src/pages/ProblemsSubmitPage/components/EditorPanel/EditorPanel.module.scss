@@ -1,0 +1,286 @@
+.editor-panel {
+	flex: 1;
+	border-radius: 8px;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid var(--border-color);
+	border-radius: 8px;
+}
+
+.editor-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 7px 16px;
+	border-bottom: 1px solid var(--border-color);
+}
+
+.editor-tabs {
+	display: flex;
+	border: 1px solid var(--border-color);
+	padding: 0 12px 0 16px;
+	border-radius: 18px;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+
+	span {
+		justify-content: center;
+		align-items: center;
+		display: flex;
+	}
+}
+
+.editor-controls {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.language-select {
+	font-size: 0.875rem;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	width: 100%;
+	box-sizing: border-box;
+	transition: border-color 0.18s;
+	justify-content: space-between;
+}
+
+.language-select:focus,
+.language-select:active,
+.language-select[aria-expanded="true"] {
+	outline: none;
+	border-color: var(--primary-blue);
+	box-shadow: 0 0 0 2px rgba(32, 190, 255, 0.2);
+}
+
+.editor-controls .btn {
+	height: 38px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0 var(--spacing-lg);
+	font-size: 0.875rem;
+	line-height: 1;
+	white-space: nowrap;
+}
+
+.editor-controls .back-button {
+	position: static;
+	height: 38px;
+	transform: none;
+	z-index: auto;
+	margin-right: auto;
+}
+
+.editor-controls .back-button:hover {
+	transform: translateX(-2px);
+}
+
+.editor-controls .btn i {
+	margin-right: var(--spacing-xs);
+	font-size: 1rem;
+}
+
+.editor-container {
+	flex: 1;
+	position: relative;
+	overflow: hidden;
+}
+
+.monaco-editor {
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.console-panel {
+	height: 200px;
+	min-height: 200px;
+	border-top: 1px solid var(--border-color);
+	background: var(--white);
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 0;
+}
+
+.console-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: var(--spacing-sm) var(--spacing-lg);
+	background: var(--light-gray);
+	border-bottom: 1px solid var(--border-color);
+}
+
+.console-title {
+	font-weight: 600;
+	color: var(--text-primary);
+	font-size: 0.875rem;
+}
+
+.console-content {
+	flex: 1;
+	padding: var(--spacing-md);
+	overflow-y: auto;
+	background: #fafafa;
+	font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+	font-size: 0.875rem;
+}
+
+.console-content::-webkit-scrollbar {
+	width: 6px;
+}
+
+.console-content::-webkit-scrollbar-track {
+	background: var(--light-gray);
+	border-radius: 3px;
+}
+
+.console-content::-webkit-scrollbar-thumb {
+	background: var(--border-color);
+	border-radius: 3px;
+}
+
+.console-content::-webkit-scrollbar-thumb:hover {
+	background: var(--primary-blue);
+}
+
+.console-message {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-sm);
+	padding: var(--spacing-sm);
+	border-radius: var(--radius-md);
+	margin-bottom: var(--spacing-sm);
+}
+
+.console-message.info {
+	background: var(--primary-blue-light);
+	color: var(--primary-blue-dark);
+}
+
+.console-message.success {
+	background: #d4edda;
+	color: #155724;
+}
+
+.console-message.error {
+	background: #f8d7da;
+	color: #721c24;
+}
+
+.editor-placeholder {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #f8f9fa;
+	border: 2px dashed #dee2e6;
+	z-index: 1;
+	transition: opacity 0.3s ease;
+
+	&.hidden {
+		opacity: 0;
+		pointer-events: none;
+	}
+}
+
+.placeholder-content {
+	text-align: center;
+	color: #6c757d;
+}
+
+.placeholder-content i {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+	display: block;
+}
+
+.placeholder-content p {
+	margin: 0;
+	font-size: 1rem;
+}
+
+@media (max-width: 1200px) {
+	.editor-panel {
+		min-width: unset;
+		height: 70vh;
+	}
+
+	.console-panel {
+		height: 150px;
+	}
+}
+
+@media (max-width: 768px) {
+	.editor-header {
+		flex-direction: column;
+		gap: var(--spacing-md);
+		align-items: stretch;
+	}
+
+	.editor-controls {
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: var(--spacing-sm);
+	}
+
+	.editor-controls .back-button {
+		margin-right: 0;
+		order: -1;
+	}
+
+	.editor-controls .btn {
+		height: 36px;
+		font-size: 0.75rem;
+		padding: 0 var(--spacing-sm);
+		min-width: 80px;
+	}
+
+	.language-select {
+		height: 36px;
+	}
+
+	.run-code-btn,
+	.submit-code-btn {
+		height: 36px;
+		min-width: 80px;
+	}
+
+	.console-panel {
+		height: 120px;
+	}
+}
+
+@media (max-width: 480px) {
+	.editor-controls {
+		flex-direction: column;
+		gap: var(--spacing-sm);
+	}
+
+	.editor-controls .back-button {
+		width: 100%;
+		justify-content: center;
+		margin-right: 0;
+	}
+
+	.language-select {
+		width: 100%;
+	}
+
+	.btn {
+		width: 100%;
+		justify-content: center;
+	}
+}

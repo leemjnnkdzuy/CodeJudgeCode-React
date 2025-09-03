@@ -1,0 +1,152 @@
+.header-container {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 8px;
+	background-color: white;
+}
+.tooltip {
+	padding: 0;
+	font-size: 0.9rem;
+}
+.icon {
+	font-size: 18px;
+	margin-right: 16px;
+}
+.right-icons {
+	display: flex;
+	align-items: center;
+	margin-left: auto;
+
+	.stopwatch-container {
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		transition: all 0.2s ease;
+
+		&.expanded {
+			margin-right: 22px;
+			margin-left: auto;
+		}
+		.stopwatch-expanded {
+			display: flex;
+			align-items: center;
+			background: #fff;
+			border: 1px solid var(--border-color);
+			border-radius: 20px;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+			padding: 0;
+			animation: stopwatch-expand 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+			.time-icon {
+				font-size: 18px;
+				cursor: pointer;
+				font-weight: 500;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 24px;
+				height: 24px;
+			}
+			.time-display {
+				font-variant-numeric: tabular-nums;
+				font-weight: 400;
+				font-size: 0.8rem;
+				justify-content: center;
+				align-items: center;
+				display: flex;
+				cursor: default;
+				min-width: 48px;
+			}
+
+			.start-stop-btn {
+				border: none;
+				background: none;
+				color: var(--primary-blue);
+				cursor: pointer;
+				font-weight: 500;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 24px;
+				height: 24px;
+				border-radius: 50%;
+				transition: all 0.2s ease;
+
+				&:hover {
+					background: rgba(0, 123, 255, 0.1);
+				}
+			}
+
+			.reset-btn {
+				border: none;
+				background: none;
+				color: #e74c3c;
+				cursor: pointer;
+				font-weight: 500;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 24px;
+				height: 24px;
+				border-radius: 50%;
+				transition: all 0.2s ease;
+
+				&:hover {
+					background: rgba(231, 76, 60, 0.1);
+				}
+			}
+
+			.btn-icon {
+				font-size: 16px;
+			}
+
+			.close-btn {
+				border: none;
+				background: none;
+				color: #888;
+				cursor: pointer;
+				margin-left: 4px;
+			}
+		}
+	}
+}
+
+@keyframes stopwatch-expand {
+	0% {
+		opacity: 0;
+		transform: scaleX(0.8);
+	}
+	100% {
+		opacity: 1;
+		transform: scaleX(1);
+	}
+}
+
+.avatar-img {
+	border: 1px solid var(--border-color);
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.back-btn {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-weight: 400;
+	color: var(--primary-blue);
+	background: none;
+	border: none;
+	cursor: pointer;
+	transition: color 0.2s;
+}
+
+@media (max-width: 600px) {
+	.header-container {
+		padding: 12px 8px 8px 8px;
+	}
+	.problem-title {
+		font-size: 1.05rem;
+	}
+}

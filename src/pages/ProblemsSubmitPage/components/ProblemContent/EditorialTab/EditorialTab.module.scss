@@ -1,0 +1,112 @@
+.problem-section {
+	margin-bottom: var(--spacing-xl);
+}
+
+.section-title {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-sm);
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: var(--text-primary);
+	margin-bottom: var(--spacing-lg);
+	padding-bottom: var(--spacing-sm);
+	border-bottom: 2px solid var(--primary-blue-light);
+}
+
+.section-title i {
+	color: var(--primary-blue);
+	font-size: 1.3rem;
+}
+
+.problem-description {
+	line-height: 1.7;
+	color: var(--text-secondary);
+}
+
+.problem-description p {
+	margin-bottom: var(--spacing-md);
+}
+
+.empty-state,
+.loading-state,
+.error-state {
+	text-align: center;
+	padding: var(--spacing-xxl) var(--spacing-lg);
+	color: var(--text-muted);
+}
+
+.empty-state i,
+.loading-state i,
+.error-state i {
+	font-size: 3rem;
+	margin-bottom: var(--spacing-lg);
+	color: var(--primary-blue-light);
+}
+
+.empty-state p,
+.loading-state p,
+.error-state p {
+	font-size: 1.1rem;
+	margin: 0;
+}
+
+.error-state i {
+	color: var(--error);
+}
+
+.solution-content {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-xl);
+}
+
+.solution-text {
+	background: var(--white);
+	border: 1px solid var(--border-color);
+	border-radius: var(--radius-md);
+	padding: var(--spacing-lg);
+}
+
+.solution-text h3 {
+	color: var(--text-primary);
+	font-size: 1.1rem;
+	font-weight: 600;
+	margin-bottom: var(--spacing-md);
+	margin-top: 0;
+}
+
+.solution-text div {
+	line-height: 1.6;
+	color: var(--text-secondary);
+}
+
+.solution-code {
+	background: var(--white);
+	border: 1px solid var(--border-color);
+	border-radius: var(--radius-md);
+	padding: var(--spacing-lg);
+}
+
+.solution-code h3 {
+	color: var(--text-primary);
+	font-size: 1.1rem;
+	font-weight: 600;
+	margin-bottom: var(--spacing-md);
+	margin-top: 0;
+}
+
+.solution-code pre {
+	background: var(--light-gray);
+	border-radius: var(--radius-sm);
+	padding: var(--spacing-md);
+	margin: 0;
+	overflow-x: auto;
+	font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
+	font-size: 0.875rem;
+	line-height: 1.4;
+}
+
+.solution-code code {
+	color: var(--text-primary);
+}

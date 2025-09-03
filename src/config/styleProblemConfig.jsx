@@ -239,9 +239,9 @@ const TYPE_PROBLEM = {
 		icon: BiRefresh,
 	},
 	Divide_and_Conquer: {
-	    "name": "Chia Để Trị",
-	    "description": "Bài toán sử dụng thuật toán chia để trị.",
-	    "icon": BiGitMerge
+		name: "Chia Để Trị",
+		description: "Bài toán sử dụng thuật toán chia để trị.",
+		icon: BiGitMerge,
 	},
 	Geometry: {
 		name: "Hình Học`",
@@ -410,4 +410,5 @@ const TYPE_PROBLEM = {
 	},
 };
 
+export {TYPE_PROBLEM};
 export default TYPE_PROBLEM;

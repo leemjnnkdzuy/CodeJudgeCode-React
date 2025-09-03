@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import classNames from "classnames/bind";
 import styles from "./GlobalNotificationPopup.module.scss";
 import {useTheme} from "../../hooks/useTheme";
@@ -22,22 +22,10 @@ function PopupNotification({
 	duration = 3000,
 }) {
 	const {isDarkMode} = useTheme();
-
-	useEffect(() => {
-		if (duration) {
-			const timer = setTimeout(() => {
-				onClose();
-			}, duration);
-			return () => clearTimeout(timer);
-		}
-	}, [duration, onClose]);
-
 	return (
 		<div className={cx("popup-container")}>
-			<div className={cx("popup-overlay")} onClick={onClose}></div>
 			<div
 				className={cx("popup", type)}
-				onClick={(e) => e.stopPropagation()}
 				data-theme={isDarkMode ? "dark" : "light"}
 			>
 				<div className={cx("icon")}>{icons[type]}</div>

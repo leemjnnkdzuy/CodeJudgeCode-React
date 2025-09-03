@@ -71,7 +71,7 @@ const DropDown = ({items, onSelect, children}) => {
 				onClick={() => setOpen((v) => !v)}
 				className={cx("dropdownTrigger")}
 			>
-				{children}
+				{typeof children === "function" ? children(open) : children}
 			</div>
 
 			{open && (

@@ -27,24 +27,6 @@ const routerOptions = {
 	},
 };
 
-function NotificationRenderer() {
-	const {notifications, removeNotification} = useGlobalNotificationPopup();
-
-	return (
-		<>
-			{notifications.map((notification) => (
-				<GlobalNotificationPopup
-					key={notification.id}
-					message={notification.message}
-					type={notification.type}
-					onClose={() => removeNotification(notification.id)}
-					duration={0}
-				/>
-			))}
-		</>
-	);
-}
-
 function AuthRedirect({showError}) {
 	useEffect(() => {
 		showError && showError("Bạn cần đăng nhập để truy cập trang này!");
@@ -54,7 +36,8 @@ function AuthRedirect({showError}) {
 
 function AppContent() {
 	const {loading: authLoading, isAuthenticated} = useAuth();
-	const {showError} = useGlobalNotificationPopup();
+	const {showError, notifications, removeNotification} =
+		useGlobalNotificationPopup();
 	const [appLoading, setAppLoading] = useState(true);
 
 	useEffect(() => {
@@ -124,7 +107,29 @@ function AppContent() {
 					);
 				})}
 			</Routes>
-			<NotificationRenderer />
+
+			{notifications.length > 0 && (
+				<div
+					style={{
+						position: "fixed",
+						top: "20px",
+						right: "20px",
+						zIndex: 1000,
+						maxWidth: "400px",
+						pointerEvents: "none",
+					}}
+				>
+					{notifications.map((notification) => (
+						<GlobalNotificationPopup
+							key={notification.id}
+							message={notification.message}
+							type={notification.type}
+							onClose={() => removeNotification(notification.id)}
+							duration={0}
+						/>
+					))}
+				</div>
+			)}
 		</GlobalStyles>
 	);
 }

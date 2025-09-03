@@ -1,8 +1,5 @@
 // layouts
-import {
-	NotThingLayout,
-	SidebarLayout,
-} from "../layouts/";
+import {NotThingLayout, SidebarLayout} from "../layouts/";
 
 // Pages
 import {
@@ -91,7 +88,7 @@ const privateRoutes = [
 	},
 
 	{
-		path: "/problems/*",
+		path: "/problems/:problemId",
 		component: ProblemsSubmitPage,
 		layout: NotThingLayout,
 	},

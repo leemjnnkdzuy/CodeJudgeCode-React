@@ -163,6 +163,145 @@ const request = {
 			handleAxiosError(error);
 		}
 	},
+
+	getProblemDetail: async (problemId, token) => {
+		try {
+			let lang = "vi";
+			if (typeof window !== "undefined" && window.localStorage) {
+				lang = window.localStorage.getItem("language") || "vi";
+			}
+
+			const config = {};
+			if (token) {
+				config.headers = {
+					Authorization: `Bearer ${token}`,
+				};
+			}
+
+			const response = await axiosInstance.get(
+				`/api/problems/${problemId}`,
+				{
+					params: {language: lang},
+					...config,
+				}
+			);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+
+	getUserSubmissions: async (problemId, token) => {
+		try {
+			const response = await axiosInstance.get(
+				`/api/submissions/${problemId}/`,
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+
+	getProblemSolution: async (problemId, token) => {
+		try {
+			let lang = "vi";
+			if (typeof window !== "undefined" && window.localStorage) {
+				lang = window.localStorage.getItem("language") || "vi";
+			}
+
+			const response = await axiosInstance.get(
+				`/api/problems/${problemId}/solution`,
+				{
+					params: {language: lang},
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+
+	getPublicSubmissions: async (problemId) => {
+		try {
+			const response = await axiosInstance.get(
+				`/api/problems/${problemId}/submissions/public`
+			);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+
+	// Test Run API - Chạy thử code với 3 test case đầu tiên
+	testCode: async ({language, code, problemId}) => {
+		try {
+			const response = await axiosInstance.post("/api/code/test", {
+				problemId,
+				code,
+				language,
+			});
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+
+	// Submit Solution API - Nộp bài và chạy với tất cả test cases
+	submitCode: async ({problemId, language, code}, token) => {
+		try {
+			const response = await axiosInstance.post(
+				"/api/code/submit",
+				{
+					problemId,
+					code,
+					language,
+				},
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+
+	// Legacy method for backward compatibility - will use testCode internally
+	runCode: async ({language, code, problemId}) => {
+		try {
+			const response = await axiosInstance.post("/api/code/test", {
+				problemId,
+				code,
+				language,
+			});
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+
+	// Helper function to get status display text
+	getStatusDisplayText: (status) => {
+		const statusMap = {
+			pending: "Đang chờ xử lý",
+			running: "Đang chạy",
+			accepted: "Đã chấp nhận",
+			wrong_answer: "Sai kết quả",
+			time_limit_exceeded: "Vượt quá thời gian",
+			not_run: "Chưa chạy",
+		};
+		return statusMap[status] || status;
+	},
 };
 
 function handleAxiosError(error) {
