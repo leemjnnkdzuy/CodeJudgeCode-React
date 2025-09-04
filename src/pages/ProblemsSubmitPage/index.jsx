@@ -2,10 +2,10 @@ import React, {useState, useEffect, useCallback} from "react";
 import {useParams, useNavigate} from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./ProblemsSubmitPage.module.scss";
-import {Button, Loading} from "../../components/UI";
+import {Loading} from "../../components/UI";
 import {useGlobalNotificationPopup} from "../../hooks/useGlobalNotificationPopup";
 import {useAuth} from "../../hooks/useAuth";
-import {useTheme} from "../../hooks/useTheme";
+import {useEditorSettings} from "../../hooks/useEditorSettings";
 import request from "../../utils/request";
 import {SUPPORTED_LANGUAGES} from "../../config/supportedLanguagesConfig";
 import {
@@ -14,8 +14,15 @@ import {
 	EditorPanel,
 	SubmitPopup,
 	ProblemSubmitHeader,
+	ConsolePanel,
 } from "./components";
-import ConsolePanel from "./components/ConsolePanel";
+
+import handleRunCodeFunc from "../../handlers/handleRunCode";
+import handleSubmitCodeFunc from "../../handlers/handleSubmitCode";
+import handleClearConsoleFunc from "../../handlers/handleClearConsole";
+import handleBackToProblemsFunc from "../../handlers/handleBackToProblems";
+import handleEditorSettingsChangeFunc from "../../handlers/handleEditorSettingsChange";
+import handleConfirmSubmitFunc from "../../handlers/handleConfirmSubmit";
 
 const cx = classNames.bind(styles);
 
@@ -23,8 +30,8 @@ function ProblemsSubmitPage() {
 	const {problemId} = useParams();
 	const navigate = useNavigate();
 	const {token, isAuthenticated} = useAuth();
-	const {isDarkMode} = useTheme();
 	const {showError, showSuccess} = useGlobalNotificationPopup();
+	const {editorSettings, updateEditorSettings} = useEditorSettings();
 
 	const [problem, setProblem] = useState(null);
 	const [userSubmissions, setUserSubmissions] = useState([]);
@@ -40,51 +47,10 @@ function ProblemsSubmitPage() {
 	const [showSubmitModal, setShowSubmitModal] = useState(false);
 	const [editor, setEditor] = useState(null);
 	const [submissionsView, setSubmissionsView] = useState("my-submissions");
-	const [editorSettings, setEditorSettings] = useState({
-		fontFamily: "'Consolas', monospace",
-		fontSize: 14,
-		theme: "vs-light",
-		tabSize: 4,
-		wordWrap: true,
-		lineNumbers: true,
-		minimap: false,
-		autoCloseBrackets: true,
-		formatOnPaste: true,
-	});
 
 	const memoizedSetEditor = useCallback((editorInstance) => {
 		setEditor(editorInstance);
 	}, []);
-
-	useEffect(() => {
-		try {
-			const savedSettings = localStorage.getItem("editorSettings");
-			if (savedSettings) {
-				setEditorSettings(JSON.parse(savedSettings));
-			}
-		} catch (error) {
-			console.warn("Could not load editor settings:", error);
-		}
-	}, []);
-
-	useEffect(() => {
-		setEditorSettings((prevSettings) => {
-			if (prevSettings.theme === "sync") {
-				const appTheme = isDarkMode ? "vs-dark" : "vs-light";
-				const updatedSettings = {
-					...prevSettings,
-					theme: "sync",
-					_appTheme: appTheme,
-				};
-				localStorage.setItem(
-					"editorSettings",
-					JSON.stringify(updatedSettings)
-				);
-				return updatedSettings;
-			}
-			return prevSettings;
-		});
-	}, [isDarkMode]);
 
 	useEffect(() => {
 		if (SUPPORTED_LANGUAGES[selectedLanguage]) {
@@ -95,7 +61,7 @@ function ProblemsSubmitPage() {
 	useEffect(() => {
 		const fetchProblemData = async () => {
 			if (!problemId) {
-				navigate("/*");
+				navigate("/not-found");
 				return;
 			}
 
@@ -136,7 +102,10 @@ function ProblemsSubmitPage() {
 
 				try {
 					const publicSubmissions =
-						await request.getAllSubmissionsByProblem(problemId, token);
+						await request.getAllSubmissionsByProblem(
+							problemId,
+							token
+						);
 					const allSubs =
 						publicSubmissions?.data?.submissions ||
 						publicSubmissions?.submissions ||
@@ -150,7 +119,7 @@ function ProblemsSubmitPage() {
 					setAllSubmissions([]);
 				}
 			} catch (error) {
-				navigate("/*");
+				navigate("/not-found");
 			} finally {
 				setLoading(false);
 			}
@@ -159,225 +128,65 @@ function ProblemsSubmitPage() {
 		fetchProblemData();
 	}, [problemId, token, isAuthenticated, navigate, showError]);
 
-	const handleRunCode = async () => {
-		if (!code.trim()) {
-			showError("Vui lòng nhập code trước khi chạy");
-			return;
-		}
+	const handleRunCode = useCallback(async () => {
+		await handleRunCodeFunc(
+			code,
+			selectedLanguage,
+			problemId,
+			showError,
+			setIsRunning,
+			setConsoleOutput,
+			request
+		);
+	}, [code, selectedLanguage, problemId, showError]);
 
-		setIsRunning(true);
-		setConsoleOutput([]);
+	const handleSubmitCode = useCallback(() => {
+		handleSubmitCodeFunc(
+			isAuthenticated,
+			showError,
+			navigate,
+			code,
+			setShowSubmitModal
+		);
+	}, [isAuthenticated, showError, navigate, code]);
 
-		try {
-			const result = await request.runCode({
-				language: selectedLanguage,
-				code: code,
-				problemId: problemId,
-			});
+	const handleConfirmSubmit = useCallback(async () => {
+		await handleConfirmSubmitFunc(
+			setIsSubmitting,
+			setShowSubmitModal,
+			request,
+			problemId,
+			selectedLanguage,
+			code,
+			token,
+			showSuccess,
+			showError,
+			setUserSubmissions,
+			setSolution,
+			setActiveTab,
+			setConsoleOutput
+		);
+	}, [problemId, selectedLanguage, code, token, showSuccess, showError]);
 
-			if (result.success && result.data) {
-				const {status, results, totalTests, passedTests} = result.data;
+	const handleClearConsole = useCallback(() => {
+		handleClearConsoleFunc(setConsoleOutput);
+	}, []);
 
-				const outputMessages = [
-					{
-						type: status === "passed" ? "success" : "info",
-						message: `Đã chạy ${totalTests} test case - Passed: ${passedTests}/${totalTests}`,
-						icon:
-							status === "passed"
-								? "bx-check-circle"
-								: "bx-info-circle",
-					},
-				];
+	const handleBackToProblems = useCallback(() => {
+		handleBackToProblemsFunc(navigate);
+	}, [navigate]);
 
-				results.forEach((testResult, index) => {
-					const testMessage = {
-						type: testResult.passed ? "success" : "error",
-						message: `Test ${testResult.testCase}: ${
-							testResult.passed ? "PASSED" : "FAILED"
-						}`,
-						icon: testResult.passed ? "bx-check" : "bx-x",
-						details: {
-							input: testResult.input,
-							expected: testResult.expectedOutput,
-							actual: testResult.actualOutput,
-							error: testResult.error,
-						},
-					};
-					outputMessages.push(testMessage);
-				});
-
-				setConsoleOutput(outputMessages);
-			} else {
-				setConsoleOutput([
-					{
-						type: "success",
-						message: "Code đã chạy thành công!",
-						icon: "bx-check-circle",
-					},
-					...(result.output || []),
-				]);
-			}
-		} catch (error) {
-			setConsoleOutput([
-				{
-					type: "error",
-					message: error.message || "Lỗi khi chạy code",
-					icon: "bx-x-circle",
-				},
-			]);
-		} finally {
-			setIsRunning(false);
-		}
-	};
-
-	const handleSubmitCode = () => {
-		if (!isAuthenticated) {
-			showError("Vui lòng đăng nhập để nộp bài");
-			navigate("/login");
-			return;
-		}
-
-		if (!code.trim()) {
-			showError("Vui lòng nhập code trước khi nộp bài");
-			return;
-		}
-
-		setShowSubmitModal(true);
-	};
-
-	const handleConfirmSubmit = async () => {
-		setIsSubmitting(true);
-		setShowSubmitModal(false);
-
-		try {
-			const result = await request.submitCode(
-				{
-					problemId: problemId,
-					language: selectedLanguage,
-					code: code,
-				},
-				token
-			);
-
-			// Handle new API response format
-			if (result.success && result.data) {
-				const {
-					status,
-					submissionId,
-					totalTests,
-					testCaseStatus,
-					message,
-				} = result.data;
-
-				// Show appropriate success message based on status
-				if (status === "accepted") {
-					showSuccess(
-						"Nộp bài thành công! Bài làm của bạn đã được chấp nhận."
-					);
-				} else {
-					const passedTests = testCaseStatus.filter(
-						(test) => test.status === "accepted"
-					).length;
-					showSuccess(
-						`Nộp bài thành công! Kết quả: ${passedTests}/${totalTests} test case đã pass.`
-					);
-
-					// Show detailed feedback in console
-					const submissionOutput = [
-						{
-							type: status === "accepted" ? "success" : "warning",
-							message: `Submission ID: ${submissionId} - Status: ${status.toUpperCase()}`,
-							icon:
-								status === "accepted"
-									? "bx-check-circle"
-									: "bx-info-circle",
-						},
-						{
-							type: "info",
-							message: `Test Cases: ${passedTests}/${totalTests} passed`,
-							icon: "bx-list-check",
-						},
-					];
-
-					if (message) {
-						submissionOutput.push({
-							type: "info",
-							message: message,
-							icon: "bx-message",
-						});
-					}
-
-					setConsoleOutput(submissionOutput);
-				}
-			} else {
-				showSuccess("Nộp bài thành công!");
-			}
-
-			const updatedSubmissions = await request.getUserSubmissions(
-				problemId,
-				token
-			);
-			const userSubs =
-				updatedSubmissions?.data?.submissions ||
-				updatedSubmissions?.submissions ||
-				[];
-			setUserSubmissions(userSubs);
-
-			try {
-				const updatedSolution = await request.getProblemSolution(
-					problemId,
-					token
-				);
-				setSolution(updatedSolution);
-			} catch (error) {
-				console.warn("Could not refresh solution:", error.message);
-			}
-
-			setActiveTab("submissions");
-		} catch (error) {
-			showError(error.message || "Nộp bài thất bại");
-		} finally {
-			setIsSubmitting(false);
-		}
-	};
-
-	const handleClearConsole = () => {
-		setConsoleOutput([
-			{
-				type: "info",
-				message:
-					'Nhấn "Chạy thử" để kiểm tra code của bạn với test case mẫu.',
-				icon: "bx-info-circle",
-			},
-		]);
-	};
-
-	const handleBackToProblems = () => {
-		navigate("/problems");
-	};
-
-	const handleEditorSettingsChange = (newSettings) => {
-		setEditorSettings(newSettings);
-		localStorage.setItem("editorSettings", JSON.stringify(newSettings));
-	};
+	const handleEditorSettingsChange = useCallback(
+		(newSettings) => {
+			handleEditorSettingsChangeFunc(newSettings, updateEditorSettings);
+		},
+		[updateEditorSettings]
+	);
 
 	if (loading) {
 		return (
 			<div className={cx("loading-container")}>
-				<Loading size='30px' />
-				<p>Đang tải dữ liệu bài tập...</p>
-			</div>
-		);
-	}
-
-	if (!problem) {
-		return (
-			<div className={cx("error-container")}>
-				<i className='bx bx-error-circle'></i>
-				<h3>Không tìm thấy bài tập</h3>
-				<Button onClick={handleBackToProblems}>
-					Quay lại danh sách bài tập
-				</Button>
+				<Loading size='50px' />
 			</div>
 		);
 	}

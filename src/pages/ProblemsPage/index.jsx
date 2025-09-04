@@ -5,8 +5,12 @@ import {Button, Loading} from "../../components/UI";
 import {ProblemsSidebar, ProblemsItem, ProblemsHeader} from "./components";
 import TYPE_PROBLEM from "../../config/styleProblemConfig";
 import request from "../../utils/request";
+import handleTypeClick from "../../handlers/handleTypeClick";
+import handleDifficultyChange from "../../handlers/handleDifficultyChange";
+import handleStatusChange from "../../handlers/handleStatusChange";
 
 const cx = classNames.bind(styles);
+
 const PROBLEM_TYPES = Object.entries(TYPE_PROBLEM).map(([key, value]) => ({
 	key: key.toLowerCase(),
 	name: value.name,
@@ -92,17 +96,12 @@ function ProblemsPage() {
 		setProblems(filtered);
 	}, [allProblems, search, selectedTypes, difficulty, status]);
 
-	const handleTypeClick = (key) => {
-		setSelectedTypes((prev) =>
-			prev.includes(key) ? prev.filter((t) => t !== key) : [...prev, key]
-		);
-	};
-	const handleDifficultyChange = (key) => {
-		setDifficulty((prev) => ({...prev, [key]: !prev[key]}));
-	};
-	const handleStatusChange = (val) => {
-		setStatus(val);
-	};
+	const handleTypeClickWrapper = (key) =>
+		handleTypeClick(setSelectedTypes, key);
+	const handleDifficultyChangeWrapper = (key) =>
+		handleDifficultyChange(setDifficulty, key);
+	const handleStatusChangeWrapper = (val) =>
+		handleStatusChange(setStatus, val);
 
 	const loadMore = () => {
 		setLoadedCount((prev) => prev + 5);
@@ -160,12 +159,12 @@ function ProblemsPage() {
 
 				<ProblemsSidebar
 					difficulty={difficulty}
-					handleDifficultyChange={handleDifficultyChange}
+					handleDifficultyChange={handleDifficultyChangeWrapper}
 					status={status}
-					handleStatusChange={handleStatusChange}
+					handleStatusChange={handleStatusChangeWrapper}
 					DIFFICULTY_LABELS={DIFFICULTY_LABELS}
 					selectedTypes={selectedTypes}
-					handleTypeClick={handleTypeClick}
+					handleTypeClick={handleTypeClickWrapper}
 				/>
 			</div>
 		</div>

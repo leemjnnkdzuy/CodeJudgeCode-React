@@ -18,7 +18,6 @@ import {
 import {publicRoutes, privateRoutes} from "./routes";
 import AppLoader from "./components/AppLoader";
 import GlobalNotificationPopup from "./components/GlobalNotificationPopup";
-import request from "./utils/request";
 
 const routerOptions = {
 	future: {
@@ -42,24 +41,7 @@ function AppContent() {
 
 	useEffect(() => {
 		const initializeApp = async () => {
-			const storedToken = localStorage.getItem("userToken");
-			if (storedToken) {
-				const result = await request.reloadUserProfile(storedToken);
-				if (result && !result.error && result.user) {
-					const {theme, language, ...userInfo} = result.user;
-					localStorage.setItem("userInfo", JSON.stringify(userInfo));
-					if (theme) localStorage.setItem("theme", theme);
-					if (language) localStorage.setItem("language", language);
-				} else {
-					localStorage.removeItem("userToken");
-					localStorage.removeItem("userInfo");
-					localStorage.removeItem("theme");
-					localStorage.removeItem("language");
-				}
-				await new Promise((resolve) => setTimeout(resolve, 500));
-			} else {
-				await new Promise((resolve) => setTimeout(resolve, 500));
-			}
+			await new Promise((resolve) => setTimeout(resolve, 500));
 			setAppLoading(false);
 		};
 		initializeApp();

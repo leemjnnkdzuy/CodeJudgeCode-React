@@ -10,6 +10,8 @@ import {
 	HomePage,
 	ProblemsPage,
 	ProblemsSubmitPage,
+	UserPage,
+	SettingsPage,
 } from "../pages";
 
 const publicRoutes = [
@@ -20,6 +22,11 @@ const publicRoutes = [
 	},
 	{
 		path: "*",
+		component: NotFoundPage,
+		layout: NotThingLayout,
+	},
+	{
+		path: "/not-found",
 		component: NotFoundPage,
 		layout: NotThingLayout,
 	},
@@ -82,14 +89,43 @@ const privateRoutes = [
 		layout: SidebarLayout,
 	},
 	{
+		path: "/profile",
+		component: UserPage,
+		layout: SidebarLayout,
+	},
+	{
+		path: "/users/:username",
+		component: UserPage,
+		layout: SidebarLayout,
+	},
+	{
 		path: "/problems",
 		component: ProblemsPage,
 		layout: SidebarLayout,
 	},
-
 	{
 		path: "/problems/:problemId",
 		component: ProblemsSubmitPage,
+		layout: NotThingLayout,
+	},
+	{
+		path: "/settings",
+		component: SettingsPage,
+		layout: NotThingLayout,
+	},
+	{
+		path: "/settings/password-and-security",
+		component: SettingsPage,
+		layout: NotThingLayout,
+	},
+	{
+		path: "/settings/personal-info",
+		component: SettingsPage,
+		layout: NotThingLayout,
+	},
+	{
+		path: "/settings/interface-and-language",
+		component: SettingsPage,
 		layout: NotThingLayout,
 	},
 ];

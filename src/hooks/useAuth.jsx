@@ -4,9 +4,11 @@ import {
 	useState,
 	useEffect,
 	useCallback,
+	useRef,
 } from "react";
 import {useNavigate, useLocation} from "react-router-dom";
 import request from "../utils/request";
+import handleLogout from "../handlers/handleLogout";
 
 const AuthContext = createContext(null);
 
@@ -15,29 +17,25 @@ export const AuthProvider = ({children}) => {
 	const [user, setUser] = useState(null);
 	const [token, setToken] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const hasInitializedRef = useRef(false);
 	const navigate = useNavigate();
 	const location = useLocation();
 
-	const handleLogout = useCallback(async () => {
-		try {
-			await request.logout();
-		} catch (error) {
-			console.error("Logout API error:", error);
-		}
-		localStorage.removeItem("userToken");
-		localStorage.removeItem("userInfo");
-		localStorage.removeItem("theme");
-		localStorage.removeItem("language");
-		document.cookie =
-			"YIF+pxrGp0isUkYUsAWxn3rQH6pBrNY_=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-		setIsAuthenticated(false);
-		setUser(null);
-		setToken(null);
-		navigate("/");
-	}, [navigate]);
+	const logout = useCallback(
+		() =>
+			handleLogout({
+				setIsAuthenticated,
+				setUser,
+				setToken,
+				navigate,
+			}),
+		[navigate]
+	);
 
 	useEffect(() => {
-		const checkAuth = () => {
+		if (hasInitializedRef.current) return;
+
+		const checkAuth = async () => {
 			const storedToken = localStorage.getItem("userToken");
 			const storedUser = localStorage.getItem("userInfo");
 
@@ -67,11 +65,58 @@ export const AuthProvider = ({children}) => {
 							const expiryDate = new Date(tokenData.exp * 1000);
 							document.cookie = `YIF+pxrGp0isUkYUsAWxn3rQH6pBrNY_=true; expires=${expiryDate.toUTCString()}; path=/`;
 						}
+
+						try {
+							const response = await request.reloadUserProfile(
+								storedToken
+							);
+							if (response && response.user) {
+								const userData = response.user;
+								const {theme, language, ...userInfo} = userData;
+								localStorage.setItem(
+									"userInfo",
+									JSON.stringify(userInfo)
+								);
+								if (theme) localStorage.setItem("theme", theme);
+								if (language)
+									localStorage.setItem("language", language);
+								setUser(userInfo);
+								if (response.editorSettings) {
+									localStorage.setItem(
+										"editorSettings",
+										JSON.stringify(response.editorSettings)
+									);
+									window.dispatchEvent(
+										new CustomEvent(
+											"editorSettingsUpdated",
+											{
+												detail: response.editorSettings,
+											}
+										)
+									);
+								}
+							}
+						} catch (err) {
+							console.warn(
+								"Could not reload user profile from API:",
+								err
+							);
+						}
 					} else {
-						handleLogout();
+						handleLogout({
+							setIsAuthenticated,
+							setUser,
+							setToken,
+							navigate,
+						});
 					}
 				} catch (error) {
-					handleLogout();
+					handleLogout({
+						setIsAuthenticated,
+						setUser,
+						setToken,
+						navigate,
+					});
 				}
 			} else {
 				setIsAuthenticated(false);
@@ -79,14 +124,11 @@ export const AuthProvider = ({children}) => {
 				setToken(null);
 			}
 			setLoading(false);
+			hasInitializedRef.current = true;
 		};
 
-		window.addEventListener("storage", checkAuth);
 		checkAuth();
-		return () => {
-			window.removeEventListener("storage", checkAuth);
-		};
-	}, [handleLogout]);
+	}, [navigate]);
 
 	useEffect(() => {
 		if (!loading) {
@@ -117,6 +159,17 @@ export const AuthProvider = ({children}) => {
 				localStorage.setItem("userInfo", JSON.stringify(userInfo));
 				if (theme) localStorage.setItem("theme", theme);
 				if (language) localStorage.setItem("language", language);
+				if (response.editorSettings) {
+					localStorage.setItem(
+						"editorSettings",
+						JSON.stringify(response.editorSettings)
+					);
+					window.dispatchEvent(
+						new CustomEvent("editorSettingsUpdated", {
+							detail: response.editorSettings,
+						})
+					);
+				}
 				try {
 					const tokenData = JSON.parse(atob(token.split(".")[1]));
 					const expiryDate = new Date(tokenData.exp * 1000);
@@ -141,13 +194,44 @@ export const AuthProvider = ({children}) => {
 		}
 	};
 
+	const reloadUserProfile = useCallback(async () => {
+		if (!token) return null;
+		try {
+			const response = await request.reloadUserProfile(token);
+			if (response && response.user) {
+				const userData = response.user;
+				const {theme, language, ...userInfo} = userData;
+				localStorage.setItem("userInfo", JSON.stringify(userInfo));
+				if (theme) localStorage.setItem("theme", theme);
+				if (language) localStorage.setItem("language", language);
+				if (response.editorSettings) {
+					localStorage.setItem(
+						"editorSettings",
+						JSON.stringify(response.editorSettings)
+					);
+					window.dispatchEvent(
+						new CustomEvent("editorSettingsUpdated", {
+							detail: response.editorSettings,
+						})
+					);
+				}
+				setUser(userInfo);
+				return response;
+			}
+		} catch (error) {
+			console.error("Reload user profile failed:", error);
+			return null;
+		}
+	}, [token]);
+
 	const value = {
 		isAuthenticated,
 		user,
 		token,
 		loading,
 		login,
-		logout: handleLogout,
+		logout,
+		reloadUserProfile,
 	};
 
 	return (

@@ -1,0 +1,62 @@
+.section-title {
+	font-size: 1.5rem;
+	font-weight: 600;
+	color: #1a1a1a;
+	margin: 0 0 20px 0;
+	padding-bottom: 10px;
+	border-bottom: 2px solid #f0f2f5;
+}
+
+.badges-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	gap: 20px;
+}
+
+.badge-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 15px;
+	border-radius: 10px;
+	text-align: center;
+	transition: all 0.3s ease;
+	cursor: pointer;
+}
+
+.badge-item.earned {
+	background: linear-gradient(135deg, #fff3cd, #fff);
+	border: 2px solid #ffc107;
+	color: #856404;
+}
+
+.badge-item.unearned {
+	background: #f8f9fa;
+	border: 2px solid #e9ecef;
+	color: #6c757d;
+	opacity: 0.6;
+}
+
+.badge-item:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.badge-icon {
+	width: 48px;
+	height: 48px;
+	margin-bottom: 8px;
+}
+
+.badge-title {
+	font-size: 0.85rem;
+	font-weight: 500;
+	line-height: 1.2;
+}
+
+.no-content {
+	color: #999;
+	font-style: italic;
+	text-align: center;
+	padding: 20px;
+}

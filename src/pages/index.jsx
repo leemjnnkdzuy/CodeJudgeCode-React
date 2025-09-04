@@ -4,4 +4,6 @@ export {default as SignInSignUpPage} from "./SignInSignUpPage";
 export {default as DocumentPage} from "./DocumentPage";
 export {default as HomePage} from "./HomePage";
 export {default as ProblemsPage} from "./ProblemsPage";
-export {default as ProblemsSubmitPage} from "./ProblemsSubmitPage";
+export { default as ProblemsSubmitPage } from "./ProblemsSubmitPage";
+export { default as UserPage } from "./UserPage";
+export { default as SettingsPage } from "./SettingsPage";

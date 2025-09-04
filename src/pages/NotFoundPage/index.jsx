@@ -2,19 +2,13 @@ import {useNavigate} from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./NotFoundPage.module.scss";
 import {Button} from "../../components/UI/";
+import handleRefresh from "../../handlers/handleRefresh";
+import handleGoBack from "../../handlers/handleGoBack";
 
 const cx = classNames.bind(styles);
 
 const NotFoundPage = () => {
 	const navigate = useNavigate();
-
-	const handleRefresh = () => {
-		window.location.reload();
-	};
-
-	const handleGoBack = () => {
-		navigate(-1);
-	};
 
 	return (
 		<section className={cx("errorSection")}>
@@ -39,7 +33,7 @@ const NotFoundPage = () => {
 								Về Trang Chủ
 							</Button>
 							<Button
-								onClick={handleGoBack}
+								onClick={() => handleGoBack(navigate)}
 								variant='outline'
 								className={cx("btnOutline")}
 							>

@@ -1,0 +1,28 @@
+.profile-container {
+	margin: 0 auto;
+}
+
+.profile-content {
+	display: grid;
+	gap: 30px;
+}
+
+@media (max-width: 480px) {
+	.profile-container {
+		padding: 15px;
+	}
+}
+
+.error-text {
+	color: #dc3545;
+	text-align: center;
+	padding: 20px;
+	font-size: 1.1rem;
+}
+
+.loading-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 40px;
+}

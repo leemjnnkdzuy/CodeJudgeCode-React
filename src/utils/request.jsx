@@ -245,6 +245,15 @@ const request = {
 		}
 	},
 
+	userData: async (username) => {
+		try {
+			const response = await axiosInstance.get(`/api/user/${username}`);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+
 	testCode: async ({language, code, problemId}) => {
 		try {
 			const response = await axiosInstance.post("/api/code/test", {
