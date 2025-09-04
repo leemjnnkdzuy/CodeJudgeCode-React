@@ -1,7 +1,12 @@
-import React from "react";
+import React, {useState} from "react";
 import classNames from "classnames/bind";
 import styles from "./SubmissionsTab.module.scss";
-import {DropDown} from "../../../../../components/UI";
+import {DropDown} from "../../../../../../components/UI";
+import {
+	SubmissionItem,
+	ReviewSubmissionPopup,
+	PublicSubmissionItem,
+} from "./components/";
 
 const cx = classNames.bind(styles);
 
@@ -10,9 +15,18 @@ function SubmissionsTab({
 	allSubmissions,
 	submissionsView,
 	onSubmissionsViewChange,
+	editorSettings,
 }) {
+	const [selectedSubmission, setSelectedSubmission] = useState(null);
+	const [isPopupOpen, setIsPopupOpen] = useState(false);
+
 	const handleViewChange = (view) => {
 		onSubmissionsViewChange(view);
+	};
+
+	const handleSubmissionClick = (submission) => {
+		setSelectedSubmission(submission);
+		setIsPopupOpen(true);
 	};
 
 	const submissionsItems = [
@@ -74,108 +88,6 @@ function SubmissionsTab({
 		);
 	};
 
-	const renderSubmissionItem = (submission, isPublic = false) => (
-		<div
-			key={submission.id}
-			className={cx("submission-item", getStatusClass(submission.status))}
-		>
-			<div className={cx("submission-header")}>
-				<div className={cx("submission-status")}>
-					<span className={cx("status-text")}>
-						{submission.status
-							.replace(/_/g, " ")
-							.replace(/\b\w/g, (l) => l.toUpperCase())}
-					</span>
-				</div>
-				<div className={cx("submission-meta")}>
-					{isPublic && submission.username && (
-						<span className={cx("submission-user")}>
-							<i className='bx bx-user'></i>
-							{submission.username}
-						</span>
-					)}
-					<span className={cx("submission-time")}>
-						<i className='bx bx-time'></i>
-						{formatDate(submission.submittedAt)}
-					</span>
-				</div>
-			</div>
-			<div className={cx("submission-details")}>
-				<div className={cx("detail-item")}>
-					<span className={cx("detail-label")}>Ngôn ngữ:</span>
-					<span
-						className={cx(
-							"detail-value",
-							getLanguageColor(submission.language)
-						)}
-					>
-						{submission.language}
-					</span>
-				</div>
-				<div className={cx("detail-item")}>
-					<span className={cx("detail-label")}>Độ khó:</span>
-					<span
-						className={cx(
-							"detail-value",
-							`difficulty-${submission.problemDifficulty?.toLowerCase()}`
-						)}
-					>
-						{submission.problemDifficulty}
-					</span>
-				</div>
-				{submission.test_cases_passed &&
-					submission.total_test_cases && (
-						<div className={cx("detail-item")}>
-							<span className={cx("detail-label")}>
-								Test cases:
-							</span>
-							<span className={cx("detail-value")}>
-								{submission.test_cases_passed}/
-								{submission.total_test_cases}
-							</span>
-						</div>
-					)}
-				{submission.status === "accepted" &&
-					(submission.execution_time > 0 ||
-						submission.memory_usage > 0) && (
-						<>
-							{submission.execution_time && (
-								<div className={cx("detail-item")}>
-									<span className={cx("detail-label")}>
-										Thời gian:
-									</span>
-									<span className={cx("detail-value")}>
-										{submission.execution_time}ms
-									</span>
-								</div>
-							)}
-							{submission.memory_usage && (
-								<div className={cx("detail-item")}>
-									<span className={cx("detail-label")}>
-										Bộ nhớ:
-									</span>
-									<span className={cx("detail-value")}>
-										{Number(
-											submission.memory_usage
-										).toFixed(2)}
-										MB
-									</span>
-								</div>
-							)}
-						</>
-					)}
-				{submission.error_message && (
-					<div className={cx("detail-item", "error-message")}>
-						<span className={cx("detail-label")}>Lỗi:</span>
-						<span className={cx("detail-value")}>
-							{submission.error_message}
-						</span>
-					</div>
-				)}
-			</div>
-		</div>
-	);
-
 	return (
 		<>
 			<div className={cx("submissions-global-header")}>
@@ -215,9 +127,17 @@ function SubmissionsTab({
 					<div className={cx("problem-section", "submissions-view")}>
 						{userSubmissions?.length > 0 ? (
 							<div className={cx("submissions-container")}>
-								{userSubmissions.map((submission) =>
-									renderSubmissionItem(submission)
-								)}
+								{userSubmissions.map((submission) => (
+									<SubmissionItem
+										key={submission.id}
+										submission={submission}
+										isPublic={false}
+										getStatusClass={getStatusClass}
+										getLanguageColor={getLanguageColor}
+										formatDate={formatDate}
+										onClick={handleSubmissionClick}
+									/>
+								))}
 							</div>
 						) : (
 							<div className={cx("empty-state")}>
@@ -236,9 +156,17 @@ function SubmissionsTab({
 							)}
 						>
 							{allSubmissions?.length > 0 ? (
-								allSubmissions.map((submission) =>
-									renderSubmissionItem(submission, true)
-								)
+								allSubmissions.map((submission) => (
+									<PublicSubmissionItem
+										key={submission.id}
+										submission={submission}
+										isPublic={true}
+										getStatusClass={getStatusClass}
+										getLanguageColor={getLanguageColor}
+										formatDate={formatDate}
+										onClick={handleSubmissionClick}
+									/>
+								))
 							) : (
 								<div className={cx("empty-state")}>
 									<i className='bx bx-code-alt'></i>
@@ -253,6 +181,12 @@ function SubmissionsTab({
 					</div>
 				)}
 			</div>
+			<ReviewSubmissionPopup
+				submission={selectedSubmission}
+				isOpen={isPopupOpen}
+				onClose={() => setIsPopupOpen(false)}
+				editorSettings={editorSettings}
+			/>
 		</>
 	);
 }

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import classNames from "classnames/bind";
-import TYPE_PROBLEM from "../../../../../config/styleProblemConfig";
-import DIFFICULTY_LEVELS from "../../../../../config/difficultyConfig";
+import TYPE_PROBLEM from "../../../../../../config/styleProblemConfig";
+import DIFFICULTY_LEVELS from "../../../../../../config/difficultyConfig";
 import styles from "./DescriptionTab.module.scss";
 
 const cx = classNames.bind(styles);

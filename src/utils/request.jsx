@@ -229,10 +229,15 @@ const request = {
 		}
 	},
 
-	getPublicSubmissions: async (problemId) => {
+	getAllSubmissionsByProblem: async (problemId, token) => {
 		try {
 			const response = await axiosInstance.get(
-				`/api/problems/${problemId}/submissions/public`
+				`/api/submissions/public/${problemId}/`,
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
 			);
 			return response.data;
 		} catch (error) {
@@ -240,7 +245,6 @@ const request = {
 		}
 	},
 
-	// Test Run API - Chạy thử code với 3 test case đầu tiên
 	testCode: async ({language, code, problemId}) => {
 		try {
 			const response = await axiosInstance.post("/api/code/test", {
@@ -254,7 +258,6 @@ const request = {
 		}
 	},
 
-	// Submit Solution API - Nộp bài và chạy với tất cả test cases
 	submitCode: async ({problemId, language, code}, token) => {
 		try {
 			const response = await axiosInstance.post(
@@ -276,7 +279,6 @@ const request = {
 		}
 	},
 
-	// Legacy method for backward compatibility - will use testCode internally
 	runCode: async ({language, code, problemId}) => {
 		try {
 			const response = await axiosInstance.post("/api/code/test", {
@@ -290,7 +292,6 @@ const request = {
 		}
 	},
 
-	// Helper function to get status display text
 	getStatusDisplayText: (status) => {
 		const statusMap = {
 			pending: "Đang chờ xử lý",

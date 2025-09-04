@@ -1,10 +1,12 @@
 import React from "react";
 import classNames from "classnames/bind";
 import styles from "./ProblemContent.module.scss";
-import DescriptionTab from "./DescriptionTab";
-import EditorialTab from "./EditorialTab";
-import SubmissionsTab from "./SubmissionsTab";
-import SimilarQuestionsTab from "./SimilarQuestionsTab";
+import {
+	SubmissionsTab,
+	DescriptionTab,
+	EditorialTab,
+	SimilarQuestionsTab,
+} from "./components";
 import {useAuth} from "../../../../hooks/useAuth";
 
 const cx = classNames.bind(styles);
@@ -17,6 +19,7 @@ function ProblemContent({
 	submissionsView,
 	onSubmissionsViewChange,
 	solution,
+	editorSettings,
 }) {
 	const {token} = useAuth();
 
@@ -52,6 +55,7 @@ function ProblemContent({
 					allSubmissions={allSubmissions}
 					submissionsView={submissionsView}
 					onSubmissionsViewChange={onSubmissionsViewChange}
+					editorSettings={editorSettings}
 				/>
 			</div>
 

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import classNames from "classnames/bind";
 import styles from "./EditorialTab.module.scss";
-import request from "../../../../../utils/request";
+import request from "../../../../../../utils/request";
 
 const cx = classNames.bind(styles);
 

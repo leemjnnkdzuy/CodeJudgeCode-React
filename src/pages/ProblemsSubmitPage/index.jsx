@@ -136,7 +136,7 @@ function ProblemsSubmitPage() {
 
 				try {
 					const publicSubmissions =
-						await request.getPublicSubmissions(problemId);
+						await request.getAllSubmissionsByProblem(problemId, token);
 					const allSubs =
 						publicSubmissions?.data?.submissions ||
 						publicSubmissions?.submissions ||
@@ -406,6 +406,7 @@ function ProblemsSubmitPage() {
 						submissionsView={submissionsView}
 						onSubmissionsViewChange={setSubmissionsView}
 						solution={solution}
+						editorSettings={editorSettings}
 					/>
 				</div>
 
