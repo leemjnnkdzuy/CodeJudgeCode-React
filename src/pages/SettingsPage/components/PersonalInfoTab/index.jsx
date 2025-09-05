@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useCallback} from "react";
 import classNames from "classnames/bind";
-import {Button, Loading} from "../../../../components/UI";
+import {Button, Loading, Input} from "../../../../components/UI";
 import {useAuth} from "../../../../hooks/useAuth";
 import {base64ToImage} from "../../../../helper/avatarBase64Helper";
 import {useGlobalNotificationPopup} from "../../../../hooks/useGlobalNotificationPopup";
@@ -8,6 +8,7 @@ import useSettings from "../../../../hooks/useSettings";
 import request from "../../../../utils/request";
 import {useDropzone} from "react-dropzone";
 import {BiImageAdd} from "react-icons/bi";
+import {BiRefresh} from "react-icons/bi";
 import {FaArrowRight} from "react-icons/fa";
 import {
 	FaGithub,
@@ -71,6 +72,8 @@ const PersonalInfoTab = ({
 	});
 	const [isExpanded, setIsExpanded] = useState(false);
 	const [errors, setErrors] = useState({});
+	const [isCheckingUsername, setIsCheckingUsername] = useState(false);
+	const [usernameAvailable, setUsernameAvailable] = useState(null);
 
 	const containerVariants = {
 		collapsed: {
@@ -200,7 +203,10 @@ const PersonalInfoTab = ({
 					return;
 				}
 				if (response.error) {
-					showNotification("Cập nhật thông tin cá nhân thất bại", "error");
+					showNotification(
+						"Cập nhật thông tin cá nhân thất bại",
+						"error"
+					);
 				} else if (response.personalInfo) {
 					const updatedUser = {
 						...response.personalInfo,
@@ -237,7 +243,10 @@ const PersonalInfoTab = ({
 						"success"
 					);
 				} else {
-					showNotification("Phản hồi không hợp lệ từ máy chủ", "error");
+					showNotification(
+						"Phản hồi không hợp lệ từ máy chủ",
+						"error"
+					);
 				}
 			} catch (error) {
 				showNotification("Đã xảy ra lỗi", "error");
@@ -279,6 +288,34 @@ const PersonalInfoTab = ({
 		setFormData((prev) => ({...prev, [name]: value}));
 		if (errors[name]) {
 			setErrors((prev) => ({...prev, [name]: ""}));
+		}
+		if (name === "username") {
+			setUsernameAvailable(null);
+		}
+	};
+
+	const handleCheckUsername = async () => {
+		if (!formData.username.trim()) return;
+		setIsCheckingUsername(true);
+		try {
+			const response = await request.checkUsernameExist(
+				formData.username
+			);
+			if (response && response.exist !== undefined) {
+				setUsernameAvailable(!response.exist);
+				if (response.exist) {
+					showNotification("Username đã tồn tại", "error");
+				} else {
+					showNotification("Username khả dụng", "success");
+				}
+			} else {
+				setUsernameAvailable(null);
+			}
+		} catch (error) {
+			showNotification("Lỗi kiểm tra username", "error");
+			setUsernameAvailable(null);
+		} finally {
+			setIsCheckingUsername(false);
 		}
 	};
 
@@ -395,14 +432,14 @@ const PersonalInfoTab = ({
 				</div>
 				<div className={cx("row-form-group")}>
 					<div className={cx("form-group")}>
-						<label htmlFor='firstName'>First Name</label>
-						<input
+						<label htmlFor='firstName'>Tên</label>
+						<Input
 							type='text'
 							id='firstName'
 							name='firstName'
 							value={formData.firstName}
 							onChange={handleInputChange}
-							className={cx("input", {error: errors.firstName})}
+							className={cx({error: errors.firstName})}
 						/>
 						{errors.firstName && (
 							<span className={cx("error-text")}>
@@ -411,14 +448,14 @@ const PersonalInfoTab = ({
 						)}
 					</div>
 					<div className={cx("form-group")}>
-						<label htmlFor='lastName'>Last Name</label>
-						<input
+						<label htmlFor='lastName'>Họ</label>
+						<Input
 							type='text'
 							id='lastName'
 							name='lastName'
 							value={formData.lastName}
 							onChange={handleInputChange}
-							className={cx("input", {error: errors.lastName})}
+							className={cx({error: errors.lastName})}
 						/>
 						{errors.lastName && (
 							<span className={cx("error-text")}>
@@ -427,15 +464,36 @@ const PersonalInfoTab = ({
 						)}
 					</div>
 					<div className={cx("form-group")}>
-						<label htmlFor='username'>Username</label>
-						<input
-							type='text'
-							id='username'
-							name='username'
-							value={formData.username}
-							onChange={handleInputChange}
-							className={cx("input", {error: errors.username})}
-						/>
+						<label htmlFor='username'>Tên đăng nhập</label>
+						<div className={cx("input-with-icon")}>
+							<Input
+								type='text'
+								id='username'
+								name='username'
+								value={formData.username}
+								onChange={handleInputChange}
+								className={cx({
+									error: errors.username,
+									"username-available":
+										usernameAvailable === true,
+									"username-not-available":
+										usernameAvailable === false,
+								})}
+							/>
+							{formData.username !== initialFormData.username &&
+								formData.username.trim() && (
+									<button
+										type='button'
+										className={cx("check-icon", {
+											checking: isCheckingUsername,
+										})}
+										onClick={handleCheckUsername}
+										disabled={isCheckingUsername}
+									>
+										<BiRefresh />
+									</button>
+								)}
+						</div>
 						{errors.username && (
 							<span className={cx("error-text")}>
 								{errors.username}
@@ -444,8 +502,9 @@ const PersonalInfoTab = ({
 					</div>
 				</div>
 				<div className={cx("form-group")}>
-					<label htmlFor='bio'>Bio</label>
-					<textarea
+					<label htmlFor='bio'>Tiểu sử</label>
+					<Input
+						type='textarea'
 						id='bio'
 						name='bio'
 						value={formData.bio}
@@ -459,7 +518,7 @@ const PersonalInfoTab = ({
 						<label htmlFor='githubUrl'>
 							<FaGithub /> GitHub
 						</label>
-						<input
+						<Input
 							type='url'
 							id='githubUrl'
 							name='githubUrl'
@@ -472,7 +531,7 @@ const PersonalInfoTab = ({
 						<label htmlFor='linkedinUrl'>
 							<FaLinkedin /> LinkedIn
 						</label>
-						<input
+						<Input
 							type='url'
 							id='linkedinUrl'
 							name='linkedinUrl'
@@ -485,7 +544,7 @@ const PersonalInfoTab = ({
 						<label htmlFor='websiteUrl'>
 							<FaGlobe /> Website
 						</label>
-						<input
+						<Input
 							type='url'
 							id='websiteUrl'
 							name='websiteUrl'
@@ -498,7 +557,7 @@ const PersonalInfoTab = ({
 						<label htmlFor='youtubeUrl'>
 							<FaYoutube /> YouTube
 						</label>
-						<input
+						<Input
 							type='url'
 							id='youtubeUrl'
 							name='youtubeUrl'
@@ -511,7 +570,7 @@ const PersonalInfoTab = ({
 						<label htmlFor='facebookUrl'>
 							<FaFacebook /> Facebook
 						</label>
-						<input
+						<Input
 							type='url'
 							id='facebookUrl'
 							name='facebookUrl'
@@ -524,7 +583,7 @@ const PersonalInfoTab = ({
 						<label htmlFor='instagramUrl'>
 							<FaInstagram /> Instagram
 						</label>
-						<input
+						<Input
 							type='url'
 							id='instagramUrl'
 							name='instagramUrl'

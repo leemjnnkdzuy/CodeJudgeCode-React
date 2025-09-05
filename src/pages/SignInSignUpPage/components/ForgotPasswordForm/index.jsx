@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames/bind";
-import {Loading, Button} from "../../../../components/UI/";
+import {Loading, Button, Input} from "../../../../components/UI/";
 
 import styles from "./ForgotPasswordForm.module.scss";
 
@@ -17,7 +17,7 @@ function ForgotPasswordForm({
 		<form onSubmit={onSubmit} className={cx("forgot-password-form")}>
 			<h1>Quên mật khẩu</h1>
 			<p>Nhập email để nhận liên kết đặt lại mật khẩu</p>
-			<input
+			<Input
 				type='email'
 				placeholder='Email'
 				value={forgotPasswordData.email}

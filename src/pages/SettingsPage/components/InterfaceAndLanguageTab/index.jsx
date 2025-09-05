@@ -4,6 +4,7 @@ import {Loading, Select} from "../../../../components/UI";
 import {useAuth} from "../../../../hooks/useAuth";
 import {useGlobalNotificationPopup} from "../../../../hooks/useGlobalNotificationPopup";
 import {useTheme} from "../../../../hooks/useTheme";
+import {useLanguages} from "../../../../hooks/useLanguages";
 import request from "../../../../utils/request";
 import style from "./InterfaceAndLanguageTab.module.scss";
 
@@ -17,13 +18,14 @@ const InterfaceAndLanguageTab = ({
 }) => {
 	const {token} = useAuth();
 	const {showNotification} = useGlobalNotificationPopup();
-	const {theme, toggleTheme} = useTheme();
+	const {isDarkMode, toggleTheme} = useTheme();
+	const {selectedLanguage, setLanguage} = useLanguages();
 	const [settings, setSettings] = useState({
-		language: "en",
+		language: "vi",
 		theme: "light",
 	});
 	const [initialSettings, setInitialSettings] = useState({
-		language: "en",
+		language: "vi",
 		theme: "light",
 	});
 	const [isLoadingInitial, setIsLoadingInitial] = useState(true);
@@ -55,6 +57,7 @@ const InterfaceAndLanguageTab = ({
 					const fetchedSettings = response.settings;
 					setSettings(fetchedSettings);
 					setInitialSettings(fetchedSettings);
+					setLanguage(fetchedSettings.language);
 				}
 			} catch (error) {
 				console.error("Failed to fetch settings:", error);
@@ -67,7 +70,7 @@ const InterfaceAndLanguageTab = ({
 		if (token) {
 			fetchSettings();
 		}
-	}, [token, showNotification, setLoading]);
+	}, [token, showNotification, setLoading, setLanguage]);
 
 	const handleSelectChange = (name, value) => {
 		setSettings((prev) => ({...prev, [name]: value}));
@@ -91,8 +94,11 @@ const InterfaceAndLanguageTab = ({
 						"Settings updated successfully",
 						"success"
 					);
-					if (settings.theme !== theme) {
+					if (settings.theme !== (isDarkMode ? "dark" : "light")) {
 						toggleTheme();
+					}
+					if (settings.language !== selectedLanguage) {
+						setLanguage(settings.language);
 					}
 				}
 			} catch (error) {
@@ -107,8 +113,10 @@ const InterfaceAndLanguageTab = ({
 			showNotification,
 			setLoading,
 			resetChanges,
-			theme,
+			isDarkMode,
 			toggleTheme,
+			selectedLanguage,
+			setLanguage,
 		]
 	);
 
@@ -136,8 +144,8 @@ const InterfaceAndLanguageTab = ({
 	];
 
 	const themeOptions = [
-		{value: "light", label: "Light"},
-		{value: "dark", label: "Dark"},
+		{value: "light", label: "Sáng"},
+		{value: "dark", label: "Tối"},
 	];
 
 	const getSelectedLabel = (options, value) => {

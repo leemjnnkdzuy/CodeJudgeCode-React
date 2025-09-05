@@ -416,6 +416,18 @@ const request = {
 		}
 	},
 
+	checkUsernameExist: async (username) => {
+		try {
+			const response = await axiosInstance.post(
+				`/api/user/check-username-exist`,
+				{username}
+			);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+
 	getStatusDisplayText: (status) => {
 		const statusMap = {
 			pending: "Đang chờ xử lý",

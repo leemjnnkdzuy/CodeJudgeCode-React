@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import classNames from "classnames/bind";
 
-import {Button, Loading, Tooltip} from "../../../../components/UI/";
+import {Button, Loading, Tooltip, Input} from "../../../../components/UI/";
 import zxcvbn from "zxcvbn";
 import "tippy.js/dist/tippy.css";
 import SocialIcons from "../SocialIcons";
@@ -80,7 +80,7 @@ function RegisterForm({
 			<SocialIcons onSocialLogin={onSocialLogin} />
 			<span>hoặc sử dụng email để đăng ký</span>
 			<div className={cx("name-row")}>
-				<input
+				<Input
 					type='text'
 					placeholder='Họ'
 					value={registerData.last_name || ""}
@@ -92,7 +92,7 @@ function RegisterForm({
 					}
 					required
 				/>
-				<input
+				<Input
 					type='text'
 					placeholder='Tên'
 					value={registerData.first_name || ""}
@@ -105,7 +105,7 @@ function RegisterForm({
 					required
 				/>
 			</div>
-			<input
+			<Input
 				type='text'
 				placeholder='Tên người dùng'
 				className={cx("username-input")}
@@ -118,7 +118,7 @@ function RegisterForm({
 				}
 				required
 			/>
-			<input
+			<Input
 				type='email'
 				placeholder='Email'
 				value={registerData.email}
@@ -141,7 +141,7 @@ function RegisterForm({
 					alignItems: "center",
 				}}
 			>
-				<input
+				<Input
 					type='password'
 					placeholder='Mật khẩu'
 					value={registerData.password}
@@ -172,7 +172,7 @@ function RegisterForm({
 					/>
 				</Tooltip>
 			</div>
-			<input
+			<Input
 				type='password'
 				placeholder='Xác nhận mật khẩu'
 				value={registerData.confirmPassword}

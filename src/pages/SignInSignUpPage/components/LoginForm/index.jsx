@@ -2,7 +2,7 @@ import classNames from "classnames/bind";
 import {useState} from "react";
 import "boxicons/css/boxicons.min.css";
 
-import {Button, Loading} from "../../../../components/UI/";
+import {Button, Loading, Input} from "../../../../components/UI/";
 import SocialIcons from "../SocialIcons";
 
 import styles from "./LoginForm.module.scss";
@@ -24,8 +24,8 @@ function LoginForm({
 		<form onSubmit={onSubmit} className={cx("login-form")}>
 			<h1>Đăng nhập</h1>
 			<SocialIcons onSocialLogin={onSocialLogin} />
-			<span>hoặc sử dụng mật khẩu của bạn</span>
-			<input
+			<div className={cx("alternative-login")}>hoặc sử dụng mật khẩu của bạn</div>
+			<Input
 				type='text'
 				placeholder='Tên đăng nhập'
 				value={loginData.username}
@@ -38,7 +38,7 @@ function LoginForm({
 				required
 			/>
 			<div className={cx("password-input-wrapper")}>
-				<input
+				<Input
 					type={showPassword ? "text" : "password"}
 					placeholder='Mật khẩu'
 					value={loginData.password}

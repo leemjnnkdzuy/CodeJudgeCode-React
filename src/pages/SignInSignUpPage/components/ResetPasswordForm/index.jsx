@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import classNames from "classnames/bind";
-import {Button, Loading, Tooltip} from "../../../../components/UI/";
+import {Button, Loading, Tooltip, Input} from "../../../../components/UI/";
 import zxcvbn from "zxcvbn";
 import styles from "./ResetPasswordForm.module.scss";
 
@@ -86,7 +86,7 @@ function ResetPasswordForm({
 					alignItems: "center",
 				}}
 			>
-				<input
+				<Input
 					type='password'
 					placeholder='Mật khẩu mới'
 					value={resetPasswordData.password}
@@ -117,7 +117,7 @@ function ResetPasswordForm({
 					/>
 				</Tooltip>
 			</div>
-			<input
+			<Input
 				type='password'
 				placeholder='Xác nhận mật khẩu mới'
 				value={resetPasswordData.confirmPassword}

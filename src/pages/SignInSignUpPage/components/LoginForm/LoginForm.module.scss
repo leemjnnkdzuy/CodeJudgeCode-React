@@ -6,73 +6,57 @@
 	flex-direction: column;
 	padding: 0 40px;
 	height: 100%;
+}
+h1 {
+	font-weight: bold;
+	margin: 0;
+}
 
-	h1 {
-		font-weight: bold;
-		margin: 0;
-	}
+.alternative-login {
+	font-size: 12px;
+	margin-bottom: 5px;
+}
 
-	span {
-		font-size: 12px;
-	}
+.password-input-wrapper {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	position: relative;
+	margin: 8px 0;
+}
 
-	input {
-		background-color: #eee;
-		border: none;
-		margin: 8px 0;
-		padding: 10px 15px;
-		font-size: 13px;
-		border-radius: 8px;
-		width: 100%;
-		outline: none;
-		transition: all 0.3s ease;
-		box-sizing: border-box;
-		&:focus {
-			background-color: #ddd;
-		}
-	}
+.password-input {
+	padding-right: 38px;
+	margin: 0;
+}
 
-	.password-input-wrapper {
-		width: 100%;
-		display: flex;
-		align-items: center;
-		position: relative;
-		margin: 8px 0;
-	}
+.toggle-password-icon {
+	position: absolute;
+	right: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	cursor: pointer;
+	color: #888;
+	font-size: 20px;
+	z-index: 2;
+	display: flex;
+	align-items: center;
+	height: 100%;
+	background: transparent;
+	border: none;
+	padding: 0;
+}
 
-	.password-input {
-		padding-right: 38px;
-		margin: 0;
-	}
+.forget-password {
+	color: #666;
+	font-size: 13px;
+	cursor: pointer;
+	border: none;
+	background-color: transparent;
+	transition: all 0.3s ease;
+	margin-bottom: 5px;
 
-	.toggle-password-icon {
-		position: absolute;
-		right: 12px;
-		top: 50%;
-		transform: translateY(-50%);
-		cursor: pointer;
-		color: #888;
-		font-size: 20px;
-		z-index: 2;
-		display: flex;
-		align-items: center;
-		height: 100%;
-		background: transparent;
-		border: none;
-		padding: 0;
-	}
-
-	.forget-password {
-		color: #666;
-		font-size: 13px;
-		cursor: pointer;
-		border: none;
-		background-color: transparent;
-		transition: all 0.3s ease;
-		margin-bottom: 5px;
-
-		&:hover {
-			text-decoration: underline;
-		}
+	&:hover {
+		text-decoration: underline;
 	}
 }

@@ -20,22 +20,6 @@
 		text-align: center;
 	}
 
-	input {
-		background-color: #eee;
-		border: none;
-		margin: 8px 0;
-		padding: 10px 15px;
-		font-size: 13px;
-		border-radius: 8px;
-		width: 100%;
-		outline: none;
-		transition: all 0.3s ease;
-
-		&:focus {
-			background-color: #ddd;
-		}
-	}
-
 	.verification-buttons {
 		display: flex;
 		gap: 20px;

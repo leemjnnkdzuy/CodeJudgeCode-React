@@ -43,21 +43,6 @@
 	.confirm-password-input {
 		margin-bottom: 8px;
 	}
-	input {
-		background-color: #eee;
-		border: none;
-		padding: 10px 15px;
-		font-size: 13px;
-		border-radius: 8px;
-		width: 100%;
-		outline: none;
-		transition: all 0.3s ease;
-		box-sizing: border-box;
-
-		&:focus {
-			background-color: #ddd;
-		}
-	}
 
 	.name-row input {
 		margin: 0;

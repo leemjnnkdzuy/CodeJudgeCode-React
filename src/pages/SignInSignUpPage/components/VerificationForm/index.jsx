@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames/bind";
 
-import {Button, Loading} from "../../../../components/UI/";
+import {Button, Loading, Input} from "../../../../components/UI/";
 
 import styles from "./VerificationForm.module.scss";
 
@@ -18,7 +18,7 @@ function VerificationForm({
 		<form onSubmit={onSubmit} className={cx("verification-form")}>
 			<h1>Xác minh tài khoản</h1>
 			<p>Nhập mã xác minh đã được gửi đến email của bạn</p>
-			<input
+			<Input
 				type='text'
 				placeholder='Mã xác minh'
 				value={verificationData.code}
