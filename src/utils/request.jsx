@@ -123,6 +123,22 @@ const request = {
 			handleAxiosError(error);
 		}
 	},
+	changePassword: async (passwordData, token) => {
+		try {
+			const response = await axiosInstance.post(
+				"/api/user/change-password",
+				passwordData,
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
 	homeData: async (token) => {
 		try {
 			const response = await axiosInstance.get("/api/user/homeData", {
@@ -295,6 +311,105 @@ const request = {
 				code,
 				language,
 			});
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+
+	getPersonalInfo: async (token) => {
+		try {
+			const response = await axiosInstance.get(
+				"/api/settings/personal-info",
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+
+	changePersonalInfo: async (info, token) => {
+		try {
+			const response = await axiosInstance.post(
+				"/api/settings/personal-info/change",
+				info,
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+
+	getInterfaceAndLanguage: async (token) => {
+		try {
+			const response = await axiosInstance.get(
+				"/api/settings/interface-and-language",
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+
+	changeInterfaceAndLanguage: async (settings, token) => {
+		try {
+			const response = await axiosInstance.post(
+				"/api/settings/interface-and-language/change",
+				settings,
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+
+	getEditorSettings: async (token) => {
+		try {
+			const response = await axiosInstance.get(
+				"/api/settings/editor-settings",
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
+			return response.data;
+		} catch (error) {
+			handleAxiosError(error);
+		}
+	},
+
+	changeEditorSettings: async (settings, token) => {
+		try {
+			const response = await axiosInstance.post(
+				"/api/settings/editor-settings/change",
+				settings,
+				{
+					headers: {
+						Authorization: `Bearer ${token}`,
+					},
+				}
+			);
 			return response.data;
 		} catch (error) {
 			handleAxiosError(error);

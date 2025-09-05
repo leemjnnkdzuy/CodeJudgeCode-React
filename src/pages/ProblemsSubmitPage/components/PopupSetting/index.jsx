@@ -1,9 +1,12 @@
-import React, {useState, useEffect, useRef} from "react";
+import React, {useState, useEffect, useRef, useMemo} from "react";
 import classNames from "classnames/bind";
 import styles from "./PopupSetting.module.scss";
-import {Button, Toggle} from "../../../../components/UI";
+import {Button, Toggle, Select, Loading} from "../../../../components/UI";
 import {useTheme} from "../../../../hooks/useTheme";
-
+import {useAuth} from "../../../../hooks/useAuth";
+import {useGlobalNotificationPopup} from "../../../../hooks/useGlobalNotificationPopup";
+import request from "../../../../utils/request";
+import { BiRefresh } from "react-icons/bi";
 const cx = classNames.bind(styles);
 
 const FONT_OPTIONS = [
@@ -49,6 +52,10 @@ const TAB_SIZE_OPTIONS = [
 function PopupSetting({isOpen, onClose, settings, onSettingsChange}) {
 	const popupRef = useRef(null);
 	const {isDarkMode} = useTheme();
+	const {token} = useAuth();
+	const {showSuccess, showError} = useGlobalNotificationPopup();
+	const [isSaving, setIsSaving] = useState(false);
+	const [initialSettings, setInitialSettings] = useState(settings);
 
 	const [localSettings, setLocalSettings] = useState(() => {
 		return {
@@ -65,20 +72,28 @@ function PopupSetting({isOpen, onClose, settings, onSettingsChange}) {
 		};
 	});
 
+	const hasChanges = useMemo(() => {
+		return (
+			JSON.stringify(localSettings) !== JSON.stringify(initialSettings)
+		);
+	}, [localSettings, initialSettings]);
+
 	useEffect(() => {
 		if (isOpen) {
-			setLocalSettings({
+			const defaultSettings = {
 				fontFamily: "'Consolas', monospace",
 				fontSize: 14,
-				theme: settings?.theme || "sync",
+				theme: "sync",
 				tabSize: 4,
 				wordWrap: true,
 				lineNumbers: true,
 				minimap: false,
 				autoCloseBrackets: true,
 				formatOnPaste: true,
-				...settings,
-			});
+			};
+			const mergedSettings = {...defaultSettings, ...settings};
+			setInitialSettings(mergedSettings);
+			setLocalSettings(mergedSettings);
 		}
 	}, [isOpen, settings, isDarkMode]);
 
@@ -113,9 +128,31 @@ function PopupSetting({isOpen, onClose, settings, onSettingsChange}) {
 		}));
 	};
 
-	const handleApply = () => {
-		onSettingsChange(localSettings);
-		onClose();
+	const handleApply = async () => {
+		if (!token) {
+			showError("Bạn cần đăng nhập để lưu cài đặt");
+			return;
+		}
+
+		setIsSaving(true);
+		try {
+			localStorage.setItem(
+				"editorSettings",
+				JSON.stringify(localSettings)
+			);
+
+			await request.changeEditorSettings(localSettings, token);
+
+			onSettingsChange(localSettings);
+
+			showSuccess("Cài đặt đã được lưu thành công");
+			onClose();
+		} catch (error) {
+			console.error("Failed to save editor settings:", error);
+			showError("Không thể lưu cài đặt. Vui lòng thử lại.");
+		} finally {
+			setIsSaving(false);
+		}
 	};
 
 	const handleReset = () => {
@@ -153,66 +190,83 @@ function PopupSetting({isOpen, onClose, settings, onSettingsChange}) {
 							<label className={cx("setting-label")}>
 								Font chữ:
 							</label>
-							<select
-								className={cx("setting-select")}
-								value={localSettings.fontFamily}
-								onChange={(e) =>
+							<Select
+								items={FONT_OPTIONS.map((option) => ({
+									label: option.label,
+									value: option.value,
+								}))}
+								onSelect={(item) =>
 									handleSettingChange(
 										"fontFamily",
-										e.target.value
+										item.value
 									)
 								}
+								selectedValue={localSettings.fontFamily}
+								className={cx("setting-select")}
 							>
-								{FONT_OPTIONS.map((font) => (
-									<option key={font.value} value={font.value}>
-										{font.label}
-									</option>
-								))}
-							</select>
+								{(() => {
+									const current = FONT_OPTIONS.find(
+										(o) =>
+											o.value === localSettings.fontFamily
+									);
+									return current
+										? current.label
+										: "Select Font";
+								})()}
+							</Select>
 						</div>
 
 						<div className={cx("setting-item")}>
 							<label className={cx("setting-label")}>
 								Kích thước chữ:
 							</label>
-							<select
-								className={cx("setting-select")}
-								value={localSettings.fontSize}
-								onChange={(e) =>
-									handleSettingChange(
-										"fontSize",
-										parseInt(e.target.value)
-									)
+							<Select
+								items={FONT_SIZE_OPTIONS.map((option) => ({
+									label: option.label,
+									value: option.value,
+								}))}
+								onSelect={(item) =>
+									handleSettingChange("fontSize", item.value)
 								}
+								selectedValue={localSettings.fontSize}
+								className={cx("setting-select")}
 							>
-								{FONT_SIZE_OPTIONS.map((size) => (
-									<option key={size.value} value={size.value}>
-										{size.label}
-									</option>
-								))}
-							</select>
+								{(() => {
+									const current = FONT_SIZE_OPTIONS.find(
+										(o) =>
+											o.value === localSettings.fontSize
+									);
+									return current
+										? current.label
+										: "Select Size";
+								})()}
+							</Select>
 						</div>
 
 						<div className={cx("setting-item")}>
 							<label className={cx("setting-label")}>
 								Theme:
 							</label>
-							<select
-								className={cx("setting-select")}
-								value={localSettings.theme}
-								onChange={(e) =>
-									handleSettingChange("theme", e.target.value)
+							<Select
+								items={THEME_OPTIONS.map((option) => ({
+									label: option.label,
+									value: option.value,
+								}))}
+								onSelect={(item) =>
+									handleSettingChange("theme", item.value)
 								}
+								selectedValue={localSettings.theme}
+								className={cx("setting-select")}
 							>
-								{THEME_OPTIONS.map((theme) => (
-									<option
-										key={theme.value}
-										value={theme.value}
-									>
-										{theme.label}
-									</option>
-								))}
-							</select>
+								{(() => {
+									const current = THEME_OPTIONS.find(
+										(o) => o.value === localSettings.theme
+									);
+									return current
+										? current.label
+										: "Select Theme";
+								})()}
+							</Select>
 						</div>
 					</div>
 
@@ -223,22 +277,26 @@ function PopupSetting({isOpen, onClose, settings, onSettingsChange}) {
 							<label className={cx("setting-label")}>
 								Tab size:
 							</label>
-							<select
-								className={cx("setting-select")}
-								value={localSettings.tabSize}
-								onChange={(e) =>
-									handleSettingChange(
-										"tabSize",
-										parseInt(e.target.value)
-									)
+							<Select
+								items={TAB_SIZE_OPTIONS.map((option) => ({
+									label: option.label,
+									value: option.value,
+								}))}
+								onSelect={(item) =>
+									handleSettingChange("tabSize", item.value)
 								}
+								selectedValue={localSettings.tabSize}
+								className={cx("setting-select")}
 							>
-								{TAB_SIZE_OPTIONS.map((tab) => (
-									<option key={tab.value} value={tab.value}>
-										{tab.label}
-									</option>
-								))}
-							</select>
+								{(() => {
+									const current = TAB_SIZE_OPTIONS.find(
+										(o) => o.value === localSettings.tabSize
+									);
+									return current
+										? current.label
+										: "Select Tab Size";
+								})()}
+							</Select>
 						</div>
 
 						<div className={cx("setting-item")}>
@@ -311,7 +369,7 @@ function PopupSetting({isOpen, onClose, settings, onSettingsChange}) {
 					<Button
 						variant='outline'
 						size='sm'
-						icon={<i className='bx bx-refresh'></i>}
+						icon={<BiRefresh size={18}/>}
 						onClick={handleReset}
 						className={cx("reset-btn")}
 					>
@@ -321,8 +379,12 @@ function PopupSetting({isOpen, onClose, settings, onSettingsChange}) {
 						<Button variant='outline' size='sm' onClick={onClose}>
 							Hủy
 						</Button>
-						<Button size='sm' onClick={handleApply}>
-							Áp dụng
+						<Button
+							size='sm'
+							onClick={handleApply}
+							disabled={isSaving || !hasChanges}
+						>
+							{isSaving ? <Loading size={12} /> : "Áp dụng"}
 						</Button>
 					</div>
 				</div>

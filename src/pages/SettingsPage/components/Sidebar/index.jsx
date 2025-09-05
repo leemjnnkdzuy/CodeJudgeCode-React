@@ -1,13 +1,14 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import classNames from "classnames/bind";
-import {BiLock, BiUser, BiGlobe} from "react-icons/bi";
+import {BiLock, BiUser, BiGlobe, BiEdit} from "react-icons/bi";
 import {FaArrowLeft} from "react-icons/fa";
 import style from "./Sidebar.module.scss";
 import {Button} from "../../../../components/UI/";
+import FadeInUpdateButton from "../FadeInUpdateButton";
 
 const cx = classNames.bind(style);
 
-const Sidebar = () => {
+const Sidebar = ({loading = false, hasChanges = false, onClick}) => {
 	const location = useLocation();
 	const navigate = useNavigate();
 
@@ -26,6 +27,11 @@ const Sidebar = () => {
 			path: "/settings/interface-and-language",
 			label: "Giao diện và Ngôn ngữ",
 			icon: <BiGlobe />,
+		},
+		{
+			path: "/settings/editor-settings",
+			label: "Cài Đặt Trình Soạn Thảo",
+			icon: <BiEdit />,
 		},
 	];
 
@@ -50,7 +56,11 @@ const Sidebar = () => {
 							<div
 								onClick={() => navigate(item.path)}
 								className={cx("nav-link", {
-									active: location.pathname === item.path,
+									active:
+										location.pathname === item.path ||
+										(location.pathname === "/settings" &&
+											item.path ===
+												"/settings/personal-info"),
 								})}
 							>
 								<span className={cx("nav-icon")}>
@@ -64,6 +74,13 @@ const Sidebar = () => {
 					))}
 				</ul>
 			</nav>
+			<div className={cx("sidebar-footer")}>
+				<FadeInUpdateButton
+					loading={loading}
+					hasChanges={hasChanges}
+					onClick={onClick}
+				/>
+			</div>
 		</div>
 	);
 };

@@ -7,7 +7,11 @@ const cx = classNames.bind(styles);
 function Loading({size}) {
 	const style = {};
 
-	if (typeof size === "string") {
+	if (typeof size === "number") {
+		style.width = `${size}px`;
+		style.height = `${size}px`;
+		style.minHeight = `${size}px`;
+	} else if (typeof size === "string") {
 		style.width = size;
 		style.height = size;
 		style.minHeight = size;

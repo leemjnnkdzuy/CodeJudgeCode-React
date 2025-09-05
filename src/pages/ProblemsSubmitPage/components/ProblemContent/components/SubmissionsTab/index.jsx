@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import classNames from "classnames/bind";
 import styles from "./SubmissionsTab.module.scss";
-import {DropDown} from "../../../../../../components/UI";
+import {Select} from "../../../../../../components/UI";
 import {
 	SubmissionItem,
 	ReviewSubmissionPopup,
@@ -91,35 +91,27 @@ function SubmissionsTab({
 	return (
 		<>
 			<div className={cx("submissions-global-header")}>
-				<div className={cx("submissions-toggle")}>
-					<DropDown
-						className={cx("submissions-select")}
-						items={submissionsItems}
-						onSelect={(item) => handleViewChange(item.value)}
-					>
-						{(open) => (
-							<span>
-								<i
-									className={
-										submissionsView === "my-submissions"
-											? "bx bx-user"
-											: "bx bx-globe"
-									}
-								></i>
-								{submissionsView === "my-submissions"
-									? "Bài nộp của bạn"
-									: "Tất cả bài nộp"}
-								<i
-									className={
-										open
-											? "bx bx-chevron-up"
-											: "bx bx-chevron-down"
-									}
-								></i>
-							</span>
-						)}
-					</DropDown>
-				</div>
+				<Select
+					className={cx("submissions-select")}
+					items={submissionsItems}
+					onSelect={(item) => handleViewChange(item.value)}
+					selectedValue={submissionsView}
+				>
+					{(open) => (
+						<span>
+							<i
+								className={
+									submissionsView === "my-submissions"
+										? "bx bx-user"
+										: "bx bx-globe"
+								}
+							></i>
+							{submissionsView === "my-submissions"
+								? "Bài nộp của bạn"
+								: "Tất cả bài nộp"}
+						</span>
+					)}
+				</Select>
 			</div>
 
 			<div className={cx("submissions-view-container")}>

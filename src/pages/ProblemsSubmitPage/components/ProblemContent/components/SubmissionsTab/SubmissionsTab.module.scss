@@ -29,37 +29,17 @@
 .submissions-view-container::-webkit-scrollbar-thumb:hover {
 	background: var(--primary-blue);
 }
-.submissions-toggle {
-	border: 1px solid var(--border-color);
-	padding: 0 12px 0 16px;
-	border-radius: 18px;
+.submissions-select{
+	max-width: 280px;
+	min-height: 40px;
 
-	span {
-		justify-content: center;
-		align-items: center;
+	span{
 		display: flex;
-		gap: 4px;
+		align-items: center;
+		justify-content: space-between;
+		gap: 8px;
 	}
 }
-.submissions-select {
-	font-size: 0.875rem;
-	display: flex;
-	align-items: center;
-	cursor: pointer;
-	width: 100%;
-	box-sizing: border-box;
-	transition: border-color 0.18s;
-	justify-content: space-between;
-}
-
-.submissions-select:focus,
-.submissions-select:active,
-.submissions-select[aria-expanded="true"] {
-	outline: none;
-	border-color: var(--primary-blue);
-	box-shadow: 0 0 0 2px rgba(32, 190, 255, 0.2);
-}
-
 .submissions-container {
 	display: flex;
 	flex-direction: column;
@@ -276,22 +256,10 @@
 	.submissions-toggle {
 		align-self: center;
 	}
-
-	.submissions-select {
-		width: 100%;
-		max-width: 280px;
-		height: 36px;
-	}
 }
 
 @media (max-width: 480px) {
 	.submissions-global-header {
 		padding: var(--spacing-sm);
-	}
-
-	.submissions-select {
-		padding: var(--spacing-sm);
-		font-size: 0.75rem;
-		min-width: 180px;
 	}
 }

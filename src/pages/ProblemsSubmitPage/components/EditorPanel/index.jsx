@@ -1,7 +1,7 @@
 import React, {useRef, useEffect, useCallback} from "react";
 import classNames from "classnames/bind";
 import styles from "./EditorPanel.module.scss";
-import {Button, DropDown, Loading} from "../../../../components/UI";
+import {Button, Select, Loading} from "../../../../components/UI";
 import {SUPPORTED_LANGUAGES} from "../../../../config/supportedLanguagesConfig";
 import Editor from "@monaco-editor/react";
 import {useTheme} from "../../../../hooks/useTheme";
@@ -30,7 +30,6 @@ function EditorPanel({
 	const handleEditorDidMount = (editorInstance, monaco) => {
 		editorRef.current = editorInstance;
 		setEditor(editorInstance);
-		console.log("Monaco Editor initialized successfully");
 	};
 
 	const handleEditorChange = (value) => {
@@ -124,27 +123,14 @@ function EditorPanel({
 	return (
 		<div className={cx("editor-panel")}>
 			<div className={cx("editor-header")}>
-				<div className={cx("editor-tabs")}>
-					<DropDown
-						className={cx("language-select")}
-						items={languageItems}
-						onSelect={(item) => onLanguageChange(item.value)}
-					>
-						{(open) => (
-							<span>
-								{getLanguageDisplayName(selectedLanguage)}
-								<i
-									className={
-										open
-											? "bx bx-chevron-up"
-											: "bx bx-chevron-down"
-									}
-									style={{marginLeft: 6}}
-								></i>
-							</span>
-						)}
-					</DropDown>
-				</div>
+				<Select
+					className={cx("language-select")}
+					items={languageItems}
+					selectedValue={selectedLanguage}
+					onSelect={(item) => onLanguageChange(item.value)}
+				>
+					{getLanguageDisplayName(selectedLanguage)}
+				</Select>
 				<div className={cx("editor-controls")}>
 					<Button
 						size='sm'

@@ -2,7 +2,6 @@
 	width: 280px;
 	height: 100vh;
 	border-right: 2px solid var(--primary-blue-light);
-	padding: 2rem 0;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -107,9 +106,11 @@
 }
 
 .sidebar-footer {
-	padding: 1.5rem 2rem 0;
-	border-top: 1px solid var(--primary-blue-light);
-	margin-top: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 2rem 2rem 0 2rem;
+	gap: 1rem;
 }
 
 .footer-info {
@@ -154,7 +155,7 @@
 	}
 
 	.sidebar-footer {
-		padding: 1.5rem 1.5rem 0;
+		padding: 1.5rem 1.5rem;
 	}
 }
 

@@ -4,7 +4,9 @@ import {
 	InterfaceAndLanguageTab,
 	PasswordAndSecurityTab,
 	PersonalInfoTab,
+	EditorSettingsTab,
 } from "./components";
+import useSettings from "../../hooks/useSettings";
 import style from "./SettingsPage.module.scss";
 import classNames from "classnames/bind";
 
@@ -12,19 +14,43 @@ const cx = classNames.bind(style);
 
 const SettingsPage = () => {
 	const location = useLocation();
+	const {
+		loading,
+		hasChanges,
+		submitHandler,
+		setLoading,
+		setHasChanges,
+		updateSubmitHandler,
+		resetChanges,
+	} = useSettings();
 
-	const shouldShowSettings =
-		location.pathname === "/settings" ||
-		location.pathname === "/settings/personal-info";
+	const tabComponents = {
+		"/settings": PersonalInfoTab,
+		"/settings/personal-info": PersonalInfoTab,
+		"/settings/password-and-security": PasswordAndSecurityTab,
+		"/settings/interface-and-language": InterfaceAndLanguageTab,
+		"/settings/editor-settings": EditorSettingsTab,
+	};
+
+	const CurrentTab = tabComponents[location.pathname];
 
 	return (
 		<div className={cx("settings-page")}>
 			<div className={cx("container")}>
-				<Sidebar className={cx("sidebar")} />
+				<Sidebar
+					loading={loading}
+					hasChanges={hasChanges}
+					onClick={submitHandler}
+				/>
 				<div className={cx("content")}>
-					{shouldShowSettings && <PersonalInfoTab />}
-					<InterfaceAndLanguageTab />
-					<PasswordAndSecurityTab />
+					{CurrentTab && (
+						<CurrentTab
+							setLoading={setLoading}
+							setHasChanges={setHasChanges}
+							updateSubmitHandler={updateSubmitHandler}
+							resetChanges={resetChanges}
+						/>
+					)}
 				</div>
 			</div>
 		</div>

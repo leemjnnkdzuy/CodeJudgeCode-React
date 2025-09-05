@@ -128,6 +128,11 @@ const privateRoutes = [
 		component: SettingsPage,
 		layout: NotThingLayout,
 	},
+	{
+		path: "/settings/editor-settings",
+		component: SettingsPage,
+		layout: NotThingLayout,
+	},
 ];
 
 export {publicRoutes, privateRoutes};

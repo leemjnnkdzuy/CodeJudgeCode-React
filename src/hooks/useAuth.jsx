@@ -224,6 +224,24 @@ export const AuthProvider = ({children}) => {
 		}
 	}, [token]);
 
+	const updateUser = useCallback((newUserData) => {
+		setUser(newUserData);
+		const currentUserInfo = JSON.parse(
+			localStorage.getItem("userInfo") || "{}"
+		);
+		const updatedUserInfo = {
+			...currentUserInfo,
+			avatar: newUserData.avatar || currentUserInfo.avatar,
+			email: newUserData.email || currentUserInfo.email,
+			first_name: newUserData.first_name || currentUserInfo.first_name,
+			last_name: newUserData.last_name || currentUserInfo.last_name,
+			id: newUserData.id || newUserData._id || currentUserInfo.id,
+			username: newUserData.username || currentUserInfo.username,
+			role: newUserData.role || currentUserInfo.role,
+		};
+		localStorage.setItem("userInfo", JSON.stringify(updatedUserInfo));
+	}, []);
+
 	const value = {
 		isAuthenticated,
 		user,
@@ -232,6 +250,7 @@ export const AuthProvider = ({children}) => {
 		login,
 		logout,
 		reloadUserProfile,
+		updateUser,
 	};
 
 	return (
