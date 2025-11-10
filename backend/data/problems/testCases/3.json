@@ -1,0 +1,254 @@
+{
+	"testCases": [
+		{
+			"testId": 1,
+			"input": "",
+			"expectedOutput": "0"
+		},
+		{
+			"testId": 2,
+			"input": "a",
+			"expectedOutput": "1"
+		},
+		{
+			"testId": 3,
+			"input": "aa",
+			"expectedOutput": "1"
+		},
+		{
+			"testId": 4,
+			"input": "ab",
+			"expectedOutput": "2"
+		},
+		{
+			"testId": 5,
+			"input": "abcabcbb",
+			"expectedOutput": "3"
+		},
+		{
+			"testId": 6,
+			"input": "bbbbb",
+			"expectedOutput": "1"
+		},
+		{
+			"testId": 7,
+			"input": "pwwkew",
+			"expectedOutput": "3"
+		},
+		{
+			"testId": 8,
+			"input": "dvdf",
+			"expectedOutput": "3"
+		},
+		{
+			"testId": 9,
+			"input": "anviaj",
+			"expectedOutput": "5"
+		},
+		{
+			"testId": 10,
+			"input": "abcdeffedcba",
+			"expectedOutput": "6"
+		},
+		{
+			"testId": 11,
+			"input": "aab",
+			"expectedOutput": "2"
+		},
+		{
+			"testId": 12,
+			"input": "abba",
+			"expectedOutput": "2"
+		},
+		{
+			"testId": 13,
+			"input": "tmmzuxt",
+			"expectedOutput": "5"
+		},
+		{
+			"testId": 14,
+			"input": "bbtablud",
+			"expectedOutput": "6"
+		},
+		{
+			"testId": 15,
+			"input": "1234567890",
+			"expectedOutput": "10"
+		},
+		{
+			"testId": 16,
+			"input": "1111111111",
+			"expectedOutput": "1"
+		},
+		{
+			"testId": 17,
+			"input": "!@#$%^&*()",
+			"expectedOutput": "10"
+		},
+		{
+			"testId": 18,
+			"input": "a b c d e",
+			"expectedOutput": "3"
+		},
+		{
+			"testId": 19,
+			"input": "abc def ghi",
+			"expectedOutput": "3"
+		},
+		{
+			"testId": 20,
+			"input": "au",
+			"expectedOutput": "2"
+		},
+		{
+			"testId": 21,
+			"input": "cdd",
+			"expectedOutput": "2"
+		},
+		{
+			"testId": 22,
+			"input": "abcbda",
+			"expectedOutput": "4"
+		},
+		{
+			"testId": 23,
+			"input": "abcdefghijklmnopqrstuvwxyz",
+			"expectedOutput": "26"
+		},
+		{
+			"testId": 24,
+			"input": "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+			"expectedOutput": "26"
+		},
+		{
+			"testId": 25,
+			"input": "aA",
+			"expectedOutput": "2"
+		},
+		{
+			"testId": 26,
+			"input": "abcdeabcde",
+			"expectedOutput": "5"
+		},
+		{
+			"testId": 27,
+			"input": "abc d ef ghi",
+			"expectedOutput": "4"
+		},
+		{
+			"testId": 28,
+			"input": " .!@# ABC ",
+			"expectedOutput": "6"
+		},
+		{
+			"testId": 29,
+			"input": "a b c d e f g h i j k l m n o p q r s t u v w x y z",
+			"expectedOutput": "3"
+		},
+		{
+			"testId": 30,
+			"input": "abcabcabcabcabcabcabcabcabcabc",
+			"expectedOutput": "3"
+		},
+		{
+			"testId": 31,
+			"input": "abcdabcdabcdabcdabcdabcdabcd",
+			"expectedOutput": "4"
+		},
+		{
+			"testId": 32,
+			"input": "abcd efgh ijkl mnop qrst uvwx yz",
+			"expectedOutput": "8"
+		},
+		{
+			"testId": 33,
+			"input": "a1b2c3d4e5f6g7h8i9j0",
+			"expectedOutput": "10"
+		},
+		{
+			"testId": 34,
+			"input": "aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyyzz",
+			"expectedOutput": "2"
+		},
+		{
+			"testId": 35,
+			"input": "abcdeedcba",
+			"expectedOutput": "5"
+		},
+		{
+			"testId": 36,
+			"input": "abcde fghij klmno pqrst uvwxy z",
+			"expectedOutput": "11"
+		},
+		{
+			"testId": 37,
+			"input": "the quick brown fox jumps over the lazy dog",
+			"expectedOutput": "8"
+		},
+		{
+			"testId": 38,
+			"input": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+			"expectedOutput": "26"
+		},
+		{
+			"testId": 39,
+			"input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+			"expectedOutput": "1"
+		},
+		{
+			"testId": 40,
+			"input": "abacaba",
+			"expectedOutput": "3"
+		},
+		{
+			"testId": 41,
+			"input": "abcdabcdeabcdef",
+			"expectedOutput": "6"
+		},
+		{
+			"testId": 42,
+			"input": "abcd efgh abcd efgh",
+			"expectedOutput": "8"
+		},
+		{
+			"testId": 43,
+			"input": "abc123abc123",
+			"expectedOutput": "6"
+		},
+		{
+			"testId": 44,
+			"input": "!@#$%^&*()!@#$%^&*()",
+			"expectedOutput": "10"
+		},
+		{
+			"testId": 45,
+			"input": "a b c d e f g h i j k l m n o p q r s t u v w x y z a b c d e f g h i j k l m n o p q r s t u v w x y z",
+			"expectedOutput": "3"
+		},
+		{
+			"testId": 46,
+			"input": "abcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcdabcd",
+			"expectedOutput": "4"
+		},
+		{
+			"testId": 47,
+			"input": "abcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabcabc",
+			"expectedOutput": "3"
+		},
+		{
+			"testId": 48,
+			"input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+			"expectedOutput": "1"
+		},
+		{
+			"testId": 49,
+			"input": "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz",
+			"expectedOutput": "26"
+		},
+		{
+			"testId": 50,
+			"input": "",
+			"expectedOutput": "0"
+		}
+	]
+}

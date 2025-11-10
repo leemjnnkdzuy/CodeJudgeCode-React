@@ -1,0 +1,38 @@
+{
+	"questionId": 10,
+	"titleSlug": "regular-expression-matching",
+	"difficulty": "Hard",
+	"topicTags": ["String", "Dynamic_Programming", "Recursion"],
+	"originalSource": {
+		"source": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nclass Solution {\npublic:\n    bool isMatch(string s, string p) {\n        int m = s.length(), n = p.length();\n        vector<vector<bool>> dp(m + 1, vector<bool>(n + 1, false));\n        dp[0][0] = true;\n\n        for (int j = 1; j <= n; j++) {\n            if (p[j - 1] == '*') {\n                dp[0][j] = dp[0][j - 2];\n            }\n        }\n\n        for (int i = 1; i <= m; i++) {\n            for (int j = 1; j <= n; j++) {\n                if (p[j - 1] == s[i - 1] || p[j - 1] == '.') {\n                    dp[i][j] = dp[i - 1][j - 1];\n                } else if (p[j - 1] == '*') {\n                    dp[i][j] = dp[i][j - 2];\n                    if (p[j - 2] == s[i - 1] || p[j - 2] == '.') {\n                        dp[i][j] = dp[i][j] || dp[i - 1][j];\n                    }\n                }\n            }\n        }\n        return dp[m][n];\n    }\n};\n\nint main() {\n    Solution sol;\n    string s = \"aab\";\n    string p = \"c*a*b\";\n    cout << (sol.isMatch(s, p) ? \"true\" : \"false\") << endl; // Expected output: true\n    return 0;\n}",
+		"language": "c/c++"
+	},
+	"details": {
+		"en": {
+			"title": "Regular Expression Matching",
+			"content": "<p>Given an input string <code>s</code>&nbsp;and a pattern <code>p</code>, implement regular expression matching with support for <code>&#39;.&#39;</code> and <code>&#39;*&#39;</code> where:</p>\n\n<ul>\n\t<li><code>&#39;.&#39;</code> Matches any single character.​​​​</li>\n\t<li><code>&#39;*&#39;</code> Matches zero or more of the preceding element.</li>\n</ul>\n\n<p>The matching should cover the <strong>entire</strong> input string (not partial).</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;aa&quot;, p = &quot;a&quot;\n<strong>Output:</strong> false\n<strong>Explanation:</strong> &quot;a&quot; does not match the entire string &quot;aa&quot;.\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;aa&quot;, p = &quot;a*&quot;\n<strong>Output:</strong> true\n<strong>Explanation:</strong> &#39;*&#39; means zero or more of the preceding element, &#39;a&#39;. Therefore, by repeating &#39;a&#39; once, it becomes &quot;aa&quot;.\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;ab&quot;, p = &quot;.*&quot;\n<strong>Output:</strong> true\n<strong>Explanation:</strong> &quot;.*&quot; means &quot;zero or more (*) of any character (.)&quot;.\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= s.length&nbsp;&lt;= 20</code></li>\n\t<li><code>1 &lt;= p.length&nbsp;&lt;= 20</code></li>\n\t<li><code>s</code> contains only lowercase English letters.</li>\n\t<li><code>p</code> contains only lowercase English letters, <code>&#39;.&#39;</code>, and&nbsp;<code>&#39;*&#39;</code>.</li>\n\t<li>It is guaranteed for each appearance of the character <code>&#39;*&#39;</code>, there will be a previous valid character to match.</li>\n</ul>\n",
+			"hints": [],
+			"similarQuestionList": [
+				{
+					"title": "Wildcard Matching",
+					"titleSlug": "wildcard-matching",
+					"difficulty": "Hard"
+				}
+			]
+		},
+		"vi": {
+			"title": "Đối Sánh Biểu Thức Chính Quy",
+			"content": "<p>Cho một chuỗi đầu vào <code>s</code> và một mẫu <code>p</code>, hãy triển khai khớp biểu thức chính quy với hỗ trợ cho <code>'.'</code> và <code>'*'</code> trong đó:</p>\n\n<ul>\n\t<li><code>'.'</code> Khớp với bất kỳ ký tự đơn nào.</li>\n\t<li><code>'*'</code> Khớp với không hoặc nhiều phần tử đứng trước.</li>\n</ul>\n\n<p>Việc khớp phải bao phủ toàn bộ chuỗi đầu vào (không phải một phần).</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Ví dụ 1:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> s = \"aa\", p = \"a\"\n<strong>Đầu ra:</strong> false\n<strong>Giải thích:</strong> \"a\" không khớp với toàn bộ chuỗi \"aa\".\n</pre>\n\n<p><strong class=\"example\">Ví dụ 2:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> s = \"aa\", p = \"a*\"\n<strong>Đầu ra:</strong> true\n<strong>Giải thích:</strong> '*' có nghĩa là không hoặc nhiều phần tử đứng trước, 'a'. Do đó, bằng cách lặp lại 'a' một lần, nó trở thành \"aa\".\n</pre>\n\n<p><strong class=\"example\">Ví dụ 3:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> s = \"ab\", p = \".*\"\n<strong>Đầu ra:</strong> true\n<strong>Giải thích:</strong> \".*\" có nghĩa là \"không hoặc nhiều (*) ký tự bất kỳ (.)\".\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Ràng buộc:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= s.length &lt;= 20</code></li>\n\t<li><code>1 &lt;= p.length &lt;= 20</code></li>\n\t<li><code>s</code> chỉ chứa các chữ cái tiếng Anh viết thường.</li>\n\t<li><code>p</code> chỉ chứa các chữ cái tiếng Anh viết thường, <code>'.'</code> và <code>'*'</code>.</li>\n\t<li>Đảm bảo rằng với mỗi lần xuất hiện của ký tự <code>'*'</code>, sẽ có một ký tự hợp lệ trước đó để khớp.</li>\n</ul>",
+			"hints": [],
+			"similarQuestionList": [
+				{
+					"title": "Đối Sánh Ký Tự Đại Diện",
+					"titleSlug": "wildcard-matching",
+					"difficulty": "Hard"
+				}
+			]
+		}
+	},
+	"timeLimit": 1000,
+	"memoryLimit": 512
+}

@@ -1,0 +1,68 @@
+{
+	"questionId": 7,
+	"titleSlug": "reverse-integer",
+	"difficulty": "Medium",
+	"topicTags": ["Math"],
+	"originalSource": {
+		"source": "#include <iostream>\n#include <limits>\nusing namespace std;\n\nclass Solution {\npublic:\n    int reverse(int x) {\n        int reversed = 0;\n        while (x != 0) {\n            int pop = x % 10;\n            x /= 10;\n            if (reversed > INT_MAX / 10 || (reversed == INT_MAX / 10 && pop > 7)) return 0;\n            if (reversed < INT_MIN / 10 || (reversed == INT_MIN / 10 && pop < -8)) return 0;\n            reversed = reversed * 10 + pop;\n        }\n        return reversed;\n    }\n};\n\nint main() {\n    Solution sol;\n    int x = 123;\n    cout << sol.reverse(x) << endl; // Expected output: 321\n    return 0;\n}",
+		"language": "c/c++"
+	},
+	"details": {
+		"en": {
+			"title": "Reverse Integer",
+			"content": "<p>Given a signed 32-bit integer <code>x</code>, return <code>x</code><em> with its digits reversed</em>. If reversing <code>x</code> causes the value to go outside the signed 32-bit integer range <code>[-2<sup>31</sup>, 2<sup>31</sup> - 1]</code>, then return <code>0</code>.</p>\n\n<p><strong>Assume the environment does not allow you to store 64-bit integers (signed or unsigned).</strong></p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> x = 123\n<strong>Output:</strong> 321\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> x = -123\n<strong>Output:</strong> -321\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> x = 120\n<strong>Output:</strong> 21\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>-2<sup>31</sup> &lt;= x &lt;= 2<sup>31</sup> - 1</code></li>\n</ul>\n",
+			"hints": [],
+			"similarQuestionList": [
+				{
+					"title": "String to Integer (atoi)",
+					"titleSlug": "string-to-integer-atoi",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Reverse Bits",
+					"titleSlug": "reverse-bits",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "A Number After a Double Reversal",
+					"titleSlug": "a-number-after-a-double-reversal",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Count Number of Distinct Integers After Reverse Operations",
+					"titleSlug": "count-number-of-distinct-integers-after-reverse-operations",
+					"difficulty": "Medium"
+				}
+			]
+		},
+		"vi": {
+			"title": "Đảo Ngược Số Nguyên",
+			"content": "<p>Cho một số nguyên có dấu 32-bit <code>x</code>, hãy trả về <code>x</code><em> với các chữ số đảo ngược</em>. Nếu việc đảo ngược <code>x</code> khiến giá trị vượt ra ngoài phạm vi số nguyên 32-bit có dấu <code>[-2<sup>31</sup>, 2<sup>31</sup> - 1]</code>, hãy trả về <code>0</code>.</p>\n\n<p><strong>Giả định rằng môi trường không cho phép bạn lưu trữ số nguyên 64-bit (có dấu hoặc không dấu).</strong></p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Ví dụ 1:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> x = 123\n<strong>Đầu ra:</strong> 321\n</pre>\n\n<p><strong class=\"example\">Ví dụ 2:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> x = -123\n<strong>Đầu ra:</strong> -321\n</pre>\n\n<p><strong class=\"example\">Ví dụ 3:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> x = 120\n<strong>Đầu ra:</strong> 21\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Ràng buộc:</strong></p>\n\n<ul>\n\t<li><code>-2<sup>31</sup> &le; x &le; 2<sup>31</sup> - 1</code></li>\n</ul>",
+			"hints": [],
+			"similarQuestionList": [
+				{
+					"title": "Chuyển Chuỗi thành Số Nguyên (atoi)",
+					"titleSlug": "string-to-integer-atoi",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Đảo Ngược Các Bit",
+					"titleSlug": "reverse-bits",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Một Số Sau Hai Lần Đảo Ngược",
+					"titleSlug": "a-number-after-a-double-reversal",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Đếm Số Lượng Số Nguyên Phân Biệt Sau Các Phép Đảo Ngược",
+					"titleSlug": "count-number-of-distinct-integers-after-reverse-operations",
+					"difficulty": "Medium"
+				}
+			]
+		}
+	},
+	"timeLimit": 1000,
+	"memoryLimit": 512
+}

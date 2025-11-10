@@ -1,0 +1,86 @@
+{
+	"questionId": 5,
+	"titleSlug": "longest-palindromic-substring",
+	"difficulty": "Medium",
+	"topicTags": ["Two_Pointers", "String", "Dynamic_Programming"],
+	"originalSource": {
+		"source": "#include <iostream>\n#include <string>\nusing namespace std;\n\nclass Solution {\npublic:\n    string longestPalindrome(string s) {\n        if (s.empty()) return \"\";\n        int start = 0, end = 0;\n        for (int i = 0; i < s.length(); i++) {\n            int len1 = expandAroundCenter(s, i, i);   // Odd length\n            int len2 = expandAroundCenter(s, i, i + 1); // Even length\n            int len = max(len1, len2);\n            if (len > end - start) {\n                start = i - (len - 1) / 2;\n                end = i + len / 2;\n            }\n        }\n        return s.substr(start, end - start + 1);\n    }\n\nprivate:\n    int expandAroundCenter(const string& s, int left, int right) {\n        while (left >= 0 && right < s.length() && s[left] == s[right]) {\n            left--;\n            right++;\n        }\n        return right - left - 1; // Length of the palindrome\n    }\n};\n\nint main() {\n    Solution sol;\n    string s = \"babad\";\n    cout << sol.longestPalindrome(s) << endl; // Expected output: \"bab\" or \"aba\"\n    return 0;\n}",
+		"language": "c/c++"
+	},
+	"details": {
+		"en": {
+			"title": "Longest Palindromic Substring",
+			"content": "<p>Given a string <code>s</code>, return <em>the longest</em> <span data-keyword=\"palindromic-string\"><em>palindromic</em></span> <span data-keyword=\"substring-nonempty\"><em>substring</em></span> in <code>s</code>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;babad&quot;\n<strong>Output:</strong> &quot;bab&quot;\n<strong>Explanation:</strong> &quot;aba&quot; is also a valid answer.\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;cbbd&quot;\n<strong>Output:</strong> &quot;bb&quot;\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= s.length &lt;= 1000</code></li>\n\t<li><code>s</code> consist of only digits and English letters.</li>\n</ul>\n",
+			"hints": [
+				"How can we reuse a previously computed palindrome to compute a larger palindrome?",
+				"If “aba” is a palindrome, is “xabax” a palindrome? Similarly is “xabay” a palindrome?",
+				"Complexity based hint:</br>\r\nIf we use brute-force and check whether for every start and end position a substring is a palindrome we have O(n^2) start - end pairs and O(n) palindromic checks. Can we reduce the time for palindromic checks to O(1) by reusing some previous computation."
+			],
+			"similarQuestionList": [
+				{
+					"title": "Shortest Palindrome",
+					"titleSlug": "shortest-palindrome",
+					"difficulty": "Hard"
+				},
+				{
+					"title": "Palindrome Pairs",
+					"titleSlug": "palindrome-pairs",
+					"difficulty": "Hard"
+				},
+				{
+					"title": "Longest Palindromic Subsequence",
+					"titleSlug": "longest-palindromic-subsequence",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Palindromic Substrings",
+					"titleSlug": "palindromic-substrings",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Maximum Number of Non-overlapping Palindrome Substrings",
+					"titleSlug": "maximum-number-of-non-overlapping-palindrome-substrings",
+					"difficulty": "Hard"
+				}
+			]
+		},
+		"vi": {
+			"title": "Chuỗi con đối xứng dài nhất",
+			"content": "<p>Cho một chuỗi <code>s</code>, hãy trả về <em>chuỗi con đối xứng dài nhất</em> trong <code>s</code>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Ví dụ 1:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> s = \"babad\"\n<strong>Đầu ra:</strong> \"bab\"\n<strong>Giải thích:</strong> \"aba\" cũng là một đáp án hợp lệ.\n</pre>\n\n<p><strong class=\"example\">Ví dụ 2:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> s = \"cbbd\"\n<strong>Đầu ra:</strong> \"bb\"\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Ràng buộc:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= s.length &lt;= 1000</code></li>\n\t<li><code>s</code> chỉ chứa chữ số và chữ cái tiếng Anh.</li>\n</ul>",
+			"hints": [
+				"Có thể tái sử dụng palindrome đã tính trước đó để tính palindrome lớn hơn bằng cách sử dụng thuật toán Manacher. Thuật toán này tận dụng tính đối xứng của palindrome để giảm số phép so sánh cần thực hiện. Cụ thể:\n\n1. **Duy trì một mảng `P[]`** lưu độ dài mở rộng của palindrome tại mỗi vị trí trung tâm.\n2. **Tận dụng tính đối xứng**: Khi xử lý một trung tâm mới `C`, nếu vị trí hiện tại `i` nằm trong palindrome trước đó (có tâm `C` và bán kính `R`), ta lấy giá trị đối xứng của `i` qua `C` (tức `mirror_i = 2*C - i`) từ mảng `P[]`. Giá trị `P[mirror_i]` cung cấp một cận dưới cho `P[i]`, giúp tránh so sánh các ký tự đã biết.\n3. **Mở rộng từ cận dưới**: Bắt đầu từ `min(R - i, P[mirror_i])` để tiếp tục mở rộng palindrome tại `i`, tận dụng phần đối xứng đã được tính toán trước.\n\nCách tiếp cận này giảm độ phức tạp xuống **O(n)** do mỗi ký tự chỉ được so sánh tối đa 2 lần.",
+				"Nếu \"aba\" là một chuỗi đối xứng (palindrome), thì \"xabax\" cũng là một chuỗi đối xứng vì đọc xuôi và đọc ngược đều giống nhau: x-ab-a-x.  \nNgược lại, \"xabay\" không phải là chuỗi đối xứng vì đọc xuôi là \"xabay\" và đọc ngược là \"yabax\", không trùng khớp.",
+				"Gợi ý dựa trên độ phức tạp:</br>\r\nNếu chúng ta sử dụng phương pháp vét cạn và kiểm tra xem với mỗi vị trí bắt đầu và kết thúc, một chuỗi con có phải là palindrome hay không, chúng ta sẽ có O(n^2) cặp bắt đầu - kết thúc và O(n) lần kiểm tra palindrome. Liệu chúng ta có thể giảm thời gian kiểm tra palindrome xuống O(1) bằng cách tái sử dụng một số tính toán trước đó không?"
+			],
+			"similarQuestionList": [
+				{
+					"title": "Chuỗi Palindrome Ngắn Nhất",
+					"titleSlug": "shortest-palindrome",
+					"difficulty": "Hard"
+				},
+				{
+					"title": "Cặp Đối Xứng",
+					"titleSlug": "palindrome-pairs",
+					"difficulty": "Hard"
+				},
+				{
+					"title": "Chuỗi con Palindromic dài nhất",
+					"titleSlug": "longest-palindromic-subsequence",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Các Chuỗi Con Đối Xứng",
+					"titleSlug": "palindromic-substrings",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Số Lượng Tối Đa Các Chuỗi Con Palindrome Không Chồng Chéo",
+					"titleSlug": "maximum-number-of-non-overlapping-palindrome-substrings",
+					"difficulty": "Hard"
+				}
+			]
+		}
+	},
+	"timeLimit": 1000,
+	"memoryLimit": 512
+}

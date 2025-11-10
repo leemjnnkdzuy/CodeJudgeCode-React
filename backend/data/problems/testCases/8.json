@@ -1,0 +1,312 @@
+{
+	"testCases": [
+		{"testId": 1, "input": "42", "expectedOutput": "42"},
+		{"testId": 2, "input": "   -42", "expectedOutput": "-42"},
+		{"testId": 3, "input": "1337c0d3", "expectedOutput": "1337"},
+		{"testId": 4, "input": "0-1", "expectedOutput": "0"},
+		{"testId": 5, "input": "words and 987", "expectedOutput": "0"},
+		{"testId": 6, "input": "+123", "expectedOutput": "123"},
+		{"testId": 7, "input": "-000123", "expectedOutput": "-123"},
+		{"testId": 8, "input": "   +0000123abc", "expectedOutput": "123"},
+		{"testId": 9, "input": "   00000", "expectedOutput": "0"},
+		{"testId": 10, "input": "   ", "expectedOutput": "0"},
+		{"testId": 11, "input": "", "expectedOutput": "0"},
+		{"testId": 12, "input": "   +", "expectedOutput": "0"},
+		{"testId": 13, "input": "   -", "expectedOutput": "0"},
+		{"testId": 14, "input": "2147483647", "expectedOutput": "2147483647"},
+		{"testId": 15, "input": "2147483648", "expectedOutput": "2147483647"},
+		{"testId": 16, "input": "-2147483648", "expectedOutput": "-2147483648"},
+		{"testId": 17, "input": "-2147483649", "expectedOutput": "-2147483648"},
+		{"testId": 18, "input": "0032", "expectedOutput": "32"},
+		{"testId": 19, "input": "+0032", "expectedOutput": "32"},
+		{"testId": 20, "input": "-0032", "expectedOutput": "-32"},
+		{"testId": 21, "input": "   4193 with words", "expectedOutput": "4193"},
+		{"testId": 22, "input": "words 4193", "expectedOutput": "0"},
+		{"testId": 23, "input": "4193words", "expectedOutput": "4193"},
+		{"testId": 24, "input": "+-12", "expectedOutput": "0"},
+		{"testId": 25, "input": "-+12", "expectedOutput": "0"},
+		{
+			"testId": 26,
+			"input": "0000000000012345678",
+			"expectedOutput": "12345678"
+		},
+		{
+			"testId": 27,
+			"input": "   000000000001234567800000words",
+			"expectedOutput": "1234567800000"
+		},
+		{
+			"testId": 28,
+			"input": "   91283472332",
+			"expectedOutput": "2147483647"
+		},
+		{
+			"testId": 29,
+			"input": "-91283472332",
+			"expectedOutput": "-2147483648"
+		},
+		{
+			"testId": 30,
+			"input": "   +2147483647",
+			"expectedOutput": "2147483647"
+		},
+		{
+			"testId": 31,
+			"input": "   +21474836470",
+			"expectedOutput": "2147483647"
+		},
+		{
+			"testId": 32,
+			"input": "   -2147483648",
+			"expectedOutput": "-2147483648"
+		},
+		{
+			"testId": 33,
+			"input": "   -21474836480",
+			"expectedOutput": "-2147483648"
+		},
+		{"testId": 34, "input": "  +000000000", "expectedOutput": "0"},
+		{"testId": 35, "input": "  -000000000", "expectedOutput": "0"},
+		{"testId": 36, "input": "abc", "expectedOutput": "0"},
+		{"testId": 37, "input": "   abc123", "expectedOutput": "0"},
+		{"testId": 38, "input": "   123abc456", "expectedOutput": "123"},
+		{"testId": 39, "input": "   -abc", "expectedOutput": "0"},
+		{"testId": 40, "input": "   +abc", "expectedOutput": "0"},
+		{"testId": 41, "input": "   1.23", "expectedOutput": "1"},
+		{"testId": 42, "input": "   -1.23", "expectedOutput": "-1"},
+		{"testId": 43, "input": "   +1.23", "expectedOutput": "1"},
+		{
+			"testId": 44,
+			"input": "  00000000000000000000000000000000123",
+			"expectedOutput": "123"
+		},
+		{
+			"testId": 45,
+			"input": "  00000000000000000000000000000000",
+			"expectedOutput": "0"
+		},
+		{
+			"testId": 46,
+			"input": "   18446744073709551615",
+			"expectedOutput": "2147483647"
+		},
+		{
+			"testId": 47,
+			"input": "-18446744073709551615",
+			"expectedOutput": "-2147483648"
+		},
+		{
+			"testId": 48,
+			"input": "   -0000012345678",
+			"expectedOutput": "-12345678"
+		},
+		{
+			"testId": 49,
+			"input": "   +0000012345678",
+			"expectedOutput": "12345678"
+		},
+		{
+			"testId": 50,
+			"input": "   9223372036854775807",
+			"expectedOutput": "2147483647"
+		},
+		{
+			"testId": 51,
+			"input": "-9223372036854775808",
+			"expectedOutput": "-2147483648"
+		},
+		{
+			"testId": 52,
+			"input": "   2147483646",
+			"expectedOutput": "2147483646"
+		},
+		{
+			"testId": 53,
+			"input": "   -2147483647",
+			"expectedOutput": "-2147483647"
+		},
+		{
+			"testId": 54,
+			"input": "   +2147483646",
+			"expectedOutput": "2147483646"
+		},
+		{
+			"testId": 55,
+			"input": "   -2147483647abc",
+			"expectedOutput": "-2147483647"
+		},
+		{
+			"testId": 56,
+			"input": "   2147483647xyz",
+			"expectedOutput": "2147483647"
+		},
+		{
+			"testId": 57,
+			"input": "   -2147483649xyz",
+			"expectedOutput": "-2147483648"
+		},
+		{
+			"testId": 58,
+			"input": "   2147483648xyz",
+			"expectedOutput": "2147483647"
+		},
+		{
+			"testId": 59,
+			"input": "   0000002147483647",
+			"expectedOutput": "2147483647"
+		},
+		{
+			"testId": 60,
+			"input": "   -0000002147483648",
+			"expectedOutput": "-2147483648"
+		},
+		{"testId": 61, "input": "   123 456", "expectedOutput": "123"},
+		{"testId": 62, "input": "   -123 456", "expectedOutput": "-123"},
+		{"testId": 63, "input": "   +123 456", "expectedOutput": "123"},
+		{"testId": 64, "input": "   1a2b3c", "expectedOutput": "1"},
+		{"testId": 65, "input": "   -1a2b3c", "expectedOutput": "-1"},
+		{"testId": 66, "input": "   +1a2b3c", "expectedOutput": "1"},
+		{"testId": 67, "input": "   000000000000001", "expectedOutput": "1"},
+		{"testId": 68, "input": "   -000000000000001", "expectedOutput": "-1"},
+		{"testId": 69, "input": "   +000000000000001", "expectedOutput": "1"},
+		{"testId": 70, "input": "   00000000000000abc", "expectedOutput": "0"},
+		{"testId": 71, "input": "   -00000000000000abc", "expectedOutput": "0"},
+		{"testId": 72, "input": "   +00000000000000abc", "expectedOutput": "0"},
+		{
+			"testId": 73,
+			"input": "   +2147483649",
+			"expectedOutput": "2147483647"
+		},
+		{
+			"testId": 74,
+			"input": "   -2147483650",
+			"expectedOutput": "-2147483648"
+		},
+		{
+			"testId": 75,
+			"input": "   9999999999999999999999999999",
+			"expectedOutput": "2147483647"
+		},
+		{
+			"testId": 76,
+			"input": "   -9999999999999999999999999999",
+			"expectedOutput": "-2147483648"
+		},
+		{
+			"testId": 77,
+			"input": "   1234567890",
+			"expectedOutput": "1234567890"
+		},
+		{"testId": 78, "input": "-1234567890", "expectedOutput": "-1234567890"},
+		{
+			"testId": 79,
+			"input": "   000001234567890",
+			"expectedOutput": "123456790"
+		},
+		{
+			"testId": 80,
+			"input": "   -000001234567890",
+			"expectedOutput": "-123456790"
+		},
+		{
+			"testId": 81,
+			"input": "   21474836470abc",
+			"expectedOutput": "2147483647"
+		},
+		{
+			"testId": 82,
+			"input": "   -21474836480abc",
+			"expectedOutput": "-2147483648"
+		},
+		{
+			"testId": 83,
+			"input": "   2147483647000000000",
+			"expectedOutput": "2147483647"
+		},
+		{
+			"testId": 84,
+			"input": "   -2147483648000000000",
+			"expectedOutput": "-2147483648"
+		},
+		{
+			"testId": 85,
+			"input": "   2147483647999999999",
+			"expectedOutput": "2147483647"
+		},
+		{
+			"testId": 86,
+			"input": "-2147483648999999999",
+			"expectedOutput": "-2147483648"
+		},
+		{
+			"testId": 87,
+			"input": "   2147483646words",
+			"expectedOutput": "2147483646"
+		},
+		{
+			"testId": 88,
+			"input": "-2147483647words",
+			"expectedOutput": "-2147483647"
+		},
+		{
+			"testId": 89,
+			"input": "   +2147483646words",
+			"expectedOutput": "2147483646"
+		},
+		{
+			"testId": 90,
+			"input": "   +21474836470words",
+			"expectedOutput": "2147483647"
+		},
+		{
+			"testId": 91,
+			"input": "   -21474836480words",
+			"expectedOutput": "-2147483648"
+		},
+		{
+			"testId": 92,
+			"input": "   0000000000000000000000000000000000000000000000000000000012345678",
+			"expectedOutput": "12345678"
+		},
+		{
+			"testId": 93,
+			"input": "   -0000000000000000000000000000000000000000000000000000000012345678",
+			"expectedOutput": "-12345678"
+		},
+		{
+			"testId": 94,
+			"input": "   +0000000000000000000000000000000000000000000000000000000012345678",
+			"expectedOutput": "12345678"
+		},
+		{
+			"testId": 95,
+			"input": "   21474836471234567890",
+			"expectedOutput": "2147483647"
+		},
+		{
+			"testId": 96,
+			"input": "   -21474836481234567890",
+			"expectedOutput": "-2147483648"
+		},
+		{
+			"testId": 97,
+			"input": "   0000000000000000000000000000000000000",
+			"expectedOutput": "0"
+		},
+		{
+			"testId": 98,
+			"input": "   +0000000000000000000000000000000000000",
+			"expectedOutput": "0"
+		},
+		{
+			"testId": 99,
+			"input": "   -0000000000000000000000000000000000000",
+			"expectedOutput": "0"
+		},
+		{
+			"testId": 100,
+			"input": "   0000000000000000000000000000000000000123",
+			"expectedOutput": "123"
+		}
+	]
+}

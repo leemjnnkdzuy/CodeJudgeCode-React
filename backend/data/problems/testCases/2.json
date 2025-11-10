@@ -1,0 +1,320 @@
+{
+	"testCases": [
+		{"testId": 1, "input": "2 4 3\n5 6 4", "expectedOutput": "7 0 8"},
+		{"testId": 2, "input": "0\n0", "expectedOutput": "0"},
+		{
+			"testId": 3,
+			"input": "9 9 9 9 9 9 9\n9 9 9 9",
+			"expectedOutput": "8 9 9 9 0 0 0 1"
+		},
+		{"testId": 4, "input": "1\n9 9 9", "expectedOutput": "0 0 0 1"},
+		{"testId": 5, "input": "5\n5", "expectedOutput": "0 1"},
+		{"testId": 6, "input": "9 9\n1", "expectedOutput": "0 0 1"},
+		{"testId": 7, "input": "1 2 3\n4 5 6", "expectedOutput": "5 7 9"},
+		{"testId": 8, "input": "7 1\n5 9", "expectedOutput": "2 1 1"},
+		{"testId": 9, "input": "9 9 9\n9 9 9", "expectedOutput": "8 9 9 1"},
+		{"testId": 10, "input": "1 0 0\n9 9", "expectedOutput": "0 0 1"},
+		{"testId": 11, "input": "3 4 5\n7 5 5", "expectedOutput": "0 0 1 1"},
+		{
+			"testId": 12,
+			"input": "2 2 2 2\n8 8 8 8",
+			"expectedOutput": "0 1 1 1 1"
+		},
+		{"testId": 13, "input": "9 8 7\n1 2 3", "expectedOutput": "0 1 1 1"},
+		{
+			"testId": 14,
+			"input": "4 4 4 4\n5 5 5 5",
+			"expectedOutput": "9 9 9 9"
+		},
+		{
+			"testId": 15,
+			"input": "1 1 1 1 1\n9 9 9 9 9",
+			"expectedOutput": "0 1 1 1 1 1"
+		},
+		{"testId": 16, "input": "7 7 7\n7 7 7", "expectedOutput": "4 5 5 1"},
+		{"testId": 17, "input": "9 9 9 9\n1", "expectedOutput": "0 0 0 0 1"},
+		{
+			"testId": 18,
+			"input": "5 5 5 5\n5 5 5 5",
+			"expectedOutput": "0 1 1 1 1 1"
+		},
+		{
+			"testId": 19,
+			"input": "1 2 3 4 5\n5 4 3 2 1",
+			"expectedOutput": "6 6 6 6 6"
+		},
+		{
+			"testId": 20,
+			"input": "9 0 0 1\n1 9 9 9",
+			"expectedOutput": "0 0 0 1 1"
+		},
+		{"testId": 21, "input": "8 9 9\n2", "expectedOutput": "0 0 0 1"},
+		{
+			"testId": 22,
+			"input": "6 6 6 6 6\n4 4 4 4 4",
+			"expectedOutput": "0 1 1 1 1 1"
+		},
+		{
+			"testId": 23,
+			"input": "1 2 3 4\n9 9 9 9",
+			"expectedOutput": "0 2 3 4 1"
+		},
+		{"testId": 24, "input": "7 3\n8 9", "expectedOutput": "5 3 1"},
+		{
+			"testId": 25,
+			"input": "9 9 9 9 9\n9 9 9 9 9",
+			"expectedOutput": "8 9 9 9 9 1"
+		},
+		{
+			"testId": 26,
+			"input": "1 0 0 0 0\n9 9 9 9",
+			"expectedOutput": "0 0 0 0 0 1"
+		},
+		{
+			"testId": 27,
+			"input": "3 3 3 3\n7 7 7 7",
+			"expectedOutput": "0 1 1 1 1 1"
+		},
+		{"testId": 28, "input": "1 2 9\n1", "expectedOutput": "2 2 9"},
+		{"testId": 29, "input": "9 1\n1 9", "expectedOutput": "0 1 1"},
+		{
+			"testId": 30,
+			"input": "4 5 6 7\n5 4 3 2",
+			"expectedOutput": "9 9 9 9"
+		},
+		{"testId": 31, "input": "8 8 8\n2 2 2", "expectedOutput": "0 1 1 1"},
+		{
+			"testId": 32,
+			"input": "7 5 3 1\n3 5 7 9",
+			"expectedOutput": "0 1 1 1 1"
+		},
+		{"testId": 33, "input": "9 9 9 8\n2", "expectedOutput": "1 0 0 0 1"},
+		{
+			"testId": 34,
+			"input": "2 2 2 2 2\n8 8 8 8 8",
+			"expectedOutput": "0 1 1 1 1 1"
+		},
+		{"testId": 35, "input": "6 6 6\n3 3 3", "expectedOutput": "9 9 9"},
+		{"testId": 36, "input": "9\n1", "expectedOutput": "0 1"},
+		{
+			"testId": 37,
+			"input": "1 1 1 1 1 1\n9 9 9 9 9 9",
+			"expectedOutput": "0 1 1 1 1 1 1"
+		},
+		{"testId": 38, "input": "5 5 5\n5 5 5", "expectedOutput": "0 1 1 1"},
+		{"testId": 39, "input": "7 8 9\n1 1 1", "expectedOutput": "8 9 0 1"},
+		{"testId": 40, "input": "9 0 1\n9 0 9", "expectedOutput": "8 1 0 1"},
+		{
+			"testId": 41,
+			"input": "1 9 9 9\n9 0 0 1",
+			"expectedOutput": "0 0 0 1 1"
+		},
+		{
+			"testId": 42,
+			"input": "2 4 6 8\n8 6 4 2",
+			"expectedOutput": "0 1 1 1 1"
+		},
+		{
+			"testId": 43,
+			"input": "7 7 7 7\n7 7 7 7",
+			"expectedOutput": "4 5 5 5 1"
+		},
+		{
+			"testId": 44,
+			"input": "9 8 7 6\n4 3 2 1",
+			"expectedOutput": "3 2 0 8"
+		},
+		{
+			"testId": 45,
+			"input": "3 3 3 3 3\n7 7 7 7 7",
+			"expectedOutput": "0 1 1 1 1 1"
+		},
+		{
+			"testId": 46,
+			"input": "9 9 9 9 9\n1",
+			"expectedOutput": "0 0 0 0 0 1"
+		},
+		{"testId": 47, "input": "6 5 4\n4 5 6", "expectedOutput": "0 1 1 1"},
+		{
+			"testId": 48,
+			"input": "1 2 3 9\n7 8 6",
+			"expectedOutput": "8 0 0 0 1"
+		},
+		{
+			"testId": 49,
+			"input": "9 9 9 9 9 9 9 9 9\n1",
+			"expectedOutput": "0 0 0 0 0 0 0 0 0 1"
+		},
+		{"testId": 50, "input": "2 2\n8 8", "expectedOutput": "0 1 1"},
+		{"testId": 51, "input": "3 1 4\n1 5 9", "expectedOutput": "4 6 3 1"},
+		{"testId": 52, "input": "7 2\n5 8", "expectedOutput": "2 1 1"},
+		{
+			"testId": 53,
+			"input": "9 9 9 9 9\n9 9 9 9",
+			"expectedOutput": "8 9 9 9 0 1"
+		},
+		{
+			"testId": 54,
+			"input": "1 0 0 0 0 0\n9 9 9 9 9",
+			"expectedOutput": "0 0 0 0 0 0 1"
+		},
+		{
+			"testId": 55,
+			"input": "4 4 4 4 4\n6 6 6 6 6",
+			"expectedOutput": "0 1 1 1 1 1"
+		},
+		{
+			"testId": 56,
+			"input": "8 8 8 8\n2 2 2 2",
+			"expectedOutput": "0 1 1 1 1"
+		},
+		{"testId": 57, "input": "5 6 7\n7 6 5", "expectedOutput": "2 3 3 1"},
+		{"testId": 58, "input": "9 0 9\n1 0 1", "expectedOutput": "0 1 0 1"},
+		{
+			"testId": 59,
+			"input": "2 9 9 9\n8 0 0 1",
+			"expectedOutput": "0 0 0 1 1"
+		},
+		{"testId": 60, "input": "6 6 6\n6 6 6", "expectedOutput": "2 3 3 1"},
+		{
+			"testId": 61,
+			"input": "1 2 3 4 5 6\n6 5 4 3 2 1",
+			"expectedOutput": "7 7 7 7 7 7"
+		},
+		{"testId": 62, "input": "9 9 0 0\n1", "expectedOutput": "0 0 0 1"},
+		{"testId": 63, "input": "7 8 9 9\n2 1", "expectedOutput": "9 9 9 9"},
+		{"testId": 64, "input": "5 5 0\n5 5", "expectedOutput": "0 1 0 1"},
+		{
+			"testId": 65,
+			"input": "9 9 9 0\n9 9 9",
+			"expectedOutput": "8 9 9 0 1"
+		},
+		{"testId": 66, "input": "1 1 1 0\n9 9", "expectedOutput": "0 1 1 0 1"},
+		{
+			"testId": 67,
+			"input": "3 3 3 3 3 3\n7 7 7 7 7 7",
+			"expectedOutput": "0 1 1 1 1 1 1"
+		},
+		{"testId": 68, "input": "9 9 9\n9 9 9", "expectedOutput": "8 9 9 1"},
+		{
+			"testId": 69,
+			"input": "2 4 6 8 0\n7 5 3 2",
+			"expectedOutput": "9 9 9 0 1"
+		},
+		{
+			"testId": 70,
+			"input": "1 0 0 0 0 0 0\n9 9 9 9 9 9",
+			"expectedOutput": "0 0 0 0 0 0 1"
+		},
+		{
+			"testId": 71,
+			"input": "4 4 4 4\n4 4 4 4",
+			"expectedOutput": "8 8 8 8"
+		},
+		{
+			"testId": 72,
+			"input": "9 9 9 9 9 9 9 9\n1",
+			"expectedOutput": "0 0 0 0 0 0 0 0 1"
+		},
+		{"testId": 73, "input": "3 2 1\n6 7 8", "expectedOutput": "9 9 9"},
+		{
+			"testId": 74,
+			"input": "5 5 5 5 5\n5 5 5 5 5",
+			"expectedOutput": "0 1 1 1 1 1"
+		},
+		{"testId": 75, "input": "7 0 7\n3 0 3", "expectedOutput": "0 1 0 1"},
+		{"testId": 76, "input": "8 1\n2 9", "expectedOutput": "0 1 1"},
+		{
+			"testId": 77,
+			"input": "9 9 9 9 0\n1 0 0 0 9",
+			"expectedOutput": "0 0 0 0 0 1"
+		},
+		{"testId": 78, "input": "6 7 8\n4 3 2", "expectedOutput": "0 1 1 1"},
+		{
+			"testId": 79,
+			"input": "1 2 3 4 5\n5 4 3 2 1",
+			"expectedOutput": "6 6 6 6 6"
+		},
+		{
+			"testId": 80,
+			"input": "9 9 9 9 9 9 9 9 9 9\n9 9 9 9 9 9 9 9 9 9",
+			"expectedOutput": "8 9 9 9 9 9 9 9 9 9 1"
+		},
+		{"testId": 81, "input": "7 7 7\n7 7 7", "expectedOutput": "4 5 5 1"},
+		{"testId": 82, "input": "1 0 0 0\n9 9 9", "expectedOutput": "0 0 0 1"},
+		{"testId": 83, "input": "5 9 9\n5 0 1", "expectedOutput": "0 0 1 1"},
+		{
+			"testId": 84,
+			"input": "2 2 2 2 2\n8 8 8 8 8",
+			"expectedOutput": "0 1 1 1 1 1"
+		},
+		{
+			"testId": 85,
+			"input": "6 6 6 6\n4 4 4 4",
+			"expectedOutput": "0 1 1 1 1"
+		},
+		{
+			"testId": 86,
+			"input": "9 9 9 9 9\n9 9 9 9 9",
+			"expectedOutput": "8 9 9 9 9 1"
+		},
+		{
+			"testId": 87,
+			"input": "2 3 4 5\n5 6 5 5",
+			"expectedOutput": "7 9 9 0 1"
+		},
+		{
+			"testId": 88,
+			"input": "8 8 8 8 8\n1 1 1 1 1",
+			"expectedOutput": "9 9 9 9 9"
+		},
+		{
+			"testId": 89,
+			"input": "4 9 9 9\n6 0 0 1",
+			"expectedOutput": "0 0 0 1 1"
+		},
+		{
+			"testId": 90,
+			"input": "7 8 9 0\n3 2 1",
+			"expectedOutput": "0 1 1 1 1"
+		},
+		{"testId": 91, "input": "9\n9", "expectedOutput": "8 1"},
+		{"testId": 92, "input": "2 9 9\n1", "expectedOutput": "3 9"},
+		{
+			"testId": 93,
+			"input": "3 3 3 3\n7 7 7",
+			"expectedOutput": "0 1 1 1 1"
+		},
+		{
+			"testId": 94,
+			"input": "5 0 0 0\n5 0 0 0",
+			"expectedOutput": "0 1 0 0 1"
+		},
+		{
+			"testId": 95,
+			"input": "6 7 8 9\n9 8 7 6",
+			"expectedOutput": "5 6 6 6 1"
+		},
+		{
+			"testId": 96,
+			"input": "1 2 3 4 5 6 7 8 9\n9 8 7 6 5 4 3 2 1",
+			"expectedOutput": "0 1 1 1 1 1 1 1 1 1"
+		},
+		{
+			"testId": 97,
+			"input": "9 9 9 9 9 9 9\n9 9 9 9 9 9 9",
+			"expectedOutput": "8 9 9 9 9 9 9 1"
+		},
+		{"testId": 98, "input": "4 4 4\n6 6 6", "expectedOutput": "0 1 1 1"},
+		{
+			"testId": 99,
+			"input": "7 7 7 7 7\n3 3 3 3 3",
+			"expectedOutput": "0 1 1 1 1 1"
+		},
+		{
+			"testId": 100,
+			"input": "9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9\n1",
+			"expectedOutput": "0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1"
+		}
+	]
+}

@@ -1,0 +1,226 @@
+{
+	"questionId": 1,
+	"titleSlug": "two-sum",
+	"difficulty": "Easy",
+	"topicTags": ["Array", "Hash_Table"],
+	"originalSource": {
+		"source": "#include <iostream>\n#include <vector>\n#include <unordered_map>\nusing namespace std;\n\nclass Solution {\npublic:\n    vector<int> twoSum(vector<int>& nums, int target) {\n        unordered_map<int, int> mp; // value -> index\n        for (int i = 0; i < nums.size(); i++) {\n            int need = target - nums[i];\n            if (mp.find(need) != mp.end()) {\n                return {mp[need], i};\n            }\n            mp[nums[i]] = i;\n        }\n        return {}; // guaranteed to have one solution\n    }\n};\n\nint main() {\n    Solution sol;\n    vector<int> nums = {2, 7, 11, 15};\n    int target = 9;\n\n    vector<int> ans = sol.twoSum(nums, target);\n    cout << ans[0] << \" \" << ans[1];\n\n    return 0;\n}",
+		"language": "c/c++"
+	},
+	"details": {
+		"en": {
+			"title": "Two Sum",
+			"content": "<p>Given an array of integers <code>nums</code>&nbsp;and an integer <code>target</code>, return <em>indices of the two numbers such that they add up to <code>target</code></em>.</p>\n\n<p>You may assume that each input would have <strong><em>exactly</em> one solution</strong>, and you may not use the <em>same</em> element twice.</p>\n\n<p>You can return the answer in any order.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [2,7,11,15], target = 9\n<strong>Output:</strong> [0,1]\n<strong>Explanation:</strong> Because nums[0] + nums[1] == 9, we return [0, 1].\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [3,2,4], target = 6\n<strong>Output:</strong> [1,2]\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> nums = [3,3], target = 6\n<strong>Output:</strong> [0,1]\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>2 &lt;= nums.length &lt;= 10<sup>4</sup></code></li>\n\t<li><code>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>\n\t<li><code>-10<sup>9</sup> &lt;= target &lt;= 10<sup>9</sup></code></li>\n\t<li><strong>Only one valid answer exists.</strong></li>\n</ul>\n\n<p>&nbsp;</p>\n<strong>Follow-up:&nbsp;</strong>Can you come up with an algorithm that is less than <code>O(n<sup>2</sup>)</code><font face=\"monospace\">&nbsp;</font>time complexity?",
+			"hints": [
+				"A really brute force way would be to search for all possible pairs of numbers but that would be too slow. Again, it's best to try out brute force solutions just for completeness. It is from these brute force solutions that you can come up with optimizations.",
+				"So, if we fix one of the numbers, say <code>x</code>, we have to scan the entire array to find the next number <code>y</code> which is <code>value - x</code> where value is the input parameter. Can we change our array somehow so that this search becomes faster?",
+				"The second train of thought is, without changing the array, can we use additional space somehow? Like maybe a hash map to speed up the search?"
+			],
+			"similarQuestionList": [
+				{
+					"title": "3Sum",
+					"titleSlug": "3sum",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "4Sum",
+					"titleSlug": "4sum",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Two Sum II - Input Array Is Sorted",
+					"titleSlug": "two-sum-ii-input-array-is-sorted",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Subarray Sum Equals K",
+					"titleSlug": "subarray-sum-equals-k",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Two Sum IV - Input is a BST",
+					"titleSlug": "two-sum-iv-input-is-a-bst",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Max Number of K-Sum Pairs",
+					"titleSlug": "max-number-of-k-sum-pairs",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Count Good Meals",
+					"titleSlug": "count-good-meals",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Count Number of Pairs With Absolute Difference K",
+					"titleSlug": "count-number-of-pairs-with-absolute-difference-k",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Number of Pairs of Strings With Concatenation Equal to Target",
+					"titleSlug": "number-of-pairs-of-strings-with-concatenation-equal-to-target",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Find All K-Distant Indices in an Array",
+					"titleSlug": "find-all-k-distant-indices-in-an-array",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "First Letter to Appear Twice",
+					"titleSlug": "first-letter-to-appear-twice",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Number of Excellent Pairs",
+					"titleSlug": "number-of-excellent-pairs",
+					"difficulty": "Hard"
+				},
+				{
+					"title": "Number of Arithmetic Triplets",
+					"titleSlug": "number-of-arithmetic-triplets",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Node With Highest Edge Score",
+					"titleSlug": "node-with-highest-edge-score",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Check Distances Between Same Letters",
+					"titleSlug": "check-distances-between-same-letters",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Find Subarrays With Equal Sum",
+					"titleSlug": "find-subarrays-with-equal-sum",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Largest Positive Integer That Exists With Its Negative",
+					"titleSlug": "largest-positive-integer-that-exists-with-its-negative",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Number of Distinct Averages",
+					"titleSlug": "number-of-distinct-averages",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Count Pairs Whose Sum is Less than Target",
+					"titleSlug": "count-pairs-whose-sum-is-less-than-target",
+					"difficulty": "Easy"
+				}
+			]
+		},
+		"vi": {
+			"title": "Tổng Hai Số",
+			"content": "<p>Cho một mảng số nguyên <code>nums</code> và một số nguyên <code>target</code>, hãy trả về <em>các chỉ số của hai số sao cho tổng của chúng bằng <code>target</code></em>.</p>\n\n<p>Bạn có thể giả định rằng mỗi đầu vào sẽ có <strong><em>chính xác một giải pháp</em></strong>, và bạn không được sử dụng <em>cùng một phần tử hai lần</em>.</p>\n\n<p>Bạn có thể trả về câu trả lời theo bất kỳ thứ tự nào.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Ví dụ 1:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> nums = [2,7,11,15], target = 9\n<strong>Đầu ra:</strong> [0,1]\n<strong>Giải thích:</strong> Vì nums[0] + nums[1] == 9, nên trả về [0, 1].\n</pre>\n\n<p><strong class=\"example\">Ví dụ 2:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> nums = [3,2,4], target = 6\n<strong>Đầu ra:</strong> [1,2]\n</pre>\n\n<p><strong class=\"example\">Ví dụ 3:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> nums = [3,3], target = 6\n<strong>Đầu ra:</strong> [0,1]\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Ràng buộc:</strong></p>\n\n<ul>\n\t<li><code>2 &lt;= nums.length &lt;= 10<sup>4</sup></code></li>\n\t<li><code>-10<sup>9</sup> &lt;= nums[i] &lt;= 10<sup>9</sup></code></li>\n\t<li><code>-10<sup>9</sup> &lt;= target &lt;= 10<sup>9</sup></code></li>\n\t<li><strong>Chỉ tồn tại một câu trả lời hợp lệ.</strong></li>\n</ul>\n\n<p>&nbsp;</p>\n<strong>Theo dõi:&nbsp;</strong>Bạn có thể đề xuất một thuật toán có độ phức tạp thời gian nhỏ hơn <code>O(n<sup>2</sup>)</code><font face=\"monospace\">&nbsp;</font>?",
+			"hints": [
+				"Một cách tiếp cận vét cạn thực sự sẽ là tìm kiếm tất cả các cặp số có thể, nhưng cách này quá chậm. Một lần nữa, vẫn nên thử nghiệm các giải pháp vét cạn chỉ để đảm bảo tính đầy đủ. Chính từ những giải pháp vét cạn này mà bạn có thể đề xuất các tối ưu hóa.",
+				"Vậy, nếu chúng ta cố định một trong các số, ví dụ <code>x</code>, chúng ta phải quét toàn bộ mảng để tìm số tiếp theo <code>y</code> là <code>giá trị - x</code> trong đó giá trị là tham số đầu vào. Chúng ta có thể thay đổi mảng của mình theo cách nào đó để việc tìm kiếm này trở nên nhanh hơn không?",
+				"Ý tưởng thứ hai là, mà không thay đổi mảng, liệu chúng ta có thể sử dụng thêm không gian nào không? Như có lẽ một bảng băm để tăng tốc độ tìm kiếm?"
+			],
+			"similarQuestionList": [
+				{
+					"title": "Tổng Ba Số",
+					"titleSlug": "3sum",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Tổng 4 Số",
+					"titleSlug": "4sum",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Tổng Hai Số II - Mảng Đầu Vào Đã Được Sắp Xếp",
+					"titleSlug": "two-sum-ii-input-array-is-sorted",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Tổng Mảng Con Bằng K",
+					"titleSlug": "subarray-sum-equals-k",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Tổng Hai Phần Tử IV - Đầu Vào Là Cây Tìm Kiếm Nhị Phân",
+					"titleSlug": "two-sum-iv-input-is-a-bst",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Số Cặp Tổng Bằng K Tối Đa",
+					"titleSlug": "max-number-of-k-sum-pairs",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Đếm Số Bữa Ăn Ngon",
+					"titleSlug": "count-good-meals",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Đếm Số Cặp Có Hiệu Tuyệt Đối K",
+					"titleSlug": "count-number-of-pairs-with-absolute-difference-k",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Số Cặp Chuỗi Có Phép Nối Bằng Chuỗi Đích",
+					"titleSlug": "number-of-pairs-of-strings-with-concatenation-equal-to-target",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Tìm Tất Cả Các Chỉ Số K-Khoảng Cách Trong Mảng",
+					"titleSlug": "find-all-k-distant-indices-in-an-array",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Chữ Cái Đầu Tiên Xuất Hiện Hai Lần",
+					"titleSlug": "first-letter-to-appear-twice",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Số Lượng Cặp Xuất Sắc",
+					"titleSlug": "number-of-excellent-pairs",
+					"difficulty": "Hard"
+				},
+				{
+					"title": "Số Lượng Bộ Ba Số Học",
+					"titleSlug": "number-of-arithmetic-triplets",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Nút Có Điểm Cạnh Cao Nhất",
+					"titleSlug": "node-with-highest-edge-score",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Kiểm Tra Khoảng Cách Giữa Các Chữ Cái Giống Nhau",
+					"titleSlug": "check-distances-between-same-letters",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Tìm các mảng con có tổng bằng nhau",
+					"titleSlug": "find-subarrays-with-equal-sum",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Số Nguyên Dương Lớn Nhất Tồn Tại Cùng Số Âm Của Nó",
+					"titleSlug": "largest-positive-integer-that-exists-with-its-negative",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Số lượng trung bình phân biệt",
+					"titleSlug": "number-of-distinct-averages",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Đếm Số Cặp Có Tổng Nhỏ Hơn Mục Tiêu",
+					"titleSlug": "count-pairs-whose-sum-is-less-than-target",
+					"difficulty": "Easy"
+				}
+			]
+		}
+	},
+	"timeLimit": 1000,
+	"memoryLimit": 512
+}

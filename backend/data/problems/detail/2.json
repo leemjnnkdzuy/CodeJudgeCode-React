@@ -1,0 +1,98 @@
+{
+	"questionId": 2,
+	"titleSlug": "add-two-numbers",
+	"difficulty": "Medium",
+	"topicTags": ["Linked_List", "Math", "Recursion"],
+	"originalSource": {
+		"source": "#include <iostream>\\nusing namespace std;\\n\\nstruct ListNode {\\n    int val;\\n    ListNode *next;\\n    ListNode(int x) : val(x), next(nullptr) {}\\n};\\n\\nclass Solution {\\npublic:\\n    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {\\n        ListNode dummy(0);\\n        ListNode* curr = &dummy;\\n        int carry = 0;\\n\\n        while (l1 != nullptr || l2 != nullptr || carry) {\\n            int sum = carry;\\n            if (l1) { sum += l1->val; l1 = l1->next; }\\n            if (l2) { sum += l2->val; l2 = l2->next; }\\n            carry = sum / 10;\\n            curr->next = new ListNode(sum % 10);\\n            curr = curr->next;\\n        }\\n        return dummy.next;\\n    }\\n};\\n\\nvoid printList(ListNode* node) {\\n    while (node) {\\n        cout << node->val;\\n        if (node->next) cout << \\\\\" \\\\\";\\n        node = node->next;\\n    }\\n    cout << endl;\\n}\\n\\nint main() {\\n    // Input: l1 = [2,4,3], l2 = [5,6,4]\\n    ListNode* l1 = new ListNode(2);\\n    l1->next = new ListNode(4);\\n    l1->next->next = new ListNode(3);\\n\\n    ListNode* l2 = new ListNode(5);\\n    l2->next = new ListNode(6);\\n    l2->next->next = new ListNode(4);\\n\\n    Solution sol;\\n    ListNode* result = sol.addTwoNumbers(l1, l2);\\n    printList(result); // Expected: 7 0 8\\n\\n    return 0;\\n}",
+		"language": "c/c++"
+	},
+	"details": {
+		"en": {
+			"title": "Add Two Numbers",
+			"content": "<p>You are given two <strong>non-empty</strong> linked lists representing two non-negative integers. The digits are stored in <strong>reverse order</strong>, and each of their nodes contains a single digit. Add the two numbers and return the sum&nbsp;as a linked list.</p>\n\n<p>You may assume the two numbers do not contain any leading zero, except the number 0 itself.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2020/10/02/addtwonumber1.jpg\" style=\"width: 483px; height: 342px;\" />\n<pre>\n<strong>Input:</strong> l1 = [2,4,3], l2 = [5,6,4]\n<strong>Output:</strong> [7,0,8]\n<strong>Explanation:</strong> 342 + 465 = 807.\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> l1 = [0], l2 = [0]\n<strong>Output:</strong> [0]\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]\n<strong>Output:</strong> [8,9,9,9,0,0,0,1]\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li>The number of nodes in each linked list is in the range <code>[1, 100]</code>.</li>\n\t<li><code>0 &lt;= Node.val &lt;= 9</code></li>\n\t<li>It is guaranteed that the list represents a number that does not have leading zeros.</li>\n</ul>\n",
+			"hints": [],
+			"similarQuestionList": [
+				{
+					"title": "Multiply Strings",
+					"titleSlug": "multiply-strings",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Add Binary",
+					"titleSlug": "add-binary",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Sum of Two Integers",
+					"titleSlug": "sum-of-two-integers",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Add Strings",
+					"titleSlug": "add-strings",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Add Two Numbers II",
+					"titleSlug": "add-two-numbers-ii",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Add to Array-Form of Integer",
+					"titleSlug": "add-to-array-form-of-integer",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Double a Number Represented as a Linked List",
+					"titleSlug": "double-a-number-represented-as-a-linked-list",
+					"difficulty": "Medium"
+				}
+			]
+		},
+		"vi": {
+			"title": "Thêm Hai Số",
+			"content": "<p>Bạn được cung cấp hai danh sách liên kết <strong>không rỗng</strong> biểu diễn hai số nguyên không âm. Các chữ số được lưu trữ theo <strong>thứ tự ngược</strong>, và mỗi nút của chúng chứa một chữ số duy nhất. Hãy cộng hai số này và trả về tổng dưới dạng một danh sách liên kết.</p>\n\n<p>Bạn có thể giả định rằng hai số không chứa bất kỳ chữ số 0 đứng đầu nào, ngoại trừ chính số 0.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Ví dụ 1:</strong></p>\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2020/10/02/addtwonumber1.jpg\" style=\"width: 483px; height: 342px;\" />\n<pre>\n<strong>Đầu vào:</strong> l1 = [2,4,3], l2 = [5,6,4]\n<strong>Đầu ra:</strong> [7,0,8]\n<strong>Giải thích:</strong> 342 + 465 = 807.\n</pre>\n\n<p><strong class=\"example\">Ví dụ 2:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> l1 = [0], l2 = [0]\n<strong>Đầu ra:</strong> [0]\n</pre>\n\n<p><strong class=\"example\">Ví dụ 3:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]\n<strong>Đầu ra:</strong> [8,9,9,9,0,0,0,1]\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Ràng buộc:</strong></p>\n\n<ul>\n\t<li>Số lượng nút trong mỗi danh sách liên kết nằm trong khoảng <code>[1, 100]</code>.</li>\n\t<li><code>0 &lt;= Node.val &lt;= 9</code></li>\n\t<li>Đảm bảo rằng danh sách biểu diễn một số không có chữ số 0 đứng đầu.</li>\n</ul>",
+			"hints": [],
+			"similarQuestionList": [
+				{
+					"title": "Nhân Các Chuỗi Ký Tự",
+					"titleSlug": "multiply-strings",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Cộng Nhị Phân",
+					"titleSlug": "add-binary",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Tổng của Hai Số Nguyên",
+					"titleSlug": "sum-of-two-integers",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Thêm Chuỗi",
+					"titleSlug": "add-strings",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Cộng Hai Số II",
+					"titleSlug": "add-two-numbers-ii",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Thêm vào Dạng Mảng của Số Nguyên",
+					"titleSlug": "add-to-array-form-of-integer",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Nhân Đôi Một Số Được Biểu Diễn Dưới Dạng Danh Sách Liên Kết",
+					"titleSlug": "double-a-number-represented-as-a-linked-list",
+					"difficulty": "Medium"
+				}
+			]
+		}
+	},
+  "timeLimit": 1000,
+  "memoryLimit": 512
+}

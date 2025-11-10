@@ -1,0 +1,32 @@
+{
+	"name": "codejudge-server",
+	"version": "1.0.0",
+	"description": "Problem management system for code judging platform",
+	"main": "app.js",
+	"scripts": {
+		"start": "node app.js",
+		"dev": "node app.js",
+		"test": "node test-setup.js",
+		"sync-data": "node syncProblemData.js",
+		"sync-data-clear": "node syncProblemData.js --clear"
+	},
+	"keywords": [
+		"codejudge",
+		"programming",
+		"problems",
+		"api"
+	],
+	"author": "Your Name",
+	"license": "MIT",
+	"dependencies": {
+		"bcrypt": "^6.0.0",
+		"cors": "^2.8.5",
+		"dotenv": "^17.2.1",
+		"express": "^5.1.0",
+		"express-async-handler": "^1.2.0",
+		"jsonwebtoken": "^9.0.2",
+		"mongodb": "^6.18.0",
+		"mongoose": "^8.17.2",
+		"nodemailer": "^7.0.5"
+	}
+}

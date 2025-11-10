@@ -1,0 +1,88 @@
+{
+	"questionId": 9,
+	"titleSlug": "palindrome-number",
+	"difficulty": "Easy",
+	"topicTags": ["Math"],
+	"originalSource": {
+		"source": "#include <iostream>\n#include <limits>\nusing namespace std;\n\nclass Solution {\npublic:\n    bool isPalindrome(int x) {\n        if (x < 0 || (x % 10 == 0 && x != 0)) return false;\n        int reversed = 0;\n        while (x > reversed) {\n            int pop = x % 10;\n            x /= 10;\n            if (reversed > INT_MAX / 10 || (reversed == INT_MAX / 10 && pop > 7)) return false;\n            reversed = reversed * 10 + pop;\n        }\n        return x == reversed || x == reversed / 10;\n    }\n};\n\nint main() {\n    Solution sol;\n    int x = 121;\n    cout << (sol.isPalindrome(x) ? \"true\" : \"false\") << endl; // Expected output: true\n    return 0;\n}",
+		"language": "c/c++"
+	},
+	"details": {
+		"en": {
+			"title": "Palindrome Number",
+			"content": "<p>Given an integer <code>x</code>, return <code>true</code><em> if </em><code>x</code><em> is a </em><span data-keyword=\"palindrome-integer\"><em><strong>palindrome</strong></em></span><em>, and </em><code>false</code><em> otherwise</em>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> x = 121\n<strong>Output:</strong> true\n<strong>Explanation:</strong> 121 reads as 121 from left to right and from right to left.\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> x = -121\n<strong>Output:</strong> false\n<strong>Explanation:</strong> From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> x = 10\n<strong>Output:</strong> false\n<strong>Explanation:</strong> Reads 01 from right to left. Therefore it is not a palindrome.\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>-2<sup>31</sup>&nbsp;&lt;= x &lt;= 2<sup>31</sup>&nbsp;- 1</code></li>\n</ul>\n\n<p>&nbsp;</p>\n<strong>Follow up:</strong> Could you solve it without converting the integer to a string?",
+			"hints": ["Beware of overflow when you reverse the integer."],
+			"similarQuestionList": [
+				{
+					"title": "Palindrome Linked List",
+					"titleSlug": "palindrome-linked-list",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Find Palindrome With Fixed Length",
+					"titleSlug": "find-palindrome-with-fixed-length",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Strictly Palindromic Number",
+					"titleSlug": "strictly-palindromic-number",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "  Count Symmetric Integers",
+					"titleSlug": "count-symmetric-integers",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Find the Count of Good Integers",
+					"titleSlug": "find-the-count-of-good-integers",
+					"difficulty": "Hard"
+				},
+				{
+					"title": "Find the Largest Palindrome Divisible by K",
+					"titleSlug": "find-the-largest-palindrome-divisible-by-k",
+					"difficulty": "Hard"
+				}
+			]
+		},
+		"vi": {
+			"title": "Số Đối Xứng",
+			"content": "<p>Cho một số nguyên <code>x</code>, hãy trả về <code>true</code><em> nếu </em><code>x</code><em> là một </em><span data-keyword=\"palindrome-integer\"><em><strong>số đối xứng</strong></em></span><em>, và </em><code>false</code><em> trong trường hợp ngược lại</em>.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Ví dụ 1:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> x = 121\n<strong>Đầu ra:</strong> true\n<strong>Giải thích:</strong> 121 đọc từ trái sang phải và từ phải sang trái đều là 121.\n</pre>\n\n<p><strong class=\"example\">Ví dụ 2:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> x = -121\n<strong>Đầu ra:</strong> false\n<strong>Giải thích:</strong> Từ trái sang phải, nó là -121. Từ phải sang trái, nó trở thành 121-. Do đó không phải là số đối xứng.\n</pre>\n\n<p><strong class=\"example\">Ví dụ 3:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> x = 10\n<strong>Đầu ra:</strong> false\n<strong>Giải thích:</strong> Đọc từ phải sang trái là 01. Do đó không phải là số đối xứng.\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Ràng buộc:</strong></p>\n\n<ul>\n\t<li><code>-2<sup>31</sup>&nbsp;&lt;= x &lt;= 2<sup>31</sup>&nbsp;- 1</code></li>\n</ul>\n\n<p>&nbsp;</p>\n<strong>Theo dõi:</strong> Bạn có thể giải quyết bài toán mà không cần chuyển đổi số nguyên thành chuỗi không?",
+			"hints": ["Hãy cảnh giác với tràn số khi bạn đảo ngược số nguyên."],
+			"similarQuestionList": [
+				{
+					"title": "Danh Sách Liên Kết Đối Xứng",
+					"titleSlug": "palindrome-linked-list",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Tìm Chuỗi Đối Xứng Với Độ Dài Cố Định",
+					"titleSlug": "find-palindrome-with-fixed-length",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Số Đối Xứng Nghiêm Ngặt",
+					"titleSlug": "strictly-palindromic-number",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Đếm Số Nguyên Đối Xứng",
+					"titleSlug": "count-symmetric-integers",
+					"difficulty": "Easy"
+				},
+				{
+					"title": "Tìm Số Lượng của Các Số Nguyên Tố",
+					"titleSlug": "find-the-count-of-good-integers",
+					"difficulty": "Hard"
+				},
+				{
+					"title": "Tìm Số Đối Xứng Lớn Nhất Chia Hết Cho K",
+					"titleSlug": "find-the-largest-palindrome-divisible-by-k",
+					"difficulty": "Hard"
+				}
+			]
+		}
+	},
+	"timeLimit": 1000,
+	"memoryLimit": 512
+}

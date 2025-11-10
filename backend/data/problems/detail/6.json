@@ -1,0 +1,26 @@
+{
+	"questionId": 6,
+	"titleSlug": "zigzag-conversion",
+	"difficulty": "Medium",
+	"topicTags": ["String"],
+	"originalSource": {
+		"source": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\n\nclass Solution {\npublic:\n    string convert(string s, int numRows) {\n        if (numRows == 1 || s.size() <= numRows) return s;\n        vector<string> rows(min(numRows, int(s.size())));\n        int curRow = 0;\n        bool goingDown = false;\n\n        for (char c : s) {\n            rows[curRow] += c;\n            if (curRow == 0 || curRow == numRows - 1) goingDown = !goingDown;\n            curRow += goingDown ? 1 : -1;\n        }\n\n        string result;\n        for (string row : rows) {\n            result += row;\n        }\n        return result;\n    }\n};\n\nint main() {\n    Solution sol;\n    string s = \"PAYPALISHIRING\";\n    int numRows = 3;\n    cout << sol.convert(s, numRows) << endl; // Expected output: \"PAHNAPLSIIGYIR\"\n    return 0;\n}",
+		"language": "c/c++"
+	},
+	"details": {
+		"en": {
+			"title": "Zigzag Conversion",
+			"content": "<p>The string <code>&quot;PAYPALISHIRING&quot;</code> is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)</p>\n\n<pre>\nP   A   H   N\nA P L S I I G\nY   I   R\n</pre>\n\n<p>And then read line by line: <code>&quot;PAHNAPLSIIGYIR&quot;</code></p>\n\n<p>Write the code that will take a string and make this conversion given a number of rows:</p>\n\n<pre>\nstring convert(string s, int numRows);\n</pre>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;PAYPALISHIRING&quot;, numRows = 3\n<strong>Output:</strong> &quot;PAHNAPLSIIGYIR&quot;\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;PAYPALISHIRING&quot;, numRows = 4\n<strong>Output:</strong> &quot;PINALSIGYAHRPI&quot;\n<strong>Explanation:</strong>\nP     I    N\nA   L S  I G\nY A   H R\nP     I\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;A&quot;, numRows = 1\n<strong>Output:</strong> &quot;A&quot;\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= s.length &lt;= 1000</code></li>\n\t<li><code>s</code> consists of English letters (lower-case and upper-case), <code>&#39;,&#39;</code> and <code>&#39;.&#39;</code>.</li>\n\t<li><code>1 &lt;= numRows &lt;= 1000</code></li>\n</ul>\n",
+			"hints": [],
+			"similarQuestionList": []
+		},
+		"vi": {
+			"title": "Chuyển đổi Zigzag",
+			"content": "Chuỗi `\"PAYPALISHIRING\"` được viết theo kiểu zic-zac trên một số hàng cho trước như sau: (bạn có thể muốn hiển thị mẫu này bằng phông chữ cố định để dễ đọc hơn)\n\n<pre>\nP   A   H   N\nA P L S I I G\nY   I   R\n</pre>\n\nVà sau đó đọc theo từng dòng: `\"PAHNAPLSIIGYIR\"`\n\nViết mã để thực hiện chuyển đổi này với một chuỗi và số hàng cho trước:\n\n<pre>\nstring convert(string s, int numRows);\n</pre>\n\n&nbsp;\n\n<p><strong class=\"example\">Ví dụ 1:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> s = \"PAYPALISHIRING\", numRows = 3\n<strong>Đầu ra:</strong> \"PAHNAPLSIIGYIR\"\n</pre>\n\n<p><strong class=\"example\">Ví dụ 2:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> s = \"PAYPALISHIRING\", numRows = 4\n<strong>Đầu ra:</strong> \"PINALSIGYAHRPI\"\n<strong>Giải thích:</strong>\nP     I    N\nA   L S  I G\nY A   H R\nP     I\n</pre>\n\n<p><strong class=\"example\">Ví dụ 3:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> s = \"A\", numRows = 1\n<strong>Đầu ra:</strong> \"A\"\n</pre>\n\n&nbsp;\n\n<p><strong>Ràng buộc:</strong></p>\n\n<ul>\n\t<li><code>1 &lt;= s.length &lt;= 1000</code></li>\n\t<li><code>s</code> bao gồm các chữ cái tiếng Anh (chữ thường và chữ hoa), <code>','</code> và <code>'.'</code>.</li>\n\t<li><code>1 &lt;= numRows &lt;= 1000</code></li>\n</ul>",
+			"hints": [],
+			"similarQuestionList": []
+		}
+	},
+	"timeLimit": 1000,
+	"memoryLimit": 512
+}

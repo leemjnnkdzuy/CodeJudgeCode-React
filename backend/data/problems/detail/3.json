@@ -1,0 +1,112 @@
+{
+	"questionId": 3,
+	"titleSlug": "longest-substring-without-repeating-characters",
+	"difficulty": "Medium",
+	"topicTags": ["Hash_Table", "String", "Sliding_Window"],
+	"originalSource": {
+		"source": "#include <iostream>\n#include <string>\n#include <unordered_map>\nusing namespace std;\n\nclass Solution {\npublic:\n    int lengthOfLongestSubstring(string s) {\n        unordered_map<char, int> charIndexMap;\n        int maxLength = 0, start = 0;\n\n        for (int i = 0; i < s.length(); i++) {\n            if (charIndexMap.find(s[i]) != charIndexMap.end() && charIndexMap[s[i]] >= start) {\n                start = charIndexMap[s[i]] + 1;\n            }\n            charIndexMap[s[i]] = i;\n            maxLength = max(maxLength, i - start + 1);\n        }\n        return maxLength;\n    }\n};\n\nint main() {\n    Solution sol;\n    string s = \"abcabcbb\";\n    cout << sol.lengthOfLongestSubstring(s) << endl; // Expected output: 3\n    return 0;\n}",
+		"language": "c/c++"
+	},
+	"details": {
+		"en": {
+			"title": "Longest Substring Without Repeating Characters",
+			"content": "<p>Given a string <code>s</code>, find the length of the <strong>longest</strong> <span data-keyword=\"substring-nonempty\"><strong>substring</strong></span> without duplicate characters.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Example 1:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;abcabcbb&quot;\n<strong>Output:</strong> 3\n<strong>Explanation:</strong> The answer is &quot;abc&quot;, with the length of 3.\n</pre>\n\n<p><strong class=\"example\">Example 2:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;bbbbb&quot;\n<strong>Output:</strong> 1\n<strong>Explanation:</strong> The answer is &quot;b&quot;, with the length of 1.\n</pre>\n\n<p><strong class=\"example\">Example 3:</strong></p>\n\n<pre>\n<strong>Input:</strong> s = &quot;pwwkew&quot;\n<strong>Output:</strong> 3\n<strong>Explanation:</strong> The answer is &quot;wke&quot;, with the length of 3.\nNotice that the answer must be a substring, &quot;pwke&quot; is a subsequence and not a substring.\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Constraints:</strong></p>\n\n<ul>\n\t<li><code>0 &lt;= s.length &lt;= 5 * 10<sup>4</sup></code></li>\n\t<li><code>s</code> consists of English letters, digits, symbols and spaces.</li>\n</ul>\n",
+			"hints": [
+				"Generate all possible substrings & check for each substring if it's valid and keep updating maxLen accordingly."
+			],
+			"similarQuestionList": [
+				{
+					"title": "Subarrays with K Different Integers",
+					"titleSlug": "subarrays-with-k-different-integers",
+					"difficulty": "Hard"
+				},
+				{
+					"title": "Maximum Erasure Value",
+					"titleSlug": "maximum-erasure-value",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Minimum Consecutive Cards to Pick Up",
+					"titleSlug": "minimum-consecutive-cards-to-pick-up",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Longest Nice Subarray",
+					"titleSlug": "longest-nice-subarray",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Optimal Partition of String",
+					"titleSlug": "optimal-partition-of-string",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Count Complete Subarrays in an Array",
+					"titleSlug": "count-complete-subarrays-in-an-array",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Find Longest Special Substring That Occurs Thrice II",
+					"titleSlug": "find-longest-special-substring-that-occurs-thrice-ii",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Find Longest Special Substring That Occurs Thrice I",
+					"titleSlug": "find-longest-special-substring-that-occurs-thrice-i",
+					"difficulty": "Medium"
+				}
+			]
+		},
+		"vi": {
+			"title": "Chuỗi Con Dài Nhất Không Có Ký Tự Lặp Lại",
+			"content": "<p>Cho một chuỗi <code>s</code>, hãy tìm độ dài của <strong>chuỗi con</strong> <strong>dài nhất</strong> không chứa các ký tự trùng lặp.</p>\n\n<p>&nbsp;</p>\n<p><strong class=\"example\">Ví dụ 1:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> s = \"abcabcbb\"\n<strong>Đầu ra:</strong> 3\n<strong>Giải thích:</strong> Đáp án là \"abc\", với độ dài là 3.\n</pre>\n\n<p><strong class=\"example\">Ví dụ 2:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> s = \"bbbbb\"\n<strong>Đầu ra:</strong> 1\n<strong>Giải thích:</strong> Đáp án là \"b\", với độ dài là 1.\n</pre>\n\n<p><strong class=\"example\">Ví dụ 3:</strong></p>\n\n<pre>\n<strong>Đầu vào:</strong> s = \"pwwkew\"\n<strong>Đầu ra:</strong> 3\n<strong>Giải thích:</strong> Đáp án là \"wke\", với độ dài là 3.\nLưu ý rằng đáp án phải là một chuỗi con, \"pwke\" là một chuỗi con dạng subsequence chứ không phải substring.\n</pre>\n\n<p>&nbsp;</p>\n<p><strong>Ràng buộc:</strong></p>\n\n<ul>\n\t<li><code>0 &lt;= s.length &lt;= 5 * 10<sup>4</sup></code></li>\n\t<li><code>s</code> bao gồm các chữ cái tiếng Anh, chữ số, ký hiệu và dấu cách.</li>\n</ul>",
+			"hints": [
+				"Tạo tất cả các chuỗi con có thể & kiểm tra từng chuỗi con xem có hợp lệ không và liên tục cập nhật maxLen cho phù hợp."
+			],
+			"similarQuestionList": [
+				{
+					"title": "Các Mảng Con với K Số Nguyên Khác Nhau",
+					"titleSlug": "subarrays-with-k-different-integers",
+					"difficulty": "Hard"
+				},
+				{
+					"title": "Giá Trị Xóa Tối Đa",
+					"titleSlug": "maximum-erasure-value",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Số Lá Bài Liên Tiếp Tối Thiểu Cần Rút",
+					"titleSlug": "minimum-consecutive-cards-to-pick-up",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Mảng con Tốt đẹp Dài nhất",
+					"titleSlug": "longest-nice-subarray",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Phân Chia Chuỗi Tối Ưu",
+					"titleSlug": "optimal-partition-of-string",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Đếm Số Mảng Con Hoàn Chỉnh trong Một Mảng",
+					"titleSlug": "count-complete-subarrays-in-an-array",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Tìm Chuỗi Con Đặc Biệt Dài Nhất Xuất Hiện Ba Lần II",
+					"titleSlug": "find-longest-special-substring-that-occurs-thrice-ii",
+					"difficulty": "Medium"
+				},
+				{
+					"title": "Tìm Chuỗi Con Đặc Biệt Dài Nhất Xuất Hiện Ba Lần I",
+					"titleSlug": "find-longest-special-substring-that-occurs-thrice-i",
+					"difficulty": "Medium"
+				}
+			]
+		}
+	},
+  "timeLimit": 1000,
+  "memoryLimit": 512
+}

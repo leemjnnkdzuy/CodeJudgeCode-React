@@ -1,0 +1,212 @@
+{
+	"testCases": [
+		{
+			"testId": 1,
+			"input": "PAYPALISHIRING\n3",
+			"expectedOutput": "PAHNAPLSIIGYIR"
+		},
+		{
+			"testId": 2,
+			"input": "PAYPALISHIRING\n4",
+			"expectedOutput": "PINALSIGYAHRPI"
+		},
+		{"testId": 3, "input": "A\n1", "expectedOutput": "A"},
+		{"testId": 4, "input": "ABC\n2", "expectedOutput": "ACB"},
+		{"testId": 5, "input": "ABCD\n2", "expectedOutput": "ACBD"},
+		{"testId": 6, "input": "ABCD\n3", "expectedOutput": "ABDC"},
+		{"testId": 7, "input": "ABCD\n4", "expectedOutput": "ABCD"},
+		{"testId": 8, "input": "HELLO\n3", "expectedOutput": "HOELL"},
+		{"testId": 9, "input": "HELLO\n2", "expectedOutput": "HLOEL"},
+		{"testId": 10, "input": "HELLO\n1", "expectedOutput": "HELLO"},
+		{"testId": 11, "input": "WORLD\n2", "expectedOutput": "WLRDO"},
+		{"testId": 12, "input": "WORLD\n3", "expectedOutput": "WODRL"},
+		{"testId": 13, "input": "WORLD\n4", "expectedOutput": "WOLRD"},
+		{"testId": 14, "input": "OPENAI\n2", "expectedOutput": "OAI PEN"},
+		{"testId": 15, "input": "OPENAI\n3", "expectedOutput": "OAI PEN"},
+		{"testId": 16, "input": "OPENAI\n4", "expectedOutput": "OPEANI"},
+		{"testId": 17, "input": "ABCDEFG\n2", "expectedOutput": "ACEGBDF"},
+		{"testId": 18, "input": "ABCDEFG\n3", "expectedOutput": "AEBDFCG"},
+		{"testId": 19, "input": "ABCDEFG\n4", "expectedOutput": "AGBFCE D"},
+		{"testId": 20, "input": "ABCDEFG\n5", "expectedOutput": "AFBGCE D"},
+		{
+			"testId": 21,
+			"input": "ABCDEFGHIJ\n2",
+			"expectedOutput": "ACEGIBDFHJ"
+		},
+		{
+			"testId": 22,
+			"input": "ABCDEFGHIJ\n3",
+			"expectedOutput": "AEIBDFHJCG"
+		},
+		{
+			"testId": 23,
+			"input": "ABCDEFGHIJ\n4",
+			"expectedOutput": "AGBFHCEIDJ"
+		},
+		{
+			"testId": 24,
+			"input": "ABCDEFGHIJ\n5",
+			"expectedOutput": "AFBGCEH D IJ"
+		},
+		{
+			"testId": 25,
+			"input": "ABCDEFGHIJ\n10",
+			"expectedOutput": "ABCDEFGHIJ"
+		},
+		{
+			"testId": 26,
+			"input": "ABCDEFGHIJ\n1",
+			"expectedOutput": "ABCDEFGHIJ"
+		},
+		{
+			"testId": 27,
+			"input": "LONGSTRING\n2",
+			"expectedOutput": "LNSRNOGTI G"
+		},
+		{
+			"testId": 28,
+			"input": "LONGSTRING\n3",
+			"expectedOutput": "LGNTRNOSTI"
+		},
+		{"testId": 29, "input": "LONGSTRING\n4", "expectedOutput": "LIRNTSNOG"},
+		{"testId": 30, "input": "LONGSTRING\n5", "expectedOutput": "LNTGOSIRN"},
+		{"testId": 31, "input": "COMPUTER\n2", "expectedOutput": "CMTR OUEP"},
+		{"testId": 32, "input": "COMPUTER\n3", "expectedOutput": "CUR OEP MT"},
+		{"testId": 33, "input": "COMPUTER\n4", "expectedOutput": "CEMTORUP"},
+		{"testId": 34, "input": "COMPUTER\n5", "expectedOutput": "CRMUOTPE"},
+		{"testId": 35, "input": "XYZ\n2", "expectedOutput": "XZ Y"},
+		{"testId": 36, "input": "XYZ\n3", "expectedOutput": "XYZ"},
+		{"testId": 37, "input": "XYZ\n4", "expectedOutput": "XYZ"},
+		{"testId": 38, "input": "MATRIX\n2", "expectedOutput": "MTX ARI"},
+		{"testId": 39, "input": "MATRIX\n3", "expectedOutput": "MIA XRT"},
+		{"testId": 40, "input": "MATRIX\n4", "expectedOutput": "MXAIR T"},
+		{"testId": 41, "input": "MATRIX\n5", "expectedOutput": "MIRXAT"},
+		{"testId": 42, "input": "MATRIX\n6", "expectedOutput": "MATRIX"},
+		{"testId": 43, "input": "DATA\n2", "expectedOutput": "DT AA"},
+		{"testId": 44, "input": "DATA\n3", "expectedOutput": "DAAT"},
+		{"testId": 45, "input": "DATA\n4", "expectedOutput": "DATA"},
+		{"testId": 46, "input": "SINGLE\n2", "expectedOutput": "SNE IGL"},
+		{"testId": 47, "input": "SINGLE\n3", "expectedOutput": "SLE I GN"},
+		{"testId": 48, "input": "SINGLE\n4", "expectedOutput": "SILE GN"},
+		{"testId": 49, "input": "SINGLE\n5", "expectedOutput": "SGNILE"},
+		{"testId": 50, "input": "NETWORK\n2", "expectedOutput": "NTOK EWR"},
+		{"testId": 51, "input": "NETWORK\n3", "expectedOutput": "NWR ETO K"},
+		{"testId": 52, "input": "NETWORK\n4", "expectedOutput": "NOKTR EW"},
+		{"testId": 53, "input": "NETWORK\n5", "expectedOutput": "NRWOETK"},
+		{"testId": 54, "input": "NETWORK\n6", "expectedOutput": "NETWORK"},
+		{
+			"testId": 55,
+			"input": "ABCDEFGHIJKLM\n2",
+			"expectedOutput": "ACEGIKMBDFHJL"
+		},
+		{
+			"testId": 56,
+			"input": "ABCDEFGHIJKLM\n3",
+			"expectedOutput": "AEIMBDFHJLCGK"
+		},
+		{
+			"testId": 57,
+			"input": "ABCDEFGHIJKLM\n4",
+			"expectedOutput": "AGMBFHLCEIKDJ"
+		},
+		{
+			"testId": 58,
+			"input": "ABCDEFGHIJKLM\n5",
+			"expectedOutput": "AFKBGJLCHMDIE"
+		},
+		{
+			"testId": 59,
+			"input": "ABCDEFGHIJKLM\n6",
+			"expectedOutput": "ALBKJCMIDHENGF"
+		},
+		{
+			"testId": 60,
+			"input": "ABCDEFGHIJKLM\n7",
+			"expectedOutput": "AMBLCKDJEHFIG"
+		},
+		{
+			"testId": 61,
+			"input": "ABCDEFGHIJKLM\n13",
+			"expectedOutput": "ABCDEFGHIJKLM"
+		},
+		{
+			"testId": 62,
+			"input": "ABCDEFGHIJKLM\n1",
+			"expectedOutput": "ABCDEFGHIJKLM"
+		},
+		{
+			"testId": 63,
+			"input": "CODEJUDGE\n2",
+			"expectedOutput": "CDJDE OEU G"
+		},
+		{"testId": 64, "input": "CODEJUDGE\n3", "expectedOutput": "CJU OE GDD"},
+		{"testId": 65, "input": "CODEJUDGE\n4", "expectedOutput": "CUEOD GJD"},
+		{"testId": 66, "input": "CODEJUDGE\n5", "expectedOutput": "CGEUOJDD"},
+		{"testId": 67, "input": "CODEJUDGE\n6", "expectedOutput": "CODEJUDGE"},
+		{"testId": 68, "input": "HELLO\n2", "expectedOutput": "HLO EL"},
+		{"testId": 69, "input": "HELLO\n3", "expectedOutput": "HLO EL"},
+		{"testId": 70, "input": "HELLO\n4", "expectedOutput": "HOELL"},
+		{"testId": 71, "input": "HELLO\n5", "expectedOutput": "HELLO"},
+		{"testId": 72, "input": "WORLD\n2", "expectedOutput": "WLD OR"},
+		{"testId": 73, "input": "WORLD\n3", "expectedOutput": "WLD OR"},
+		{"testId": 74, "input": "WORLD\n4", "expectedOutput": "WRLO D"},
+		{"testId": 75, "input": "WORLD\n5", "expectedOutput": "WORLD"},
+		{
+			"testId": 76,
+			"input": "ALGORITHM\n2",
+			"expectedOutput": "AGRTML OI H"
+		},
+		{
+			"testId": 77,
+			"input": "ALGORITHM\n3",
+			"expectedOutput": "AOH LRI GM T"
+		},
+		{"testId": 78, "input": "ALGORITHM\n4", "expectedOutput": "ATMLOI GRH"},
+		{"testId": 79, "input": "ALGORITHM\n5", "expectedOutput": "AHRLOIT GM"},
+		{"testId": 80, "input": "ALGORITHM\n6", "expectedOutput": "ANIMLOTRHG"},
+		{"testId": 81, "input": "PROGRAM\n2", "expectedOutput": "PORM RGA"},
+		{"testId": 82, "input": "PROGRAM\n3", "expectedOutput": "PGM RRO A"},
+		{"testId": 83, "input": "PROGRAM\n4", "expectedOutput": "PRAG OR M"},
+		{"testId": 84, "input": "PROGRAM\n5", "expectedOutput": "PNMRGOA"},
+		{"testId": 85, "input": "PROGRAM\n6", "expectedOutput": "PROGRAM"},
+		{"testId": 86, "input": "PYTHON\n2", "expectedOutput": "PTO YHN"},
+		{"testId": 87, "input": "PYTHON\n3", "expectedOutput": "PHN YTO"},
+		{"testId": 88, "input": "PYTHON\n4", "expectedOutput": "PNYH TO"},
+		{"testId": 89, "input": "PYTHON\n5", "expectedOutput": "PNTOYH"},
+		{"testId": 90, "input": "PYTHON\n6", "expectedOutput": "PYTHON"},
+		{
+			"testId": 91,
+			"input": "JAVASCRIPT\n2",
+			"expectedOutput": "JVSRP AA CI T"
+		},
+		{
+			"testId": 92,
+			"input": "JAVASCRIPT\n3",
+			"expectedOutput": "JSPAAI VCR T"
+		},
+		{
+			"testId": 93,
+			"input": "JAVASCRIPT\n4",
+			"expectedOutput": "JSPIR AAVC T"
+		},
+		{
+			"testId": 94,
+			"input": "JAVASCRIPT\n5",
+			"expectedOutput": "JCTARSVAPI"
+		},
+		{
+			"testId": 95,
+			"input": "JAVASCRIPT\n6",
+			"expectedOutput": "JTPCRSVAAI"
+		},
+		{
+			"testId": 96,
+			"input": "JAVASCRIPT\n10",
+			"expectedOutput": "JAVASCRIPT"
+		},
+		{"testId": 97, "input": "TESTING\n2", "expectedOutput": "TSN ETIG"},
+		{"testId": 98, "input": "TESTING\n3", "expectedOutput": "TIG ESN T"},
+		{"testId": 99, "input": "TESTING\n4", "expectedOutput": "TNN TEG SI"},
+		{"testId": 100, "input": "TESTING\n7", "expectedOutput": "TESTING"}
+	]
+}
