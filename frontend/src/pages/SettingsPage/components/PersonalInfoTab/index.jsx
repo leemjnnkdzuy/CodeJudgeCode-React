@@ -4,6 +4,7 @@ import {Button, Loading, Input} from "../../../../components/UI";
 import {useAuth} from "../../../../hooks/useAuth";
 import {base64ToImage} from "../../../../helper/avatarBase64Helper";
 import {useGlobalNotificationPopup} from "../../../../hooks/useGlobalNotificationPopup";
+import {useLanguages} from "../../../../hooks/useLanguages";
 import useSettings from "../../../../hooks/useSettings";
 import request from "../../../../utils/request";
 import {useDropzone} from "react-dropzone";
@@ -31,6 +32,7 @@ const PersonalInfoTab = ({
 }) => {
 	const {token, updateUser} = useAuth();
 	const {showNotification} = useGlobalNotificationPopup();
+	const {t} = useLanguages();
 	const settingsHook = useSettings();
 	const {setLoading, setHasChanges, updateSubmitHandler, resetChanges} =
 		propSetLoading
@@ -107,7 +109,10 @@ const PersonalInfoTab = ({
 				const base64 = await convertFileToBase64(file);
 				setUploadedImage(base64);
 			} catch (error) {
-				showNotification("Xử lý hình ảnh thất bại", "error");
+				showNotification(
+					t("settingsPage.personalInfoTab.imageProcessError"),
+					"error"
+				);
 			}
 		}
 	};
@@ -147,7 +152,10 @@ const PersonalInfoTab = ({
 					setInitialFormData(newFormData);
 				}
 			} catch (error) {
-				showNotification("Đã xảy ra lỗi", "error");
+				showNotification(
+					t("settingsPage.personalInfoTab.generalError"),
+					"error"
+				);
 			} finally {
 				setLoading(false);
 				setIsLoadingInitial(false);
@@ -157,19 +165,25 @@ const PersonalInfoTab = ({
 		if (token) {
 			fetchPersonalInfo();
 		}
-	}, [token, showNotification, setLoading]);
+	}, [token, showNotification, setLoading, t]);
 
 	const validateForm = useCallback(() => {
 		const newErrors = {};
 		if (!formData.firstName.trim())
-			newErrors.firstName = "First name is required";
+			newErrors.firstName = t(
+				"settingsPage.personalInfoTab.firstNameRequired"
+			);
 		if (!formData.lastName.trim())
-			newErrors.lastName = "Last name is required";
+			newErrors.lastName = t(
+				"settingsPage.personalInfoTab.lastNameRequired"
+			);
 		if (!formData.username.trim())
-			newErrors.username = "Username is required";
+			newErrors.username = t(
+				"settingsPage.personalInfoTab.usernameRequired"
+			);
 		setErrors(newErrors);
 		return Object.keys(newErrors).length === 0;
-	}, [formData.firstName, formData.lastName, formData.username]);
+	}, [formData.firstName, formData.lastName, formData.username, t]);
 
 	const submitHandler = useCallback(
 		async (e) => {
@@ -199,12 +213,15 @@ const PersonalInfoTab = ({
 					token
 				);
 				if (!response) {
-					showNotification("Không có phản hồi từ máy chủ", "error");
+					showNotification(
+						t("settingsPage.personalInfoTab.noServerResponse"),
+						"error"
+					);
 					return;
 				}
 				if (response.error) {
 					showNotification(
-						"Cập nhật thông tin cá nhân thất bại",
+						t("settingsPage.personalInfoTab.updateError"),
 						"error"
 					);
 				} else if (response.personalInfo) {
@@ -239,17 +256,20 @@ const PersonalInfoTab = ({
 					setUploadedImage(null);
 					resetChanges();
 					showNotification(
-						"Thông tin cá nhân đã được cập nhật thành công",
+						t("settingsPage.personalInfoTab.updateSuccess"),
 						"success"
 					);
 				} else {
 					showNotification(
-						"Phản hồi không hợp lệ từ máy chủ",
+						t("settingsPage.personalInfoTab.invalidResponse"),
 						"error"
 					);
 				}
 			} catch (error) {
-				showNotification("Đã xảy ra lỗi", "error");
+				showNotification(
+					t("settingsPage.personalInfoTab.generalError"),
+					"error"
+				);
 			} finally {
 				setLoading(false);
 			}
@@ -263,6 +283,7 @@ const PersonalInfoTab = ({
 			setLoading,
 			resetChanges,
 			validateForm,
+			t,
 		]
 	);
 
@@ -304,15 +325,24 @@ const PersonalInfoTab = ({
 			if (response && response.exist !== undefined) {
 				setUsernameAvailable(!response.exist);
 				if (response.exist) {
-					showNotification("Username đã tồn tại", "error");
+					showNotification(
+						t("settingsPage.personalInfoTab.usernameExists"),
+						"error"
+					);
 				} else {
-					showNotification("Username khả dụng", "success");
+					showNotification(
+						t("settingsPage.personalInfoTab.usernameAvailable"),
+						"success"
+					);
 				}
 			} else {
 				setUsernameAvailable(null);
 			}
 		} catch (error) {
-			showNotification("Lỗi kiểm tra username", "error");
+			showNotification(
+				t("settingsPage.personalInfoTab.checkUsernameError"),
+				"error"
+			);
 			setUsernameAvailable(null);
 		} finally {
 			setIsCheckingUsername(false);
@@ -329,10 +359,14 @@ const PersonalInfoTab = ({
 
 	return (
 		<div className={cx("personal-info-tab")}>
-			<div className={cx("title")}>Thông tin cá nhân</div>
+			<div className={cx("title")}>
+				{t("settingsPage.personalInfoTab.title")}
+			</div>
 			<form className={cx("form")}>
 				<div className={cx("form-group")}>
-					<label htmlFor='avatar'>Ảnh đại diện</label>
+					<label htmlFor='avatar'>
+						{t("settingsPage.personalInfoTab.avatar")}
+					</label>
 					<AnimatePresence mode='wait'>
 						<motion.div
 							key={isExpanded ? "expanded" : "collapsed"}
@@ -362,7 +396,9 @@ const PersonalInfoTab = ({
 										type='button'
 										onClick={() => setIsExpanded(true)}
 									>
-										Thay đổi ảnh đại diện
+										{t(
+											"settingsPage.personalInfoTab.changeAvatar"
+										)}
 									</Button>
 								</motion.div>
 							) : (
@@ -418,8 +454,9 @@ const PersonalInfoTab = ({
 												<>
 													<BiImageAdd size={48} />
 													<p>
-														Kéo & thả ảnh vào đây,
-														hoặc nhấn để chọn
+														{t(
+															"settingsPage.personalInfoTab.dragDropImage"
+														)}
 													</p>
 												</>
 											)}
@@ -432,7 +469,9 @@ const PersonalInfoTab = ({
 				</div>
 				<div className={cx("row-form-group")}>
 					<div className={cx("form-group")}>
-						<label htmlFor='firstName'>Tên</label>
+						<label htmlFor='firstName'>
+							{t("settingsPage.personalInfoTab.firstName")}
+						</label>
 						<Input
 							type='text'
 							id='firstName'
@@ -448,7 +487,9 @@ const PersonalInfoTab = ({
 						)}
 					</div>
 					<div className={cx("form-group")}>
-						<label htmlFor='lastName'>Họ</label>
+						<label htmlFor='lastName'>
+							{t("settingsPage.personalInfoTab.lastName")}
+						</label>
 						<Input
 							type='text'
 							id='lastName'
@@ -464,7 +505,9 @@ const PersonalInfoTab = ({
 						)}
 					</div>
 					<div className={cx("form-group")}>
-						<label htmlFor='username'>Tên đăng nhập</label>
+						<label htmlFor='username'>
+							{t("settingsPage.personalInfoTab.username")}
+						</label>
 						<div className={cx("input-with-icon")}>
 							<Input
 								type='text'
@@ -502,7 +545,9 @@ const PersonalInfoTab = ({
 					</div>
 				</div>
 				<div className={cx("form-group")}>
-					<label htmlFor='bio'>Tiểu sử</label>
+					<label htmlFor='bio'>
+						{t("settingsPage.personalInfoTab.bio")}
+					</label>
 					<Input
 						type='textarea'
 						id='bio'
@@ -516,7 +561,8 @@ const PersonalInfoTab = ({
 				<div className={cx("additional-info")}>
 					<div className={cx("form-group")}>
 						<label htmlFor='githubUrl'>
-							<FaGithub /> GitHub
+							<FaGithub />{" "}
+							{t("settingsPage.personalInfoTab.github")}
 						</label>
 						<Input
 							type='url'
@@ -529,7 +575,8 @@ const PersonalInfoTab = ({
 					</div>
 					<div className={cx("form-group")}>
 						<label htmlFor='linkedinUrl'>
-							<FaLinkedin /> LinkedIn
+							<FaLinkedin />{" "}
+							{t("settingsPage.personalInfoTab.linkedin")}
 						</label>
 						<Input
 							type='url'
@@ -542,7 +589,8 @@ const PersonalInfoTab = ({
 					</div>
 					<div className={cx("form-group")}>
 						<label htmlFor='websiteUrl'>
-							<FaGlobe /> Website
+							<FaGlobe />{" "}
+							{t("settingsPage.personalInfoTab.website")}
 						</label>
 						<Input
 							type='url'
@@ -555,7 +603,8 @@ const PersonalInfoTab = ({
 					</div>
 					<div className={cx("form-group")}>
 						<label htmlFor='youtubeUrl'>
-							<FaYoutube /> YouTube
+							<FaYoutube />{" "}
+							{t("settingsPage.personalInfoTab.youtube")}
 						</label>
 						<Input
 							type='url'
@@ -568,7 +617,8 @@ const PersonalInfoTab = ({
 					</div>
 					<div className={cx("form-group")}>
 						<label htmlFor='facebookUrl'>
-							<FaFacebook /> Facebook
+							<FaFacebook />{" "}
+							{t("settingsPage.personalInfoTab.facebook")}
 						</label>
 						<Input
 							type='url'
@@ -581,7 +631,8 @@ const PersonalInfoTab = ({
 					</div>
 					<div className={cx("form-group")}>
 						<label htmlFor='instagramUrl'>
-							<FaInstagram /> Instagram
+							<FaInstagram />{" "}
+							{t("settingsPage.personalInfoTab.instagram")}
 						</label>
 						<Input
 							type='url'

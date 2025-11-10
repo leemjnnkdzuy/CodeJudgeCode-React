@@ -1,56 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
+import {useTranslation} from "react-i18next";
 import styles from "./Sidebar.module.scss";
 import {useAuth} from "../../../hooks/useAuth";
 import classNames from "classnames/bind";
 import {DropDown} from "../../UI";
 
 const cx = classNames.bind(styles);
-
-const navItems = [
-	{
-		to: "/home",
-		icon: "bxs-home",
-		label: "Trang Chủ",
-		match: (p) => p === "/" || p === "/home",
-	},
-	{
-		to: "/problems",
-		icon: "bxs-brain",
-		label: "Bài Tập",
-		match: (p) => p.startsWith("/problems"),
-	},
-	{
-		to: "/contests",
-		icon: "bxs-trophy",
-		label: "Cuộc Thi",
-		match: (p) => p.startsWith("/contests"),
-	},
-	{
-		to: "/submissions",
-		icon: "bxs-file-doc",
-		label: "Bài Nộp",
-		match: (p) => p.startsWith("/submissions"),
-	},
-	{
-		to: "/leaderboard",
-		icon: "bxs-bar-chart-alt-2",
-		label: "Bảng Xếp Hạng",
-		match: (p) => p.startsWith("/leaderboard"),
-	},
-	{
-		to: "/discussions",
-		icon: "bxs-conversation",
-		label: "Thảo luận",
-		match: (p) => p.startsWith("/discussions"),
-	},
-	{
-		to: "/learning",
-		icon: "bxs-graduation",
-		label: "Học tập",
-		match: (p) => p.startsWith("/learning"),
-	},
-];
 
 function getInitials(name = "") {
 	if (!name) return "?";
@@ -67,6 +23,52 @@ const Sidebar = ({
 	const location = useLocation();
 	const navigate = useNavigate();
 	const {user, logout} = useAuth();
+	const {t} = useTranslation();
+
+	const navItems = [
+		{
+			to: "/home",
+			icon: "bxs-home",
+			label: t("globalSidebar.home"),
+			match: (p) => p === "/" || p === "/home",
+		},
+		{
+			to: "/problems",
+			icon: "bxs-brain",
+			label: t("globalSidebar.problems"),
+			match: (p) => p.startsWith("/problems"),
+		},
+		{
+			to: "/contests",
+			icon: "bxs-trophy",
+			label: t("globalSidebar.contests"),
+			match: (p) => p.startsWith("/contests"),
+		},
+		{
+			to: "/submissions",
+			icon: "bxs-file-doc",
+			label: t("globalSidebar.submissions"),
+			match: (p) => p.startsWith("/submissions"),
+		},
+		{
+			to: "/leaderboard",
+			icon: "bxs-bar-chart-alt-2",
+			label: t("globalSidebar.leaderboard"),
+			match: (p) => p.startsWith("/leaderboard"),
+		},
+		{
+			to: "/discussions",
+			icon: "bxs-conversation",
+			label: t("globalSidebar.discussions"),
+			match: (p) => p.startsWith("/discussions"),
+		},
+		{
+			to: "/learning",
+			icon: "bxs-graduation",
+			label: t("globalSidebar.learning"),
+			match: (p) => p.startsWith("/learning"),
+		},
+	];
 
 	const [internalCollapsed, setInternalCollapsed] = useState(false);
 	const collapsed =
@@ -186,29 +188,39 @@ const Sidebar = ({
 									collapsed
 										? [
 												{
-													label: "Hồ sơ",
+													label: t(
+														"globalSidebar.profile"
+													),
 													onClick: () =>
 														navigate("/profile"),
 												},
 												{
-													label: "Cài đặt",
+													label: t(
+														"globalSidebar.settings"
+													),
 													onClick: () =>
 														navigate("/settings"),
 												},
 												{
-													label: "Đăng xuất",
+													label: t(
+														"globalSidebar.logout"
+													),
 													danger: true,
 													onClick: handleLogout,
 												},
 										  ]
 										: [
 												{
-													label: "Hồ sơ",
+													label: t(
+														"globalSidebar.profile"
+													),
 													onClick: () =>
 														navigate("/profile"),
 												},
 												{
-													label: "Đăng xuất",
+													label: t(
+														"globalSidebar.logout"
+													),
 													danger: true,
 													onClick: handleLogout,
 												},
@@ -269,7 +281,9 @@ const Sidebar = ({
 																user.last_name ||
 																""
 														  }`.trim()
-														: "Người dùng"}
+														: t(
+																"globalSidebar.user"
+														  )}
 												</div>
 												<div
 													className={cx(
@@ -306,7 +320,7 @@ const Sidebar = ({
 													  } ${
 															user.last_name || ""
 													  }`.trim()
-													: "Người dùng"}
+													: t("globalSidebar.user")}
 											</span>
 										)
 									)}
@@ -353,12 +367,12 @@ const Sidebar = ({
 													zIndex: 10,
 												}}
 											>
-												Admin Panel
+												{t("globalSidebar.adminPanel")}
 											</span>
 										)
 									) : (
 										<span className={cx("nav-text")}>
-											Admin Panel
+											{t("globalSidebar.adminPanel")}
 										</span>
 									)}
 								</button>

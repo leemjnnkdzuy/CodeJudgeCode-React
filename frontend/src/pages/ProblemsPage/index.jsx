@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import classNames from "classnames/bind";
+import {useLanguages} from "../../hooks/useLanguages";
 import styles from "./ProblemsPage.module.scss";
 import {Button, Loading} from "../../components/UI";
 import {ProblemsSidebar, ProblemsItem, ProblemsHeader} from "./components";
@@ -13,15 +14,9 @@ const cx = classNames.bind(styles);
 
 const PROBLEM_TYPES = Object.entries(TYPE_PROBLEM).map(([key, value]) => ({
 	key: key.toLowerCase(),
-	name: value.name,
+	config: value,
 	icon: value.icon,
 }));
-
-const DIFFICULTY_LABELS = {
-	easy: "Dễ",
-	medium: "Trung bình",
-	hard: "Khó",
-};
 
 function formatSolvedCount(count) {
 	if (count < 1000) return count;
@@ -30,6 +25,7 @@ function formatSolvedCount(count) {
 }
 
 function ProblemsPage() {
+	const {t} = useLanguages();
 	const [allProblems, setAllProblems] = useState([]);
 	const [problems, setProblems] = useState([]);
 	const [search, setSearch] = useState("");
@@ -107,6 +103,12 @@ function ProblemsPage() {
 		setLoadedCount((prev) => prev + 5);
 	};
 
+	const DIFFICULTY_LABELS = {
+		easy: t("problemsPage.difficulty.easy"),
+		medium: t("problemsPage.difficulty.medium"),
+		hard: t("problemsPage.difficulty.hard"),
+	};
+
 	return (
 		<div className={cx("problems-page")}>
 			<ProblemsHeader search={search} setSearch={setSearch} />
@@ -129,13 +131,19 @@ function ProblemsPage() {
 								<i className='bx bx-search'></i>
 								<h3>
 									{search && search.trim()
-										? "Không tìm thấy bài toán nào"
-										: "Chưa có bài toán nào"}
+										? t("problemsPage.noProblems.title")
+										: t(
+												"problemsPage.noProblems.titleNoData"
+										  )}
 								</h3>
 								<p>
 									{search && search.trim()
-										? "Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm"
-										: "Bài toán sẽ xuất hiện ở đây khi có dữ liệu"}
+										? t(
+												"problemsPage.noProblems.description"
+										  )
+										: t(
+												"problemsPage.noProblems.descriptionNoData"
+										  )}
 								</p>
 							</div>
 						)}
@@ -150,7 +158,7 @@ function ProblemsPage() {
 								{isLoading ? (
 									<Loading size='10px' />
 								) : (
-									"Xem thêm bài tập"
+									t("problemsPage.loadMore")
 								)}
 							</Button>
 						</div>

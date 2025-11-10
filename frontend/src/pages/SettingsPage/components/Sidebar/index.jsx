@@ -4,6 +4,7 @@ import {BiLock, BiUser, BiGlobe, BiEdit} from "react-icons/bi";
 import {FaArrowLeft} from "react-icons/fa";
 import style from "./Sidebar.module.scss";
 import {Button} from "../../../../components/UI/";
+import {useLanguages} from "../../../../hooks/useLanguages";
 import FadeInUpdateButton from "../FadeInUpdateButton";
 
 const cx = classNames.bind(style);
@@ -11,26 +12,27 @@ const cx = classNames.bind(style);
 const Sidebar = ({loading = false, hasChanges = false, onClick}) => {
 	const location = useLocation();
 	const navigate = useNavigate();
+	const {t} = useLanguages();
 
 	const menuItems = [
 		{
 			path: "/settings/personal-info",
-			label: "Thông Tin Cá Nhân",
+			label: t("settingsPage.sidebar.personalInfo"),
 			icon: <BiUser />,
 		},
 		{
 			path: "/settings/password-and-security",
-			label: "Mật Khẩu và Bảo Mật",
+			label: t("settingsPage.sidebar.passwordAndSecurity"),
 			icon: <BiLock />,
 		},
 		{
 			path: "/settings/interface-and-language",
-			label: "Giao diện và Ngôn ngữ",
+			label: t("settingsPage.sidebar.interfaceAndLanguage"),
 			icon: <BiGlobe />,
 		},
 		{
 			path: "/settings/editor-settings",
-			label: "Cài Đặt Trình Soạn Thảo",
+			label: t("settingsPage.sidebar.editorSettings"),
 			icon: <BiEdit />,
 		},
 	];
@@ -45,10 +47,9 @@ const Sidebar = ({loading = false, hasChanges = false, onClick}) => {
 					onClick={() => navigate("/")}
 					variant='outline'
 				>
-					Trở về trang chủ
+					{t("settingsPage.sidebar.backToHome")}
 				</Button>
-			</div>
-
+			</div>{" "}
 			<nav className={cx("sidebar-nav")}>
 				<ul className={cx("nav-list")}>
 					{menuItems.map((item, index) => (

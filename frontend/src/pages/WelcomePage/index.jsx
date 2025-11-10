@@ -1,3 +1,4 @@
+import React, {useState} from "react";
 import assets from "../../assets";
 import classNames from "classnames/bind";
 import styles from "./WelcomePage.module.scss";
@@ -5,11 +6,16 @@ import {WelcomeFooter, WelcomeHeader} from "./components/";
 import {Button} from "../../components/UI/";
 import {FaArrowRight} from "react-icons/fa";
 import {useAuth} from "../../hooks/useAuth";
+import {useLanguages} from "../../hooks/useLanguages";
 
 const cx = classNames.bind(styles);
 
 const WelcomePage = () => {
 	const {isAuthenticated} = useAuth();
+	const {t} = useLanguages();
+	const [seeMoreText, setSeeMoreText] = useState(
+		t("welcomePage.about.seeMore")
+	);
 
 	const toggleAllFeatures = (button) => {
 		const allFeatures = document.querySelectorAll(
@@ -24,12 +30,12 @@ const WelcomePage = () => {
 			allFeatures.forEach((features) => {
 				features.style.display = "none";
 			});
-			button.textContent = "Xem thêm";
+			setSeeMoreText(t("welcomePage.about.seeMore"));
 		} else {
 			allFeatures.forEach((features) => {
 				features.style.display = "block";
 			});
-			button.textContent = "Ẩn bớt";
+			setSeeMoreText(t("welcomePage.about.seeLess"));
 		}
 	};
 
@@ -42,24 +48,18 @@ const WelcomePage = () => {
 					<div className={cx("hero-content")}>
 						<div className={cx("hero-text")}>
 							<h1 className={cx("hero-title")}>
-								Nâng tầm với cộng đồng lập trình và chấm tự động
-								lớn nhất
+								{t("welcomePage.hero.title")}
 							</h1>
 							<p className={cx("hero-subtitle")}>
-								Tham gia cùng hơn 25 triệu lập trình viên và
-								sinh viên để thực hành, chia sẻ và kiểm tra giải
-								pháp của bạn. Luôn cập nhật với các thuật toán
-								và công nghệ mới nhất. Khám phá thư viện khổng
-								lồ các bài tập, giải pháp mẫu và hệ thống chấm
-								tự động cho tất cả các dự án học tập của bạn.
+								{t("welcomePage.hero.subtitle")}
 							</p>
 							{!isAuthenticated ? (
 								<div className={cx("hero-buttons")}>
 									<Button to='/login' variant='primary-hero'>
-										Đăng Nhập
+										{t("welcomePage.hero.login")}
 									</Button>
 									<Button to='/register' variant='outline'>
-										Đăng Ký
+										{t("welcomePage.hero.register")}
 									</Button>
 								</div>
 							) : (
@@ -71,7 +71,7 @@ const WelcomePage = () => {
 										className={cx("home-btn-animated")}
 									>
 										<span className={cx("home-btn-text")}>
-											Vào Trang Chủ
+											{t("welcomePage.hero.home")}
 										</span>
 										<span className={cx("home-btn-icon")}>
 											<FaArrowRight size={16} />
@@ -96,13 +96,13 @@ const WelcomePage = () => {
 					<div className={cx("about-header")}>
 						<div className={cx("about-header-content")}>
 							<h2 className={cx("about-title")}>
-								Ai đang sử dụng CodeJudge?
+								{t("welcomePage.about.title")}
 							</h2>
 							<button
 								className={cx("see-more-btn-main")}
 								onClick={(e) => toggleAllFeatures(e.target)}
 							>
-								Xem thêm
+								{seeMoreText}
 							</button>
 						</div>
 					</div>
@@ -112,12 +112,12 @@ const WelcomePage = () => {
 							<div className={cx("about-card-header")}>
 								<div className={cx("about-text-section")}>
 									<h3 className={cx("about-card-title")}>
-										Sinh Viên
+										{t("welcomePage.about.students.title")}
 									</h3>
 									<p className={cx("about-card-description")}>
-										Thành thạo thuật toán và cấu trúc dữ
-										liệu thông qua các lộ trình học tập có
-										cấu trúc và thử thách lập trình.
+										{t(
+											"welcomePage.about.students.description"
+										)}
 									</p>
 								</div>
 								<div className={cx("about-image")}>
@@ -134,7 +134,9 @@ const WelcomePage = () => {
 								style={{display: "none"}}
 							>
 								<h4 className={cx("features-title")}>
-									TÍNH NĂNG CHÍNH
+									{t(
+										"welcomePage.about.students.featuresTitle"
+									)}
 								</h4>
 								<ul className={cx("features-list")}>
 									<li className={cx("feature-item")}>
@@ -142,7 +144,9 @@ const WelcomePage = () => {
 											<i className='bx bx-medal'></i>
 										</span>
 										<span className={cx("feature-text")}>
-											Cuộc thi lập trình tương tác
+											{t(
+												"welcomePage.about.students.features.contests"
+											)}
 										</span>
 									</li>
 									<li className={cx("feature-item")}>
@@ -150,7 +154,9 @@ const WelcomePage = () => {
 											<i className='bx bx-book-open'></i>
 										</span>
 										<span className={cx("feature-text")}>
-											Hướng dẫn từng bước
+											{t(
+												"welcomePage.about.students.features.guides"
+											)}
 										</span>
 									</li>
 									<li className={cx("feature-item")}>
@@ -158,7 +164,9 @@ const WelcomePage = () => {
 											<i className='bx bx-folder'></i>
 										</span>
 										<span className={cx("feature-text")}>
-											Bộ bài tập thực hành
+											{t(
+												"welcomePage.about.students.features.exercises"
+											)}
 										</span>
 									</li>
 								</ul>
@@ -169,12 +177,14 @@ const WelcomePage = () => {
 							<div className={cx("about-card-header")}>
 								<div className={cx("about-text-section")}>
 									<h3 className={cx("about-card-title")}>
-										Lập Trình Viên
+										{t(
+											"welcomePage.about.developers.title"
+										)}
 									</h3>
 									<p className={cx("about-card-description")}>
-										Rèn luyện kỹ năng lập trình và chuẩn bị
-										cho phỏng vấn kỹ thuật với các thử thách
-										thực tế.
+										{t(
+											"welcomePage.about.developers.description"
+										)}
 									</p>
 								</div>
 								<div className={cx("about-image")}>
@@ -191,7 +201,9 @@ const WelcomePage = () => {
 								style={{display: "none"}}
 							>
 								<h4 className={cx("features-title")}>
-									TÍNH NĂNG CHÍNH
+									{t(
+										"welcomePage.about.developers.featuresTitle"
+									)}
 								</h4>
 								<ul className={cx("features-list")}>
 									<li className={cx("feature-item")}>
@@ -199,7 +211,9 @@ const WelcomePage = () => {
 											<i className='bx bx-code-alt'></i>
 										</span>
 										<span className={cx("feature-text")}>
-											Nhiều ngôn ngữ lập trình
+											{t(
+												"welcomePage.about.developers.features.languages"
+											)}
 										</span>
 									</li>
 									<li className={cx("feature-item")}>
@@ -207,7 +221,9 @@ const WelcomePage = () => {
 											<i className='bx bx-timer'></i>
 										</span>
 										<span className={cx("feature-text")}>
-											Thử thách có thời gian
+											{t(
+												"welcomePage.about.developers.features.timed"
+											)}
 										</span>
 									</li>
 									<li className={cx("feature-item")}>
@@ -215,7 +231,9 @@ const WelcomePage = () => {
 											<i className='bx bx-bar-chart'></i>
 										</span>
 										<span className={cx("feature-text")}>
-											Phân tích hiệu suất
+											{t(
+												"welcomePage.about.developers.features.analytics"
+											)}
 										</span>
 									</li>
 								</ul>
@@ -226,12 +244,12 @@ const WelcomePage = () => {
 							<div className={cx("about-card-header")}>
 								<div className={cx("about-text-section")}>
 									<h3 className={cx("about-card-title")}>
-										Công Ty
+										{t("welcomePage.about.companies.title")}
 									</h3>
 									<p className={cx("about-card-description")}>
-										Tổ chức cuộc thi lập trình và khám phá
-										các lập trình viên tài năng cho đội ngũ
-										của bạn.
+										{t(
+											"welcomePage.about.companies.description"
+										)}
 									</p>
 								</div>
 								<div className={cx("about-image")}>
@@ -248,7 +266,9 @@ const WelcomePage = () => {
 								style={{display: "none"}}
 							>
 								<h4 className={cx("features-title")}>
-									TÍNH NĂNG CHÍNH
+									{t(
+										"welcomePage.about.companies.featuresTitle"
+									)}
 								</h4>
 								<ul className={cx("features-list")}>
 									<li className={cx("feature-item")}>
@@ -256,7 +276,9 @@ const WelcomePage = () => {
 											<i className='bx bx-trophy'></i>
 										</span>
 										<span className={cx("feature-text")}>
-											Tổ chức cuộc thi tùy chỉnh
+											{t(
+												"welcomePage.about.companies.features.custom"
+											)}
 										</span>
 									</li>
 									<li className={cx("feature-item")}>
@@ -264,7 +286,9 @@ const WelcomePage = () => {
 											<i className='bx bx-user-check'></i>
 										</span>
 										<span className={cx("feature-text")}>
-											Công cụ tuyển dụng nhân tài
+											{t(
+												"welcomePage.about.companies.features.recruitment"
+											)}
 										</span>
 									</li>
 									<li className={cx("feature-item")}>
@@ -272,7 +296,9 @@ const WelcomePage = () => {
 											<i className='bx bx-pie-chart'></i>
 										</span>
 										<span className={cx("feature-text")}>
-											Báo cáo ứng viên chi tiết
+											{t(
+												"welcomePage.about.companies.features.reports"
+											)}
 										</span>
 									</li>
 								</ul>
@@ -286,11 +312,10 @@ const WelcomePage = () => {
 				<div className={cx("container")}>
 					<div className={cx("section-header")}>
 						<h2 className={cx("section-title")}>
-							Ngôn Ngữ Lập Trình Được Hỗ Trợ
+							{t("welcomePage.languages.title")}
 						</h2>
 						<p className={cx("section-subtitle")}>
-							Viết giải pháp bằng ngôn ngữ lập trình ưa thích của
-							bạn với sự hỗ trợ toàn diện của chúng tôi
+							{t("welcomePage.languages.subtitle")}
 						</p>
 					</div>
 
@@ -304,16 +329,24 @@ const WelcomePage = () => {
 								/>
 							</div>
 							<div className={cx("language-info")}>
-								<h3 className={cx("language-name")}>Python</h3>
+								<h3 className={cx("language-name")}>
+									{t("welcomePage.languages.python.name")}
+								</h3>
 								<p className={cx("language-description")}>
-									Hoàn hảo cho thuật toán và khoa học dữ liệu
+									{t(
+										"welcomePage.languages.python.description"
+									)}
 								</p>
 								<div className={cx("language-features")}>
 									<span className={cx("feature-tag")}>
-										Cú pháp dễ
+										{t(
+											"welcomePage.languages.python.features.0"
+										)}
 									</span>
 									<span className={cx("feature-tag")}>
-										Thư viện phong phú
+										{t(
+											"welcomePage.languages.python.features.1"
+										)}
 									</span>
 								</div>
 							</div>
@@ -329,17 +362,23 @@ const WelcomePage = () => {
 							</div>
 							<div className={cx("language-info")}>
 								<h3 className={cx("language-name")}>
-									JavaScript
+									{t("welcomePage.languages.javascript.name")}
 								</h3>
 								<p className={cx("language-description")}>
-									Linh hoạt và đa dụng cho mọi lĩnh vực
+									{t(
+										"welcomePage.languages.javascript.description"
+									)}
 								</p>
 								<div className={cx("language-features")}>
 									<span className={cx("feature-tag")}>
-										Linh hoạt
+										{t(
+											"welcomePage.languages.javascript.features.0"
+										)}
 									</span>
 									<span className={cx("feature-tag")}>
-										Hiện đại
+										{t(
+											"welcomePage.languages.javascript.features.1"
+										)}
 									</span>
 								</div>
 							</div>
@@ -354,16 +393,22 @@ const WelcomePage = () => {
 								/>
 							</div>
 							<div className={cx("language-info")}>
-								<h3 className={cx("language-name")}>C/C++</h3>
+								<h3 className={cx("language-name")}>
+									{t("welcomePage.languages.cpp.name")}
+								</h3>
 								<p className={cx("language-description")}>
-									Lập trình thi đấu hiệu năng cao
+									{t("welcomePage.languages.cpp.description")}
 								</p>
 								<div className={cx("language-features")}>
 									<span className={cx("feature-tag")}>
-										Nhanh
+										{t(
+											"welcomePage.languages.cpp.features.0"
+										)}
 									</span>
 									<span className={cx("feature-tag")}>
-										Hiệu quả
+										{t(
+											"welcomePage.languages.cpp.features.1"
+										)}
 									</span>
 								</div>
 							</div>
@@ -378,16 +423,24 @@ const WelcomePage = () => {
 								/>
 							</div>
 							<div className={cx("language-info")}>
-								<h3 className={cx("language-name")}>Java</h3>
+								<h3 className={cx("language-name")}>
+									{t("welcomePage.languages.java.name")}
+								</h3>
 								<p className={cx("language-description")}>
-									Lập trình hướng đối tượng cấp doanh nghiệp
+									{t(
+										"welcomePage.languages.java.description"
+									)}
 								</p>
 								<div className={cx("language-features")}>
 									<span className={cx("feature-tag")}>
-										Mạnh mẽ
+										{t(
+											"welcomePage.languages.java.features.0"
+										)}
 									</span>
 									<span className={cx("feature-tag")}>
-										Có thể mở rộng
+										{t(
+											"welcomePage.languages.java.features.1"
+										)}
 									</span>
 								</div>
 							</div>
@@ -397,12 +450,10 @@ const WelcomePage = () => {
 					<div className={cx("languages-footer")}>
 						<p className={cx("languages-note")}>
 							<i className='bx bx-info-circle'></i>
-							Không thấy ngôn ngữ yêu thích của bạn? Chúng tôi
-							liên tục thêm hỗ trợ cho nhiều ngôn ngữ lập trình
-							hơn.
+							{t("welcomePage.languages.note")}
 						</p>
 						<Button to='/languages' variant='outline'>
-							Xem Tất Cả Ngôn Ngữ
+							{t("welcomePage.languages.viewAll")}
 						</Button>
 					</div>
 				</div>
@@ -412,12 +463,10 @@ const WelcomePage = () => {
 				<div className={cx("container")}>
 					<div className={cx("cta-content")}>
 						<h2 className={cx("cta-title")}>
-							Sẵn sàng Bắt Đầu Lập Trình?
+							{t("welcomePage.cta.title")}
 						</h2>
 						<p className={cx("cta-text")}>
-							Tham gia cùng hàng nghìn lập trình viên đang cải
-							thiện kỹ năng mỗi ngày. Bắt đầu giải quyết bài toán
-							ngay!
+							{t("welcomePage.cta.text")}
 						</p>
 						<div
 							style={{
@@ -433,7 +482,7 @@ const WelcomePage = () => {
 									variant='primary'
 									size='lg'
 								>
-									Tạo Tài Khoản
+									{t("welcomePage.cta.createAccount")}
 								</Button>
 							) : (
 								<Button
@@ -441,11 +490,11 @@ const WelcomePage = () => {
 									variant='primary'
 									size='lg'
 								>
-									Xem Hồ Sơ
+									{t("welcomePage.cta.viewProfile")}
 								</Button>
 							)}
 							<Button to='/home' variant='outline' size='lg'>
-								Duyệt Bài Toán
+								{t("welcomePage.cta.browseProblems")}
 							</Button>
 						</div>
 					</div>

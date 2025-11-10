@@ -19,7 +19,7 @@ const InterfaceAndLanguageTab = ({
 	const {token} = useAuth();
 	const {showNotification} = useGlobalNotificationPopup();
 	const {isDarkMode, toggleTheme} = useTheme();
-	const {selectedLanguage, setLanguage} = useLanguages();
+	const {selectedLanguage, setLanguage, t} = useLanguages();
 	const [settings, setSettings] = useState({
 		language: "vi",
 		theme: "light",
@@ -61,7 +61,10 @@ const InterfaceAndLanguageTab = ({
 				}
 			} catch (error) {
 				console.error("Failed to fetch settings:", error);
-				showNotification("Failed to load settings", "error");
+				showNotification(
+					t("settingsPage.interfaceAndLanguageTab.loadError"),
+					"error"
+				);
 			} finally {
 				setLoading(false);
 				setIsLoadingInitial(false);
@@ -70,7 +73,7 @@ const InterfaceAndLanguageTab = ({
 		if (token) {
 			fetchSettings();
 		}
-	}, [token, showNotification, setLoading, setLanguage]);
+	}, [token, showNotification, setLoading, setLanguage, t]);
 
 	const handleSelectChange = (name, value) => {
 		setSettings((prev) => ({...prev, [name]: value}));
@@ -86,12 +89,15 @@ const InterfaceAndLanguageTab = ({
 					token
 				);
 				if (response.error) {
-					showNotification("Failed to update settings", "error");
+					showNotification(
+						t("settingsPage.interfaceAndLanguageTab.updateError"),
+						"error"
+					);
 				} else {
 					setInitialSettings(settings);
 					resetChanges();
 					showNotification(
-						"Settings updated successfully",
+						t("settingsPage.interfaceAndLanguageTab.updateSuccess"),
 						"success"
 					);
 					if (settings.theme !== (isDarkMode ? "dark" : "light")) {
@@ -117,6 +123,7 @@ const InterfaceAndLanguageTab = ({
 			toggleTheme,
 			selectedLanguage,
 			setLanguage,
+			t,
 		]
 	);
 
@@ -144,8 +151,14 @@ const InterfaceAndLanguageTab = ({
 	];
 
 	const themeOptions = [
-		{value: "light", label: "Sáng"},
-		{value: "dark", label: "Tối"},
+		{
+			value: "light",
+			label: t("settingsPage.interfaceAndLanguageTab.lightTheme"),
+		},
+		{
+			value: "dark",
+			label: t("settingsPage.interfaceAndLanguageTab.darkTheme"),
+		},
 	];
 
 	const getSelectedLabel = (options, value) => {
@@ -155,10 +168,14 @@ const InterfaceAndLanguageTab = ({
 
 	return (
 		<div className={cx("interface-language-tab")}>
-			<div className={cx("title")}>Ngôn ngữ và Chủ đề</div>
+			<div className={cx("title")}>
+				{t("settingsPage.interfaceAndLanguageTab.title")}
+			</div>
 			<form onSubmit={submitHandler} className={cx("form")}>
 				<div className={cx("form-group")}>
-					<label>Ngôn ngữ</label>
+					<label>
+						{t("settingsPage.interfaceAndLanguageTab.language")}
+					</label>
 					<Select
 						items={languageOptions}
 						selectedValue={settings.language}
@@ -173,7 +190,9 @@ const InterfaceAndLanguageTab = ({
 					</Select>
 				</div>
 				<div className={cx("form-group")}>
-					<label>Chủ đề</label>
+					<label>
+						{t("settingsPage.interfaceAndLanguageTab.theme")}
+					</label>
 					<Select
 						items={themeOptions}
 						selectedValue={settings.theme}

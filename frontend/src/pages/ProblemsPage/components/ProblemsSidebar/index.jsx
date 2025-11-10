@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import classNames from "classnames/bind";
+import {useLanguages} from "../../../../hooks/useLanguages";
 import styles from "./ProblemsSidebar.module.scss";
 import TYPE_PROBLEM from "../../../../config/styleProblemConfig";
 import {Button} from "../../../../components/UI";
@@ -15,13 +16,14 @@ function ProblemsSidebar({
 	selectedTypes = [],
 	handleTypeClick = () => {},
 }) {
+	const {t, getConfigValue} = useLanguages();
 	const [showAllTypes, setShowAllTypes] = useState(false);
 	const problemTypeEntries = Object.entries(TYPE_PROBLEM);
 
 	return (
 		<div className={cx("problems-sidebar")}>
 			<div className={cx("problem-types-container")}>
-				<h3>Loại Bài Toán</h3>
+				<h3>{t("problemsPage.sidebar.problemTypes")}</h3>
 				<div className={cx("problem-types-list")}>
 					{problemTypeEntries.length ? (
 						problemTypeEntries.map(([key, type], idx) => {
@@ -40,7 +42,7 @@ function ProblemsSidebar({
 									onClick={() =>
 										handleTypeClick(key.toLowerCase())
 									}
-									title={type.name}
+									title={getConfigValue(type, "name")}
 								>
 									{Icon ? (
 										<Icon
@@ -53,7 +55,8 @@ function ProblemsSidebar({
 										<i className='bx bx-code'></i>
 									)}
 									<span>
-										{type.name || key.replace(/_/g, " ")}
+										{getConfigValue(type, "name") ||
+											key.replace(/_/g, " ")}
 									</span>
 								</div>
 							);
@@ -61,7 +64,9 @@ function ProblemsSidebar({
 					) : (
 						<div className={cx("problem-type-item")}>
 							<i className='bx bx-error'></i>
-							<span>Không thể tải danh sách loại bài toán</span>
+							<span>
+								{t("problemsPage.sidebar.cannotLoadTypes")}
+							</span>
 						</div>
 					)}
 				</div>
@@ -71,7 +76,11 @@ function ProblemsSidebar({
 					type='button'
 					variant='outline'
 				>
-					<span>{showAllTypes ? "Ẩn bớt" : "Xem nhiều hơn"}</span>
+					<span>
+						{showAllTypes
+							? t("problemsPage.sidebar.showLess")
+							: t("problemsPage.sidebar.showMore")}
+					</span>
 					<i
 						className={`bx bx-chevron-${
 							showAllTypes ? "up" : "down"
@@ -81,7 +90,7 @@ function ProblemsSidebar({
 			</div>
 
 			<div className={cx("difficulty-section")}>
-				<h3>Độ Khó</h3>
+				<h3>{t("problemsPage.sidebar.difficulty")}</h3>
 				<div className={cx("difficulty-filters")}>
 					{["easy", "medium", "hard"].map((key) => (
 						<label className={cx("difficulty-filter")} key={key}>
@@ -99,12 +108,15 @@ function ProblemsSidebar({
 			</div>
 
 			<div className={cx("status-section")}>
-				<h3>Trạng Thái</h3>
+				<h3>{t("problemsPage.sidebar.status")}</h3>
 				<div className={cx("status-filters")}>
 					{[
-						{key: "all", label: "Tất cả"},
-						{key: "solved", label: "Đã giải"},
-						{key: "unsolved", label: "Chưa giải"},
+						{key: "all", label: t("problemsPage.status.all")},
+						{key: "solved", label: t("problemsPage.status.solved")},
+						{
+							key: "unsolved",
+							label: t("problemsPage.status.unsolved"),
+						},
 					].map((s) => (
 						<label className={cx("status-filter")} key={s.key}>
 							<input

@@ -2,18 +2,18 @@ import classNames from "classnames/bind";
 import styles from "./BadgesSection.module.scss";
 import badgesConfig from "../../../../config/badgesConfig";
 import {Tooltip} from "../../../../components/UI";
+import {useLanguages} from "../../../../hooks/useLanguages";
 
 const cx = classNames.bind(styles);
 
 function BadgesSection({userBadges = []}) {
+	const {t, getConfigValue} = useLanguages();
+
 	return (
 		<div className={cx("badges-stats")}>
 			<div className={cx("badges-header")}>
-				<h2>Thành Tích & Huy Hiệu</h2>
-				<p>
-					Khám phá và thu thập các huy hiệu bằng cách hoàn thành các
-					thử thách
-				</p>
+				<h2>{t("homePage.badgesTitle")}</h2>
+				<p>{t("homePage.badgesSubtitle")}</p>
 			</div>
 
 			<ul className={cx("badges-list")}>
@@ -33,14 +33,25 @@ function BadgesSection({userBadges = []}) {
 								<Tooltip
 									content={
 										<div className={cx("badge-tooltip")}>
-											<strong>{badge.title}</strong>
+											<strong>
+												{getConfigValue(badge, "title")}
+											</strong>
 											<br />
-											{badge.description}
+											{getConfigValue(
+												badge,
+												"description"
+											)}
 											{!isEarned && (
 												<>
 													<br />
-													<em className={cx("badge-tooltip-unearned")}>
-														Chưa đạt được
+													<em
+														className={cx(
+															"badge-tooltip-unearned"
+														)}
+													>
+														{t(
+															"homePage.notEarned"
+														)}
 													</em>
 												</>
 											)}
@@ -49,7 +60,10 @@ function BadgesSection({userBadges = []}) {
 								>
 									<button
 										aria-haspopup='true'
-										aria-label={`${badge.title} Badge`}
+										aria-label={`${getConfigValue(
+											badge,
+											"title"
+										)} Badge`}
 										className={cx("badge-button")}
 									>
 										<div
@@ -58,7 +72,10 @@ function BadgesSection({userBadges = []}) {
 											{badgeImgPath && (
 												<img
 													src={badgeImgPath}
-													alt={badge.title}
+													alt={getConfigValue(
+														badge,
+														"title"
+													)}
 													className={cx("badge-img")}
 												/>
 											)}

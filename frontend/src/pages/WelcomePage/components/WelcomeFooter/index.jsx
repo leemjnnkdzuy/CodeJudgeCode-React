@@ -2,11 +2,13 @@ import React from "react";
 import {useNavigate} from "react-router-dom";
 import classNames from "classnames/bind";
 import styles from "./WelcomeFooter.module.scss";
+import {useLanguages} from "../../../../hooks/useLanguages";
 
 const cx = classNames.bind(styles);
 
 const WelcomeFooter = () => {
 	const navigate = useNavigate();
+	const {t} = useLanguages();
 	const handleNavigation = (path) => {
 		window.open(path, "_blank");
 	};
@@ -19,8 +21,7 @@ const WelcomeFooter = () => {
 							<span className={cx("logoText")}>CodeJudge</span>
 						</h5>
 						<p className={cx("footerDescription")}>
-							Thực hành các bài toán lập trình và cải thiện kỹ
-							năng lập trình của bạn với hệ thống chấm tự động.
+							{t("welcomeFooter.description")}
 						</p>
 						<div className={cx("footerSocial")}>
 							<div
@@ -67,7 +68,7 @@ const WelcomeFooter = () => {
 					</div>
 
 					<div className={cx("footerSection")}>
-						<h6>Nền Tảng</h6>
+						<h6>{t("welcomeFooter.sections.platform.title")}</h6>
 						<ul className={cx("footerLinks")}>
 							<li>
 								<div
@@ -76,7 +77,9 @@ const WelcomeFooter = () => {
 										navigate("/problems");
 									}}
 								>
-									Bài Toán
+									{t(
+										"welcomeFooter.sections.platform.problems"
+									)}
 								</div>
 							</li>
 							<li>
@@ -86,7 +89,9 @@ const WelcomeFooter = () => {
 										navigate("/submissions");
 									}}
 								>
-									Bài Nộp
+									{t(
+										"welcomeFooter.sections.platform.submissions"
+									)}
 								</div>
 							</li>
 							<li>
@@ -96,14 +101,16 @@ const WelcomeFooter = () => {
 										navigate("/leaderboard");
 									}}
 								>
-									Bảng Xếp Hạng
+									{t(
+										"welcomeFooter.sections.platform.leaderboard"
+									)}
 								</div>
 							</li>
 						</ul>
 					</div>
 
 					<div className={cx("footerSection")}>
-						<h6>Cộng Đồng</h6>
+						<h6>{t("welcomeFooter.sections.community.title")}</h6>
 						<ul className={cx("footerLinks")}>
 							<li>
 								<div
@@ -112,14 +119,16 @@ const WelcomeFooter = () => {
 										navigate("/discussions");
 									}}
 								>
-									Diễn Đàn
+									{t(
+										"welcomeFooter.sections.community.discussions"
+									)}
 								</div>
 							</li>
 						</ul>
 					</div>
 
 					<div className={cx("footerSection")}>
-						<h6>Hỗ Trợ</h6>
+						<h6>{t("welcomeFooter.sections.support.title")}</h6>
 						<ul className={cx("footerLinks")}>
 							<li>
 								<div
@@ -128,7 +137,7 @@ const WelcomeFooter = () => {
 										navigate("/help");
 									}}
 								>
-									Trung Tâm Trợ Giúp
+									{t("welcomeFooter.sections.support.help")}
 								</div>
 							</li>
 							<li>
@@ -138,14 +147,16 @@ const WelcomeFooter = () => {
 										navigate("/docs/contact");
 									}}
 								>
-									Liên Hệ
+									{t(
+										"welcomeFooter.sections.support.contact"
+									)}
 								</div>
 							</li>
 						</ul>
 					</div>
 
 					<div className={cx("footerSection")}>
-						<h6>Pháp Lý</h6>
+						<h6>{t("welcomeFooter.sections.legal.title")}</h6>
 						<ul className={cx("footerLinks")}>
 							<li>
 								<div
@@ -154,7 +165,7 @@ const WelcomeFooter = () => {
 										navigate("/docs/privacy");
 									}}
 								>
-									Bảo Mật
+									{t("welcomeFooter.sections.legal.privacy")}
 								</div>
 							</li>
 							<li>
@@ -164,7 +175,7 @@ const WelcomeFooter = () => {
 										navigate("/docs/terms");
 									}}
 								>
-									Điều Khoản
+									{t("welcomeFooter.sections.legal.terms")}
 								</div>
 							</li>
 							<li>
@@ -174,7 +185,7 @@ const WelcomeFooter = () => {
 										navigate("/docs/cookies");
 									}}
 								>
-									Cookies
+									{t("welcomeFooter.sections.legal.cookies")}
 								</div>
 							</li>
 						</ul>
@@ -185,8 +196,7 @@ const WelcomeFooter = () => {
 
 				<div className={cx("footerBottom")}>
 					<p className={cx("footerCopyright")}>
-						© 2025 CodeJudge. Tất cả quyền được bảo lưu. Được xây
-						dựng với cho các lập trình viên.
+						{t("welcomeFooter.copyright")}
 					</p>
 				</div>
 			</div>

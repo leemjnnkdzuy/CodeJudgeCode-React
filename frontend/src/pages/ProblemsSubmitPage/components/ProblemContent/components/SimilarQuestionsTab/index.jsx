@@ -2,12 +2,14 @@ import React from "react";
 import {useNavigate} from "react-router-dom";
 import classNames from "classnames/bind";
 import DIFFICULTY_LEVELS from "../../../../../../config/difficultyConfig";
+import {useLanguages} from "../../../../../../hooks/useLanguages";
 import styles from "./SimilarQuestionsTab.module.scss";
 
 const cx = classNames.bind(styles);
 
 function SimilarQuestionsTab({problem}) {
 	const navigate = useNavigate();
+	const {getConfigValue} = useLanguages();
 
 	if (
 		!problem ||
@@ -17,13 +19,10 @@ function SimilarQuestionsTab({problem}) {
 		return <div>No similar questions available</div>;
 	}
 
-	const currentLanguage = localStorage.getItem("language") || "vi";
-
-	const difficultyLabels = {
-		easy: DIFFICULTY_LEVELS[currentLanguage]?.easy?.name || "Dễ",
-		medium:
-			DIFFICULTY_LEVELS[currentLanguage]?.medium?.name || "Trung bình",
-		hard: DIFFICULTY_LEVELS[currentLanguage]?.hard?.name || "Khó",
+	const getDifficultyLabel = (difficulty) => {
+		const diffKey = difficulty?.toLowerCase();
+		const diffConfig = DIFFICULTY_LEVELS[diffKey];
+		return getConfigValue(diffConfig, "name") || difficulty || "Trung bình";
 	};
 
 	return (
@@ -55,9 +54,7 @@ function SimilarQuestionsTab({problem}) {
 								question.difficulty?.toLowerCase()
 							)}
 						>
-							{difficultyLabels[
-								question.difficulty?.toLowerCase()
-							] || question.difficulty}
+							{getDifficultyLabel(question.difficulty)}
 						</span>
 						<span className={cx("separator")}>|</span>
 						<h3 className={cx("problem-title")}>

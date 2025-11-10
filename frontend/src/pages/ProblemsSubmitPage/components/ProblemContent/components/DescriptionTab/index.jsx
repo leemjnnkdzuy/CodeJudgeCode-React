@@ -2,11 +2,13 @@ import React, {useState} from "react";
 import classNames from "classnames/bind";
 import TYPE_PROBLEM from "../../../../../../config/styleProblemConfig";
 import DIFFICULTY_LEVELS from "../../../../../../config/difficultyConfig";
+import {useLanguages} from "../../../../../../hooks/useLanguages";
 import styles from "./DescriptionTab.module.scss";
 
 const cx = classNames.bind(styles);
 
 function DescriptionTab({problem}) {
+	const {getConfigValue} = useLanguages();
 	const [expandedHints, setExpandedHints] = useState({});
 
 	const toggleHint = (index) => {
@@ -20,7 +22,12 @@ function DescriptionTab({problem}) {
 		return <div>No problem data available</div>;
 	}
 
-	const currentLanguage = localStorage.getItem("language") || "vi";
+	const getDifficultyConfig = (difficulty) => {
+		const diffKey = difficulty?.toLowerCase();
+		return DIFFICULTY_LEVELS[diffKey] || DIFFICULTY_LEVELS.medium;
+	};
+
+	const difficultyConfig = getDifficultyConfig(problem.difficulty);
 
 	const getDifficultyClass = (difficulty) => {
 		switch (difficulty?.toLowerCase()) {
@@ -49,26 +56,15 @@ function DescriptionTab({problem}) {
 							getDifficultyClass(problem.difficulty)
 						)}
 						style={{
-							backgroundColor:
-								DIFFICULTY_LEVELS[currentLanguage][
-									problem.difficulty?.toLowerCase()
-								]?.color,
+							backgroundColor: difficultyConfig?.color,
 							color:
-								DIFFICULTY_LEVELS[currentLanguage][
-									problem.difficulty?.toLowerCase()
-								]?.color === "#fdcb6e"
+								difficultyConfig?.color === "#fdcb6e"
 									? "#333"
 									: "white",
-							border: `1px solid ${
-								DIFFICULTY_LEVELS[currentLanguage][
-									problem.difficulty?.toLowerCase()
-								]?.color
-							}`,
+							border: `1px solid ${difficultyConfig?.color}`,
 						}}
 					>
-						{DIFFICULTY_LEVELS[currentLanguage][
-							problem.difficulty?.toLowerCase()
-						]?.name ||
+						{getConfigValue(difficultyConfig, "name") ||
 							problem.difficulty ||
 							"Trung bình"}
 					</span>
@@ -76,7 +72,8 @@ function DescriptionTab({problem}) {
 						Array.isArray(problem.topicTags) &&
 						problem.topicTags.map((tag, index) => (
 							<span key={index} className={cx("problem-tag")}>
-								{TYPE_PROBLEM[tag]?.name || tag}
+								{getConfigValue(TYPE_PROBLEM[tag], "name") ||
+									tag}
 							</span>
 						))}
 					<div className={cx("stat-item", "stat-item-time")}>

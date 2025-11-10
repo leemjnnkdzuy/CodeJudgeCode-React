@@ -4,12 +4,14 @@ import {Button, SearchBar, DropDown} from "../../../../components/UI/";
 import {useAuth} from "../../../../hooks/useAuth";
 import {useNavigate} from "react-router-dom";
 import {base64ToImage} from "../../../../helper/avatarBase64Helper";
+import {useLanguages} from "../../../../hooks/useLanguages";
 
 const cx = classNames.bind(styles);
 
 const WelcomeHeader = () => {
 	const {isAuthenticated, logout} = useAuth();
 	const navigate = useNavigate();
+	const {t} = useLanguages();
 
 	let avatarSrc = "";
 	try {
@@ -21,17 +23,17 @@ const WelcomeHeader = () => {
 
 	const dropdownItems = [
 		{
-			label: "Hồ sơ",
+			label: t("welcomeHeader.dropdown.profile"),
 			onClick: () => navigate("/profile"),
 			icon: <i className='bx bx-user'></i>,
 		},
 		{
-			label: "Cài đặt",
+			label: t("welcomeHeader.dropdown.settings"),
 			onClick: () => navigate("/settings"),
 			icon: <i className='bx bx-cog'></i>,
 		},
 		{
-			label: "Đăng xuất",
+			label: t("welcomeHeader.dropdown.logout"),
 			onClick: async () => {
 				await logout();
 				navigate("/");
@@ -59,27 +61,27 @@ const WelcomeHeader = () => {
 							style={{cursor: "pointer"}}
 							onClick={() => navigate("/competitions")}
 						>
-							Cuộc Thi
+							{t("welcomeHeader.nav.competitions")}
 						</div>
 						<div
 							className={cx("navItem")}
 							style={{cursor: "pointer"}}
 							onClick={() => navigate("/problems")}
 						>
-							Bài Toán
+							{t("welcomeHeader.nav.problems")}
 						</div>
 						<div
 							className={cx("navItem")}
 							style={{cursor: "pointer"}}
 							onClick={() => navigate("/leaderboard")}
 						>
-							Xếp Hạng
+							{t("welcomeHeader.nav.leaderboard")}
 						</div>
 					</div>
 
 					<div className={cx("navbarSearch")}>
 						<SearchBar
-							placeholder='Tìm kiếm bài toán...'
+							placeholder={t("welcomeHeader.search.placeholder")}
 							size='md'
 							searchPath='/problems'
 							onSearch={(query) =>
@@ -102,14 +104,14 @@ const WelcomeHeader = () => {
 						) : (
 							<>
 								<Button to='/login' size='md'>
-									Đăng Nhập
+									{t("welcomeHeader.auth.login")}
 								</Button>
 								<Button
 									to='/register'
 									size='md'
 									variant='outline'
 								>
-									Đăng Ký
+									{t("welcomeHeader.auth.register")}
 								</Button>
 							</>
 						)}

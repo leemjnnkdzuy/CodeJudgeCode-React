@@ -1,1 +1,354 @@
-[]
+{
+	"welcomePage": {
+		"hero": {
+			"title": "Elevate with the largest programming community and automatic grading",
+			"subtitle": "Join over 25 million programmers and students to practice, share, and test your solutions. Stay updated with the latest algorithms and technologies. Explore the vast library of exercises, sample solutions, and automatic grading system for all your learning projects.",
+			"login": "Login",
+			"register": "Register",
+			"home": "Go to Home"
+		},
+		"about": {
+			"title": "Who is using CodeJudge?",
+			"seeMore": "See more",
+			"seeLess": "See less",
+			"students": {
+				"title": "Students",
+				"description": "Master algorithms and data structures through structured learning paths and programming challenges.",
+				"featuresTitle": "MAIN FEATURES",
+				"features": {
+					"contests": "Interactive programming contests",
+					"guides": "Step-by-step guides",
+					"exercises": "Practice exercise sets"
+				}
+			},
+			"developers": {
+				"title": "Developers",
+				"description": "Hone programming skills and prepare for technical interviews with real-world challenges.",
+				"featuresTitle": "MAIN FEATURES",
+				"features": {
+					"languages": "Multiple programming languages",
+					"timed": "Timed challenges",
+					"analytics": "Performance analytics"
+				}
+			},
+			"companies": {
+				"title": "Companies",
+				"description": "Organize programming contests and discover talented programmers for your team.",
+				"featuresTitle": "MAIN FEATURES",
+				"features": {
+					"custom": "Custom contest organization",
+					"recruitment": "Talent recruitment tools",
+					"reports": "Detailed candidate reports"
+				}
+			}
+		},
+		"languages": {
+			"title": "Supported Programming Languages",
+			"subtitle": "Write solutions in your favorite programming language with our comprehensive support",
+			"python": {
+				"name": "Python",
+				"description": "Perfect for algorithms and data science",
+				"features": {
+					"0": "Easy syntax",
+					"1": "Rich libraries"
+				}
+			},
+			"javascript": {
+				"name": "JavaScript",
+				"description": "Flexible and versatile for all fields",
+				"features": {
+					"0": "Flexible",
+					"1": "Modern"
+				}
+			},
+			"cpp": {
+				"name": "C/C++",
+				"description": "High-performance competitive programming",
+				"features": {
+					"0": "Fast",
+					"1": "Efficient"
+				}
+			},
+			"java": {
+				"name": "Java",
+				"description": "Enterprise-level object-oriented programming",
+				"features": {
+					"0": "Powerful",
+					"1": "Scalable"
+				}
+			},
+			"note": "Don't see your favorite language? We continuously add support for more programming languages.",
+			"viewAll": "View All Languages"
+		},
+		"cta": {
+			"title": "Ready to Start Coding?",
+			"text": "Join thousands of programmers improving their skills every day. Start solving problems now!",
+			"createAccount": "Create Account",
+			"viewProfile": "View Profile",
+			"browseProblems": "Browse Problems"
+		}
+	},
+	"welcomeHeader": {
+		"nav": {
+			"competitions": "Competitions",
+			"problems": "Problems",
+			"leaderboard": "Leaderboard"
+		},
+		"search": {
+			"placeholder": "Search for problems..."
+		},
+		"auth": {
+			"login": "Login",
+			"register": "Register"
+		},
+		"dropdown": {
+			"profile": "Profile",
+			"settings": "Settings",
+			"logout": "Logout"
+		}
+	},
+	"welcomeFooter": {
+		"description": "Practice programming problems and improve your coding skills with our automatic grading system.",
+		"sections": {
+			"platform": {
+				"title": "Platform",
+				"problems": "Problems",
+				"submissions": "Submissions",
+				"leaderboard": "Leaderboard"
+			},
+			"community": {
+				"title": "Community",
+				"discussions": "Discussions"
+			},
+			"support": {
+				"title": "Support",
+				"help": "Help Center",
+				"contact": "Contact"
+			},
+			"legal": {
+				"title": "Legal",
+				"privacy": "Privacy",
+				"terms": "Terms",
+				"cookies": "Cookies"
+			}
+		},
+		"copyright": "© 2025 CodeJudge. All rights reserved. Built with for programmers."
+	},
+	"globalSidebar": {
+		"home": "Home",
+		"problems": "Problems",
+		"contests": "Contests",
+		"submissions": "Submissions",
+		"leaderboard": "Leaderboard",
+		"discussions": "Discussions",
+		"learning": "Learning",
+		"profile": "Profile",
+		"settings": "Settings",
+		"logout": "Logout",
+		"adminPanel": "Admin Panel",
+		"user": "User"
+	},
+	"homePage": {
+		"welcome": "Welcome, ",
+		"subWelcome": "You're doing great! Keep going or start something new.",
+		"loginStreak": "Login Streak",
+		"day": "day",
+		"days": "days",
+		"excellent": "– excellent!",
+		"levelProgress": "Level Progress",
+		"noRank": "No rank yet",
+		"toRank": "to {rank}",
+		"problems": "Problems",
+		"solved": "solved",
+		"contests": "Contests",
+		"participated": "participated",
+		"submissions": "Submissions",
+		"submitted": "submitted",
+		"discussions": "Discussions",
+		"posted": "posted",
+		"badges": "Badges",
+		"earned": "earned",
+		"badgesTitle": "Achievements & Badges",
+		"badgesSubtitle": "Discover and collect badges by completing challenges",
+		"notEarned": "Not earned yet"
+	},
+	"problemsPage": {
+		"header": {
+			"title": "Problems",
+			"subtitle": "Practice programming problems to improve your skills",
+			"searchPlaceholder": "Search for problems..."
+		},
+		"sidebar": {
+			"problemTypes": "Problem Types",
+			"difficulty": "Difficulty",
+			"status": "Status",
+			"showMore": "Show more",
+			"showLess": "Show less",
+			"cannotLoadTypes": "Cannot load problem types list"
+		},
+		"difficulty": {
+			"easy": "Easy",
+			"medium": "Medium",
+			"hard": "Hard"
+		},
+		"status": {
+			"all": "All",
+			"solved": "Solved",
+			"unsolved": "Unsolved"
+		},
+		"item": {
+			"solvedCount": "solved",
+			"statusPending": "Pending",
+			"statusRunning": "Running",
+			"statusAccepted": "Solved",
+			"statusWrongAnswer": "Wrong Answer",
+			"statusTimeLimitExceeded": "Time Limit Exceeded"
+		},
+		"noProblems": {
+			"title": "No problems found",
+			"titleNoData": "No problems yet",
+			"description": "Try changing filters or search keywords",
+			"descriptionNoData": "Problems will appear here when data is available"
+		},
+		"loadMore": "Load more problems"
+	},
+	"settingsPage": {
+		"sidebar": {
+			"backToHome": "Back to home",
+			"personalInfo": "Personal Info",
+			"passwordAndSecurity": "Password and Security",
+			"interfaceAndLanguage": "Interface and Language",
+			"editorSettings": "Editor Settings"
+		},
+		"personalInfoTab": {
+			"title": "Personal Information",
+			"avatar": "Avatar",
+			"changeAvatar": "Change avatar",
+			"dragDropImage": "Drag & drop image here, or click to select",
+			"firstName": "First Name",
+			"lastName": "Last Name",
+			"username": "Username",
+			"bio": "Bio",
+			"firstNameRequired": "First name is required",
+			"lastNameRequired": "Last name is required",
+			"usernameRequired": "Username is required",
+			"usernameExists": "Username already exists",
+			"usernameAvailable": "Username is available",
+			"imageProcessError": "Image processing failed",
+			"updateError": "Failed to update personal information",
+			"noServerResponse": "No response from server",
+			"invalidResponse": "Invalid response from server",
+			"updateSuccess": "Personal information updated successfully",
+			"generalError": "An error occurred",
+			"checkUsernameError": "Error checking username",
+			"github": "GitHub",
+			"linkedin": "LinkedIn",
+			"website": "Website",
+			"youtube": "YouTube",
+			"facebook": "Facebook",
+			"instagram": "Instagram"
+		},
+		"interfaceAndLanguageTab": {
+			"title": "Language and Theme",
+			"language": "Language",
+			"theme": "Theme",
+			"lightTheme": "Light",
+			"darkTheme": "Dark",
+			"updateSuccess": "Settings updated successfully",
+			"updateError": "Failed to update settings",
+			"loadError": "Failed to load settings"
+		},
+		"passwordAndSecurityTab": {
+			"title": "Password and Security",
+			"changePasswordTitle": "Change Password",
+			"changePasswordDescription": "Change your account password for better security",
+			"changePasswordButton": "Change Password",
+			"changeEmailTitle": "Change Email",
+			"changeEmailDescription": "Change the email address associated with your account",
+			"changeEmailButton": "Change Email",
+			"changePasswordPopup": {
+				"title": "Change Password",
+				"currentPassword": "Current Password",
+				"currentPasswordPlaceholder": "Enter current password",
+				"currentPasswordRequired": "Current password is required",
+				"newPassword": "New Password",
+				"newPasswordPlaceholder": "Enter new password",
+				"newPasswordRequired": "New password is required",
+				"newPasswordMinLength": "Password must be at least 8 characters",
+				"confirmPassword": "Confirm New Password",
+				"confirmPasswordPlaceholder": "Confirm new password",
+				"confirmPasswordMismatch": "Passwords do not match",
+				"passwordRequirements": "Password Requirements:",
+				"requirement8Chars": "At least 8 characters",
+				"requirementUpperCase": "Contains uppercase letters",
+				"requirementLowerCase": "Contains lowercase letters",
+				"requirementNumbers": "Contains numbers",
+				"requirementSpecialChars": "Contains special characters",
+				"cancel": "Cancel",
+				"confirm": "Confirm",
+				"back": "Back",
+				"submit": "Change Password",
+				"successPhase1": "Current password confirmed. Please enter new password.",
+				"errorPhase1": "Unable to confirm current password",
+				"errorPhase1General": "An error occurred confirming password",
+				"successPhase2": "Password changed successfully",
+				"errorPhase2": "Unable to change password"
+			},
+			"changeEmailPopup": {
+				"title": "Change Email",
+				"authenticatePassword": "Authenticate Password",
+				"verifyCurrentEmail": "Verify Current Email",
+				"enterNewEmail": "Enter New Email",
+				"verifyNewEmail": "Verify New Email",
+				"currentPassword": "Current Password",
+				"currentPasswordPlaceholder": "Enter current password",
+				"currentPasswordRequired": "Please enter current password",
+				"currentEmailPin": "PIN from Current Email",
+				"currentEmailPinPlaceholder": "Enter 6-digit PIN",
+				"currentEmailPinRequired": "Please enter PIN",
+				"currentEmailPinInvalid": "PIN must be 6 digits",
+				"newEmail": "New Email",
+				"newEmailPlaceholder": "Enter new email",
+				"newEmailRequired": "Please enter new email",
+				"newEmailInvalid": "Invalid email address",
+				"newEmailPin": "PIN from New Email",
+				"newEmailPinPlaceholder": "Enter 6-digit PIN",
+				"newEmailPinRequired": "Please enter PIN",
+				"newEmailPinInvalid": "PIN must be 6 digits",
+				"resendPin": "Resend PIN",
+				"resendPinCooldown": "Resend PIN in {seconds}s",
+				"back": "Back",
+				"cancel": "Cancel",
+				"continue": "Continue",
+				"complete": "Complete",
+				"sendingPin": "PIN sent to your current email",
+				"verifyingEmail": "Verification successful! Please enter new email",
+				"newPinSent": "PIN sent to new email",
+				"success": "Email changed successfully!",
+				"errorPassword": "An error occurred",
+				"errorPin": "Incorrect PIN",
+				"errorResend": "Unable to resend PIN"
+			}
+		},
+		"editorSettingsTab": {
+			"title": "Editor Settings",
+			"interfaceSection": "Interface",
+			"fontFamily": "Font Family:",
+			"fontSize": "Font Size:",
+			"theme": "Theme:",
+			"formattingSection": "Formatting",
+			"tabSize": "Tab Size:",
+			"wordWrap": "Word Wrap",
+			"lineNumbers": "Show Line Numbers",
+			"minimap": "Show Minimap",
+			"autoCloseBrackets": "Auto Close Brackets",
+			"formatOnPaste": "Format on Paste",
+			"loadError": "Failed to load editor settings",
+			"updateError": "Failed to update editor settings",
+			"updateSuccess": "Editor settings updated successfully"
+		},
+		"fadeInUpdateButton": {
+			"label": "Update"
+		}
+	}
+}

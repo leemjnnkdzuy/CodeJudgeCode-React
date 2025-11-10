@@ -1,31 +1,24 @@
 export const DIFFICULTY_LEVELS = {
-	vi: {
-		easy: {
-			name: "Dễ",
-			color: "#00b894",
+	easy: {
+		name: {
+			vi: "Dễ",
+			en: "Easy",
 		},
-		medium: {
-			name: "Trung bình",
-			color: "#fdcb6e",
-		},
-		hard: {
-			name: "Khó",
-			color: "#e17055",
-		},
+		color: "#00b894",
 	},
-	en: {
-		easy: {
-			name: "Easy",
-			color: "#00b894",
+	medium: {
+		name: {
+			vi: "Trung bình",
+			en: "Medium",
 		},
-		medium: {
-			name: "Medium",
-			color: "#fdcb6e",
+		color: "#fdcb6e",
+	},
+	hard: {
+		name: {
+			vi: "Khó",
+			en: "Hard",
 		},
-		hard: {
-			name: "Hard",
-			color: "#e17055",
-		},
+		color: "#e17055",
 	},
 };
 

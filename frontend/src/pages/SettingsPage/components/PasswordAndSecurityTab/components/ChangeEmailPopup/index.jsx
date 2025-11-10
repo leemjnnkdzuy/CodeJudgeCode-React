@@ -2,6 +2,7 @@ import React, {useState, useCallback, useEffect} from "react";
 import classNames from "classnames/bind";
 import {Button, Input, Loading} from "../../../../../../components/UI";
 import {useAuth} from "../../../../../../hooks/useAuth";
+import {useLanguages} from "../../../../../../hooks/useLanguages";
 import {useGlobalNotificationPopup} from "../../../../../../hooks/useGlobalNotificationPopup";
 import request from "../../../../../../utils/request";
 import style from "./ChangeEmailPopup.module.scss";
@@ -10,6 +11,7 @@ const cx = classNames.bind(style);
 
 const ChangeEmailPopup = ({isOpen, onClose}) => {
 	const {token, updateUser} = useAuth();
+	const {t} = useLanguages();
 	const {showNotification} = useGlobalNotificationPopup();
 
 	const [phase, setPhase] = useState(1);
@@ -70,10 +72,12 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 	const validatePhase1 = useCallback(() => {
 		const newErrors = {};
 		if (!formData.currentPassword.trim()) {
-			newErrors.currentPassword = "Vui lòng nhập mật khẩu hiện tại";
+			newErrors.currentPassword = t(
+				"settingsPage.passwordAndSecurityTab.changeEmailPopup.currentPasswordRequired"
+			);
 		}
 		return newErrors;
-	}, [formData.currentPassword]);
+	}, [formData.currentPassword, t]);
 
 	const handlePhase1Submit = async (e) => {
 		e.preventDefault();
@@ -91,14 +95,22 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 			);
 			if (response.success && response.sendMail) {
 				showNotification(
-					"Mã PIN đã được gửi đến email hiện tại của bạn",
+					t(
+						"settingsPage.passwordAndSecurityTab.changeEmailPopup.sendingPin"
+					),
 					"success"
 				);
 				setPhase(2);
 				setResendCooldown((prev) => ({...prev, phase1: 60}));
 			}
 		} catch (error) {
-			setErrors({currentPassword: error.message || "Có lỗi xảy ra"});
+			setErrors({
+				currentPassword:
+					error.message ||
+					t(
+						"settingsPage.passwordAndSecurityTab.changeEmailPopup.errorPassword"
+					),
+			});
 		} finally {
 			setLoading(false);
 		}
@@ -107,12 +119,16 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 	const validatePhase2 = useCallback(() => {
 		const newErrors = {};
 		if (!formData.currentEmailPin.trim()) {
-			newErrors.currentEmailPin = "Vui lòng nhập mã PIN";
+			newErrors.currentEmailPin = t(
+				"settingsPage.passwordAndSecurityTab.changeEmailPopup.currentEmailPinRequired"
+			);
 		} else if (!/^\d{6}$/.test(formData.currentEmailPin)) {
-			newErrors.currentEmailPin = "Mã PIN phải là 6 chữ số";
+			newErrors.currentEmailPin = t(
+				"settingsPage.passwordAndSecurityTab.changeEmailPopup.currentEmailPinInvalid"
+			);
 		}
 		return newErrors;
-	}, [formData.currentEmailPin]);
+	}, [formData.currentEmailPin, t]);
 
 	const handlePhase2Submit = async (e) => {
 		e.preventDefault();
@@ -131,13 +147,21 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 			if (response.success && response.changeMailAuthHashCode) {
 				setChangeMailAuthHashCode(response.changeMailAuthHashCode);
 				showNotification(
-					"Xác thực thành công! Vui lòng nhập email mới",
+					t(
+						"settingsPage.passwordAndSecurityTab.changeEmailPopup.verifyingEmail"
+					),
 					"success"
 				);
 				setPhase(3);
 			}
 		} catch (error) {
-			setErrors({currentEmailPin: error.message || "Mã PIN không đúng"});
+			setErrors({
+				currentEmailPin:
+					error.message ||
+					t(
+						"settingsPage.passwordAndSecurityTab.changeEmailPopup.errorPin"
+					),
+			});
 		} finally {
 			setLoading(false);
 		}
@@ -146,12 +170,16 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 	const validatePhase3 = useCallback(() => {
 		const newErrors = {};
 		if (!formData.newEmail.trim()) {
-			newErrors.newEmail = "Vui lòng nhập email mới";
+			newErrors.newEmail = t(
+				"settingsPage.passwordAndSecurityTab.changeEmailPopup.newEmailRequired"
+			);
 		} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.newEmail)) {
-			newErrors.newEmail = "Email không hợp lệ";
+			newErrors.newEmail = t(
+				"settingsPage.passwordAndSecurityTab.changeEmailPopup.newEmailInvalid"
+			);
 		}
 		return newErrors;
-	}, [formData.newEmail]);
+	}, [formData.newEmail, t]);
 
 	const handlePhase3Submit = async (e) => {
 		e.preventDefault();
@@ -169,12 +197,23 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 				token
 			);
 			if (response.success && response.sendMail) {
-				showNotification("Mã PIN đã được gửi đến email mới", "success");
+				showNotification(
+					t(
+						"settingsPage.passwordAndSecurityTab.changeEmailPopup.newPinSent"
+					),
+					"success"
+				);
 				setPhase(4);
 				setResendCooldown((prev) => ({...prev, phase3: 60}));
 			}
 		} catch (error) {
-			setErrors({newEmail: error.message || "Có lỗi xảy ra"});
+			setErrors({
+				newEmail:
+					error.message ||
+					t(
+						"settingsPage.passwordAndSecurityTab.changeEmailPopup.errorPassword"
+					),
+			});
 		} finally {
 			setLoading(false);
 		}
@@ -183,12 +222,16 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 	const validatePhase4 = useCallback(() => {
 		const newErrors = {};
 		if (!formData.newEmailPin.trim()) {
-			newErrors.newEmailPin = "Vui lòng nhập mã PIN";
+			newErrors.newEmailPin = t(
+				"settingsPage.passwordAndSecurityTab.changeEmailPopup.newEmailPinRequired"
+			);
 		} else if (!/^\d{6}$/.test(formData.newEmailPin)) {
-			newErrors.newEmailPin = "Mã PIN phải là 6 chữ số";
+			newErrors.newEmailPin = t(
+				"settingsPage.passwordAndSecurityTab.changeEmailPopup.newEmailPinInvalid"
+			);
 		}
 		return newErrors;
-	}, [formData.newEmailPin]);
+	}, [formData.newEmailPin, t]);
 
 	const handlePhase4Submit = async (e) => {
 		e.preventDefault();
@@ -206,11 +249,22 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 			);
 			if (response.success && response.newMail) {
 				updateUser({email: response.newMail});
-				showNotification("Đổi email thành công!", "success");
+				showNotification(
+					t(
+						"settingsPage.passwordAndSecurityTab.changeEmailPopup.success"
+					),
+					"success"
+				);
 				onClose();
 			}
 		} catch (error) {
-			setErrors({newEmailPin: error.message || "Mã PIN không đúng"});
+			setErrors({
+				newEmailPin:
+					error.message ||
+					t(
+						"settingsPage.passwordAndSecurityTab.changeEmailPopup.errorPin"
+					),
+			});
 		} finally {
 			setLoading(false);
 		}
@@ -223,12 +277,20 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 		try {
 			const response = await request.resendChangeEmail(token);
 			if (response.success && response.sendMail) {
-				showNotification("Mã PIN đã được gửi lại", "success");
+				showNotification(
+					t(
+						"settingsPage.passwordAndSecurityTab.changeEmailPopup.resendPin"
+					),
+					"success"
+				);
 				setResendCooldown((prev) => ({...prev, phase1: 60}));
 			}
 		} catch (error) {
 			showNotification(
-				error.message || "Không thể gửi lại mã PIN",
+				error.message ||
+					t(
+						"settingsPage.passwordAndSecurityTab.changeEmailPopup.errorResend"
+					),
 				"error"
 			);
 		} finally {
@@ -243,12 +305,20 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 		try {
 			const response = await request.resendVerificationEmail(token);
 			if (response.success && response.sendMail) {
-				showNotification("Mã PIN đã được gửi lại", "success");
+				showNotification(
+					t(
+						"settingsPage.passwordAndSecurityTab.changeEmailPopup.resendPin"
+					),
+					"success"
+				);
 				setResendCooldown((prev) => ({...prev, phase3: 60}));
 			}
 		} catch (error) {
 			showNotification(
-				error.message || "Không thể gửi lại mã PIN",
+				error.message ||
+					t(
+						"settingsPage.passwordAndSecurityTab.changeEmailPopup.errorResend"
+					),
 				"error"
 			);
 		} finally {
@@ -274,15 +344,25 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 	const getPhaseTitle = () => {
 		switch (phase) {
 			case 1:
-				return "Xác thực mật khẩu";
+				return t(
+					"settingsPage.passwordAndSecurityTab.changeEmailPopup.authenticatePassword"
+				);
 			case 2:
-				return "Xác nhận mã PIN từ email hiện tại";
+				return t(
+					"settingsPage.passwordAndSecurityTab.changeEmailPopup.verifyCurrentEmail"
+				);
 			case 3:
-				return "Nhập email mới";
+				return t(
+					"settingsPage.passwordAndSecurityTab.changeEmailPopup.enterNewEmail"
+				);
 			case 4:
-				return "Xác nhận mã PIN từ email mới";
+				return t(
+					"settingsPage.passwordAndSecurityTab.changeEmailPopup.verifyNewEmail"
+				);
 			default:
-				return "Đổi email";
+				return t(
+					"settingsPage.passwordAndSecurityTab.changeEmailPopup.title"
+				);
 		}
 	};
 
@@ -316,7 +396,9 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 						{phase === 1 && (
 							<div className={cx("form-group")}>
 								<label htmlFor='currentPassword'>
-									Mật khẩu hiện tại
+									{t(
+										"settingsPage.passwordAndSecurityTab.changeEmailPopup.currentPassword"
+									)}
 								</label>
 								<Input
 									type='password'
@@ -324,7 +406,9 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 									name='currentPassword'
 									value={formData.currentPassword}
 									onChange={handleInputChange}
-									placeholder='Nhập mật khẩu hiện tại'
+									placeholder={t(
+										"settingsPage.passwordAndSecurityTab.changeEmailPopup.currentPasswordPlaceholder"
+									)}
 									required
 								/>
 								{errors.currentPassword && (
@@ -338,7 +422,9 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 						{phase === 2 && (
 							<div className={cx("form-group")}>
 								<label htmlFor='currentEmailPin'>
-									Mã PIN từ email hiện tại
+									{t(
+										"settingsPage.passwordAndSecurityTab.changeEmailPopup.currentEmailPin"
+									)}
 								</label>
 								<Input
 									type='text'
@@ -346,7 +432,9 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 									name='currentEmailPin'
 									value={formData.currentEmailPin}
 									onChange={handleInputChange}
-									placeholder='Nhập mã PIN 6 số'
+									placeholder={t(
+										"settingsPage.passwordAndSecurityTab.changeEmailPopup.currentEmailPinPlaceholder"
+									)}
 									maxLength='6'
 									pattern='\d{6}'
 									required
@@ -366,8 +454,15 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 										}
 									>
 										{resendCooldown.phase1 > 0
-											? `Gửi lại sau ${resendCooldown.phase1}s`
-											: "Gửi lại mã PIN"}
+											? `${t(
+													"settingsPage.passwordAndSecurityTab.changeEmailPopup.resendPinCooldown"
+											  ).replace(
+													"{seconds}",
+													resendCooldown.phase1
+											  )}`
+											: t(
+													"settingsPage.passwordAndSecurityTab.changeEmailPopup.resendPin"
+											  )}
 									</button>
 								</div>
 							</div>
@@ -375,14 +470,20 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 
 						{phase === 3 && (
 							<div className={cx("form-group")}>
-								<label htmlFor='newEmail'>Email mới</label>
+								<label htmlFor='newEmail'>
+									{t(
+										"settingsPage.passwordAndSecurityTab.changeEmailPopup.newEmail"
+									)}
+								</label>
 								<Input
 									type='email'
 									id='newEmail'
 									name='newEmail'
 									value={formData.newEmail}
 									onChange={handleInputChange}
-									placeholder='Nhập email mới'
+									placeholder={t(
+										"settingsPage.passwordAndSecurityTab.changeEmailPopup.newEmailPlaceholder"
+									)}
 									required
 								/>
 								{errors.newEmail && (
@@ -396,7 +497,9 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 						{phase === 4 && (
 							<div className={cx("form-group")}>
 								<label htmlFor='newEmailPin'>
-									Mã PIN từ email mới
+									{t(
+										"settingsPage.passwordAndSecurityTab.changeEmailPopup.newEmailPin"
+									)}
 								</label>
 								<Input
 									type='text'
@@ -404,7 +507,9 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 									name='newEmailPin'
 									value={formData.newEmailPin}
 									onChange={handleInputChange}
-									placeholder='Nhập mã PIN 6 số'
+									placeholder={t(
+										"settingsPage.passwordAndSecurityTab.changeEmailPopup.newEmailPinPlaceholder"
+									)}
 									maxLength='6'
 									pattern='\d{6}'
 									required
@@ -424,8 +529,15 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 										}
 									>
 										{resendCooldown.phase3 > 0
-											? `Gửi lại sau ${resendCooldown.phase3}s`
-											: "Gửi lại mã PIN"}
+											? `${t(
+													"settingsPage.passwordAndSecurityTab.changeEmailPopup.resendPinCooldown"
+											  ).replace(
+													"{seconds}",
+													resendCooldown.phase3
+											  )}`
+											: t(
+													"settingsPage.passwordAndSecurityTab.changeEmailPopup.resendPin"
+											  )}
 									</button>
 								</div>
 							</div>
@@ -438,7 +550,9 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 									onClick={handleGoBack}
 									disabled={loading}
 								>
-									Quay lại
+									{t(
+										"settingsPage.passwordAndSecurityTab.changeEmailPopup.back"
+									)}
 								</Button>
 							)}
 							<Button
@@ -446,15 +560,21 @@ const ChangeEmailPopup = ({isOpen, onClose}) => {
 								onClick={handleClose}
 								disabled={loading}
 							>
-								Hủy
+								{t(
+									"settingsPage.passwordAndSecurityTab.changeEmailPopup.cancel"
+								)}
 							</Button>
 							<Button type='submit' disabled={loading}>
 								{loading ? (
 									<Loading size={10} />
 								) : phase === 4 ? (
-									"Hoàn tất"
+									t(
+										"settingsPage.passwordAndSecurityTab.changeEmailPopup.complete"
+									)
 								) : (
-									"Tiếp tục"
+									t(
+										"settingsPage.passwordAndSecurityTab.changeEmailPopup.continue"
+									)
 								)}
 							</Button>
 						</div>

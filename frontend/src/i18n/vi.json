@@ -1,1 +1,354 @@
-[]
+{
+	"welcomePage": {
+		"hero": {
+			"title": "Nâng tầm với cộng đồng lập trình và chấm tự động lớn nhất",
+			"subtitle": "Tham gia cùng hơn 25 triệu lập trình viên và sinh viên để thực hành, chia sẻ và kiểm tra giải pháp của bạn. Luôn cập nhật với các thuật toán và công nghệ mới nhất. Khám phá thư viện khổng lồ các bài tập, giải pháp mẫu và hệ thống chấm tự động cho tất cả các dự án học tập của bạn.",
+			"login": "Đăng Nhập",
+			"register": "Đăng Ký",
+			"home": "Vào Trang Chủ"
+		},
+		"about": {
+			"title": "Ai đang sử dụng CodeJudge?",
+			"seeMore": "Xem thêm",
+			"seeLess": "Ẩn bớt",
+			"students": {
+				"title": "Sinh Viên",
+				"description": "Thành thạo thuật toán và cấu trúc dữ liệu thông qua các lộ trình học tập có cấu trúc và thử thách lập trình.",
+				"featuresTitle": "TÍNH NĂNG CHÍNH",
+				"features": {
+					"contests": "Cuộc thi lập trình tương tác",
+					"guides": "Hướng dẫn từng bước",
+					"exercises": "Bộ bài tập thực hành"
+				}
+			},
+			"developers": {
+				"title": "Lập Trình Viên",
+				"description": "Rèn luyện kỹ năng lập trình và chuẩn bị cho phỏng vấn kỹ thuật với các thử thách thực tế.",
+				"featuresTitle": "TÍNH NĂNG CHÍNH",
+				"features": {
+					"languages": "Nhiều ngôn ngữ lập trình",
+					"timed": "Thử thách có thời gian",
+					"analytics": "Phân tích hiệu suất"
+				}
+			},
+			"companies": {
+				"title": "Công Ty",
+				"description": "Tổ chức cuộc thi lập trình và khám phá các lập trình viên tài năng cho đội ngũ của bạn.",
+				"featuresTitle": "TÍNH NĂNG CHÍNH",
+				"features": {
+					"custom": "Tổ chức cuộc thi tùy chỉnh",
+					"recruitment": "Công cụ tuyển dụng nhân tài",
+					"reports": "Báo cáo ứng viên chi tiết"
+				}
+			}
+		},
+		"languages": {
+			"title": "Ngôn Ngữ Lập Trình Được Hỗ Trợ",
+			"subtitle": "Viết giải pháp bằng ngôn ngữ lập trình ưa thích của bạn với sự hỗ trợ toàn diện của chúng tôi",
+			"python": {
+				"name": "Python",
+				"description": "Hoàn hảo cho thuật toán và khoa học dữ liệu",
+				"features": {
+					"0": "Cú pháp dễ",
+					"1": "Thư viện phong phú"
+				}
+			},
+			"javascript": {
+				"name": "JavaScript",
+				"description": "Linh hoạt và đa dụng cho mọi lĩnh vực",
+				"features": {
+					"0": "Linh hoạt",
+					"1": "Hiện đại"
+				}
+			},
+			"cpp": {
+				"name": "C/C++",
+				"description": "Lập trình thi đấu hiệu năng cao",
+				"features": {
+					"0": "Nhanh",
+					"1": "Hiệu quả"
+				}
+			},
+			"java": {
+				"name": "Java",
+				"description": "Lập trình hướng đối tượng cấp doanh nghiệp",
+				"features": {
+					"0": "Mạnh mẽ",
+					"1": "Có thể mở rộng"
+				}
+			},
+			"note": "Không thấy ngôn ngữ yêu thích của bạn? Chúng tôi liên tục thêm hỗ trợ cho nhiều ngôn ngữ lập trình hơn.",
+			"viewAll": "Xem Tất Cả Ngôn Ngữ"
+		},
+		"cta": {
+			"title": "Sẵn sàng Bắt Đầu Lập Trình?",
+			"text": "Tham gia cùng hàng nghìn lập trình viên đang cải thiện kỹ năng mỗi ngày. Bắt đầu giải quyết bài toán ngay!",
+			"createAccount": "Tạo Tài Khoản",
+			"viewProfile": "Xem Hồ Sơ",
+			"browseProblems": "Duyệt Bài Toán"
+		}
+	},
+	"welcomeHeader": {
+		"nav": {
+			"competitions": "Cuộc Thi",
+			"problems": "Bài Toán",
+			"leaderboard": "Xếp Hạng"
+		},
+		"search": {
+			"placeholder": "Tìm kiếm bài toán..."
+		},
+		"auth": {
+			"login": "Đăng Nhập",
+			"register": "Đăng Ký"
+		},
+		"dropdown": {
+			"profile": "Hồ sơ",
+			"settings": "Cài đặt",
+			"logout": "Đăng xuất"
+		}
+	},
+	"welcomeFooter": {
+		"description": "Thực hành các bài toán lập trình và cải thiện kỹ năng lập trình của bạn với hệ thống chấm tự động.",
+		"sections": {
+			"platform": {
+				"title": "Nền Tảng",
+				"problems": "Bài Toán",
+				"submissions": "Bài Nộp",
+				"leaderboard": "Bảng Xếp Hạng"
+			},
+			"community": {
+				"title": "Cộng Đồng",
+				"discussions": "Diễn Đàn"
+			},
+			"support": {
+				"title": "Hỗ Trợ",
+				"help": "Trung Tâm Trợ Giúp",
+				"contact": "Liên Hệ"
+			},
+			"legal": {
+				"title": "Pháp Lý",
+				"privacy": "Bảo Mật",
+				"terms": "Điều Khoản",
+				"cookies": "Cookies"
+			}
+		},
+		"copyright": "© 2025 CodeJudge. Tất cả quyền được bảo lưu. Được xây dựng với cho các lập trình viên."
+	},
+	"globalSidebar": {
+		"home": "Trang Chủ",
+		"problems": "Bài Tập",
+		"contests": "Cuộc Thi",
+		"submissions": "Bài Nộp",
+		"leaderboard": "Bảng Xếp Hạng",
+		"discussions": "Thảo luận",
+		"learning": "Học tập",
+		"profile": "Hồ sơ",
+		"settings": "Cài đặt",
+		"logout": "Đăng xuất",
+		"adminPanel": "Bảng Quản Lý",
+		"user": "Người dùng"
+	},
+	"homePage": {
+		"welcome": "Chào mừng, ",
+		"subWelcome": "Bạn đang làm rất tốt! Hãy tiếp tục hoặc bắt đầu điều gì đó mới.",
+		"loginStreak": "Chuỗi Đăng Nhập",
+		"day": "ngày",
+		"days": "ngày",
+		"excellent": "– tuyệt vời!",
+		"levelProgress": "Tiến Trình Cấp Độ",
+		"noRank": "Chưa có xếp hạng",
+		"toRank": "đến {rank}",
+		"problems": "Bài Tập",
+		"solved": "đã giải quyết",
+		"contests": "Cuộc Thi",
+		"participated": "đã tham gia",
+		"submissions": "Bài Nộp",
+		"submitted": "đã gửi",
+		"discussions": "Thảo Luận",
+		"posted": "đã đăng",
+		"badges": "Thành Tích",
+		"earned": "đã đạt được",
+		"badgesTitle": "Thành Tích & Huy Hiệu",
+		"badgesSubtitle": "Khám phá và thu thập các huy hiệu bằng cách hoàn thành các thử thách",
+		"notEarned": "Chưa đạt được"
+	},
+	"problemsPage": {
+		"header": {
+			"title": "Bài Tập",
+			"subtitle": "Luyện tập các bài toán lập trình để nâng cao kỹ năng của bạn",
+			"searchPlaceholder": "Tìm kiếm bài toán..."
+		},
+		"sidebar": {
+			"problemTypes": "Loại Bài Toán",
+			"difficulty": "Độ Khó",
+			"status": "Trạng Thái",
+			"showMore": "Xem nhiều hơn",
+			"showLess": "Ẩn bớt",
+			"cannotLoadTypes": "Không thể tải danh sách loại bài toán"
+		},
+		"difficulty": {
+			"easy": "Dễ",
+			"medium": "Trung bình",
+			"hard": "Khó"
+		},
+		"status": {
+			"all": "Tất cả",
+			"solved": "Đã giải",
+			"unsolved": "Chưa giải"
+		},
+		"item": {
+			"solvedCount": "đã giải",
+			"statusPending": "Đang chờ",
+			"statusRunning": "Đang chạy",
+			"statusAccepted": "Đã giải",
+			"statusWrongAnswer": "Sai đáp án",
+			"statusTimeLimitExceeded": "Quá thời gian"
+		},
+		"noProblems": {
+			"title": "Không tìm thấy bài toán nào",
+			"titleNoData": "Chưa có bài toán nào",
+			"description": "Thử thay đổi bộ lọc hoặc từ khóa tìm kiếm",
+			"descriptionNoData": "Bài toán sẽ xuất hiện ở đây khi có dữ liệu"
+		},
+		"loadMore": "Xem thêm bài tập"
+	},
+	"settingsPage": {
+		"sidebar": {
+			"backToHome": "Trở về trang chủ",
+			"personalInfo": "Thông Tin Cá Nhân",
+			"passwordAndSecurity": "Mật Khẩu và Bảo Mật",
+			"interfaceAndLanguage": "Giao diện và Ngôn ngữ",
+			"editorSettings": "Cài Đặt Trình Soạn Thảo"
+		},
+		"personalInfoTab": {
+			"title": "Thông tin cá nhân",
+			"avatar": "Ảnh đại diện",
+			"changeAvatar": "Thay đổi ảnh đại diện",
+			"dragDropImage": "Kéo & thả ảnh vào đây, hoặc nhấn để chọn",
+			"firstName": "Tên",
+			"lastName": "Họ",
+			"username": "Tên đăng nhập",
+			"bio": "Tiểu sử",
+			"firstNameRequired": "Tên là bắt buộc",
+			"lastNameRequired": "Họ là bắt buộc",
+			"usernameRequired": "Tên đăng nhập là bắt buộc",
+			"usernameExists": "Username đã tồn tại",
+			"usernameAvailable": "Username khả dụng",
+			"imageProcessError": "Xử lý hình ảnh thất bại",
+			"updateError": "Cập nhật thông tin cá nhân thất bại",
+			"noServerResponse": "Không có phản hồi từ máy chủ",
+			"invalidResponse": "Phản hồi không hợp lệ từ máy chủ",
+			"updateSuccess": "Thông tin cá nhân đã được cập nhật thành công",
+			"generalError": "Đã xảy ra lỗi",
+			"checkUsernameError": "Lỗi kiểm tra username",
+			"github": "GitHub",
+			"linkedin": "LinkedIn",
+			"website": "Website",
+			"youtube": "YouTube",
+			"facebook": "Facebook",
+			"instagram": "Instagram"
+		},
+		"interfaceAndLanguageTab": {
+			"title": "Ngôn ngữ và Chủ đề",
+			"language": "Ngôn ngữ",
+			"theme": "Chủ đề",
+			"lightTheme": "Sáng",
+			"darkTheme": "Tối",
+			"updateSuccess": "Cài đặt đã được cập nhật thành công",
+			"updateError": "Cập nhật cài đặt thất bại",
+			"loadError": "Không thể tải cài đặt"
+		},
+		"passwordAndSecurityTab": {
+			"title": "Mật khẩu và Bảo mật",
+			"changePasswordTitle": "Đổi mật khẩu",
+			"changePasswordDescription": "Thay đổi mật khẩu tài khoản của bạn để bảo mật tốt hơn",
+			"changePasswordButton": "Thay đổi mật khẩu",
+			"changeEmailTitle": "Đổi email",
+			"changeEmailDescription": "Thay đổi địa chỉ email liên kết với tài khoản",
+			"changeEmailButton": "Thay đổi email",
+			"changePasswordPopup": {
+				"title": "Thay đổi mật khẩu",
+				"currentPassword": "Mật khẩu hiện tại",
+				"currentPasswordPlaceholder": "Nhập mật khẩu hiện tại",
+				"currentPasswordRequired": "Mật khẩu hiện tại là bắt buộc",
+				"newPassword": "Mật khẩu mới",
+				"newPasswordPlaceholder": "Nhập mật khẩu mới",
+				"newPasswordRequired": "Mật khẩu mới là bắt buộc",
+				"newPasswordMinLength": "Mật khẩu phải có ít nhất 8 ký tự",
+				"confirmPassword": "Xác nhận mật khẩu mới",
+				"confirmPasswordPlaceholder": "Xác nhận mật khẩu mới",
+				"confirmPasswordMismatch": "Mật khẩu xác nhận không khớp",
+				"passwordRequirements": "Yêu cầu mật khẩu:",
+				"requirement8Chars": "Ít nhất 8 ký tự",
+				"requirementUpperCase": "Có chữ hoa",
+				"requirementLowerCase": "Có chữ thường",
+				"requirementNumbers": "Có số",
+				"requirementSpecialChars": "Có ký tự đặc biệt",
+				"cancel": "Hủy",
+				"confirm": "Xác nhận",
+				"back": "Quay lại",
+				"submit": "Thay đổi mật khẩu",
+				"successPhase1": "Mật khẩu hiện tại đã được xác nhận. Vui lòng nhập mật khẩu mới.",
+				"errorPhase1": "Không thể xác nhận mật khẩu hiện tại",
+				"errorPhase1General": "Đã xảy ra lỗi khi xác nhận mật khẩu",
+				"successPhase2": "Mật khẩu đã được thay đổi thành công",
+				"errorPhase2": "Không thể thay đổi mật khẩu"
+			},
+			"changeEmailPopup": {
+				"title": "Đổi email",
+				"authenticatePassword": "Xác thực mật khẩu",
+				"verifyCurrentEmail": "Xác nhận mã PIN từ email hiện tại",
+				"enterNewEmail": "Nhập email mới",
+				"verifyNewEmail": "Xác nhận mã PIN từ email mới",
+				"currentPassword": "Mật khẩu hiện tại",
+				"currentPasswordPlaceholder": "Nhập mật khẩu hiện tại",
+				"currentPasswordRequired": "Vui lòng nhập mật khẩu hiện tại",
+				"currentEmailPin": "Mã PIN từ email hiện tại",
+				"currentEmailPinPlaceholder": "Nhập mã PIN 6 số",
+				"currentEmailPinRequired": "Vui lòng nhập mã PIN",
+				"currentEmailPinInvalid": "Mã PIN phải là 6 chữ số",
+				"newEmail": "Email mới",
+				"newEmailPlaceholder": "Nhập email mới",
+				"newEmailRequired": "Vui lòng nhập email mới",
+				"newEmailInvalid": "Email không hợp lệ",
+				"newEmailPin": "Mã PIN từ email mới",
+				"newEmailPinPlaceholder": "Nhập mã PIN 6 số",
+				"newEmailPinRequired": "Vui lòng nhập mã PIN",
+				"newEmailPinInvalid": "Mã PIN phải là 6 chữ số",
+				"resendPin": "Gửi lại mã PIN",
+				"resendPinCooldown": "Gửi lại sau {seconds}s",
+				"back": "Quay lại",
+				"cancel": "Hủy",
+				"continue": "Tiếp tục",
+				"complete": "Hoàn tất",
+				"sendingPin": "Mã PIN đã được gửi đến email hiện tại của bạn",
+				"verifyingEmail": "Xác thực thành công! Vui lòng nhập email mới",
+				"newPinSent": "Mã PIN đã được gửi đến email mới",
+				"success": "Đổi email thành công!",
+				"errorPassword": "Có lỗi xảy ra",
+				"errorPin": "Mã PIN không đúng",
+				"errorResend": "Không thể gửi lại mã PIN"
+			}
+		},
+		"editorSettingsTab": {
+			"title": "Cài Đặt Trình Soạn Thảo",
+			"interfaceSection": "Giao diện",
+			"fontFamily": "Font chữ:",
+			"fontSize": "Kích thước chữ:",
+			"theme": "Theme:",
+			"formattingSection": "Định dạng",
+			"tabSize": "Tab size:",
+			"wordWrap": "Xuống dòng tự động",
+			"lineNumbers": "Hiển thị số dòng",
+			"minimap": "Hiển thị minimap",
+			"autoCloseBrackets": "Tự động đóng ngoặc",
+			"formatOnPaste": "Định dạng khi paste",
+			"loadError": "Không thể tải cài đặt trình soạn thảo",
+			"updateError": "Không thể cập nhật cài đặt trình soạn thảo",
+			"updateSuccess": "Cài đặt trình soạn thảo đã được cập nhật thành công"
+		},
+		"fadeInUpdateButton": {
+			"label": "Cập Nhật"
+		}
+	}
+}

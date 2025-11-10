@@ -1,6 +1,7 @@
 import React, {useState, useCallback} from "react";
 import classNames from "classnames/bind";
 import {useAuth} from "../../../../../../hooks/useAuth";
+import {useLanguages} from "../../../../../../hooks/useLanguages";
 import {useGlobalNotificationPopup} from "../../../../../../hooks/useGlobalNotificationPopup";
 import request from "../../../../../../utils/request";
 import {Button, Input, Loading, Tooltip} from "../../../../../../components/UI";
@@ -13,6 +14,7 @@ const cx = classNames.bind(style);
 
 const ChangePasswordPopup = ({isOpen, onClose}) => {
 	const {token, setToken} = useAuth();
+	const {t} = useLanguages();
 	const {showNotification} = useGlobalNotificationPopup();
 
 	const [phase, setPhase] = useState(1);
@@ -31,23 +33,33 @@ const ChangePasswordPopup = ({isOpen, onClose}) => {
 	const score = strength.score;
 	const rules = [
 		{
-			label: "Ít nhất 8 ký tự",
+			label: t(
+				"settingsPage.passwordAndSecurityTab.changePasswordPopup.requirement8Chars"
+			),
 			test: password.length >= 8,
 		},
 		{
-			label: "Có chữ hoa",
+			label: t(
+				"settingsPage.passwordAndSecurityTab.changePasswordPopup.requirementUpperCase"
+			),
 			test: /[A-Z]/.test(password),
 		},
 		{
-			label: "Có chữ thường",
+			label: t(
+				"settingsPage.passwordAndSecurityTab.changePasswordPopup.requirementLowerCase"
+			),
 			test: /[a-z]/.test(password),
 		},
 		{
-			label: "Có số",
+			label: t(
+				"settingsPage.passwordAndSecurityTab.changePasswordPopup.requirementNumbers"
+			),
 			test: /[0-9]/.test(password),
 		},
 		{
-			label: "Có ký tự đặc biệt",
+			label: t(
+				"settingsPage.passwordAndSecurityTab.changePasswordPopup.requirementSpecialChars"
+			),
 			test: /[^A-Za-z0-9]/.test(password),
 		},
 	];
@@ -57,7 +69,9 @@ const ChangePasswordPopup = ({isOpen, onClose}) => {
 	const renderPasswordRequirements = (rules) => (
 		<div style={{minWidth: 180}}>
 			<div style={{fontWeight: 600, marginBottom: 4}}>
-				Yêu cầu mật khẩu:
+				{t(
+					"settingsPage.passwordAndSecurityTab.changePasswordPopup.passwordRequirements"
+				)}
 			</div>
 			<div
 				style={{
@@ -94,25 +108,33 @@ const ChangePasswordPopup = ({isOpen, onClose}) => {
 	const validatePhase1 = useCallback(() => {
 		const newErrors = {};
 		if (!formData.currentPassword.trim()) {
-			newErrors.currentPassword = "Mật khẩu hiện tại là bắt buộc";
+			newErrors.currentPassword = t(
+				"settingsPage.passwordAndSecurityTab.changePasswordPopup.currentPasswordRequired"
+			);
 		}
 		setErrors(newErrors);
 		return Object.keys(newErrors).length === 0;
-	}, [formData.currentPassword]);
+	}, [formData.currentPassword, t]);
 
 	const validatePhase2 = useCallback(() => {
 		const newErrors = {};
 		if (!formData.newPassword.trim()) {
-			newErrors.newPassword = "Mật khẩu mới là bắt buộc";
+			newErrors.newPassword = t(
+				"settingsPage.passwordAndSecurityTab.changePasswordPopup.newPasswordRequired"
+			);
 		} else if (formData.newPassword.length < 8) {
-			newErrors.newPassword = "Mật khẩu phải có ít nhất 8 ký tự";
+			newErrors.newPassword = t(
+				"settingsPage.passwordAndSecurityTab.changePasswordPopup.newPasswordMinLength"
+			);
 		}
 		if (formData.newPassword !== formData.confirmPassword) {
-			newErrors.confirmPassword = "Mật khẩu xác nhận không khớp";
+			newErrors.confirmPassword = t(
+				"settingsPage.passwordAndSecurityTab.changePasswordPopup.confirmPasswordMismatch"
+			);
 		}
 		setErrors(newErrors);
 		return Object.keys(newErrors).length === 0;
-	}, [formData.newPassword, formData.confirmPassword]);
+	}, [formData.newPassword, formData.confirmPassword, t]);
 
 	const handlePhase1Submit = async (e) => {
 		e.preventDefault();
@@ -133,17 +155,27 @@ const ChangePasswordPopup = ({isOpen, onClose}) => {
 					confirmPassword: "",
 				});
 				showNotification(
-					"Mật khẩu hiện tại đã được xác nhận. Vui lòng nhập mật khẩu mới.",
+					t(
+						"settingsPage.passwordAndSecurityTab.changePasswordPopup.successPhase1"
+					),
 					"success"
 				);
 			} else {
 				showNotification(
-					response.message || "Không thể xác nhận mật khẩu hiện tại",
+					response.message ||
+						t(
+							"settingsPage.passwordAndSecurityTab.changePasswordPopup.errorPhase1"
+						),
 					"error"
 				);
 			}
 		} catch (error) {
-			showNotification("Đã xảy ra lỗi khi xác nhận mật khẩu", "error");
+			showNotification(
+				t(
+					"settingsPage.passwordAndSecurityTab.changePasswordPopup.errorPhase1General"
+				),
+				"error"
+			);
 		} finally {
 			setLoading(false);
 		}
@@ -169,18 +201,28 @@ const ChangePasswordPopup = ({isOpen, onClose}) => {
 				}
 
 				showNotification(
-					"Mật khẩu đã được thay đổi thành công",
+					t(
+						"settingsPage.passwordAndSecurityTab.changePasswordPopup.successPhase2"
+					),
 					"success"
 				);
 				handleClose();
 			} else {
 				showNotification(
-					response?.message || "Không thể thay đổi mật khẩu",
+					response?.message ||
+						t(
+							"settingsPage.passwordAndSecurityTab.changePasswordPopup.errorPhase2"
+						),
 					"error"
 				);
 			}
 		} catch (error) {
-			showNotification("Đã xảy ra lỗi khi thay đổi mật khẩu", "error");
+			showNotification(
+				t(
+					"settingsPage.passwordAndSecurityTab.changePasswordPopup.errorPhase2"
+				),
+				"error"
+			);
 		} finally {
 			setLoading(false);
 		}
@@ -204,7 +246,11 @@ const ChangePasswordPopup = ({isOpen, onClose}) => {
 		<div className={cx("overlay")}>
 			<div className={cx("popup")}>
 				<div className={cx("header")}>
-					<h2>Thay đổi mật khẩu</h2>
+					<h2>
+						{t(
+							"settingsPage.passwordAndSecurityTab.changePasswordPopup.title"
+						)}
+					</h2>
 					<button
 						className={cx("close-btn", {disabled: loading})}
 						onClick={handleClose}
@@ -217,13 +263,19 @@ const ChangePasswordPopup = ({isOpen, onClose}) => {
 					{phase === 1 ? (
 						<form onSubmit={handlePhase1Submit}>
 							<div className={cx("form-group")}>
-								<label>Mật khẩu hiện tại</label>
+								<label>
+									{t(
+										"settingsPage.passwordAndSecurityTab.changePasswordPopup.currentPassword"
+									)}
+								</label>
 								<Input
 									type='password'
 									name='currentPassword'
 									value={formData.currentPassword}
 									onChange={handleInputChange}
-									placeholder='Nhập mật khẩu hiện tại'
+									placeholder={t(
+										"settingsPage.passwordAndSecurityTab.changePasswordPopup.currentPasswordPlaceholder"
+									)}
 									className={cx({
 										error: errors.currentPassword,
 									})}
@@ -242,7 +294,9 @@ const ChangePasswordPopup = ({isOpen, onClose}) => {
 									disabled={loading}
 									variant='outline'
 								>
-									Hủy
+									{t(
+										"settingsPage.passwordAndSecurityTab.changePasswordPopup.cancel"
+									)}
 								</Button>
 								<Button type='submit' disabled={loading}>
 									{loading ? (
@@ -250,7 +304,9 @@ const ChangePasswordPopup = ({isOpen, onClose}) => {
 											<Loading size={14} />
 										</>
 									) : (
-										"Xác nhận"
+										t(
+											"settingsPage.passwordAndSecurityTab.changePasswordPopup.confirm"
+										)
 									)}
 								</Button>
 							</div>
@@ -258,7 +314,11 @@ const ChangePasswordPopup = ({isOpen, onClose}) => {
 					) : (
 						<form onSubmit={handlePhase2Submit}>
 							<div className={cx("form-group")}>
-								<label>Mật khẩu mới</label>
+								<label>
+									{t(
+										"settingsPage.passwordAndSecurityTab.changePasswordPopup.newPassword"
+									)}
+								</label>
 								<div
 									className={cx("password-row", {
 										focused: passwordFocused,
@@ -277,7 +337,9 @@ const ChangePasswordPopup = ({isOpen, onClose}) => {
 										onFocus={() => setPasswordFocused(true)}
 										onBlur={() => setPasswordFocused(false)}
 										onChange={handleInputChange}
-										placeholder='Nhập mật khẩu mới'
+										placeholder={t(
+											"settingsPage.passwordAndSecurityTab.changePasswordPopup.newPasswordPlaceholder"
+										)}
 										className={cx("password-input", {
 											error: errors.newPassword,
 										})}
@@ -315,13 +377,19 @@ const ChangePasswordPopup = ({isOpen, onClose}) => {
 								)}
 							</div>
 							<div className={cx("form-group")}>
-								<label>Xác nhận mật khẩu mới</label>
+								<label>
+									{t(
+										"settingsPage.passwordAndSecurityTab.changePasswordPopup.confirmPassword"
+									)}
+								</label>
 								<Input
 									type='password'
 									name='confirmPassword'
 									value={formData.confirmPassword}
 									onChange={handleInputChange}
-									placeholder='Xác nhận mật khẩu mới'
+									placeholder={t(
+										"settingsPage.passwordAndSecurityTab.changePasswordPopup.confirmPasswordPlaceholder"
+									)}
 									className={cx({
 										error: errors.confirmPassword,
 									})}
@@ -349,7 +417,9 @@ const ChangePasswordPopup = ({isOpen, onClose}) => {
 									disabled={loading}
 									variant='outline'
 								>
-									Quay lại
+									{t(
+										"settingsPage.passwordAndSecurityTab.changePasswordPopup.back"
+									)}
 								</Button>
 								<Button type='submit' disabled={loading}>
 									{loading ? (
@@ -357,7 +427,9 @@ const ChangePasswordPopup = ({isOpen, onClose}) => {
 											<Loading size={14} />
 										</>
 									) : (
-										"Thay đổi mật khẩu"
+										t(
+											"settingsPage.passwordAndSecurityTab.changePasswordPopup.submit"
+										)
 									)}
 								</Button>
 							</div>

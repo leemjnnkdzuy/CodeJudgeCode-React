@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useCallback, useMemo} from "react";
 import classNames from "classnames/bind";
+import {useLanguages} from "../../../../hooks/useLanguages";
 import {useGlobalNotificationPopup} from "../../../../hooks/useGlobalNotificationPopup";
 import {useAuth} from "../../../../hooks/useAuth";
 import {Toggle, Select, Loading} from "../../../../components/UI";
@@ -66,6 +67,7 @@ const EditorSettingsTab = ({
 	updateSubmitHandler: propUpdateSubmitHandler,
 	resetChanges: propResetChanges,
 }) => {
+	const {t} = useLanguages();
 	const {token} = useAuth();
 	const {showNotification} = useGlobalNotificationPopup();
 	const [settings, setSettings] = useState(defaultSettings);
@@ -103,7 +105,7 @@ const EditorSettingsTab = ({
 			} catch (error) {
 				console.error("Failed to fetch editor settings:", error);
 				showNotification(
-					"Không thể tải cài đặt trình soạn thảo",
+					t("settingsPage.editorSettingsTab.loadError"),
 					"error"
 				);
 			} finally {
@@ -115,7 +117,7 @@ const EditorSettingsTab = ({
 		if (token) {
 			fetchSettings();
 		}
-	}, [token, showNotification, setLoading]);
+	}, [token, showNotification, setLoading, t]);
 
 	const handleChange = (field, value) => {
 		setSettings((prev) => ({...prev, [field]: value}));
@@ -132,28 +134,28 @@ const EditorSettingsTab = ({
 				);
 				if (response.error) {
 					showNotification(
-						"Không thể cập nhật cài đặt trình soạn thảo",
+						t("settingsPage.editorSettingsTab.updateError"),
 						"error"
 					);
 				} else {
 					setInitialSettings(settings);
 					resetChanges();
 					showNotification(
-						"Cài đặt trình soạn thảo đã được cập nhật thành công",
+						t("settingsPage.editorSettingsTab.updateSuccess"),
 						"success"
 					);
 				}
 			} catch (error) {
 				console.error("Error updating editor settings:", error);
 				showNotification(
-					"Không thể cập nhật cài đặt trình soạn thảo",
+					t("settingsPage.editorSettingsTab.updateError"),
 					"error"
 				);
 			} finally {
 				setLoading(false);
 			}
 		},
-		[settings, token, showNotification, setLoading, resetChanges]
+		[settings, token, showNotification, setLoading, resetChanges, t]
 	);
 
 	useEffect(() => {
@@ -176,13 +178,19 @@ const EditorSettingsTab = ({
 
 	return (
 		<div className={cx("editor-settings-tab")}>
-			<div className={cx("title")}>Cài Đặt Trình Soạn Thảo</div>
+			<div className={cx("title")}>
+				{t("settingsPage.editorSettingsTab.title")}
+			</div>
 
 			<div className={cx("settings-section")}>
-				<h4 className={cx("section-title")}>Giao diện</h4>
+				<h4 className={cx("section-title")}>
+					{t("settingsPage.editorSettingsTab.interfaceSection")}
+				</h4>
 
 				<div className={cx("setting-item")}>
-					<label className={cx("setting-label")}>Font chữ:</label>
+					<label className={cx("setting-label")}>
+						{t("settingsPage.editorSettingsTab.fontFamily")}
+					</label>
 					<Select
 						items={FONT_OPTIONS.map((option) => ({
 							label: option.label,
@@ -202,10 +210,9 @@ const EditorSettingsTab = ({
 						})()}
 					</Select>
 				</div>
-
 				<div className={cx("setting-item")}>
 					<label className={cx("setting-label")}>
-						Kích thước chữ:
+						{t("settingsPage.editorSettingsTab.fontSize")}
 					</label>
 					<Select
 						items={FONT_SIZE_OPTIONS.map((option) => ({
@@ -228,7 +235,9 @@ const EditorSettingsTab = ({
 				</div>
 
 				<div className={cx("setting-item")}>
-					<label className={cx("setting-label")}>Theme:</label>
+					<label className={cx("setting-label")}>
+						{t("settingsPage.editorSettingsTab.theme")}
+					</label>
 					<Select
 						items={THEME_OPTIONS.map((option) => ({
 							label: option.label,
@@ -249,10 +258,14 @@ const EditorSettingsTab = ({
 			</div>
 
 			<div className={cx("settings-section")}>
-				<h4 className={cx("section-title")}>Định dạng</h4>
+				<h4 className={cx("section-title")}>
+					{t("settingsPage.editorSettingsTab.formattingSection")}
+				</h4>
 
 				<div className={cx("setting-item")}>
-					<label className={cx("setting-label")}>Tab size:</label>
+					<label className={cx("setting-label")}>
+						{t("settingsPage.editorSettingsTab.tabSize")}
+					</label>
 					<Select
 						items={TAB_SIZE_OPTIONS.map((option) => ({
 							label: option.label,
@@ -273,7 +286,7 @@ const EditorSettingsTab = ({
 
 				<div className={cx("setting-item")}>
 					<div className={cx("setting-title-label")}>
-						Xuống dòng tự động
+						{t("settingsPage.editorSettingsTab.wordWrap")}
 					</div>
 					<Toggle
 						checked={settings.wordWrap}
@@ -283,7 +296,7 @@ const EditorSettingsTab = ({
 
 				<div className={cx("setting-item")}>
 					<div className={cx("setting-title-label")}>
-						Hiển thị số dòng
+						{t("settingsPage.editorSettingsTab.lineNumbers")}
 					</div>
 					<Toggle
 						checked={settings.lineNumbers}
@@ -293,7 +306,7 @@ const EditorSettingsTab = ({
 
 				<div className={cx("setting-item")}>
 					<div className={cx("setting-title-label")}>
-						Hiển thị minimap
+						{t("settingsPage.editorSettingsTab.minimap")}
 					</div>
 					<Toggle
 						checked={settings.minimap}
@@ -303,7 +316,7 @@ const EditorSettingsTab = ({
 
 				<div className={cx("setting-item")}>
 					<div className={cx("setting-title-label")}>
-						Tự động đóng ngoặc
+						{t("settingsPage.editorSettingsTab.autoCloseBrackets")}
 					</div>
 					<Toggle
 						checked={settings.autoCloseBrackets}
@@ -315,7 +328,7 @@ const EditorSettingsTab = ({
 
 				<div className={cx("setting-item")}>
 					<div className={cx("setting-title-label")}>
-						Định dạng khi paste
+						{t("settingsPage.editorSettingsTab.formatOnPaste")}
 					</div>
 					<Toggle
 						checked={settings.formatOnPaste}

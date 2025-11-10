@@ -5,6 +5,7 @@ import RANK from "../../../../config/rankingConfig";
 import defaultAvatar from "../../../../assets/default_avatar.png";
 import {base64ToImage} from "../../../../helper/avatarBase64Helper";
 import {Button} from "../../../../components/UI";
+import {useLanguages} from "../../../../hooks/useLanguages";
 
 const cx = classNames.bind(styles);
 
@@ -14,6 +15,7 @@ const ProfileHeader = ({
 	isOwnProfile = false,
 	onEditProfile,
 }) => {
+	const {getConfigValue} = useLanguages();
 	const getUserRank = (rating) => {
 		if (rating === -1 || rating < 0) {
 			return RANK.Unranked;
@@ -80,7 +82,7 @@ const ProfileHeader = ({
 				<div className={cx("rank-icon")}>
 					<img
 						src={userRank.icon}
-						alt={userRank.name}
+						alt={getConfigValue(userRank, "name")}
 						className={cx("rank-image")}
 					/>
 				</div>
@@ -89,7 +91,7 @@ const ProfileHeader = ({
 						className={cx("rank-name")}
 						style={{color: userRank.color}}
 					>
-						{userRank.name}
+						{getConfigValue(userRank, "name")}
 					</span>
 					<span className={cx("rank-rating")}>{displayRating}</span>
 				</div>

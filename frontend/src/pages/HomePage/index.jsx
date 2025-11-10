@@ -3,6 +3,7 @@ import classNames from "classnames/bind";
 import styles from "./HomePage.module.scss";
 import {BadgesSection, ProfileStats} from "./components/";
 import {useAuth} from "../../hooks/useAuth";
+import {useLanguages} from "../../hooks/useLanguages";
 import {useEffect, useState} from "react";
 import request from "../../utils/request";
 import {Loading} from "../../components/UI";
@@ -10,6 +11,7 @@ import {Loading} from "../../components/UI";
 const cx = classNames.bind(styles);
 
 function HomePage() {
+	const {t} = useLanguages();
 	const {user, token} = useAuth();
 	const [homeData, setHomeData] = useState(null);
 	const [loading, setLoading] = useState(false);
@@ -46,7 +48,7 @@ function HomePage() {
 				<Loading size='20px' />
 			) : error ? (
 				<div className={cx("error-text")}>
-					Có lỗi khi tải dữ liệu: {error}
+					{t("settingsPage.personalInfoTab.generalError")}: {error}
 				</div>
 			) : (
 				<>

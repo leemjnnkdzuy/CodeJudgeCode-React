@@ -54,361 +54,786 @@ import {
 
 const TYPE_PROBLEM = {
 	Array: {
-		name: "Mảng",
-		description: "Bài toán liên quan đến xử lý mảng.",
+		name: {
+			vi: "Mảng",
+			en: "Array",
+		},
+		description: {
+			vi: "Bài toán liên quan đến xử lý mảng.",
+			en: "Problems related to array manipulation and processing.",
+		},
 		icon: BiGridAlt,
 	},
 	String: {
-		name: "Chuỗi",
-		description: "Bài toán liên quan đến xử lý chuỗi.",
+		name: {
+			vi: "Chuỗi",
+			en: "String",
+		},
+		description: {
+			vi: "Bài toán liên quan đến xử lý chuỗi.",
+			en: "Problems related to string manipulation and processing.",
+		},
 		icon: BiText,
 	},
 	Hash_Table: {
-		name: "Bảng Băm",
-		description: "Bài toán liên quan đến cấu trúc dữ liệu bảng băm.",
+		name: {
+			vi: "Bảng Băm",
+			en: "Hash Table",
+		},
+		description: {
+			vi: "Bài toán liên quan đến cấu trúc dữ liệu bảng băm.",
+			en: "Problems related to hash table data structure.",
+		},
 		icon: BiHash,
 	},
 	Dynamic_Programming: {
-		name: "Quy Hoạch Động",
-		description: "Bài toán sử dụng kỹ thuật quy hoạch động.",
+		name: {
+			vi: "Quy Hoạch Động",
+			en: "Dynamic Programming",
+		},
+		description: {
+			vi: "Bài toán sử dụng kỹ thuật quy hoạch động.",
+			en: "Problems using dynamic programming technique.",
+		},
 		icon: BiTrendingUp,
 	},
 	Math: {
-		name: "Toán Học",
-		description: "Bài toán liên quan đến toán học.",
+		name: {
+			vi: "Toán Học",
+			en: "Math",
+		},
+		description: {
+			vi: "Bài toán liên quan đến toán học.",
+			en: "Problems related to mathematics.",
+		},
 		icon: BiCalculator,
 	},
 	Sorting: {
-		name: "Sắp Xếp",
-		description: "Bài toán liên quan đến thuật toán sắp xếp.",
+		name: {
+			vi: "Sắp Xếp",
+			en: "Sorting",
+		},
+		description: {
+			vi: "Bài toán liên quan đến thuật toán sắp xếp.",
+			en: "Problems related to sorting algorithms.",
+		},
 		icon: BiSortAlt2,
 	},
 	Greedy: {
-		name: "Tham Lam",
-		description: "Bài toán sử dụng thuật toán tham lam.",
+		name: {
+			vi: "Tham Lam",
+			en: "Greedy",
+		},
+		description: {
+			vi: "Bài toán sử dụng thuật toán tham lam.",
+			en: "Problems using greedy algorithm approach.",
+		},
 		icon: BiTargetLock,
 	},
 	Depth_First_Search: {
-		name: "Tìm Kiếm Theo Chiều Sâu",
-		description: "Bài toán sử dụng thuật toán DFS.",
+		name: {
+			vi: "Tìm Kiếm Theo Chiều Sâu",
+			en: "Depth-First Search",
+		},
+		description: {
+			vi: "Bài toán sử dụng thuật toán DFS.",
+			en: "Problems using Depth-First Search (DFS) algorithm.",
+		},
 		icon: BiGitBranch,
 	},
 	Binary_Search: {
-		name: "Tìm Kiếm Nhị Phân",
-		description: "Bài toán sử dụng thuật toán tìm kiếm nhị phân.",
+		name: {
+			vi: "Tìm Kiếm Nhị Phân",
+			en: "Binary Search",
+		},
+		description: {
+			vi: "Bài toán sử dụng thuật toán tìm kiếm nhị phân.",
+			en: "Problems using binary search algorithm.",
+		},
 		icon: BiSearchAlt,
 	},
 	Database: {
-		name: "Cơ Sở Dữ Liệu",
-		description: "Bài toán liên quan đến cơ sở dữ liệu.",
+		name: {
+			vi: "Cơ Sở Dữ Liệu",
+			en: "Database",
+		},
+		description: {
+			vi: "Bài toán liên quan đến cơ sở dữ liệu.",
+			en: "Problems related to database design and SQL.",
+		},
 		icon: BiData,
 	},
 	Matrix: {
-		name: "Ma Trận",
-		description: "Bài toán liên quan đến xử lý ma trận.",
+		name: {
+			vi: "Ma Trận",
+			en: "Matrix",
+		},
+		description: {
+			vi: "Bài toán liên quan đến xử lý ma trận.",
+			en: "Problems related to matrix manipulation.",
+		},
 		icon: BiGrid,
 	},
 	Tree: {
-		name: "Cây",
-		description: "Bài toán liên quan đến cấu trúc dữ liệu cây.",
+		name: {
+			vi: "Cây",
+			en: "Tree",
+		},
+		description: {
+			vi: "Bài toán liên quan đến cấu trúc dữ liệu cây.",
+			en: "Problems related to tree data structure.",
+		},
 		icon: BiGitBranch,
 	},
 	Breadth_First_Search: {
-		name: "Tìm Kiếm Theo Chiều Rộng",
-		description: "Bài toán sử dụng thuật toán BFS.",
+		name: {
+			vi: "Tìm Kiếm Theo Chiều Rộng",
+			en: "Breadth-First Search",
+		},
+		description: {
+			vi: "Bài toán sử dụng thuật toán BFS.",
+			en: "Problems using Breadth-First Search (BFS) algorithm.",
+		},
 		icon: BiExpandHorizontal,
 	},
 	Bit_Manipulation: {
-		name: "Thao Tác Bit",
-		description: "Bài toán liên quan đến thao tác trên bit.",
+		name: {
+			vi: "Thao Tác Bit",
+			en: "Bit Manipulation",
+		},
+		description: {
+			vi: "Bài toán liên quan đến thao tác trên bit.",
+			en: "Problems related to bit manipulation operations.",
+		},
 		icon: BiMask,
 	},
 	Two_Pointers: {
-		name: "Hai Con Trỏ",
-		description: "Bài toán sử dụng kỹ thuật hai con trỏ.",
+		name: {
+			vi: "Hai Con Trỏ",
+			en: "Two Pointers",
+		},
+		description: {
+			vi: "Bài toán sử dụng kỹ thuật hai con trỏ.",
+			en: "Problems using two pointers technique.",
+		},
 		icon: BiPointer,
 	},
 	Prefix_Sum: {
-		name: "Tổng Tiền Tố",
-		description: "Bài toán sử dụng kỹ thuật tổng tiền tố.",
+		name: {
+			vi: "Tổng Tiền Tố",
+			en: "Prefix Sum",
+		},
+		description: {
+			vi: "Bài toán sử dụng kỹ thuật tổng tiền tố.",
+			en: "Problems using prefix sum technique.",
+		},
 		icon: BiPlus,
 	},
 	Heap_Priority_Queue: {
-		name: "Heap (Hàng Đợi Ưu Tiên)",
-		description: "Bài toán sử dụng cấu trúc dữ liệu heap.",
+		name: {
+			vi: "Heap (Hàng Đợi Ưu Tiên)",
+			en: "Heap/Priority Queue",
+		},
+		description: {
+			vi: "Bài toán sử dụng cấu trúc dữ liệu heap.",
+			en: "Problems using heap or priority queue data structure.",
+		},
 		icon: BiLayer,
 	},
 	Simulation: {
-		name: "Mô Phỏng",
-		description: "Bài toán mô phỏng quá trình.",
+		name: {
+			vi: "Mô Phỏng",
+			en: "Simulation",
+		},
+		description: {
+			vi: "Bài toán mô phỏng quá trình.",
+			en: "Problems involving process simulation.",
+		},
 		icon: BiPlayCircle,
 	},
 	Binary_Tree: {
-		name: "Cây Nhị Phân",
-		description: "Bài toán liên quan đến cây nhị phân.",
+		name: {
+			vi: "Cây Nhị Phân",
+			en: "Binary Tree",
+		},
+		description: {
+			vi: "Bài toán liên quan đến cây nhị phân.",
+			en: "Problems related to binary tree.",
+		},
 		icon: BiGitBranch,
 	},
 	Graph: {
-		name: "Đồ Thị",
-		description: "Bài toán liên quan đến lý thuyết đồ thị.",
+		name: {
+			vi: "Đồ Thị",
+			en: "Graph",
+		},
+		description: {
+			vi: "Bài toán liên quan đến lý thuyết đồ thị.",
+			en: "Problems related to graph theory.",
+		},
 		icon: BiShareAlt,
 	},
 	Stack: {
-		name: "Ngăn Xếp",
-		description: "Bài toán sử dụng cấu trúc dữ liệu ngăn xếp.",
+		name: {
+			vi: "Ngăn Xếp",
+			en: "Stack",
+		},
+		description: {
+			vi: "Bài toán sử dụng cấu trúc dữ liệu ngăn xếp.",
+			en: "Problems using stack data structure.",
+		},
 		icon: BiLayer,
 	},
 	Counting: {
-		name: "Đếm",
-		description: "Bài toán liên quan đến đếm số lượng.",
+		name: {
+			vi: "Đếm",
+			en: "Counting",
+		},
+		description: {
+			vi: "Bài toán liên quan đến đếm số lượng.",
+			en: "Problems related to counting combinatorics.",
+		},
 		icon: BiListOl,
 	},
 	Sliding_Window: {
-		name: "Cửa Sổ Trượt",
-		description: "Bài toán sử dụng kỹ thuật cửa sổ trượt.",
+		name: {
+			vi: "Cửa Sổ Trượt",
+			en: "Sliding Window",
+		},
+		description: {
+			vi: "Bài toán sử dụng kỹ thuật cửa sổ trượt.",
+			en: "Problems using sliding window technique.",
+		},
 		icon: BiWindow,
 	},
 	Design: {
-		name: "Thiết Kế",
-		description: "Bài toán thiết kế cấu trúc dữ liệu.",
+		name: {
+			vi: "Thiết Kế",
+			en: "Design",
+		},
+		description: {
+			vi: "Bài toán thiết kế cấu trúc dữ liệu.",
+			en: "Problems involving data structure design.",
+		},
 		icon: BiCube,
 	},
 	Enumeration: {
-		name: "Liệt Kê",
-		description: "Bài toán liệt kê các khả năng.",
+		name: {
+			vi: "Liệt Kê",
+			en: "Enumeration",
+		},
+		description: {
+			vi: "Bài toán liệt kê các khả năng.",
+			en: "Problems involving enumeration of possibilities.",
+		},
 		icon: BiListUl,
 	},
 	Backtracking: {
-		name: "Quay Lui",
-		description: "Bài toán sử dụng thuật toán quay lui.",
+		name: {
+			vi: "Quay Lui",
+			en: "Backtracking",
+		},
+		description: {
+			vi: "Bài toán sử dụng thuật toán quay lui.",
+			en: "Problems using backtracking algorithm.",
+		},
 		icon: BiUndo,
 	},
 	Union_Find: {
-		name: "Union Find",
-		description: "Bài toán sử dụng cấu trúc dữ liệu Union Find.",
+		name: {
+			vi: "Union Find",
+			en: "Union Find",
+		},
+		description: {
+			vi: "Bài toán sử dụng cấu trúc dữ liệu Union Find.",
+			en: "Problems using Union Find (Disjoint Set Union) data structure.",
+		},
 		icon: BiLink,
 	},
 	Linked_List: {
-		name: "Danh Sách Liên Kết",
-		description: "Bài toán liên quan đến danh sách liên kết.",
+		name: {
+			vi: "Danh Sách Liên Kết",
+			en: "Linked List",
+		},
+		description: {
+			vi: "Bài toán liên quan đến danh sách liên kết.",
+			en: "Problems related to linked list data structure.",
+		},
 		icon: BiListCheck,
 	},
 	Number_Theory: {
-		name: "Lý Thuyết Số",
-		description: "Bài toán liên quan đến lý thuyết số.",
+		name: {
+			vi: "Lý Thuyết Số",
+			en: "Number Theory",
+		},
+		description: {
+			vi: "Bài toán liên quan đến lý thuyết số.",
+			en: "Problems related to number theory.",
+		},
 		icon: BiMath,
 	},
 	Ordered_Set: {
-		name: "Tập Có Thứ Tự",
-		description: "Bài toán sử dụng tập có thứ tự.",
+		name: {
+			vi: "Tập Có Thứ Tự",
+			en: "Ordered Set",
+		},
+		description: {
+			vi: "Bài toán sử dụng tập có thứ tự.",
+			en: "Problems using ordered set data structure.",
+		},
 		icon: BiSortDown,
 	},
 	Monotonic_Stack: {
-		name: "Ngăn Xếp Đơn Điệu",
-		description: "Bài toán sử dụng ngăn xếp đơn điệu.",
+		name: {
+			vi: "Ngăn Xếp Đơn Điệu",
+			en: "Monotonic Stack",
+		},
+		description: {
+			vi: "Bài toán sử dụng ngăn xếp đơn điệu.",
+			en: "Problems using monotonic stack technique.",
+		},
 		icon: BiTrendingDown,
 	},
 	Segment_Tree: {
-		name: "Cây Phân Đoạn",
-		description: "Bài toán sử dụng cây phân đoạn.",
+		name: {
+			vi: "Cây Phân Đoạn",
+			en: "Segment Tree",
+		},
+		description: {
+			vi: "Bài toán sử dụng cây phân đoạn.",
+			en: "Problems using segment tree data structure.",
+		},
 		icon: BiGitBranch,
 	},
 	Trie: {
-		name: "Trie",
-		description: "Bài toán sử dụng cấu trúc dữ liệu Trie.",
+		name: {
+			vi: "Trie",
+			en: "Trie",
+		},
+		description: {
+			vi: "Bài toán sử dụng cấu trúc dữ liệu Trie.",
+			en: "Problems using Trie (prefix tree) data structure.",
+		},
 		icon: BiGitBranch,
 	},
 	Combinatorics: {
-		name: "Tổ Hợp",
-		description: "Bài toán liên quan đến tổ hợp.",
+		name: {
+			vi: "Tổ Hợp",
+			en: "Combinatorics",
+		},
+		description: {
+			vi: "Bài toán liên quan đến tổ hợp.",
+			en: "Problems related to combinatorics.",
+		},
 		icon: BiShuffle,
 	},
 	Bitmask: {
-		name: "Mặt Nạ Bit",
-		description: "Bài toán sử dụng kỹ thuật bitmask.",
+		name: {
+			vi: "Mặt Nạ Bit",
+			en: "Bitmask",
+		},
+		description: {
+			vi: "Bài toán sử dụng kỹ thuật bitmask.",
+			en: "Problems using bitmask technique.",
+		},
 		icon: BiMask,
 	},
 	Queue: {
-		name: "Hàng Đợi",
-		description: "Bài toán sử dụng cấu trúc dữ liệu hàng đợi.",
+		name: {
+			vi: "Hàng Đợi",
+			en: "Queue",
+		},
+		description: {
+			vi: "Bài toán sử dụng cấu trúc dữ liệu hàng đợi.",
+			en: "Problems using queue data structure.",
+		},
 		icon: BiRightArrowAlt,
 	},
 	Recursion: {
-		name: "Đệ Quy",
-		description: "Bài toán sử dụng kỹ thuật đệ quy.",
+		name: {
+			vi: "Đệ Quy",
+			en: "Recursion",
+		},
+		description: {
+			vi: "Bài toán sử dụng kỹ thuật đệ quy.",
+			en: "Problems using recursion technique.",
+		},
 		icon: BiRefresh,
 	},
 	Divide_and_Conquer: {
-		name: "Chia Để Trị",
-		description: "Bài toán sử dụng thuật toán chia để trị.",
+		name: {
+			vi: "Chia Để Trị",
+			en: "Divide and Conquer",
+		},
+		description: {
+			vi: "Bài toán sử dụng thuật toán chia để trị.",
+			en: "Problems using divide and conquer algorithm.",
+		},
 		icon: BiGitMerge,
 	},
 	Geometry: {
-		name: "Hình Học`",
-		description: "Bài toán liên quan đến hình học.",
+		name: {
+			vi: "Hình Học",
+			en: "Geometry",
+		},
+		description: {
+			vi: "Bài toán liên quan đến hình học.",
+			en: "Problems related to geometry.",
+		},
 		icon: BiShapeTriangle,
 	},
 	Binary_Indexed_Tree: {
-		name: "Cây Chỉ Số Nhị Phân",
-		description: "Bài toán sử dụng cây chỉ số nhị phân.",
+		name: {
+			vi: "Cây Chỉ Số Nhị Phân",
+			en: "Binary Indexed Tree",
+		},
+		description: {
+			vi: "Bài toán sử dụng cây chỉ số nhị phân.",
+			en: "Problems using Binary Indexed Tree (Fenwick Tree).",
+		},
 		icon: BiGitBranch,
 	},
 	Memoization: {
-		name: "Ghi Nhớ",
-		description: "Bài toán sử dụng kỹ thuật ghi nhớ.",
+		name: {
+			vi: "Ghi Nhớ",
+			en: "Memoization",
+		},
+		description: {
+			vi: "Bài toán sử dụng kỹ thuật ghi nhớ.",
+			en: "Problems using memoization technique.",
+		},
 		icon: BiBookmark,
 	},
 	Hash_Function: {
-		name: "Hàm Băm",
-		description: "Bài toán sử dụng hàm băm.",
+		name: {
+			vi: "Hàm Băm",
+			en: "Hash Function",
+		},
+		description: {
+			vi: "Bài toán sử dụng hàm băm.",
+			en: "Problems using hash function.",
+		},
 		icon: BiHash,
 	},
 	Binary_Search_Tree: {
-		name: "Cây Tìm Kiếm Nhị Phân",
-		description: "Bài toán liên quan đến cây tìm kiếm nhị phân.",
+		name: {
+			vi: "Cây Tìm Kiếm Nhị Phân",
+			en: "Binary Search Tree",
+		},
+		description: {
+			vi: "Bài toán liên quan đến cây tìm kiếm nhị phân.",
+			en: "Problems related to binary search tree.",
+		},
 		icon: BiGitBranch,
 	},
 	Shortest_Path: {
-		name: "Đường Đi Ngắn Nhất",
-		description: "Bài toán tìm đường đi ngắn nhất.",
+		name: {
+			vi: "Đường Đi Ngắn Nhất",
+			en: "Shortest Path",
+		},
+		description: {
+			vi: "Bài toán tìm đường đi ngắn nhất.",
+			en: "Problems finding shortest path.",
+		},
 		icon: BiNavigation,
 	},
 	String_Matching: {
-		name: "Khớp Chuỗi",
-		description: "Bài toán khớp mẫu chuỗi.",
+		name: {
+			vi: "Khớp Chuỗi",
+			en: "String Matching",
+		},
+		description: {
+			vi: "Bài toán khớp mẫu chuỗi.",
+			en: "Problems involving string pattern matching.",
+		},
 		icon: BiSearch,
 	},
 	Topological_Sort: {
-		name: "Sắp Xếp Tô-pô",
-		description: "Bài toán sắp xếp tô-pô.",
+		name: {
+			vi: "Sắp Xếp Tô-pô",
+			en: "Topological Sort",
+		},
+		description: {
+			vi: "Bài toán sắp xếp tô-pô.",
+			en: "Problems involving topological sorting.",
+		},
 		icon: BiSort,
 	},
 	Rolling_Hash: {
-		name: "Băm Cuộn",
-		description: "Bài toán sử dụng kỹ thuật băm cuộn.",
+		name: {
+			vi: "Băm Cuộn",
+			en: "Rolling Hash",
+		},
+		description: {
+			vi: "Bài toán sử dụng kỹ thuật băm cuộn.",
+			en: "Problems using rolling hash technique.",
+		},
 		icon: BiRefresh,
 	},
 	Game_Theory: {
-		name: "Lý Thuyết Trò Chơi",
-		description: "Bài toán liên quan đến lý thuyết trò chơi.",
+		name: {
+			vi: "Lý Thuyết Trò Chơi",
+			en: "Game Theory",
+		},
+		description: {
+			vi: "Bài toán liên quan đến lý thuyết trò chơi.",
+			en: "Problems related to game theory.",
+		},
 		icon: BiJoystick,
 	},
 	Interactive: {
-		name: "Tương Tác",
-		description: "Bài toán tương tác với hệ thống.",
+		name: {
+			vi: "Tương Tác",
+			en: "Interactive",
+		},
+		description: {
+			vi: "Bài toán tương tác với hệ thống.",
+			en: "Interactive problems with system.",
+		},
 		icon: BiChat,
 	},
 	Data_Stream: {
-		name: "Luồng Dữ Liệu",
-		description: "Bài toán xử lý luồng dữ liệu.",
+		name: {
+			vi: "Luồng Dữ Liệu",
+			en: "Data Stream",
+		},
+		description: {
+			vi: "Bài toán xử lý luồng dữ liệu.",
+			en: "Problems involving data stream processing.",
+		},
 		icon: BiTransfer,
 	},
 	Monotonic_Queue: {
-		name: "Hàng Đợi Đơn Điệu",
-		description: "Bài toán sử dụng hàng đợi đơn điệu.",
+		name: {
+			vi: "Hàng Đợi Đơn Điệu",
+			en: "Monotonic Queue",
+		},
+		description: {
+			vi: "Bài toán sử dụng hàng đợi đơn điệu.",
+			en: "Problems using monotonic queue technique.",
+		},
 		icon: BiTrendingDown,
 	},
 	Brainteaser: {
-		name: "Câu Đố",
-		description: "Bài toán câu đố logic.",
+		name: {
+			vi: "Câu Đố",
+			en: "Brainteaser",
+		},
+		description: {
+			vi: "Bài toán câu đố logic.",
+			en: "Logic puzzle problems.",
+		},
 		icon: BiBrain,
 	},
 	Doubly_Linked_List: {
-		name: "Danh Sách Liên Kết Đôi",
-		description: "Bài toán liên quan đến danh sách liên kết đôi.",
+		name: {
+			vi: "Danh Sách Liên Kết Đôi",
+			en: "Doubly Linked List",
+		},
+		description: {
+			vi: "Bài toán liên quan đến danh sách liên kết đôi.",
+			en: "Problems related to doubly linked list.",
+		},
 		icon: BiLinkAlt,
 	},
 	Randomized: {
-		name: "Ngẫu Nhiên",
-		description: "Bài toán sử dụng thuật toán ngẫu nhiên.",
+		name: {
+			vi: "Ngẫu Nhiên",
+			en: "Randomized",
+		},
+		description: {
+			vi: "Bài toán sử dụng thuật toán ngẫu nhiên.",
+			en: "Problems using randomized algorithms.",
+		},
 		icon: BiShuffle,
 	},
 	Merge_Sort: {
-		name: "Sắp Xếp Trộn",
-		description: "Bài toán sử dụng thuật toán sắp xếp trộn.",
+		name: {
+			vi: "Sắp Xếp Trộn",
+			en: "Merge Sort",
+		},
+		description: {
+			vi: "Bài toán sử dụng thuật toán sắp xếp trộn.",
+			en: "Problems using merge sort algorithm.",
+		},
 		icon: BiMerge,
 	},
 	Counting_Sort: {
-		name: "Sắp Xếp Đếm",
-		description: "Bài toán sử dụng thuật toán sắp xếp đếm.",
+		name: {
+			vi: "Sắp Xếp Đếm",
+			en: "Counting Sort",
+		},
+		description: {
+			vi: "Bài toán sử dụng thuật toán sắp xếp đếm.",
+			en: "Problems using counting sort algorithm.",
+		},
 		icon: BiListOl,
 	},
 	Iterator: {
-		name: "Bộ Lặp",
-		description: "Bài toán sử dụng bộ lặp.",
+		name: {
+			vi: "Bộ Lặp",
+			en: "Iterator",
+		},
+		description: {
+			vi: "Bài toán sử dụng bộ lặp.",
+			en: "Problems using iterator pattern.",
+		},
 		icon: BiRepeat,
 	},
 	Concurrency: {
-		name: "Đồng Thời",
-		description: "Bài toán xử lý đồng thời.",
+		name: {
+			vi: "Đồng Thời",
+			en: "Concurrency",
+		},
+		description: {
+			vi: "Bài toán xử lý đồng thời.",
+			en: "Problems involving concurrency.",
+		},
 		icon: BiTimer,
 	},
 	Probability_and_Statistics: {
-		name: "Xác Suất và Thống Kê",
-		description: "Bài toán liên quan đến xác suất và thống kê.",
+		name: {
+			vi: "Xác Suất và Thống Kê",
+			en: "Probability and Statistics",
+		},
+		description: {
+			vi: "Bài toán liên quan đến xác suất và thống kê.",
+			en: "Problems related to probability and statistics.",
+		},
 		icon: BiBarChart,
 	},
 	Quickselect: {
-		name: "Chọn Nhanh",
-		description: "Bài toán sử dụng thuật toán chọn nhanh.",
+		name: {
+			vi: "Chọn Nhanh",
+			en: "Quickselect",
+		},
+		description: {
+			vi: "Bài toán sử dụng thuật toán chọn nhanh.",
+			en: "Problems using quickselect algorithm.",
+		},
 		icon: BiSelectMultiple,
 	},
 	Suffix_Array: {
-		name: "Mảng Hậu Tố",
-		description: "Bài toán sử dụng mảng hậu tố.",
+		name: {
+			vi: "Mảng Hậu Tố",
+			en: "Suffix Array",
+		},
+		description: {
+			vi: "Bài toán sử dụng mảng hậu tố.",
+			en: "Problems using suffix array.",
+		},
 		icon: BiGridAlt,
 	},
 	Line_Sweep: {
-		name: "Quét Đường",
-		description: "Bài toán sử dụng thuật toán quét đường.",
+		name: {
+			vi: "Quét Đường",
+			en: "Line Sweep",
+		},
+		description: {
+			vi: "Bài toán sử dụng thuật toán quét đường.",
+			en: "Problems using line sweep algorithm.",
+		},
 		icon: BiScan,
 	},
 	Minimum_Spanning_Tree: {
-		name: "Cây Khung Nhỏ Nhất",
-		description: "Bài toán tìm cây khung có trọng số nhỏ nhất.",
+		name: {
+			vi: "Cây Khung Nhỏ Nhất",
+			en: "Minimum Spanning Tree",
+		},
+		description: {
+			vi: "Bài toán tìm cây khung có trọng số nhỏ nhất.",
+			en: "Problems finding minimum spanning tree.",
+		},
 		icon: BiGitBranch,
 	},
 	Bucket_Sort: {
-		name: "Sắp Xếp Thùng",
-		description: "Bài toán sử dụng thuật toán sắp xếp thùng.",
+		name: {
+			vi: "Sắp Xếp Thùng",
+			en: "Bucket Sort",
+		},
+		description: {
+			vi: "Bài toán sử dụng thuật toán sắp xếp thùng.",
+			en: "Problems using bucket sort algorithm.",
+		},
 		icon: BiGrid,
 	},
 	Shell: {
-		name: "Shell",
-		description: "Bài toán liên quan đến shell script.",
+		name: {
+			vi: "Shell",
+			en: "Shell",
+		},
+		description: {
+			vi: "Bài toán liên quan đến shell script.",
+			en: "Problems related to shell scripting.",
+		},
 		icon: BiTerminal,
 	},
 	Reservoir_Sampling: {
-		name: "Lấy Mẫu Hồ Chứa",
-		description: "Bài toán sử dụng thuật toán lấy mẫu hồ chứa.",
+		name: {
+			vi: "Lấy Mẫu Hồ Chứa",
+			en: "Reservoir Sampling",
+		},
+		description: {
+			vi: "Bài toán sử dụng thuật toán lấy mẫu hồ chứa.",
+			en: "Problems using reservoir sampling algorithm.",
+		},
 		icon: BiDroplet,
 	},
 	Strongly_Connected_Component: {
-		name: "Thành Phần Liên Thông Mạnh",
-		description: "Bài toán tìm thành phần liên thông mạnh.",
+		name: {
+			vi: "Thành Phần Liên Thông Mạnh",
+			en: "Strongly Connected Component",
+		},
+		description: {
+			vi: "Bài toán tìm thành phần liên thông mạnh.",
+			en: "Problems finding strongly connected components.",
+		},
 		icon: BiShareAlt,
 	},
 	Eulerian_Circuit: {
-		name: "Chu Trình Euler",
-		description: "Bài toán tìm chu trình Euler.",
+		name: {
+			vi: "Chu Trình Euler",
+			en: "Eulerian Circuit",
+		},
+		description: {
+			vi: "Bài toán tìm chu trình Euler.",
+			en: "Problems finding Eulerian circuits.",
+		},
 		icon: BiRefresh,
 	},
 	Radix_Sort: {
-		name: "Sắp Xếp Cơ Số",
-		description: "Bài toán sử dụng thuật toán sắp xếp cơ số.",
+		name: {
+			vi: "Sắp Xếp Cơ Số",
+			en: "Radix Sort",
+		},
+		description: {
+			vi: "Bài toán sử dụng thuật toán sắp xếp cơ số.",
+			en: "Problems using radix sort algorithm.",
+		},
 		icon: BiSort,
 	},
 	Rejection_Sampling: {
-		name: "Lấy Mẫu Loại Bỏ",
-		description: "Bài toán sử dụng thuật toán lấy mẫu loại bỏ.",
+		name: {
+			vi: "Lấy Mẫu Loại Bỏ",
+			en: "Rejection Sampling",
+		},
+		description: {
+			vi: "Bài toán sử dụng thuật toán lấy mẫu loại bỏ.",
+			en: "Problems using rejection sampling algorithm.",
+		},
 		icon: BiXCircle,
 	},
 	Biconnected_Component: {
-		name: "Thành Phần Liên Thông Kép",
-		description: "Bài toán tìm thành phần liên thông kép.",
+		name: {
+			vi: "Thành Phần Liên Thông Kép",
+			en: "Biconnected Component",
+		},
+		description: {
+			vi: "Bài toán tìm thành phần liên thông kép.",
+			en: "Problems finding biconnected components.",
+		},
 		icon: BiLinkAlt,
 	},
 };
 
-export {TYPE_PROBLEM};
 export default TYPE_PROBLEM;

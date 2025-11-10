@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import classNames from "classnames/bind";
+import {useLanguages} from "../../../../hooks/useLanguages";
 import {Button} from "../../../../components/UI";
 import {ChangePasswordPopup, ChangeEmailPopup} from "./components";
 import style from "./PasswordAndSecurityTab.module.scss";
@@ -12,6 +13,7 @@ const PasswordAndSecurityTab = ({
 	updateSubmitHandler: propUpdateSubmitHandler,
 	resetChanges: propResetChanges,
 }) => {
+	const {t} = useLanguages();
 	const [isPasswordPopupOpen, setIsPasswordPopupOpen] = useState(false);
 	const [isEmailPopupOpen, setIsEmailPopupOpen] = useState(false);
 
@@ -33,28 +35,47 @@ const PasswordAndSecurityTab = ({
 
 	return (
 		<div className={cx("password-security-tab")}>
-			<div className={cx("title")}>Mật khẩu và Bảo mật</div>
+			<div className={cx("title")}>
+				{t("settingsPage.passwordAndSecurityTab.title")}
+			</div>
 			<div className={cx("content")}>
 				<div className={cx("section")}>
 					<div className={cx("section-header")}>
-						<div className={cx("section-title")}>Đổi mật khẩu</div>
+						<div className={cx("section-title")}>
+							{t(
+								"settingsPage.passwordAndSecurityTab.changePasswordTitle"
+							)}
+						</div>
 						<div className={cx("section-description")}>
-							Thay đổi mật khẩu tài khoản của bạn để bảo mật tốt
-							hơn.
+							{t(
+								"settingsPage.passwordAndSecurityTab.changePasswordDescription"
+							)}
 						</div>
 					</div>
 					<Button onClick={openPasswordPopup}>
-						Thay đổi mật khẩu
+						{t(
+							"settingsPage.passwordAndSecurityTab.changePasswordButton"
+						)}
 					</Button>
 				</div>
 				<div className={cx("section")}>
 					<div className={cx("section-header")}>
-						<div className={cx("section-title")}>Đổi email</div>
+						<div className={cx("section-title")}>
+							{t(
+								"settingsPage.passwordAndSecurityTab.changeEmailTitle"
+							)}
+						</div>
 						<div className={cx("section-description")}>
-							Thay đổi địa chỉ email liên kết với tài khoản.
+							{t(
+								"settingsPage.passwordAndSecurityTab.changeEmailDescription"
+							)}
 						</div>
 					</div>
-					<Button onClick={openEmailPopup}>Thay đổi email</Button>
+					<Button onClick={openEmailPopup}>
+						{t(
+							"settingsPage.passwordAndSecurityTab.changeEmailButton"
+						)}
+					</Button>
 				</div>
 			</div>
 			<ChangePasswordPopup

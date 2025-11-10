@@ -2,10 +2,12 @@ import React from "react";
 import classNames from "classnames/bind";
 import styles from "./ProfileBadges.module.scss";
 import BADGES from "../../../../config/badgesConfig";
+import {useLanguages} from "../../../../hooks/useLanguages";
 
 const cx = classNames.bind(styles);
 
 const ProfileBadges = ({userBadges = []}) => {
+	const {getConfigValue} = useLanguages();
 	return (
 		<div className={cx("profile-section")}>
 			<h2 className={cx("section-title")}>Huy hiệu & Thành tích</h2>
@@ -18,15 +20,15 @@ const ProfileBadges = ({userBadges = []}) => {
 						<div
 							key={badgeKey}
 							className={cx("badge-item", badgeClass)}
-							title={badge.description}
+							title={getConfigValue(badge, "description")}
 						>
 							<img
 								src={badge.File}
-								alt={badge.title}
+								alt={getConfigValue(badge, "title")}
 								className={cx("badge-icon")}
 							/>
 							<span className={cx("badge-title")}>
-								{badge.title}
+								{getConfigValue(badge, "title")}
 							</span>
 						</div>
 					);
